@@ -16,73 +16,87 @@ class Offer
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @var integer
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @var string
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @var string
      */
-    private $contract_type;
+    private $contractType;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
+     * @var string
      */
     private $salary;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string
      */
     private $duration;
 
     /**
      * @ORM\Column(type="date")
+     * @var \DateTimeInterface
      */
     private $date;
 
     /**
      * @ORM\Column(type="date")
+     * @var \DateTimeInterface
      */
     private $creationDate;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @var \DateTimeInterface
      */
     private $endDate;
 
     /**
      * @ORM\Column(type="text")
+     * @var string
      */
     private $description;
 
     /**
      * @ORM\Column(type="boolean")
+     * @var boolean
      */
-    private $is_anonymous;
+    private $isAnonymous;
 
     /**
      * @ORM\ManyToOne(targetEntity=city::class, inversedBy="offers")
      * @ORM\JoinColumn(nullable=false)
+     * @var City
      */
     private $city;
 
     /**
      * @ORM\ManyToOne(targetEntity=company::class, inversedBy="offers")
      * @ORM\JoinColumn(nullable=false)
+     * @var Company
      */
     private $company;
 
     /**
      * @ORM\ManyToMany(targetEntity=Skill::class, mappedBy="offer")
+     * @var Collection<Skill>
      */
     private $skills;
 
     /**
      * @ORM\ManyToMany(targetEntity=Applicant::class, inversedBy="offers")
+     * @var Collection<Applicant>
      */
     private $applicant;
 
@@ -111,12 +125,12 @@ class Offer
 
     public function getContractType(): ?string
     {
-        return $this->contract_type;
+        return $this->contractType;
     }
 
-    public function setContractType(string $contract_type): self
+    public function setContractType(string $contractType): self
     {
-        $this->contract_type = $contract_type;
+        $this->contractType = $contractType;
 
         return $this;
     }
@@ -126,7 +140,7 @@ class Offer
         return $this->salary;
     }
 
-    public function setSalary(?string $salary): self
+    public function setSalary(string $salary): self
     {
         $this->salary = $salary;
 
@@ -138,7 +152,7 @@ class Offer
         return $this->duration;
     }
 
-    public function setDuration(?string $duration): self
+    public function setDuration(string $duration): self
     {
         $this->duration = $duration;
 
@@ -174,7 +188,7 @@ class Offer
         return $this->endDate;
     }
 
-    public function setEndDate(?\DateTimeInterface $endDate): self
+    public function setEndDate(\DateTimeInterface $endDate): self
     {
         $this->endDate = $endDate;
 
@@ -195,34 +209,34 @@ class Offer
 
     public function getIsAnonymous(): ?bool
     {
-        return $this->is_anonymous;
+        return $this->isAnonymous;
     }
 
-    public function setIsAnonymous(bool $is_anonymous): self
+    public function setIsAnonymous(bool $isAnonymous): self
     {
-        $this->is_anonymous = $is_anonymous;
+        $this->isAnonymous = $isAnonymous;
 
         return $this;
     }
 
-    public function getCity(): ?city
+    public function getCity(): ?City
     {
         return $this->city;
     }
 
-    public function setCity(?city $city): self
+    public function setCity(City $city): self
     {
         $this->city = $city;
 
         return $this;
     }
 
-    public function getCompany(): ?company
+    public function getCompany(): ?Company
     {
         return $this->company;
     }
 
-    public function setCompany(?company $company): self
+    public function setCompany(Company $company): self
     {
         $this->company = $company;
 

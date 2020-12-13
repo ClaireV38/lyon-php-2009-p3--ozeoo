@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use _HumbugBox5f65e914a905\phpDocumentor\Reflection\Types\Collection;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -15,16 +16,19 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @var integer
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @var string
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
+     * @var array
      */
     private $roles = [];
 
@@ -36,11 +40,13 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToOne(targetEntity=Applicant::class, mappedBy="user", cascade={"persist", "remove"})
+     * @var Applicant
      */
     private $applicant;
 
     /**
      * @ORM\OneToOne(targetEntity=Company::class, mappedBy="user", cascade={"persist", "remove"})
+     * @var Company
      */
     private $company;
 
@@ -111,12 +117,13 @@ class User implements UserInterface
     public function getSalt()
     {
         // not needed when using the "bcrypt" algorithm in security.yaml
+        return null;
     }
 
     /**
      * @see UserInterface
      */
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;

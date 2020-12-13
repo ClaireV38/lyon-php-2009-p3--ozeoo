@@ -109,7 +109,7 @@ class City
         if ($this->applicants->removeElement($applicant)) {
             // set the owning side to null (unless already changed)
             if ($applicant->getCity() === $this) {
-                $applicant->setCity(null);
+                $applicant->setCity($this);
             }
         }
 
@@ -139,7 +139,7 @@ class City
         if ($this->companies->removeElement($company)) {
             // set the owning side to null (unless already changed)
             if ($company->getCity() === $this) {
-                $company->setCity(null);
+                $company->setCity($this);
             }
         }
 
@@ -169,7 +169,7 @@ class City
         if ($this->offers->removeElement($offer)) {
             // set the owning side to null (unless already changed)
             if ($offer->getCity() === $this) {
-                $offer->setCity(null);
+                $offer->setCity($this);
             }
         }
 

@@ -16,27 +16,32 @@ class Skill
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @var integer
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @var string
      */
     private $name;
 
     /**
      * @ORM\ManyToOne(targetEntity=SkillCategory::class, inversedBy="skills")
      * @ORM\JoinColumn(nullable=false)
+     * @var SkillCategory
      */
     private $skillCategory;
 
     /**
      * @ORM\ManyToMany(targetEntity=Applicant::class, inversedBy="skills")
+     * @var Collection<Applicant>
      */
     private $applicant;
 
     /**
      * @ORM\ManyToMany(targetEntity=Offer::class, inversedBy="skills")
+     * @var Collection<Offer>
      */
     private $offer;
 
@@ -68,7 +73,7 @@ class Skill
         return $this->skillCategory;
     }
 
-    public function setSkillCategory(?SkillCategory $skillCategory): self
+    public function setSkillCategory(SkillCategory $skillCategory): self
     {
         $this->skillCategory = $skillCategory;
 

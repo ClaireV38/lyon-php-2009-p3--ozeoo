@@ -16,21 +16,25 @@ class SkillCategory
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @var integer
      */
     private $id;
 
     /**
      * @ORM\Column(type="boolean")
+     * @var boolean
      */
-    private $is_hard;
+    private $isHard;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @var string
      */
     private $name;
 
     /**
      * @ORM\OneToMany(targetEntity=Skill::class, mappedBy="skillCategory")
+     * @var Collection<Skill>
      */
     private $skills;
 
@@ -46,12 +50,12 @@ class SkillCategory
 
     public function getIsHard(): ?bool
     {
-        return $this->is_hard;
+        return $this->isHard;
     }
 
-    public function setIsHard(bool $is_hard): self
+    public function setIsHard(bool $isHard): self
     {
-        $this->is_hard = $is_hard;
+        $this->isHard = $isHard;
 
         return $this;
     }
@@ -91,7 +95,7 @@ class SkillCategory
         if ($this->skills->removeElement($skill)) {
             // set the owning side to null (unless already changed)
             if ($skill->getSkillCategory() === $this) {
-                $skill->setSkillCategory(null);
+                $skill->setSkillCategory($this);
             }
         }
 

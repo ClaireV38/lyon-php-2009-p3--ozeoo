@@ -16,67 +16,80 @@ class Company
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @var integer
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @var string
      */
     private $name;
 
     /**
      * @ORM\Column(type="integer")
+     * @var integer
      */
     private $siretNb;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @var string
      */
     private $contactEmail;
 
     /**
      * @ORM\Column(type="integer")
+     * @var integer
      */
     private $apeNb;
 
     /**
      * @ORM\Column(type="string", length=500, nullable=true)
+     * @var string
      */
     private $picture;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string
      */
     private $video;
 
     /**
      * @ORM\Column(type="text")
+     * @var string
      */
     private $description;
 
     /**
      * @ORM\Column(type="text")
+     * @var string
      */
     private $corporateCulture;
 
     /**
      * @ORM\Column(type="text")
+     * @var string
      */
     private $csr;
 
     /**
      * @ORM\OneToOne(targetEntity=user::class, inversedBy="company", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
+     * @var User
      */
     private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity=city::class, inversedBy="companies")
+     * @var City
      */
     private $city;
 
     /**
      * @ORM\OneToMany(targetEntity=Offer::class, mappedBy="company")
+     * @var Collection<Offer>
      */
     private $offers;
 
@@ -143,7 +156,7 @@ class Company
         return $this->picture;
     }
 
-    public function setPicture(?string $picture): self
+    public function setPicture(string $picture): self
     {
         $this->picture = $picture;
 
@@ -155,7 +168,7 @@ class Company
         return $this->video;
     }
 
-    public function setVideo(?string $video): self
+    public function setVideo(string $video): self
     {
         $this->video = $video;
 
@@ -198,24 +211,24 @@ class Company
         return $this;
     }
 
-    public function getUser(): ?user
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
-    public function setUser(user $user): self
+    public function setUser(User $user): self
     {
         $this->user = $user;
 
         return $this;
     }
 
-    public function getCity(): ?city
+    public function getCity(): ?City
     {
         return $this->city;
     }
 
-    public function setCity(?city $city): self
+    public function setCity(City $city): self
     {
         $this->city = $city;
 
@@ -245,7 +258,7 @@ class Company
         if ($this->offers->removeElement($offer)) {
             // set the owning side to null (unless already changed)
             if ($offer->getCompany() === $this) {
-                $offer->setCompany(null);
+                $offer->setCompany($this);
             }
         }
 
