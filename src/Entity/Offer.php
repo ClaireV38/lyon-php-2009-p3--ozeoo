@@ -75,14 +75,14 @@ class Offer
     private $isAnonymous;
 
     /**
-     * @ORM\ManyToOne(targetEntity=city::class, inversedBy="offers")
+     * @ORM\ManyToOne(targetEntity=City::class, inversedBy="offers")
      * @ORM\JoinColumn(nullable=false)
      * @var City
      */
     private $city;
 
     /**
-     * @ORM\ManyToOne(targetEntity=company::class, inversedBy="offers")
+     * @ORM\ManyToOne(targetEntity=Company::class, inversedBy="offers")
      * @ORM\JoinColumn(nullable=false)
      * @var Company
      */
