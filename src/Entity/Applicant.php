@@ -39,14 +39,14 @@ class Applicant
     private $personality;
 
     /**
-     * @ORM\ManyToOne(targetEntity=city::class, inversedBy="applicants")
+     * @ORM\ManyToOne(targetEntity=City::class, inversedBy="applicants")
      * @ORM\JoinColumn(nullable=false)
      * @var City
      */
     private $city;
 
     /**
-     * @ORM\OneToOne(targetEntity=user::class, inversedBy="applicant", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="applicant", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      * @var User
      */
