@@ -75,14 +75,14 @@ class Company
     private $csr;
 
     /**
-     * @ORM\OneToOne(targetEntity=user::class, inversedBy="company", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="company", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      * @var User
      */
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity=city::class, inversedBy="companies")
+     * @ORM\ManyToOne(targetEntity=City::class, inversedBy="companies")
      * @var City
      */
     private $city;
