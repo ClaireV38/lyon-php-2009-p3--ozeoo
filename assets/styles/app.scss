@@ -6,10 +6,40 @@ body {
     color: $police-color;
 }
 
-// Page accueil candidat
-.applicant_index_tuto{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
+/* Page accueil candidat*/
+
+@include media-breakpoint-down(sm) {
+
+    .applicant_index_tuto {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: justify;
+    }
+
+    .applicant_home_welcome_mainTitle {
+        margin-top: 10px;
+    }
+
+    .applicant_home_welcome_mainTitle, .btn_candidateHome_createProfile,
+    .candidate_ozeoPresentationCard,
+    .candidate_ozeoTutoCard {
+        margin-bottom: 20px;
+    }
+
+    .candidate_welcome_title {
+        text-align: center;
+    }
+
+    .candidate_ozeoPresentationCard {
+        border: 1px solid $orangeOze ;
+        width: 18rem;
+    }
+
+    .candidate_ozeoTutoCard {
+        border: 1px solid $bleuOze;
+        width: 18rem;
+    }
+
 }
+@include media-breakpoint-down(md)
