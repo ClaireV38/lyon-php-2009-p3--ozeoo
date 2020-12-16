@@ -7,29 +7,31 @@ body {
 }
 
 /* Navbar */
+.logoRight {
+    display: none;
+}
 
 .button2 {
-    padding: 0 30px 0 30px;
+    padding: 0;
 }
 
-.navbar-brand {
-    padding-right: 30px;
+.navbar-nav {
+    padding-left: 10px;
 }
 
-nav.navbar.navbar-expand-lg.navbar-light.bg-clairNavbar {
-    padding: 0 10px 0 0;
-}
-
-@media (max-width: 480px) {
-
+@media (min-width: 768px) {
     .logoRight {
-        display: none;
+        display: block;
     }
     .button2 {
-        padding: 0;
+        padding: 0 30px 0 30px;
     }
 
-    .navbar-nav {
-        padding-left: 10px;
+    .navbar-brand {
+        padding-right: 30px;
+    }
+
+    nav.navbar.navbar-expand-lg.navbar-light.bg-clairNavbar {
+        padding: 0 10px 0 0;
     }
 }
