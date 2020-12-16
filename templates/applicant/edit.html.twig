@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Applicant{% endblock %}
+
+{% block body %}
+    <h1>Edit Applicant</h1>
+
+    {{ include('applicant/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('applicant_index') }}">back to list</a>
+
+    {{ include('applicant/_delete_form.html.twig') }}
+{% endblock %}

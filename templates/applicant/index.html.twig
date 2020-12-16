@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Applicant index{% endblock %}
+
+{% block body %}
+    <h1>Applicant index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Personality</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for applicant in applicants %}
+            <tr>
+                <td>{{ applicant.id }}</td>
+                <td>{{ applicant.firstname }}</td>
+                <td>{{ applicant.lastname }}</td>
+                <td>{{ applicant.personality }}</td>
+                <td>
+                    <a href="{{ path('applicant_show', {'id': applicant.id}) }}">show</a>
+                    <a href="{{ path('applicant_edit', {'id': applicant.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('applicant_new') }}">Create new</a>
+{% endblock %}

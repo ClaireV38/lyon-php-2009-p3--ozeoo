@@ -1,0 +1,267 @@
+<?php
+
+namespace App\Entity;
+
+use App\Repository\CompanyRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity(repositoryClass=CompanyRepository::class)
+ */
+class Company
+{
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     * @var integer
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @var string
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="integer")
+     * @var integer
+     */
+    private $siretNb;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @var string
+     */
+    private $contactEmail;
+
+    /**
+     * @ORM\Column(type="integer")
+     * @var integer
+     */
+    private $apeNb;
+
+    /**
+     * @ORM\Column(type="string", length=500, nullable=true)
+     * @var string
+     */
+    private $picture;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string
+     */
+    private $video;
+
+    /**
+     * @ORM\Column(type="text")
+     * @var string
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(type="text")
+     * @var string
+     */
+    private $corporateCulture;
+
+    /**
+     * @ORM\Column(type="text")
+     * @var string
+     */
+    private $csr;
+
+    /**
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="company", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     * @var User
+     */
+    private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=City::class, inversedBy="companies")
+     * @var City
+     */
+    private $city;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Offer::class, mappedBy="company")
+     * @var Collection<Offer>
+     */
+    private $offers;
+
+    public function __construct()
+    {
+        $this->offers = new ArrayCollection();
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getSiretNb(): ?int
+    {
+        return $this->siretNb;
+    }
+
+    public function setSiretNb(int $siretNb): self
+    {
+        $this->siretNb = $siretNb;
+
+        return $this;
+    }
+
+    public function getContactEmail(): ?string
+    {
+        return $this->contactEmail;
+    }
+
+    public function setContactEmail(string $contactEmail): self
+    {
+        $this->contactEmail = $contactEmail;
+
+        return $this;
+    }
+
+    public function getApeNb(): ?int
+    {
+        return $this->apeNb;
+    }
+
+    public function setApeNb(int $apeNb): self
+    {
+        $this->apeNb = $apeNb;
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(string $picture): self
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    public function getVideo(): ?string
+    {
+        return $this->video;
+    }
+
+    public function setVideo(string $video): self
+    {
+        $this->video = $video;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getCorporateCulture(): ?string
+    {
+        return $this->corporateCulture;
+    }
+
+    public function setCorporateCulture(string $corporateCulture): self
+    {
+        $this->corporateCulture = $corporateCulture;
+
+        return $this;
+    }
+
+    public function getCsr(): ?string
+    {
+        return $this->csr;
+    }
+
+    public function setCsr(string $csr): self
+    {
+        $this->csr = $csr;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getCity(): ?City
+    {
+        return $this->city;
+    }
+
+    public function setCity(City $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Offer[]
+     */
+    public function getOffers(): Collection
+    {
+        return $this->offers;
+    }
+
+    public function addOffer(Offer $offer): self
+    {
+        if (!$this->offers->contains($offer)) {
+            $this->offers[] = $offer;
+            $offer->setCompany($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOffer(Offer $offer): self
+    {
+        if ($this->offers->removeElement($offer)) {
+            // set the owning side to null (unless already changed)
+            if ($offer->getCompany() === $this) {
+                $offer->setCompany($this);
+            }
+        }
+
+        return $this;
+    }
+}
