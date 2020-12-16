@@ -2,38 +2,25 @@
 
 {% block title %}Applicant index{% endblock %}
 
-{% block body %}
-    <h1>Applicant index</h1>
+{% block body%}
+    <div class="container applicant_index_tuto">
+        <h1 class="applicant_home_welcome">Bienvenue!</h1>
+        <a href="#"><button type="button" class="btn btn-vertOze">Créez votre profil candidat</button></a>
+        <h2>Présentation de OzéO</h2>
+        <div class="card">
+            <div class="card-body">
+                OzéO, est une plateforme digitale intuitive et inclusive, permettant de simplifier l’accès à l’emploi et de recruter différemment.
+                Notre but est de faire en sorte que des profils éloignés de l’emploi,
+                puissent rencontrer une opportunité grâce à un système de matching ciblant des compétences comportementales et des compétences techniques.
+                Faire savoir un savoir faire, recruter une personnalité, Ozéo permettra de rencontrer
+            </div>
+        </div>
+        <h2>Tutoriel sur l'utilisation du site</h2>
+        <div class="card">
+            <div class="card-body">
+                Postea conatibus subito curator qui est baiolorum exustus insaniam praecentor haut baiolorum usque quidam longe quidam expediendum qui curator praecentor ad         </div>
+            </div>
+        </div>
+    </div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Personality</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for applicant in applicants %}
-            <tr>
-                <td>{{ applicant.id }}</td>
-                <td>{{ applicant.firstname }}</td>
-                <td>{{ applicant.lastname }}</td>
-                <td>{{ applicant.personality }}</td>
-                <td>
-                    <a href="{{ path('applicant_show', {'id': applicant.id}) }}">show</a>
-                    <a href="{{ path('applicant_edit', {'id': applicant.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('applicant_new') }}">Create new</a>
 {% endblock %}

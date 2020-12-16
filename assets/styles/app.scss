@@ -2,6 +2,14 @@
 @import "~bootstrap/scss/bootstrap";
 
 body {
-    background-color: $wild-color;
-    color: $light-color;
+    background-color: $light-color;
+    color: $police-color;
+}
+
+// Page accueil candidat
+.applicant_index_tuto{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
 }
