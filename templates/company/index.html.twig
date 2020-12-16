@@ -5,9 +5,26 @@
 {% block body %}
     <div class="container d-flex flex-column">
         <h1 class="d-block text-center">Accueil entreprise</h1>
-        <button id="create-company-card" type="button" class="d-block btn btn-bleuOze btn-lg" >Créer sa fiche entreprise</button>
+        <button id="create-company-card" type="button" class="d-block btn btn-bleuOze btn-lg justify-content-center" >Créer sa fiche entreprise</button>
     </div>
-    <div class="container">
+    <div class="container d-block" id="announce-list-homecompany">
+        <h1 class="text-center">Liste des annonces</h1>
+        <div class="card container" id="announce-card-homecompany">
+            <div class="card-body">
+                <h5 class="card-title text-center">Intitulé du poste</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="card-link"><button class="btn btn-orangeOze">Voir match</button></a>
+                <a href="#" class="card-link"><button class="btn btn-bleuOze">Editer</button></a>
+            </div>
+        </div>
+            <div class="card container" id="announce-card-homecompany">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Intitulé du poste</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="card-link"><button class="btn btn-orangeOze">Voir match</button></a>
+                    <a href="#" class="card-link"><button class="btn btn-bleuOze">Editer</button></a>
+                </div>
+            </div>
+    </div>
 
-    </div>
 {% endblock %}
