@@ -27,8 +27,8 @@ class Company
     private $name;
 
     /**
-     * @ORM\Column(type="integer")
-     * @var integer
+     * @ORM\Column(type="string", length=255)
+     * @var string
      */
     private $siretNb;
 
@@ -111,18 +111,6 @@ class Company
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getSiretNb(): ?int
-    {
-        return $this->siretNb;
-    }
-
-    public function setSiretNb(int $siretNb): self
-    {
-        $this->siretNb = $siretNb;
 
         return $this;
     }
@@ -261,6 +249,18 @@ class Company
                 $offer->setCompany($this);
             }
         }
+
+        return $this;
+    }
+
+    public function getSiretNb(): ?string
+    {
+        return $this->siretNb;
+    }
+
+    public function setSiretNb(string $siretNb): self
+    {
+        $this->siretNb = $siretNb;
 
         return $this;
     }

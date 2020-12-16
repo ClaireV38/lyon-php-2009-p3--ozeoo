@@ -9,10 +9,16 @@ use App\Entity\City;
 
 class CityFixtures extends Fixture
 {
+    /**
+     * nb objects to create
+     * @var int
+     */
+    private const NB_OBJECT = 50;
+
     public function load(ObjectManager $manager)
     {
         $faker  =  Faker\Factory::create('fr_FR');
-        for ($i = 1; $i <= 50; $i++) {
+        for ($i = 1; $i <= self::NB_OBJECT; $i++) {
             $city = new City();
             $city->setName($faker->city());
             $city->setZipcode(intval($faker->postcode()));

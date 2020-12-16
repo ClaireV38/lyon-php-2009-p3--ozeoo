@@ -10,6 +10,12 @@ use Faker;
 
 class UserFixtures extends Fixture
 {
+    /**
+     * nb objects to create
+     * @var int
+     */
+    private const NB_OBJECT = 50;
+
     private $passwordEncoder;
 
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
@@ -20,7 +26,7 @@ class UserFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $faker  =  Faker\Factory::create('fr_FR');
-        for ($i = 1; $i <= 50; $i++) {
+        for ($i = 1; $i <= self::NB_OBJECT; $i++) {
             $applicant = new User();
             $applicant->setEmail('appl' . $faker->email());
             $applicant->setRoles(['ROLE_APPLICANT']);
