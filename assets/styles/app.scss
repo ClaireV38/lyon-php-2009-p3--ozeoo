@@ -6,15 +6,19 @@ body {
     color: $police-color;
 }
 
-/*Index company style*/
-#announce-list-homecompany {
-    margin-top: 20px;
-}
-#create-company-card {
-    width: auto;
-}
+/* Index company style */
+@include media-breakpoint-down(md) {
+    #company-home-body {
+        width: 90%;
+    }
+    #announce-list-homecompany {
+        margin-top: 20px;
+    }
+    #create-company-card {
+    }
 
-#announce-card-homecompany {
-    width: 18rem;
-    margin-top: 15px;
+    #announce-card-homecompany {
+        width: 18rem;
+        margin-top: 15px;
+    }
 }
