@@ -22,3 +22,29 @@ body {
         margin-top: 15px;
     }
 }
+/* Desktop index company style */
+@include media-breakpoint-up(sm)
+{
+    #create-company-card {
+        text-align: center;
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    #announce-card-homecompany {
+        width: 80%;
+        margin-top: 15px;
+        height: 100px;
+    }
+
+    .card-body {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    #announce-list-homecompany {
+        margin-top: 50px;
+    }
+
+}
