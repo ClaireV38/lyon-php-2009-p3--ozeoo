@@ -6,6 +6,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use App\Entity\User;
+use Faker;
 
 class UserFixtures extends Fixture
 {
@@ -18,25 +19,29 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        // Création d’un utilisateur de type “applicant”
-        $applicant = new User();
-        $applicant->setEmail('applicant@monsite.com');
-        $applicant->setRoles(['ROLE_APPLICANT']);
-        $applicant->setPassword($this->passwordEncoder->encodePassword(
-            $applicant,
-            'applicantpassword'
-        ));
-        $manager->persist($applicant);
+        $faker  =  Faker\Factory::create('fr_FR');
+        for ($i = 1; $i <= 50; $i++) {
+            $applicant = new User();
+            $applicant->setEmail('appl' . $faker->email());
+            $applicant->setRoles(['ROLE_APPLICANT']);
+            $applicant->setPassword($this->passwordEncoder->encodePassword(
+                $applicant,
+                'applicantpassword'
+            ));
+            $this->addReference('appl_user_' . $i, $applicant);
+            $manager->persist($applicant);
 
-        // Création d’un utilisateur de type “company”
-        $company = new User();
-        $company->setEmail('company@monsite.com');
-        $company->setRoles(['ROLE_COMPANY']);
-        $company->setPassword($this->passwordEncoder->encodePassword(
-            $company,
-            'companypassword'
-        ));
-        $manager->persist($company);
+            // Création d’un utilisateur de type “company”
+            $company = new User();
+            $company->setEmail('comp' . $faker->email());
+            $company->setRoles(['ROLE_COMPANY']);
+            $company->setPassword($this->passwordEncoder->encodePassword(
+                $company,
+                'companypassword'
+            ));
+            $this->addReference('comp_user_' . $i, $company);
+            $manager->persist($company);
+        }
 
         // Création d’un utilisateur de type “administrateur”
         $admin = new User();
