@@ -3,6 +3,7 @@
 {% block title %}Applicant index{% endblock %}
 
 {% block body%}
+    <!-- mobile -->
     <div class="container applicant_index_tuto">
         <h1 class="applicant_home_welcome_mainTitle">Bienvenue!</h1>
         <a href="#"><button type="button" class="btn btn-vertOze btn_candidateHome_createProfile">Créez votre profil candidat</button></a>
@@ -18,11 +19,34 @@
         <div class="card candidate_ozeoTutoCard" >
             <div class="card-body">
                 <h5 class="card-title candidate_welcome_title">Tutoriel sur l'utilisation du site</h5>
-                <p class="card-text"> Postea conatibus subito curator qui est baiolorum exustus insaniam praecentor haut baiolorum usque quidam
-                    longe quidam expediendum qui curator praecentor ad Postea conatibus subito curator qui est baiolorum exustus
-                    insaniam praecentor haut baiolorum usque quidam longe quidam expediendum qui curator praecentor ad Postea conatibus subito curator qui est baiolorum exustus insaniam praecentor haut baiolorum usque quidam longe quidam expediendum qui curator praecentor ad </p>
+                <br class="card-text"> Oze créer ton profil en cliquant sur le bouton vert ci-dessus<br />
+                Navigue dans les annonces qui matchent tes comptétences <br />
+                L'entreprise te contacte et te propose un entretien!
+                </p>
             </div>
         </div>
     </div>
+<!-- desktop -->
+<div class="container desktop_candidate_tuto">
+    <a href="#"><div class="card desktop_candidate_tutoCard1 row align-self-center">
+        <div class="card-body">
+            Oze créer ton profil, clique sur cette bulle!
+        </div>
+    </div></a>
+    <img src="{{ asset('build/images/fleche.png') }}" alt="flèche">
+    <div class="card desktop_candidate_tutoCard2">
+        <div class="card-body">
+            Navigue dans les annonces qui matchent tes compétences
+            et postule!
+        </div>
+    </div>
+    <img src="{{ asset('build/images/fleche.png') }}" alt="flèche">
+    <div class="card desktop_candidate_tutoCard3">
+        <div class="card-body">
+            L'entreprise te contacte et te propose un entretien.
+        </div>
+    </div>
+
+</div>
 
 {% endblock %}
