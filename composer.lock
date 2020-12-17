@@ -606,8 +606,6 @@
             "time": "2020-12-05T15:07:10+00:00"
         },
         {
-<<<<<<< HEAD
-=======
             "name": "doctrine/doctrine-fixtures-bundle",
             "version": "3.4.0",
             "source": {
