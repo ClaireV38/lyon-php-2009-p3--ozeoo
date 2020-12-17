@@ -23,7 +23,6 @@ body {
 #people-box-card {
     display: flex;
     flex-direction: row;
-    justify-content: center;
     justify-content: space-around;
     padding: 20px;
 }
@@ -55,9 +54,104 @@ body {
 #logo-people {
     align-self: center;
 }
-/* Desktop index company style */
-@media (min-width: 768px)
-{
+/* Legend for icons matching & candidate */
+#legend-announce-company {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#people-box-card-legend {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 5px;
+}
+
+#square-number-candidate-people-legend {
+    background-color: #C9E364;
+    border: solid 1px #C9E364;
+    width: 40px;
+    height: 40px;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+}
+
+#text-square-people-legend {
+    align-self: center;
+}
+
+#logo-people-legend {
+    align-self: center;
+}
+
+#text-legend-announce-company {
+    margin: 10px 0 0 5px;
+}
+
+#square-number-match-people-legend {
+    background-color: #00C2CB;
+    border: solid 1px #00C2CB;
+    width: 40px;
+    height: 40px;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+}
+
+#text-square-people-legend {
+    align-self: center;
+}
+
+#logo-people-legend {
+    align-self: center;
+}
+
+#text-legend-announce-company {
+    margin: 10px 0 0 5px;
+}
+
+.people-box-card-legend {
+    margin-right: 18px;
+}
+
+/* Navbar */
+.logoright {
+    display: none;
+}
+
+.button2 {
+    padding: 0;
+}
+
+.navbar-nav {
+    padding-left: 10px;
+}
+
+/* form applicant */
+.applicantForm {
+    padding: 0 10px 0 10px;
+}
+
+@media (min-width: 768px) {
+    /* Navbar */
+    .logoright {
+        display: block;
+    }
+
+    .button2 {
+        padding: 0 30px 0 30px;
+    }
+
+    .navbar-brand {
+        padding-right: 30px;
+    }
+
+    nav.navbar.navbar-expand-lg.navbar-light.bg-clairNavbar {
+        padding: 0 10px 0 0;
+    }
+    /* Desktop index company style */
     #create-company-card {
         text-align: center;
         width: 50%;
@@ -65,7 +159,7 @@ body {
         margin-right: auto;
     }
     #announce-card-homecompany {
-        width: 80%;
+        width: 90%;
         margin-top: 15px;
         height: 90px;
     }
@@ -103,10 +197,23 @@ body {
     }
 
     #logo-people {
-       align-self: center;
+        align-self: center;
     }
 
     #text-square-people {
         align-self: center;
+    }
+
+    #legend-announce-company {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    #people-box-card-legend {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        padding: 10px;
     }
 }
