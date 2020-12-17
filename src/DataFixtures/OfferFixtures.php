@@ -7,7 +7,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker;
 use App\Entity\Offer;
-use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\DateTime;
 
 class OfferFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -39,7 +39,7 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
             $offer->setStartDate(
                 $faker->dateTimebetween(new DateTime('now'), '2023-00-00 00:00:00')
             );
-            $offer->setCreationDate('now');
+            $offer->setCreationDate(new DateTime('now'));
             $offer->setEndDate(
                 $faker->dateTimeBetween($offer->getStartDate(), '2023-00-00 00:00:00')
             );
