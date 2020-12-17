@@ -683,7 +683,6 @@
             "time": "2020-11-14T09:36:49+00:00"
         },
         {
->>>>>>> 886b3d63fb731e4eb48c8552c1866a8246be1645
             "name": "doctrine/doctrine-migrations-bundle",
             "version": "3.0.1",
             "source": {
