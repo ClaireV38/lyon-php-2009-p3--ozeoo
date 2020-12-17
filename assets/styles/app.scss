@@ -25,6 +25,7 @@ body {
     flex-direction: row;
     justify-content: center;
     justify-content: space-around;
+    padding: 20px;
 }
 
 #square-number-candidate-people {
@@ -46,6 +47,14 @@ body {
     display: flex;
     justify-content: center;
 }
+
+#text-square-people {
+    align-self: center;
+}
+
+#logo-people {
+    align-self: center;
+}
 /* Desktop index company style */
 @media (min-width: 768px)
 {
@@ -58,7 +67,10 @@ body {
     #announce-card-homecompany {
         width: 80%;
         margin-top: 15px;
-        height: 100px;
+        height: 90px;
+    }
+    #title-announce-desktop {
+        align-self: center;
     }
 
     .card-body {
@@ -71,9 +83,8 @@ body {
         margin-top: 50px;
     }
     #people-box-card {
-        justify-content: space-around;
+        display: contents;
     }
-
 
     #square-number-match-people {
         background-color: #00C2CB;
