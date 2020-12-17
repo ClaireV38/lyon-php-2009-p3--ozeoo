@@ -5,7 +5,10 @@
 {% block body %}
     <h1>Bienvenue</h1>
     <div class="container" id="home-list">
-        <button type="button" class="btn btn-bleuOze btn-block" id="home-list-buttons">Candidat</button>
-        <button type="button" class="btn btn-orangeOze btn-block" id="home-list-buttons">Entreprise</button>
+        <div id="home-list-of-buttons">
+            <button type="button" class="btn btn-bleuOze btn-lg btn-block" id="home-list-buttons">Candidat</button>
+            <button type="button" class="btn btn-orangeOze btn-lg btn-block" id="home-list-buttons">Entreprise</button>
+        </div>
+        <img id="diversity1" src="{{ asset('build/images/diversity1.jpg') }}" width="50%" height="50%" alt="Montage d'images de différentes personnes représentant la diversité">
     </div>
 {% endblock %}
