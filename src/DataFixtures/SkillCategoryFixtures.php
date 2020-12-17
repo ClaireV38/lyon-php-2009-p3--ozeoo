@@ -28,7 +28,6 @@ class SkillCategoryFixtures extends Fixture
             $this->addReference('skill_category_' . ($key + 1), $skillCategory);
             $manager->persist($skillCategory);
         };
-
         $manager->flush();
     }
 }
