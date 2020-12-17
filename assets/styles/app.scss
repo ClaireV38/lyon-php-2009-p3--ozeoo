@@ -7,23 +7,47 @@ body {
 }
 
 /* Index company style */
-@include media-breakpoint-down(sm) {
-    #company-home-body {
-        width: 90%;
-    }
-    #announce-list-homecompany {
-        margin-top: 20px;
-    }
-    #create-company-card {
-    }
+#company-home-body {
+    width: 90%;
+}
 
-    #announce-card-homecompany {
-        width: 18rem;
-        margin-top: 15px;
-    }
+#announce-list-homecompany {
+    margin-top: 20px;
+}
+
+#announce-card-homecompany {
+    width: 18rem;
+    margin-top: 15px;
+}
+
+#people-box-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    justify-content: space-around;
+}
+
+#square-number-candidate-people {
+    background-color: #C9E364;
+    border: solid 1px #C9E364;
+    width: 40px;
+    height: 40px;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+}
+
+#square-number-match-people {
+    background-color: #00C2CB;
+    border: solid 1px #00C2CB;
+    width: 40px;
+    height: 40px;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
 }
 /* Desktop index company style */
-@include media-breakpoint-up(sm)
+@media (min-width: 768px)
 {
     #create-company-card {
         text-align: center;
@@ -46,5 +70,32 @@ body {
     #announce-list-homecompany {
         margin-top: 50px;
     }
+    #people-box-card {
+        justify-content: space-around;
+    }
 
+
+    #square-number-match-people {
+        background-color: #00C2CB;
+        border: solid 1px #00C2CB;
+        width: 40px;
+        height: 40px;
+        border-radius: 2px;
+    }
+
+    #square-number-candidate-people {
+        background-color: #C9E364;
+        border: solid 1px #C9E364;
+        width: 40px;
+        height: 40px;
+        border-radius: 2px;
+    }
+
+    #logo-people {
+       align-self: center;
+    }
+
+    #text-square-people {
+        align-self: center;
+    }
 }
