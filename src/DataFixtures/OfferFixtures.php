@@ -19,7 +19,7 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
 
     public function getDependencies()
     {
-        return [UserFixtures::class, CityFixtures::class];
+        return [UserFixtures::class, CityFixtures::class, ApplicantFixtures::class, SkillFixtures::class];
     }
 
     public function load(ObjectManager $manager)
@@ -45,6 +45,12 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
             );
             $offer->setDescription($faker->text(255));
             $offer->setIsAnonymous(rand(0, 1));
+            for ($j = 1; $j <= 10; $j++) {
+                $offer->addSkill($this->getReference('hardskill_' . rand(1, 1000)));
+            }
+            for ($j = 1; $j <= 10; $j++) {
+                $offer->addSkill($this->getReference('softskill_' . rand(1, 100)));
+            }
             $manager->persist($offer);
             $this->addReference('offer_' . $i, $offer);
         }
