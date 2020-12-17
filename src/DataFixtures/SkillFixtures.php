@@ -7,6 +7,7 @@ use App\Entity\SkillCategory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use App\Entity\Skill;
 use Faker;
 
 class SkillFixtures extends Fixture implements DependentFixtureInterface
@@ -26,14 +27,12 @@ class SkillFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
         $faker  =  Faker\Factory::create('fr_FR');
-        for ($i = 1; $i <= 20; $i++) {
-            if ($this->getReference('skill_category' . $i) instanceof SkillCategory) {
-                for ($j = 1; $j <= rand(50, 150); $i++) {
-                    $skill = new Skill();
-                    $skill->setSkillCategory($this->getReference('skill_category' . $i));
-                    $skill->setName($faker->text(100));
-                    $manager->persist($skill);
-                }
+        for ($i = 1; $i <= 11; $i++) {
+            for ($j = 1; $j <= rand(50, 150); $j++) {
+                $skill = new Skill();
+                $skill->setSkillCategory($this->getReference('skill_category_' . $i));
+                $skill->setName($faker->text(100));
+                $manager->persist($skill);
             }
         }
         $manager->flush();
