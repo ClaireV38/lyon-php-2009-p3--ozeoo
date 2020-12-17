@@ -79,7 +79,7 @@ body {
 
     .desktop_candidate_tutoCard1 {
         padding-top:40px;
-        background-color: $vertOze;
+        border: 1px solid $orangeOze;
         text-decoration: none;
     }
 
@@ -91,6 +91,10 @@ body {
     .desktop_candidate_tutoCard3 {
         padding-top: 20px;
         border: 1px solid $bleuOze;
+    }
+
+    .btn_candidateHome_createProfileDesktop {
+        margin-top: 10px;
     }
 }
 
