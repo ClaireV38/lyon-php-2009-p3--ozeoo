@@ -1,51 +1,58 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Company index{% endblock %}
+{% block title %}Accueil entreprise{% endblock %}
 
 {% block body %}
-    <h1>Company index</h1>
+    {% include '/company/_navbar.html.twig' %}
+    <div class="container d-flex flex-column" id="company-home-body">
+        <h1 class="d-block text-center">Accueil entreprise</h1>
+        <a class="d-block btn btn-bleuOze btn-lg align-content-center" id="create-company-card" href="#" role="button">
+            Créer sa fiche entreprise
+        </a>
+    </div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>SiretNb</th>
-                <th>ContactEmail</th>
-                <th>ApeNb</th>
-                <th>Picture</th>
-                <th>Video</th>
-                <th>Description</th>
-                <th>CorporateCulture</th>
-                <th>Csr</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for company in companies %}
-            <tr>
-                <td>{{ company.id }}</td>
-                <td>{{ company.name }}</td>
-                <td>{{ company.siretNb }}</td>
-                <td>{{ company.contactEmail }}</td>
-                <td>{{ company.apeNb }}</td>
-                <td>{{ company.picture }}</td>
-                <td>{{ company.video }}</td>
-                <td>{{ company.description }}</td>
-                <td>{{ company.corporateCulture }}</td>
-                <td>{{ company.csr }}</td>
-                <td>
-                    <a href="{{ path('company_show', {'id': company.id}) }}">show</a>
-                    <a href="{{ path('company_edit', {'id': company.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="11">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="container d-block" id="announce-list-homecompany">
+        <h1 class="text-center">Liste des annonces</h1>
+        <div id="legend-announce-company">
+            <div id="people-box-card-legend" class="people-box-card-legend">
+                <div id="square-number-match-people-legend">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-person-fill" id="logo-people-legend" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                    </svg>
+                    <p class="card-text" id="text-square-people-legend">10</p>
+                </div>
+                <p id="text-legend-announce-company"> : Nombre de match</p>
+            </div>
+            <div id="people-box-card-legend">
+                <div id="square-number-candidate-people-legend">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-person-fill" id="logo-people-legend" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                    </svg>
+                    <p class="card-text" id="text-square-people-legend">10</p>
+                </div>
+                <p id="text-legend-announce-company"> : Nombre de candidat</p>
+            </div>
+        </div>
 
-    <a href="{{ path('company_new') }}">Create new</a>
+    <div class="card container" id="announce-card-homecompany">
+        <div class="card-body">
+            <h5 class="card-title text-center" id="title-announce-desktop">Intitulé du poste</h5>
+            <div id="people-box-card">
+                <div id="square-number-match-people">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                     class="bi bi-person-fill" id="logo-people" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                    </svg><p class="card-text" id="text-square-people">10</p></div>
+                <div id="square-number-candidate-people">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                     class="bi bi-person-fill" id="logo-people" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                    </svg><p class="card-text" id="text-square-people">10</p></div>
+            </div>
+            <a href="#" class="card-link"><button class="btn btn-orangeOze">Voir match</button></a>
+            <a href="#" class="card-link"><button class="btn btn-bleuOze">Editer</button></a>
+        </div>
+    </div>
 {% endblock %}
