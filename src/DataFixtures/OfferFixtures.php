@@ -10,6 +10,7 @@ use App\Entity\Offer;
 use DateTime;
 use App\DataFixtures\CompanyFixtures;
 use App\DataFixtures\CityFixtures;
+use App\DataFixtures\SkillFixtures;
 
 class OfferFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -48,10 +49,10 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
             $offer->setDescription($faker->text(255));
             $offer->setIsAnonymous(rand(0, 1));
             for ($j = 1; $j <= 10; $j++) {
-                $offer->addSkill($this->getReference('hardskill_' . rand(1, 1000)));
+                $offer->addSkill($this->getReference('hardskill_' . rand(1, SkillFixtures::NB_HARDSKILLS)));
             }
             for ($j = 1; $j <= 10; $j++) {
-                $offer->addSkill($this->getReference('softskill_' . rand(1, 100)));
+                $offer->addSkill($this->getReference('softskill_' . rand(1, SkillFixtures::NB_SOFTSKILLS)));
             }
             $manager->persist($offer);
             $this->addReference('offer_' . $i, $offer);

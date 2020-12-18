@@ -13,9 +13,16 @@ use Faker;
 class SkillFixtures extends Fixture implements DependentFixtureInterface
 {
     /**
+     * nb softskills to create
      * @var int
      */
-    private $nbSkills;
+    public const NB_HARDSKILLS = 1000;
+
+    /**
+     * nb softskills to create
+     * @var int
+     */
+    public const NB_SOFTSKILLS = 100;
 
     public function getDependencies()
     {
@@ -25,21 +32,21 @@ class SkillFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
         $faker = Faker\Factory::create('fr_FR');
-        $nbSkills = 0;
-        for ($i = 1; $i <= 10; $i++) {
-            for ($j = 1; $j <= 100; $j++) {
-                $nbSkills++;
+        $indexHardSkills = 0;
+        $nbHardCategories = count(SkillCategoryFixtures::CATEGORIES) - 1;
+        for ($i = 1; $i <= $nbHardCategories; $i++) {
+            for ($j = 1; $j <= round(self::NB_HARDSKILLS / $nbHardCategories); $j++) {
+                $indexHardSkills++;
                 $skill = new Skill();
                 $skill->setSkillCategory($this->getReference('skill_category_' . $i));
                 $skill->setName($faker->text(100));
                 $manager->persist($skill);
-                $this->addReference('hardskill_' . $nbSkills, $skill);
+                $this->addReference('hardskill_' . $indexHardSkills, $skill);
             }
         }
-        for ($j = 1; $j <= 100; $j++) {
-            $nbSkills++;
+        for ($j = 1; $j <= self::NB_SOFTSKILLS; $j++) {
             $skill = new Skill();
-            $skill->setSkillCategory($this->getReference('skill_category_' . ($i + 1)));
+            $skill->setSkillCategory($this->getReference('skill_category_' . $i));
             $skill->setName($faker->text(100));
             $manager->persist($skill);
             $this->addReference('softskill_' . $j, $skill);

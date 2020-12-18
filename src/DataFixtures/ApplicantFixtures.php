@@ -7,6 +7,9 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker;
 use App\Entity\Applicant;
+use App\DataFixtures\CompanyFixtures;
+use App\DataFixtures\UserFixtures;
+use App\DataFixtures\SkillFixtures;
 
 class ApplicantFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -27,16 +30,16 @@ class ApplicantFixtures extends Fixture implements DependentFixtureInterface
         for ($i = 1; $i <= self::NB_OBJECT; $i++) {
             $applicant = new Applicant();
             $applicant->setUser($this->getReference('appl_user_' . $i));
-            $applicant->setCity($this->getReference('city_' . rand(1, self::NB_OBJECT)));
+            $applicant->setCity($this->getReference('city_' . rand(1, CityFixtures::NB_OBJECT)));
             $applicant->setFirstname($faker->firstName());
             $applicant->setLastname($faker->lastName());
             $applicant->setPersonality($faker->text(100));
             $applicant->setMobility($faker->text(100));
             for ($j = 1; $j <= 10; $j++) {
-                $applicant->addSkill($this->getReference('hardskill_' . rand(1, 1000)));
+                $applicant->addSkill($this->getReference('hardskill_' . rand(1, SkillFixtures::NB_HARDSKILLS)));
             }
             for ($j = 1; $j <= 10; $j++) {
-                $applicant->addSkill($this->getReference('softskill_' . rand(1, 100)));
+                $applicant->addSkill($this->getReference('softskill_' . rand(1, SkillFixtures::NB_SOFTSKILLS)));
             }
             $manager->persist($applicant);
             $this->addReference('applicant_' . $i, $applicant);
