@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau profil{% endblock %}
+
+{% block body %}
+    <h1>Créer un nouveau profil</h1>
+
+    {{ include('applicant/_form.html.twig') }}
+
+    <a href="{{ path('applicant_index') }}">back to list</a>
+{% endblock %}
