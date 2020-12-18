@@ -4,95 +4,95 @@
 /*Body*/
 
 html, body {
-  height: 100vh;
-  margin: 0;
-  padding: 0;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  background-color: $light-color;
-  color: $police-color;
-  display: flex;
-  flex-direction: column;
+    background-color: $light-color;
+    color: $police-color;
+    display: flex;
+    flex-direction: column;
 }
 
 main {
-  flex-grow: 1;
+    flex-grow: 1;
 }
 
 /*Homepage*/
 
 #home-list-overall {
-  width: 100%;
+    width: 100%;
 }
 
 #home-list-pictures {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 h1 {
-  text-align: center;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  padding: 25px;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 25px;
 }
 
 #home-list {
-  text-align: center;
+    text-align: center;
 }
 
 #home-list-buttons {
-  text-align: center;
-  margin-top: 50px;
-  margin-bottom: 50px;
-  color: #ffffff;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    color: #ffffff;
 }
 
 #diversityBig1 {
-  display: none;
+    display: none;
 }
 
 #diversite1 {
-  height: auto;
-  width: auto;
+    height: auto;
+    width: auto;
 }
 
 #diversite2 {
-  height: 80px;
+    height: 80px;
 }
 
 /*Footer*/
 #sticky-footer {
-  flex-shrink: 0;
-  margin-top: 50px;
+    flex-shrink: 0;
+    margin-top: 50px;
 }
 
 #footer-buttons:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 #footer-buttons-link {
-  color: #ffffff;
+    color: #ffffff;
 }
 
 /* Navbar */
 .logoright {
-  display: none;
+    display: none;
 }
 
 .button2 {
-  padding: 0;
+    padding: 0;
 }
 
 .navbar-nav {
-  padding-left: 10px;
+    padding-left: 10px;
 }
 
 /* form applicant */
 .applicantForm {
-  padding: 0 10px 0 10px;
+    padding: 0 10px 0 10px;
 }
 
 .applicant_home_welcome_mainTitle {
