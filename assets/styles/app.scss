@@ -24,6 +24,41 @@ body {
     padding: 0 10px 0 10px;
 }
 
+.applicant_home_welcome_mainTitle {
+    margin-top: 10px;
+}
+
+.applicant_index_tuto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: justify;
+}
+
+.applicant_home_welcome_mainTitle, .btn_candidateHome_createProfile,
+.candidate_ozeoPresentationCard,
+.candidate_ozeoTutoCard {
+    margin-bottom: 20px;
+}
+
+.candidate_welcome_title {
+    text-align: center;
+}
+
+.candidate_ozeoPresentationCard {
+    border: 1px solid $orangeOze ;
+    width: 18rem;
+}
+
+.candidate_ozeoTutoCard {
+    border: 1px solid $bleuOze;
+    width: 18rem;
+}
+
+.desktop_candidate_tuto {
+    display: none;
+}
+
 @media (min-width: 768px) {
     /* Navbar */
     .logoright {
@@ -41,4 +76,58 @@ body {
     nav.navbar.navbar-expand-lg.navbar-light.bg-clairNavbar {
         padding: 0 10px 0 0;
     }
+
+    /* Page accueil candidat*/
+    .btn_candidateHome_createProfile {
+        display: none;
+    }
+
+    .candidate_ozeoPresentationCard {
+        width: 80rem;
+    }
+
+    .candidate_ozeoTutoCard {
+        display: none;
+    }
+
+    .desktop_candidate_tuto {
+        margin-top: 60px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .desktop_candidate_tuto a {
+        text-decoration: none;
+        color: $police-color;
+    }
+
+    .desktop_candidate_tuto .card {
+        width: 12rem;
+        height: 12rem;
+        border-radius: 100px;
+        text-align: center;
+    }
+
+    .desktop_candidate_tutoCard1 {
+        padding-top:40px;
+        border: 1px solid $orangeOze;
+        text-decoration: none;
+    }
+
+    .desktop_candidate_tutoCard2 {
+        padding-top: 15px;
+        border: 1px solid $violetOze;
+    }
+
+    .desktop_candidate_tutoCard3 {
+        padding-top: 20px;
+        border: 1px solid $bleuOze;
+    }
+
+    .btn_candidateHome_createProfileDesktop {
+        margin-top: 10px;
+    }
 }
+
