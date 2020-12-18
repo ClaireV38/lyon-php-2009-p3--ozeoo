@@ -1,9 +1,191 @@
 @import 'variables.scss';
 @import "~bootstrap/scss/bootstrap";
 
+/*Body*/
+
+html, body {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     background-color: $light-color;
     color: $police-color;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex-grow: 1;
+}
+
+/*Homepage*/
+
+#home-list-overall {
+    width: 100%;
+}
+
+#home-list-pictures {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 25px;
+}
+
+#home-list {
+    text-align: center;
+}
+
+#home-list-buttons {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    color: #ffffff;
+}
+
+#diversityBig1 {
+    display: none;
+}
+
+#diversite1 {
+    height: auto;
+    width: auto;
+}
+
+#diversite2 {
+    height: 80px;
+}
+
+/*Footer*/
+#sticky-footer {
+    flex-shrink: 0;
+    margin-top: 50px;
+}
+
+#footer-buttons:hover {
+    cursor: pointer;
+}
+
+#footer-buttons-link {
+    color: #ffffff;
+}
+
+/* Index company style */
+#company-home-body {
+    width: 90%;
+}
+
+#announce-list-homecompany {
+    margin-top: 20px;
+}
+
+#announce-card-homecompany {
+    width: 18rem;
+    margin-top: 15px;
+}
+
+#people-box-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+#square-number-candidate-people {
+    background-color: #C9E364;
+    border: solid 1px #C9E364;
+    width: 40px;
+    height: 40px;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+}
+
+#square-number-match-people {
+    background-color: #00C2CB;
+    border: solid 1px #00C2CB;
+    width: 40px;
+    height: 40px;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+}
+
+#text-square-people {
+    align-self: center;
+}
+
+#logo-people {
+    align-self: center;
+}
+
+/* Legend for icons matching & candidate */
+#legend-announce-company {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#people-box-card-legend {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 5px;
+}
+
+#square-number-candidate-people-legend {
+    background-color: #C9E364;
+    border: solid 1px #C9E364;
+    width: 40px;
+    height: 40px;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+}
+
+#text-square-people-legend {
+    align-self: center;
+}
+
+#logo-people-legend {
+    align-self: center;
+}
+
+#text-legend-announce-company {
+    margin: 10px 0 0 5px;
+}
+
+#square-number-match-people-legend {
+    background-color: #00C2CB;
+    border: solid 1px #00C2CB;
+    width: 40px;
+    height: 40px;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+}
+
+#text-square-people-legend {
+    align-self: center;
+}
+
+#logo-people-legend {
+    align-self: center;
+}
+
+#text-legend-announce-company {
+    margin: 10px 0 0 5px;
+}
+
+.people-box-card-legend {
+    margin-right: 18px;
 }
 
 /* Navbar */
@@ -24,6 +206,41 @@ body {
     padding: 0 10px 0 10px;
 }
 
+.applicant_home_welcome_mainTitle {
+    margin-top: 10px;
+}
+
+.applicant_index_tuto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: justify;
+}
+
+.applicant_home_welcome_mainTitle, .btn_candidateHome_createProfile,
+.candidate_ozeoPresentationCard,
+.candidate_ozeoTutoCard {
+    margin-bottom: 20px;
+}
+
+.candidate_welcome_title {
+    text-align: center;
+}
+
+.candidate_ozeoPresentationCard {
+    border: 1px solid $orangeOze ;
+    width: 18rem;
+}
+
+.candidate_ozeoTutoCard {
+    border: 1px solid $bleuOze;
+    width: 18rem;
+}
+
+.desktop_candidate_tuto {
+    display: none;
+}
+
 @media (min-width: 768px) {
     /* Navbar */
     .logoright {
@@ -38,7 +255,161 @@ body {
         padding-right: 30px;
     }
 
+    h1 {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 25px;
+    }
+
+    /*Homepage*/
+
+    #home-list {
+        text-align: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    #home-list-of-buttons {
+        max-width: 100%;
+    }
+
+    #home-list-buttons {
+        text-align: center;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        width: 280px;
+    }
+
+    #diversityBig1 {
+        display: block;
+    }
+
     nav.navbar.navbar-expand-lg.navbar-light.bg-clairNavbar {
         padding: 0 10px 0 0;
+    }
+
+    /* Desktop index company style */
+    #create-company-card {
+        text-align: center;
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #announce-card-homecompany {
+        width: 90%;
+        margin-top: 15px;
+        height: 90px;
+    }
+
+    #title-announce-desktop {
+        align-self: center;
+    }
+
+    .card-body {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    #announce-list-homecompany {
+        margin-top: 50px;
+    }
+
+    #people-box-card {
+        display: contents;
+    }
+
+    #square-number-match-people {
+        background-color: #00C2CB;
+        border: solid 1px #00C2CB;
+        width: 40px;
+        height: 40px;
+        border-radius: 2px;
+    }
+
+    #square-number-candidate-people {
+        background-color: #C9E364;
+        border: solid 1px #C9E364;
+        width: 40px;
+        height: 40px;
+        border-radius: 2px;
+    }
+
+    #logo-people {
+        align-self: center;
+    }
+
+    #text-square-people {
+        align-self: center;
+    }
+
+    #legend-announce-company {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    #people-box-card-legend {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        padding: 10px;
+    }
+
+    /* Page accueil candidat*/
+    .btn_candidateHome_createProfile {
+        display: none;
+    }
+
+    .candidate_ozeoPresentationCard {
+        width: 80rem;
+    }
+
+    .candidate_ozeoTutoCard {
+        display: none;
+    }
+
+    .desktop_candidate_tuto {
+        margin-top: 60px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .desktop_candidate_tuto a {
+        text-decoration: none;
+        color: $police-color;
+    }
+
+    .desktop_candidate_tuto .card {
+        width: 12rem;
+        height: 12rem;
+        border-radius: 100px;
+        text-align: center;
+    }
+
+    .desktop_candidate_tutoCard1 {
+        padding-top:40px;
+        border: 1px solid $orangeOze;
+        text-decoration: none;
+    }
+
+    .desktop_candidate_tutoCard2 {
+        padding-top: 15px;
+        border: 1px solid $violetOze;
+    }
+
+    .desktop_candidate_tutoCard3 {
+        padding-top: 20px;
+        border: 1px solid $bleuOze;
+    }
+
+    .btn_candidateHome_createProfileDesktop {
+        margin-top: 10px;
     }
 }

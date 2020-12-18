@@ -1,9 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Accueil{% endblock %}
 
 {% block body %}
-    {% include '/applicant/_navbar.html.twig' %}
-    <h1>Welcome on your project 3</h1>
-    <img src="https://media.giphy.com/media/hS58Kb2OOCMPS/giphy.gif" alt="Dewey dancing">
+        <div id="home-list-overall">
+            <div id="home-list-pictures">
+                <div id="home-list-picture1">
+                    <img id="diversite1" src="{{ asset('build/images/logoNavBar_noBg.png') }}" alt="Image Ozé La Diversité avec logo">
+                </div>
+            </div>
+            <h1>Bienvenue</h1>
+            <div class="container" id="home-list">
+                <div id="home-list-of-buttons">
+                    <a href="{{ path("applicant_index") }}"><button type="button" class="btn btn-bleuOze btn-lg btn-block" id="home-list-buttons">Candidat</button></a>
+                    <a href="{{ path("company_index") }}"><button type="button" class="btn btn-orangeOze btn-lg btn-block" id="home-list-buttons">Entreprise</button></a>
+                </div>
+                <img id="diversityBig1" src="{{ asset('build/images/diversityBig1.jpg') }}" height="350" width="500" class="ml-2" alt="Montage d'images de différentes personnes représentant la diversité">
+            </div>
+        </div>
 {% endblock %}
