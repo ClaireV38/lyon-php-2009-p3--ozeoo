@@ -127,7 +127,7 @@ h1 {
 }
 
 .desktop_candidate_tuto {
-    display: none;
+        display: none;
 }
 
 @media (min-width: 768px) {
@@ -177,59 +177,59 @@ h1 {
     }
 
     nav.navbar.navbar-expand-lg.navbar-light.bg-clairNavbar {
-          padding: 0 10px 0 0;
+        padding: 0 10px 0 0;
     }
 
     /* Page accueil candidat*/
     .btn_candidateHome_createProfile {
-          display: none;
+        display: none;
     }
 
     .candidate_ozeoPresentationCard {
-          width: 80rem;
+        width: 80rem;
     }
 
     .candidate_ozeoTutoCard {
-          display: none;
+        display: none;
     }
 
     .desktop_candidate_tuto {
-          margin-top: 60px;
-          display: flex;
-          flex-direction: row;
-          justify-content: space-around;
-          align-items: center;
+        margin-top: 60px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
     }
 
     .desktop_candidate_tuto a {
-          text-decoration: none;
-          color: $police-color;
+        text-decoration: none;
+        color: $police-color;
     }
 
     .desktop_candidate_tuto .card {
-          width: 12rem;
-          height: 12rem;
-          border-radius: 100px;
-          text-align: center;
+        width: 12rem;
+        height: 12rem;
+        border-radius: 100px;
+        text-align: center;
     }
 
     .desktop_candidate_tutoCard1 {
-          padding-top:40px;
-          border: 1px solid $orangeOze;
-          text-decoration: none;
+        padding-top:40px;
+        border: 1px solid $orangeOze;
+        text-decoration: none;
     }
 
     .desktop_candidate_tutoCard2 {
-          padding-top: 15px;
-          border: 1px solid $violetOze;
+        padding-top: 15px;
+        border: 1px solid $violetOze;
     }
 
     .desktop_candidate_tutoCard3 {
-          padding-top: 20px;
-          border: 1px solid $bleuOze;
+        padding-top: 20px;
+        border: 1px solid $bleuOze;
     }
 
     .btn_candidateHome_createProfileDesktop {
-          margin-top: 10px;
+        margin-top: 10px;
     }
 }
