@@ -3,7 +3,6 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-    <main>
         <div id="home-list-overall">
             <div id="home-list-pictures">
                 <div id="home-list-picture1">
@@ -13,11 +12,10 @@
             <h1>Bienvenue</h1>
             <div class="container" id="home-list">
                 <div id="home-list-of-buttons">
-                    <button type="button" class="btn btn-bleuOze btn-lg btn-block" id="home-list-buttons">Candidat</button>
-                    <button type="button" class="btn btn-orangeOze btn-lg btn-block" id="home-list-buttons">Entreprise</button>
+                    <a href="{{ path("applicant_index") }}"><button type="button" class="btn btn-bleuOze btn-lg btn-block" id="home-list-buttons">Candidat</button></a>
+                    <a href="{{ path("company_index") }}"><button type="button" class="btn btn-orangeOze btn-lg btn-block" id="home-list-buttons">Entreprise</button></a>
                 </div>
                 <img id="diversityBig1" src="{{ asset('build/images/diversityBig1.jpg') }}" width="500px" height="350px" class="ml-2" alt="Montage d'images de différentes personnes représentant la diversité">
             </div>
         </div>
-    </main>
 {% endblock %}
