@@ -23,10 +23,15 @@ main {
 }
 
 /*Homepage*/
+
+#home-list-overall {
+  width: 100%;
+}
+
 #home-list-pictures {
   display: flex;
-  flex-direction: row-reverse;
-  height: 80px;
+  flex-direction: row;
+  justify-content: center;
 }
 
 h1 {
@@ -38,7 +43,6 @@ h1 {
 
 #home-list {
   text-align: center;
-  width: 100%;
 }
 
 #home-list-buttons {
@@ -48,14 +52,31 @@ h1 {
   color: #ffffff;
 }
 
-#diversity1 {
+#diversityBig1 {
   display: none;
+}
+
+#diversite1 {
+  height: auto;
+  width: auto;
+}
+
+#diversite2 {
+  height: 80px;
 }
 
 /*Footer*/
 #sticky-footer {
   flex-shrink: 0;
   margin-top: 50px;
+}
+
+#footer-buttons:hover {
+  cursor: pointer;
+}
+
+#footer-buttons-link {
+  color: #ffffff;
 }
 
 /* Navbar */
@@ -128,9 +149,7 @@ h1 {
     width: 280px;
   }
 
-  #diversity1 {
+  #diversityBig1 {
     display: block;
   }
-}
-
 }

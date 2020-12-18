@@ -4,17 +4,20 @@
 
 {% block body %}
     <main>
-        <div id="home-list-pictures">
-        <img id="diversite1" src="{{ asset('build/images/logoNavBar_noBg.png') }}" alt="Image Ozé La Diversité avec logo">
-        <img id="diversite2" src="{{ asset('build/images/logoNoBg.png') }}" alt="Logo Ozé La Diversité">
-        </div>
-        <h1>Bienvenue</h1>
-        <div class="container" id="home-list">
-            <div id="home-list-of-buttons">
-                <button type="button" class="btn btn-bleuOze btn-lg btn-block" id="home-list-buttons">Candidat</button>
-                <button type="button" class="btn btn-orangeOze btn-lg btn-block" id="home-list-buttons">Entreprise</button>
+        <div id="home-list-overall">
+            <div id="home-list-pictures">
+                <div id="home-list-picture1">
+                    <img id="diversite1" src="{{ asset('build/images/logoNavBar_noBg.png') }}" alt="Image Ozé La Diversité avec logo">
+                </div>
             </div>
-            <img id="diversity1" src="{{ asset('build/images/diversity1.jpg') }}" width="50%" height="100%" class="ml-2" alt="Montage d'images de différentes personnes représentant la diversité">
+            <h1>Bienvenue</h1>
+            <div class="container" id="home-list">
+                <div id="home-list-of-buttons">
+                    <button type="button" class="btn btn-bleuOze btn-lg btn-block" id="home-list-buttons">Candidat</button>
+                    <button type="button" class="btn btn-orangeOze btn-lg btn-block" id="home-list-buttons">Entreprise</button>
+                </div>
+                <img id="diversityBig1" src="{{ asset('build/images/diversityBig1.jpg') }}" width="500px" height="350px" class="ml-2" alt="Montage d'images de différentes personnes représentant la diversité">
+            </div>
         </div>
     </main>
 {% endblock %}
