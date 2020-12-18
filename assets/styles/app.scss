@@ -32,6 +32,11 @@ main {
     justify-content: center;
 }
 
+#home-list-picture1 {
+    height: 100%;
+    width: 100%;
+}
+
 h1 {
     text-align: center;
     margin-top: 20px;
@@ -50,13 +55,21 @@ h1 {
     color: #ffffff;
 }
 
+#appliLink1 {
+    text-decoration: none;
+}
+
+#compLink1 {
+    text-decoration: none;
+}
+
 #diversityBig1 {
     display: none;
 }
 
 #diversite1 {
+    max-width: 100%;
     height: auto;
-    width: auto;
 }
 
 #diversite2 {
@@ -152,6 +165,11 @@ h1 {
     }
 
     /*Homepage*/
+
+    #home-list-picture1 {
+        height: auto;
+        width: auto;
+    }
 
     #home-list {
         text-align: center;
