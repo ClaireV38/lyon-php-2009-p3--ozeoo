@@ -131,105 +131,105 @@ h1 {
 }
 
 @media (min-width: 768px) {
-  /* Navbar */
-  .logoright {
-    display: block;
-  }
+    /* Navbar */
+    .logoright {
+        display: block;
+    }
 
-  .button2 {
-    padding: 0 30px 0 30px;
-  }
+    .button2 {
+        padding: 0 30px 0 30px;
+    }
 
-  .navbar-brand {
-    padding-right: 30px;
-  }
+    .navbar-brand {
+        padding-right: 30px;
+    }
 
-  h1 {
-    text-align: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding: 25px;
-  }
+    h1 {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 25px;
+    }
 
-  /*Homepage*/
+    /*Homepage*/
 
-  #home-list {
-    text-align: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-  }
+    #home-list {
+        text-align: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
 
-  #home-list-of-buttons {
-    max-width: 100%;
-  }
+    #home-list-of-buttons {
+        max-width: 100%;
+    }
 
-  #home-list-buttons {
-    text-align: center;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    width: 280px;
-  }
+    #home-list-buttons {
+        text-align: center;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        width: 280px;
+    }
 
-  #diversityBig1 {
-    display: block;
-  }
+    #diversityBig1 {
+        display: block;
+    }
 
-  nav.navbar.navbar-expand-lg.navbar-light.bg-clairNavbar {
-      padding: 0 10px 0 0;
-  }
+    nav.navbar.navbar-expand-lg.navbar-light.bg-clairNavbar {
+          padding: 0 10px 0 0;
+    }
 
-  /* Page accueil candidat*/
-  .btn_candidateHome_createProfile {
-      display: none;
-  }
+    /* Page accueil candidat*/
+    .btn_candidateHome_createProfile {
+          display: none;
+    }
 
-  .candidate_ozeoPresentationCard {
-      width: 80rem;
-  }
+    .candidate_ozeoPresentationCard {
+          width: 80rem;
+    }
 
-  .candidate_ozeoTutoCard {
-      display: none;
-  }
+    .candidate_ozeoTutoCard {
+          display: none;
+    }
 
-  .desktop_candidate_tuto {
-      margin-top: 60px;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-      align-items: center;
-  }
+    .desktop_candidate_tuto {
+          margin-top: 60px;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+          align-items: center;
+    }
 
-  .desktop_candidate_tuto a {
-      text-decoration: none;
-      color: $police-color;
-  }
+    .desktop_candidate_tuto a {
+          text-decoration: none;
+          color: $police-color;
+    }
 
-  .desktop_candidate_tuto .card {
-      width: 12rem;
-      height: 12rem;
-      border-radius: 100px;
-      text-align: center;
-  }
+    .desktop_candidate_tuto .card {
+          width: 12rem;
+          height: 12rem;
+          border-radius: 100px;
+          text-align: center;
+    }
 
-  .desktop_candidate_tutoCard1 {
-      padding-top:40px;
-      border: 1px solid $orangeOze;
-      text-decoration: none;
-  }
+    .desktop_candidate_tutoCard1 {
+          padding-top:40px;
+          border: 1px solid $orangeOze;
+          text-decoration: none;
+    }
 
-  .desktop_candidate_tutoCard2 {
-      padding-top: 15px;
-      border: 1px solid $violetOze;
-  }
+    .desktop_candidate_tutoCard2 {
+          padding-top: 15px;
+          border: 1px solid $violetOze;
+    }
 
-  .desktop_candidate_tutoCard3 {
-      padding-top: 20px;
-      border: 1px solid $bleuOze;
-  }
+    .desktop_candidate_tutoCard3 {
+          padding-top: 20px;
+          border: 1px solid $bleuOze;
+    }
 
-  .btn_candidateHome_createProfileDesktop {
-      margin-top: 10px;
-  }
+    .btn_candidateHome_createProfileDesktop {
+          margin-top: 10px;
+    }
 }
