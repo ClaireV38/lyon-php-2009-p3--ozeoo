@@ -12,7 +12,7 @@ class SkillCategoryFixtures extends Fixture
     /**
      * @var array
      */
-    private const CATEGORIES = ['marketing','communication','direction d\'entreprise','études, R&D',
+    public const CATEGORIES = ['marketing','communication','direction d\'entreprise','études, R&D',
         'gestion,finance et administration', 'informatique', 'production industrielle, travaux et chantier',
         'ressources humaines', 'santé, social et culture', 'services techniques', 'soft skills'];
 

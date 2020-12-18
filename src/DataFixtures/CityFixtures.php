@@ -13,7 +13,7 @@ class CityFixtures extends Fixture
      * nb objects to create
      * @var int
      */
-    private const NB_OBJECT = 50;
+    public const NB_OBJECT = 50;
 
     public function load(ObjectManager $manager)
     {

@@ -8,6 +8,8 @@ use Doctrine\Persistence\ObjectManager;
 use Faker;
 use App\Entity\Offer;
 use DateTime;
+use App\DataFixtures\CompanyFixtures;
+use App\DataFixtures\CityFixtures;
 
 class OfferFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -15,7 +17,7 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
      * nb objects to create
      * @var int
      **/
-    private const NB_OBJECT = 100;
+    public const NB_OBJECT = 100;
 
     public function getDependencies()
     {
@@ -27,10 +29,10 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
         $faker  =  Faker\Factory::create('fr_FR');
         for ($i = 1; $i <= self::NB_OBJECT; $i++) {
             $offer = new Offer();
-            $offer->setCity($this->getReference('city_' . rand(1, 50)));
-            $offer->setCompany($this->getReference('company_' . rand(1, 50)));
+            $offer->setCity($this->getReference('city_' . rand(1, CityFixtures::NB_OBJECT)));
+            $offer->setCompany($this->getReference('company_' . rand(1, CompanyFixtures::NB_OBJECT)));
             for ($j = 1; $j <= rand(0, 5); $j++) {
-                $offer->addApplicant($this->getReference('applicant_' . rand(1, 50)));
+                $offer->addApplicant($this->getReference('applicant_' . rand(1, ApplicantFixtures::NB_OBJECT)));
             }
             $offer->setTitle($faker->sentence(6, true));
             $offer->setContractType($faker->sentence(2, true));

@@ -27,7 +27,7 @@ class Company
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=15)
      * @var string
      */
     private $siretNb;

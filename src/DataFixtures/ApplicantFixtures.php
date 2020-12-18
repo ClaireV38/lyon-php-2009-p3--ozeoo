@@ -14,7 +14,7 @@ class ApplicantFixtures extends Fixture implements DependentFixtureInterface
      * nb objects to create
      * @var int
      **/
-    private const NB_OBJECT = 50;
+    public const NB_OBJECT = 50;
 
     public function getDependencies()
     {

@@ -20,7 +20,7 @@ final class Version20201217074800 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE applicant ADD mobility LONGTEXT DEFAULT NULL');
+        $this->addSql('ALTER TABLE applicant ADD mobility TEXT DEFAULT NULL');
     }
 
     public function down(Schema $schema) : void
