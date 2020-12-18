@@ -7,7 +7,7 @@ body {
 }
 
 /* Navbar */
-.logoRight {
+.logoright {
     display: none;
 }
 
@@ -20,7 +20,8 @@ body {
 }
 
 @media (min-width: 768px) {
-    .logoRight {
+    /* Navbar */
+    .logoright {
         display: block;
     }
     .button2 {
