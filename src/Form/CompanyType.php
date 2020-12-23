@@ -6,6 +6,9 @@ use App\Entity\Company;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\User;
+use App\Entity\City;
 
 class CompanyType extends AbstractType
 {
@@ -25,8 +28,14 @@ class CompanyType extends AbstractType
             ->add('description')
             ->add('corporateCulture')
             ->add('csr')
-            ->add('user')
-            ->add('city')
+            ->add('user', EntityType::class, [
+                'class' => User::class,
+                'choice_label' => 'email',
+            ])
+            ->add('city', EntityType::class, [
+                'class' => City::class,
+                'choice_label' => 'name',
+            ])
         ;
     }
 
