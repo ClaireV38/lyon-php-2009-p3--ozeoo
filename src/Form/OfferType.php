@@ -20,7 +20,7 @@ class OfferType extends AbstractType
             ->add('contractType')
             ->add('salary')
             ->add('duration')
-            ->add('date')
+            ->add('startDate')
             ->add('creationDate')
             ->add('endDate')
             ->add('description')
