@@ -248,6 +248,13 @@ h1 {
     padding: 0 10px 0 10px;
 }
 
+.btn_validate {
+    background-color: $vertOze;
+    margin: auto;
+}
+.flex{
+    display: flex;
+}
 @media (min-width: 768px) {
     /* Navbar */
     .logoright {

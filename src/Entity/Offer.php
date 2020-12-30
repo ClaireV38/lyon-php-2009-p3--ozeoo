@@ -6,6 +6,7 @@ use App\Repository\OfferRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=OfferRepository::class)
@@ -21,6 +22,8 @@ class Offer
     private $id;
 
     /**
+     * @Assert\NotBlank(message="Il vous faut indiquer l'intitulé du poste")
+     * @Assert\Length(max="255", maxMessage="L'intitulé ne doit pas faire plus de 255 caractères")
      * @ORM\Column(type="string", length=255)
      * @var string
      */
