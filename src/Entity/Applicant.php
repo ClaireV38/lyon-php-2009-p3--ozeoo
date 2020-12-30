@@ -64,6 +64,12 @@ class Applicant
      */
     private $offers;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     * @var string
+     */
+    private $mobility;
+
     public function __construct()
     {
         $this->skills = new ArrayCollection();
@@ -185,6 +191,18 @@ class Applicant
         if ($this->offers->removeElement($offer)) {
             $offer->removeApplicant($this);
         }
+
+        return $this;
+    }
+
+    public function getMobility(): ?string
+    {
+        return $this->mobility;
+    }
+
+    public function setMobility(string $mobility): self
+    {
+        $this->mobility = $mobility;
 
         return $this;
     }

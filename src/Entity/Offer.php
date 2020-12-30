@@ -51,7 +51,7 @@ class Offer
      * @ORM\Column(type="date")
      * @var \DateTimeInterface
      */
-    private $date;
+    private $startDate;
 
     /**
      * @ORM\Column(type="date")
@@ -162,14 +162,14 @@ class Offer
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getStartDate(): ?\DateTimeInterface
     {
-        return $this->date;
+        return $this->startDate;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function setStartDate(\DateTimeInterface $date): self
     {
-        $this->date = $date;
+        $this->startDate = $date;
 
         return $this;
     }
