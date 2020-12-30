@@ -30,6 +30,7 @@ class Offer
     private $title;
 
     /**
+     * @Assert\NotBlank(message="Il vous faut indiquer un type de contrat")
      * @ORM\Column(type="string", length=50)
      * @var string
      */
@@ -48,12 +49,14 @@ class Offer
     private $duration;
 
     /**
+     * @Assert\NotBlank(message="Il vous faut indiquer la date de début du contrat")
      * @ORM\Column(type="date")
      * @var \DateTimeInterface
      */
     private $startDate;
 
     /**
+     * @Assert\GreaterThan("today")
      * @ORM\Column(type="date")
      * @var \DateTimeInterface
      */
@@ -66,6 +69,7 @@ class Offer
     private $endDate;
 
     /**
+     * @Assert\NotBlank(message="Il vous faut indiquer une description du poste")
      * @ORM\Column(type="text")
      * @var string
      */
