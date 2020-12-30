@@ -6,6 +6,8 @@ use App\Repository\SkillRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass=SkillRepository::class)
@@ -22,6 +24,10 @@ class Skill
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Count(
+     *      max = 10,
+     *      maxMessage = "Tu ne peux pas choisir plus de 10 compétences"
+     * )
      * @var string
      */
     private $name;
