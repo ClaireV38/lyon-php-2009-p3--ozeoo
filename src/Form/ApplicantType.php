@@ -17,8 +17,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\ChoiceList\ChoiceList;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-
-
 class ApplicantType extends AbstractType
 {
     /**
@@ -32,14 +30,14 @@ class ApplicantType extends AbstractType
             ->add('lastname')
             ->add('personality')
             ->add('mobility')
-            ->add('skills',EntityType::class, [
+            ->add('skills', EntityType::class, [
                 'class' => Skill::class,
-//                'expanded' => true,
+//              'expanded' => true,
                 'multiple' => true,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('s');
                 },
-//                'choices' => $builder->getData()->getSkillCategory(),
+//              'choices' => $builder->getData()->getSkillCategory(),
                 'choice_label' => 'name',
             ])
 //            ->add('skillCategory', EntityType::class, [
