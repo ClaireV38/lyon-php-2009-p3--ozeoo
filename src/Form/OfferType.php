@@ -21,14 +21,14 @@ class OfferType extends AbstractType
             ->add('salary')
             ->add('duration')
             ->add('date')
-            ->add('creationDate')
-            ->add('endDate')
+            //->add('creationDate')
+            //->add('endDate')
             ->add('description')
             ->add('isAnonymous')
             ->add('city')
-            ->add('company')
-            ->add('skills')
-            ->add('applicant')
+            //->add('company')
+            //->add('skills')
+            //->add('applicant')
         ;
     }
 
