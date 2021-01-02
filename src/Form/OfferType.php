@@ -22,7 +22,7 @@ class OfferType extends AbstractType
             ->add('duration')
             ->add('startDate')
             //->add('creationDate')
-            //->add('endDate')
+            ->add('endDate')
             ->add('description')
             ->add('isAnonymous')
             //->add('city')
