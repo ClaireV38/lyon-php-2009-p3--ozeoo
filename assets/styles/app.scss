@@ -447,4 +447,27 @@ h1 {
     .login-form{
         min-width: 400px;
     }
+
+    /* New Applicant profile */
+    .applicantForm{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .infoForm{
+        width: 50%;
+        margin: auto;
+    }
+    .skillSelection{
+        display: flex;
+        padding: 10px 0 10px 0;
+    }
+    .titleApplicant{
+        text-align: center;
+        padding: 20px;
+    }
+    .buttonApplicant{
+        display: flex;
+        justify-content: center;
+    }
 }

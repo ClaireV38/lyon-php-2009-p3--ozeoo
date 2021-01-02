@@ -4,20 +4,30 @@
 
 {% block body %}
     {% include '/applicant/_navbar.html.twig' %}
-    <h2>Créer ton profil</h2>
 
         <div class="applicantForm">
-            {{ form_start(form) }}
-            {{ form_row(form.firstname, {'label': 'Ton prénom'}) }}
-            {{ form_row(form.lastname, {'label': 'Ton nom'}) }}
-            {{ form_row(form.mobility, {'label': 'Ta ville'}) }}
-            {{ form_row(form.personality, {'label': 'Parle nous de toi, de tes hobbies, de tes passions..'}) }}
-            <h2>Compétences Acquises</h2>
-
-                {{ form_row(form.skills) }}
-
-            <input type='submit' value='C parti'>
-            {{ form_end(form) }}
+            <div class="infoForm">
+                <h2 class="titleApplicant">Créer ton profil</h2>
+                {{ form_start(form) }}
+                {{ form_row(form.firstname, {'label': 'Ton prénom'}) }}
+                {{ form_row(form.lastname, {'label': 'Ton nom'}) }}
+                {{ form_row(form.mobility, {'label': 'Ta ville'}) }}
+                {{ form_row(form.personality, {'label': 'Parle nous de toi, de tes hobbies, de tes passions..'}) }}
+            </div>
+            <hr>
+            <h2 class="titleApplicant">Compétences Acquises</h2>
+            <div class="skillSelection">
+                    <div class="hardSkills">
+                        <h5>Compétences Techniques</h5>
+                            {{ form_row(form.skills) }}
+                    </div>
+                    <div class="softSkills">
+                        <h5>Compétences Comportementales</h5>
+                    </div>
+            </div>
         </div>
-    <a href="{{ path('applicant_index') }}">back to list</a>
+    <div class="buttonApplicant">
+        <input type='submit' class="btn btn-orangeOze" value='C parti'>
+    </div>
+    {{ form_end(form) }}
 {% endblock %}
