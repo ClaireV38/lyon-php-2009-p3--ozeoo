@@ -49,6 +49,7 @@ class Offer
     private $duration;
 
     /**
+     * @Assert\GreaterThan("today")
      * @Assert\NotBlank(message="Il vous faut indiquer la date de début du contrat")
      * @ORM\Column(type="date")
      * @var \DateTimeInterface
@@ -56,13 +57,13 @@ class Offer
     private $startDate;
 
     /**
-     * @Assert\GreaterThan("today")
      * @ORM\Column(type="date")
      * @var \DateTimeInterface
      */
     private $creationDate;
 
     /**
+     * @Assert\NotBlank(message="Il vous faut indiquer la date limite de candidature")
      * @ORM\Column(type="date", nullable=true)
      * @var \DateTimeInterface
      */
@@ -111,6 +112,8 @@ class Offer
     {
         $this->skills = new ArrayCollection();
         $this->applicant = new ArrayCollection();
+        $this->creationDate = new \DateTime();
+        $this->startDate = new \DateTime();
     }
 
     public function getId(): ?int

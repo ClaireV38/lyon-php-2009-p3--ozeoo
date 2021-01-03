@@ -3,9 +3,14 @@
 namespace App\Form;
 
 use App\Entity\Offer;
+use App\Entity\Skill;
+//use Doctrine\DBAL\Types\DateType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 class OfferType extends AbstractType
 {
@@ -18,16 +23,20 @@ class OfferType extends AbstractType
         $builder
             ->add('title')
             ->add('contractType')
-            ->add('salary')
-            ->add('duration')
-            ->add('startDate')
-            //->add('creationDate')
-            ->add('endDate')
+            ->add('salary', null, ['required' => false])
+            ->add('duration', null, ['required' => false])
+            ->add('startDate', DateType::class)
+            ->add('endDate', DateType::class)
             ->add('description')
             ->add('isAnonymous')
-            //->add('city')
+            //->add('city', null, ['choice_label' =>'name'])
             //->add('company')
-            //->add('skills')
+            ->add('skills', null,[
+                'choice_label' =>'name',
+                //'multiple'=> false,
+                //'expanded'=>false,
+                'label'=>false,
+            ])
             //->add('applicant')
         ;
     }

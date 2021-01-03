@@ -246,17 +246,27 @@ h1 {
     display: none;
 }
 
-
 /* Offer form */
 
-.offerForm {
-    padding: 0 10px 0 10px;
+.jobOfferFirstPart {
+    width: 50%;
+    margin: auto;
 }
 
 .btn_validate {
     background-color: $vertOze;
-    margin: auto;
+    margin:auto;
 }
+
+.offerSkillsTitle {
+    text-align: center;
+}
+
+.offerSkillsBlock {
+    flex-direction: column;
+    margin: 20px;
+}
+
 
 /*login*/
 .btn-130px{
@@ -267,6 +277,10 @@ h1 {
 /*flex*/
 .flex{
     display: flex;
+}
+
+.offer_date {
+    flex-direction: row;
 }
 
 @media (min-width: 768px) {
@@ -458,4 +472,16 @@ h1 {
     .login-form{
         min-width: 400px;
     }
+
+    /* Offer form */
+
+    .offerSkillsBlock {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .offerHardSkills {
+        width: 45%;
+    }
+
 }

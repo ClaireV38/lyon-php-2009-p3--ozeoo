@@ -39,6 +39,7 @@ class OfferController extends AbstractController
             $entityManager->persist($offer);
             $entityManager->flush();
 
+            //voir avec groupe où rediriger
             return $this->redirectToRoute('offer_index');
         }
 
