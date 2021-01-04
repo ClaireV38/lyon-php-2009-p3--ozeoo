@@ -80,6 +80,11 @@ class SkillCategory
         return $this->skills;
     }
 
+//    public function __toString(): string
+//    {
+//        return $this->getSkills();
+//    }
+
     public function addSkill(Skill $skill): self
     {
         if (!$this->skills->contains($skill)) {

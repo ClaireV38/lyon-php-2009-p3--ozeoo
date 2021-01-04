@@ -16,13 +16,21 @@
             </div>
             <hr>
             <h2 class="titleApplicant">Compétences Acquises</h2>
+
             <div class="skillSelection">
                     <div class="hardSkills">
-                        <h5>Compétences Techniques</h5>
-                            {{ form_row(form.skills) }}
+                        <h5>Compétences Techniques <small>(10 max)</small></h5>
+{#                            {{ form_row(form.skills) }}#}
+                        <h3>Tags</h3>
+                        <ul class="skills">
+                            {% for tag in form.skills %}
+                                <li>{{ form_row(skill.name) }}</li>
+                            {% endfor %}
+                        </ul>
+                        <button type="button" class="add_item_link" data-collection-holder-class="tags">+1 Skill</button>
                     </div>
                     <div class="softSkills">
-                        <h5>Compétences Comportementales</h5>
+                        <h5>Compétences Comportementales <small>(10 max)</small></h5>
                     </div>
             </div>
         </div>

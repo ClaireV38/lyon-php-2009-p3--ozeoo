@@ -1,5 +1,6 @@
 {
     "devDependencies": {
+        "@pugx/autocompleter-bundle": "file:vendor/pugx/autocompleter-bundle/assets",
         "@symfony/webpack-encore": "^0.31.0",
         "bootstrap": "^4.5.3",
         "core-js": "^3.0.0",
@@ -24,5 +25,7 @@
         "watch": "encore dev --watch",
         "build": "encore production --progress"
     },
-    "dependencies": {}
+    "dependencies": {
+        "bootstrap-autocomplete": "^2.3.7"
+    }
 }

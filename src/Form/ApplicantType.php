@@ -4,8 +4,8 @@ namespace App\Form;
 
 use App\Entity\Applicant;
 use App\Entity\Skill;
+use App\Form\SkillType;
 use App\Entity\SkillCategory;
-use Container1u5VjfN\getSkillCategoryRepositoryService;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -20,7 +20,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\ChoiceList\ChoiceList;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-
 class ApplicantType extends AbstractType
 {
     /**
@@ -34,17 +33,22 @@ class ApplicantType extends AbstractType
             ->add('lastname')
             ->add('personality')
             ->add('mobility', TextType::class)
-            ->add('skills', null, [
-//              'expanded' => true,
-//              'multiple' => true,
-                'label' => false,
+            ->add('skills', CollectionType::class, [
+                'entry_type' => SkillType::class,
+                'entry_options' => ['label' => false],
+                'allow_add' => true,
+            ]);
+//            ->add('skills', null, [
+////              'expanded' => true,
+//                'multiple' => true,
+//                'label' => false,
 //                'query_builder' => function (EntityRepository $er) {
 //                    return $er->createQueryBuilder('s')
 //                        ;
 //                },
 //              'choices' => $builder->getData()->getSkillCategory(),
-                'choice_label' => 'name',
-            ])
+//                'choice_label' => 'name',
+//            ])
 //            ->add('skillCategory', EntityType::class, [
 //                'class' => SkillCategory::class,
 //                'expanded' =>true,
