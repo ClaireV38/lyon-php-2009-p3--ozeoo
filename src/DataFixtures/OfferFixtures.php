@@ -9,7 +9,6 @@ use Faker;
 use App\Entity\Offer;
 use DateTime;
 use App\DataFixtures\CompanyFixtures;
-use App\DataFixtures\CityFixtures;
 use App\DataFixtures\SkillFixtures;
 
 class OfferFixtures extends Fixture implements DependentFixtureInterface
@@ -22,7 +21,7 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
 
     public function getDependencies()
     {
-        return [UserFixtures::class, CityFixtures::class, ApplicantFixtures::class, SkillFixtures::class];
+        return [UserFixtures::class, ApplicantFixtures::class, SkillFixtures::class];
     }
 
     public function load(ObjectManager $manager)
@@ -30,7 +29,7 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
         $faker  =  Faker\Factory::create('fr_FR');
         for ($i = 1; $i <= self::NB_OBJECT; $i++) {
             $offer = new Offer();
-            $offer->setCity($this->getReference('city_' . rand(1, CityFixtures::NB_OBJECT)));
+            $offer->setCity($faker->text(20));
             $offer->setCompany($this->getReference('company_' . rand(1, CompanyFixtures::NB_OBJECT)));
             for ($j = 1; $j <= rand(0, 5); $j++) {
                 $offer->addApplicant($this->getReference('applicant_' . rand(1, ApplicantFixtures::NB_OBJECT)));

@@ -37,18 +37,18 @@ class Skill
      * @ORM\ManyToMany(targetEntity=Applicant::class, inversedBy="skills")
      * @var Collection<Applicant>
      */
-    private $applicant;
+    private $applicants;
 
     /**
      * @ORM\ManyToMany(targetEntity=Offer::class, inversedBy="skills")
      * @var Collection<Offer>
      */
-    private $offer;
+    private $offers;
 
     public function __construct()
     {
-        $this->applicant = new ArrayCollection();
-        $this->offer = new ArrayCollection();
+        $this->applicants = new ArrayCollection();
+        $this->offers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -85,13 +85,13 @@ class Skill
      */
     public function getApplicant(): Collection
     {
-        return $this->applicant;
+        return $this->applicants;
     }
 
     public function addApplicant(Applicant $applicant): self
     {
-        if (!$this->applicant->contains($applicant)) {
-            $this->applicant[] = $applicant;
+        if (!$this->applicants->contains($applicant)) {
+            $this->applicants[] = $applicant;
         }
 
         return $this;
@@ -99,7 +99,7 @@ class Skill
 
     public function removeApplicant(Applicant $applicant): self
     {
-        $this->applicant->removeElement($applicant);
+        $this->applicants->removeElement($applicant);
 
         return $this;
     }
@@ -109,13 +109,13 @@ class Skill
      */
     public function getOffer(): Collection
     {
-        return $this->offer;
+        return $this->offers;
     }
 
     public function addOffer(Offer $offer): self
     {
-        if (!$this->offer->contains($offer)) {
-            $this->offer[] = $offer;
+        if (!$this->offers->contains($offer)) {
+            $this->offers[] = $offer;
         }
 
         return $this;
@@ -123,8 +123,24 @@ class Skill
 
     public function removeOffer(Offer $offer): self
     {
-        $this->offer->removeElement($offer);
+        $this->offers->removeElement($offer);
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Applicant[]
+     */
+    public function getApplicants(): Collection
+    {
+        return $this->applicants;
+    }
+
+    /**
+     * @return Collection|Offer[]
+     */
+    public function getOffers(): Collection
+    {
+        return $this->offers;
     }
 }

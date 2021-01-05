@@ -21,7 +21,7 @@ class ApplicantFixtures extends Fixture implements DependentFixtureInterface
 
     public function getDependencies()
     {
-        return [UserFixtures::class, CityFixtures::class, SkillFixtures::class];
+        return [UserFixtures::class, SkillFixtures::class];
     }
 
     public function load(ObjectManager $manager)
@@ -30,7 +30,7 @@ class ApplicantFixtures extends Fixture implements DependentFixtureInterface
         for ($i = 1; $i <= self::NB_OBJECT; $i++) {
             $applicant = new Applicant();
             $applicant->setUser($this->getReference('appl_user_' . $i));
-            $applicant->setCity($this->getReference('city_' . rand(1, CityFixtures::NB_OBJECT)));
+            $applicant->setCity($faker->text(20));
             $applicant->setFirstname($faker->firstName());
             $applicant->setLastname($faker->lastName());
             $applicant->setPersonality($faker->text(100));
