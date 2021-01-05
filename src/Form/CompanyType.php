@@ -8,7 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\User;
-use App\Entity\City;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class CompanyType extends AbstractType
 {
@@ -32,10 +32,7 @@ class CompanyType extends AbstractType
                 'class' => User::class,
                 'choice_label' => 'email',
             ])
-            ->add('city', EntityType::class, [
-                'class' => City::class,
-                'choice_label' => 'name',
-            ])
+            ->add('city', TextType::class)
         ;
     }
 
