@@ -20,6 +20,11 @@ main {
     flex-grow: 1;
 }
 
+.btn-center {
+    display: block;
+    margin : 20px auto;
+}
+
 /*Homepage*/
 
 #home-list-overall {
@@ -56,12 +61,13 @@ h1 {
 
 #diversite1 {
     height: auto;
-    width: auto;
+    width: 100%;
 }
 
 #diversite2 {
     height: 80px;
 }
+
 
 /*Footer*/
 #sticky-footer {
@@ -241,6 +247,12 @@ h1 {
     display: none;
 }
 
+/*login*/
+.btn-130px{
+    width: 130px;
+    padding: 3px;
+}
+
 @media (min-width: 768px) {
     /* Navbar */
     .logoright {
@@ -411,5 +423,23 @@ h1 {
 
     .btn_candidateHome_createProfileDesktop {
         margin-top: 10px;
+    }
+
+    /*login*/
+    .login-container {
+        height: 100%;
+    }
+
+    .main-row{
+        margin-top: 110px;
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .login-form{
+        min-width: 400px;
     }
 }
