@@ -26,7 +26,6 @@ class CompanyType extends AbstractType
             ->add('corporateCulture')
             ->add('csr')
             ->add('user')
-            ->add('city')
         ;
     }
 
