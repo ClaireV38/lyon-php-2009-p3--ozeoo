@@ -24,7 +24,7 @@ class Company
     /**
      * @ORM\Column(type="string", length=255)
      * @var string
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Veuillez rentrer votre nom.")
      * @Assert\Length(max="255", maxMessage="Le nom ne doit pas exceder 255 caractères.")
      */
     private $name;
@@ -32,8 +32,8 @@ class Company
     /**
      * @ORM\Column(type="string", length=15)
      * @var string
-     * @Assert\NotBlank()
-     * @Assert\Length(max="15", , maxMessage="Le siret ne doit pas exceder 15 caractères.")
+     * @Assert\Regex("/^\d{14}$/")
+     * @Assert\NotBlank(message="Veuillez saisir un numéro de SIRET composé de 14 chiffres")
      */
     private $siretNb;
 
@@ -46,9 +46,10 @@ class Company
     private $contactEmail;
 
     /**
-     * @ORM\Column(type="integer")
-     * @var integer
-     * @Assert\NotBlank()
+     * @ORM\Column(type="string")
+     * @var string
+     * @Assert\Regex("/^([0-9]{4}[a-zA-Z]{1})$/",
+     *     message="Veuillez saisir un numéro d'APE composé de 4 chiffres et une lettre")
      */
     private $apeNb;
 
