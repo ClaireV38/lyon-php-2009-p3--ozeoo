@@ -8,6 +8,7 @@ use App\Form\SkillType;
 use App\Entity\SkillCategory;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Faker\Provider\Text;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\DomCrawler\Field\TextareaFormField;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -33,6 +34,7 @@ class ApplicantType extends AbstractType
             ->add('lastname')
             ->add('personality')
             ->add('mobility', TextType::class)
+            ->add('city', TextType::class)
             ->add('softSkills', EntityType::class, [
                 'multiple' => true,
                 'query_builder' => function (EntityRepository $er) {

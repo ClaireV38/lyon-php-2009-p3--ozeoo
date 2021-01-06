@@ -22,7 +22,7 @@ class ApplicantController extends AbstractController
     public function index(ApplicantRepository $applicantRepository): Response
     {
         return $this->render('applicant/index.html.twig', [
-            'applicants' => $applicantRepository->findAll(),
+//            'applicants' => $applicantRepository->findAll(),
         ]);
     }
 
