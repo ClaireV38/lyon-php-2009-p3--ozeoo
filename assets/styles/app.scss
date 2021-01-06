@@ -248,7 +248,7 @@ h1 {
 
 /* Offer form */
 
-.jobOfferFirstPart {
+.jobOffer {
     width: 50%;
     margin: auto;
 }
@@ -259,14 +259,9 @@ h1 {
 }
 
 .offerSkillsTitle {
+    margin-top: 50px;
     text-align: center;
 }
-
-.offerSkillsBlock {
-    flex-direction: column;
-    margin: 20px;
-}
-
 
 /*login*/
 .btn-130px{
@@ -480,11 +475,6 @@ h1 {
     }
 
     /* Offer form */
-
-    .offerSkillsBlock {
-        flex-direction: row;
-        justify-content: space-between;
-    }
 
     .offerHardSkills {
         width: 45%;

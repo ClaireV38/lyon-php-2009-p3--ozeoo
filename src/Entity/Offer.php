@@ -66,7 +66,7 @@ class Offer
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @var \DateTimeInterface
+     * @var \DateTimeInterface|null
      */
     private $endDate;
 
@@ -85,7 +85,7 @@ class Offer
 
     /**
      * @ORM\Column(nullable=true)
-     * @var string
+     * @var string|null
      */
     private $city;
 
@@ -125,7 +125,6 @@ class Offer
 
     public function __construct()
     {
-        $this->skills = new ArrayCollection();
         $this->applicant = new ArrayCollection();
         $this->creationDate = new DateTime();
         $this->startDate = new DateTime();
@@ -246,12 +245,12 @@ class Offer
         return $this;
     }
 
-    public function getCity(): ?City
+    public function getCity(): ?string
     {
         return $this->city;
     }
 
-    public function setCity(City $city): self
+    public function setCity(?string $city): self
     {
         $this->city = $city;
 
