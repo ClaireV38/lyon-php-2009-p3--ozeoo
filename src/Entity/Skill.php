@@ -101,30 +101,6 @@ class Skill
     }
 
     /**
-     * @return Collection|Offer[]
-     */
-    public function getOffer(): Collection
-    {
-        return $this->offer;
-    }
-
-    public function addOffer(Offer $offer): self
-    {
-        if (!$this->offer->contains($offer)) {
-            $this->offer[] = $offer;
-        }
-
-        return $this;
-    }
-
-    public function removeOffer(Offer $offer): self
-    {
-        $this->offer->removeElement($offer);
-
-        return $this;
-    }
-
-    /**
      * @return Collection|Applicant[]
      */
     public function getSoftApplicants(): Collection
