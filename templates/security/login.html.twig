@@ -12,6 +12,7 @@
             </div>
         </div>
         <div class="main-row">
+            <div>
             <form class="login-form" method="post">
                 {% if error %}
                     <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -52,6 +53,8 @@
                     </button>
                 </a>
             </form>
+            <a href="#" class="btn btn-lg btn-orangeOze btn-center btn-130px">S'inscrire</a>
+        </div>
             <img id="diversityBig1" src="{{ asset('build/images/diversityBig1.jpg') }}" height="350" width="500"
                  class="ml-2" alt="Montage d'images de différentes personnes représentant la diversité">
         </div>
