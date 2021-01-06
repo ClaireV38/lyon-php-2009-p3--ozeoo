@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Offer;
 use App\Entity\Skill;
 //use Doctrine\DBAL\Types\DateType;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -29,7 +30,7 @@ class OfferType extends AbstractType
             ->add('endDate', DateType::class, [
                 'format' => 'ddMMMyyyy',
                 'placeholder' => [
-                'year' => 'Année',
+                    'year' => 'Année',
                     'month' => 'Mois',
                     'day' => 'Jour'
                 ],
@@ -38,16 +39,36 @@ class OfferType extends AbstractType
             ])
             ->add('description')
             ->add('isAnonymous')
-           //->add('city', ['choice_label' =>'name'])
-            //->add('company')
-            ->add('skills', null, [
+            ->add('softSkills', EntityType::class, [
+                'multiple' => true,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('s')
+                        ->join('s.skillCategory', 'c')
+                        ->where('c.isHard = false')
+                        ->orderBy('s.name', 'ASC');
+                },
+                'group_by' => function ($skill) {
+                    return $skill->getSkillCategory()->getName();
+                },
+                'class' => Skill::class,
                 'choice_label' => 'name',
-                //'multiple'=> false,
-                //'expanded'=>false,
-                'label' => false,
+
             ])
-            //->add('applicant')
-        ;
+            ->add('hardSkills', EntityType::class, [
+                'multiple' => true,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('s')
+                        ->join('s.skillCategory', 'c')
+                        ->where('c.isHard = true')
+                        ->orderBy('s.name', 'ASC');
+                },
+                'group_by' => function ($skill) {
+                    return $skill->getSkillCategory()->getName();
+                },
+                'class' => Skill::class,
+                'choice_label' => 'name',
+
+            ]);
     }
 
     /**

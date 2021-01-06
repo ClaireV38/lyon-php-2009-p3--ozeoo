@@ -97,10 +97,25 @@ class Offer
     private $company;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Skill::class, mappedBy="offer")
+     * @ORM\ManyToMany(targetEntity=Skill::class, inversedBy="softOffers")
+     * @ORM\JoinTable(name="applicant_soft_skills",
+     *      joinColumns={@ORM\JoinColumn(name="applicant_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="skill_id", referencedColumnName="id")}
+     *     )
      * @var Collection<Skill>
      */
-    private $skills;
+    private $softSkills;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Skill::class, inversedBy="hardOffers")
+     * @ORM\JoinTable(name="applicant_hard_skills",
+     *      joinColumns={@ORM\JoinColumn(name="applicant_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="skill_id", referencedColumnName="id")}
+     *     )
+     * @var Collection<Skill>
+     */
+    private $hardSkills;
+
 
     /**
      * @ORM\ManyToMany(targetEntity=Applicant::class, inversedBy="offers")
@@ -114,6 +129,8 @@ class Offer
         $this->applicant = new ArrayCollection();
         $this->creationDate = new DateTime();
         $this->startDate = new DateTime();
+        $this->softSkills = new ArrayCollection();
+        $this->hardSkills = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -254,33 +271,6 @@ class Offer
     }
 
     /**
-     * @return Collection|Skill[]
-     */
-    public function getSkills(): Collection
-    {
-        return $this->skills;
-    }
-
-    public function addSkill(Skill $skill): self
-    {
-        if (!$this->skills->contains($skill)) {
-            $this->skills[] = $skill;
-            $skill->addOffer($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSkill(Skill $skill): self
-    {
-        if ($this->skills->removeElement($skill)) {
-            $skill->removeOffer($this);
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection|Applicant[]
      */
     public function getApplicant(): Collection
@@ -300,6 +290,54 @@ class Offer
     public function removeApplicant(Applicant $applicant): self
     {
         $this->applicant->removeElement($applicant);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Skill[]
+     */
+    public function getSoftSkills(): Collection
+    {
+        return $this->softSkills;
+    }
+
+    public function addSoftSkill(Skill $softSkill): self
+    {
+        if (!$this->softSkills->contains($softSkill)) {
+            $this->softSkills[] = $softSkill;
+        }
+
+        return $this;
+    }
+
+    public function removeSoftSkill(Skill $softSkill): self
+    {
+        $this->softSkills->removeElement($softSkill);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Skill[]
+     */
+    public function getHardSkills(): Collection
+    {
+        return $this->hardSkills;
+    }
+
+    public function addHardSkill(Skill $hardSkill): self
+    {
+        if (!$this->hardSkills->contains($hardSkill)) {
+            $this->hardSkills[] = $hardSkill;
+        }
+
+        return $this;
+    }
+
+    public function removeHardSkill(Skill $hardSkill): self
+    {
+        $this->hardSkills->removeElement($hardSkill);
 
         return $this;
     }
