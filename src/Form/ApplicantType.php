@@ -61,7 +61,6 @@ class ApplicantType extends AbstractType
                 },
                 'class' => Skill::class,
                 'choice_label' => 'name',
-
             ]);
     }
 
