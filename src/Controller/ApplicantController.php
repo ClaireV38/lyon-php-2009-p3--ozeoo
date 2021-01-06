@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @Route("/applicant")
@@ -26,11 +27,11 @@ class ApplicantController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="applicant_new", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="applicant_edit", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, Applicant $applicant): Response
     {
-        $applicant = new Applicant();
+//        $applicant = $applicantRepository->findOneByUser($this->getUser());
         $form = $this->createForm(ApplicantType::class, $applicant);
         $form->handleRequest($request);
 
@@ -42,7 +43,7 @@ class ApplicantController extends AbstractController
             return $this->redirectToRoute('applicant_index');
         }
 
-        return $this->render('applicant/new.html.twig', [
+        return $this->render('applicant/edit.html.twig', [
             'applicant' => $applicant,
             'form' => $form->createView(),
         ]);
@@ -55,26 +56,6 @@ class ApplicantController extends AbstractController
     {
         return $this->render('applicant/show.html.twig', [
             'applicant' => $applicant,
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="applicant_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, Applicant $applicant): Response
-    {
-        $form = $this->createForm(ApplicantType::class, $applicant);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('applicant_index');
-        }
-
-        return $this->render('applicant/edit.html.twig', [
-            'applicant' => $applicant,
-            'form' => $form->createView(),
         ]);
     }
 
