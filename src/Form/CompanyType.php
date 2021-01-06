@@ -3,7 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Company;
+use Symfony\Component\DomCrawler\Field\TextareaFormField;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -25,13 +27,9 @@ class CompanyType extends AbstractType
             ->add('apeNb')
             ->add('picture')
             ->add('video')
-            ->add('description')
-            ->add('corporateCulture')
-            ->add('csr')
-            ->add('user', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'email',
-            ])
+            ->add('description', TextareaType::class)
+            ->add('corporateCulture', TextareaType::class)
+            ->add('csr', TextareaType::class)
             ->add('city', EntityType::class, [
                 'class' => City::class,
                 'choice_label' => 'name',

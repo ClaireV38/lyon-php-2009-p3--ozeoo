@@ -4,8 +4,9 @@
 
 {% block body %}
     <h1>Create new Company</h1>
+    <div id="createCompanyForm">
+        {{ include('company/_form.html.twig') }}
 
-    {{ include('company/_form.html.twig') }}
-
-    <a href="{{ path('company_index') }}">back to list</a>
+        <a class="btn btn-orangeOze" href="{{ path('company_index') }}">back to list</a>
+    </div>
 {% endblock %}

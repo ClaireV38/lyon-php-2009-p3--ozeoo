@@ -6,6 +6,7 @@ use App\Repository\CompanyRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CompanyRepository::class)
@@ -23,24 +24,31 @@ class Company
     /**
      * @ORM\Column(type="string", length=255)
      * @var string
+     * @Assert\NotBlank()
+     * @Assert\Length(max="255", maxMessage="Le nom ne doit pas exceder 255 caractères.")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=15)
      * @var string
+     * @Assert\NotBlank()
+     * @Assert\Length(max="15", , maxMessage="Le siret ne doit pas exceder 15 caractères.")
      */
     private $siretNb;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @var string
+     * @Assert\NotBlank()
+     * @Assert\Length(max="255", maxMessage="L'email ne doit pas exceder 255 caractères.")
      */
     private $contactEmail;
 
     /**
      * @ORM\Column(type="integer")
      * @var integer
+     * @Assert\NotBlank()
      */
     private $apeNb;
 
@@ -59,6 +67,7 @@ class Company
     /**
      * @ORM\Column(type="text")
      * @var string
+     * @Assert\NotBlank()
      */
     private $description;
 
