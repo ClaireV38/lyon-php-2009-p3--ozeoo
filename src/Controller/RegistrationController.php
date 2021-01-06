@@ -26,7 +26,7 @@ class RegistrationController extends AbstractController
         UserPasswordEncoderInterface $passwordEncoder,
         GuardAuthenticatorHandler $guardHandler,
         LoginFormAuthenticator $authenticator
-    ): Response {
+    ): ?Response {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -68,7 +68,7 @@ class RegistrationController extends AbstractController
         UserPasswordEncoderInterface $passwordEncoder,
         GuardAuthenticatorHandler $guardHandler,
         LoginFormAuthenticator $authenticator
-    ): Response {
+    ): ?Response {
         $user = new User();
         $applicant = new Applicant();
         $user->setApplicant($applicant);

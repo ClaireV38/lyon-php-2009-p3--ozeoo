@@ -260,11 +260,6 @@ class Company
         return $this;
     }
 
-    public function __toString(): string
-    {
-        return $this->getName();
-    }
-
     public function getApeNb(): ?string
     {
         return $this->apeNb;
