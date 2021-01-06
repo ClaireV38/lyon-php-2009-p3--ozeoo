@@ -6,6 +6,7 @@ use App\Repository\CompanyRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CompanyRepository::class)
@@ -23,24 +24,30 @@ class Company
     /**
      * @ORM\Column(type="string", length=255)
      * @var string
+     * @Assert\NotBlank()
+     * @Assert\Length(max="255", maxMessage="Le nom ne doit pas exceder 255 caractères.")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=15)
      * @var string
+     * @Assert\Regex("/^\d{14}$/")
+     * @Assert\NotBlank(message="Veuillez saisir un numéro de SIRET composé de 14 chiffres")
      */
     private $siretNb;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @var string
      */
-    private $contactEmail;
+    private $contactEmail = "";
 
     /**
-     * @ORM\Column(type="integer")
-     * @var integer
+     * @ORM\Column(type="string")
+     * @var string
+     * @Assert\Regex("/^([0-9]{4}[a-zA-Z]{1})$/",
+     *     message="Veuillez saisir un numéro d'APE composé de 4 chiffres et une lettre")
      */
     private $apeNb;
 
@@ -57,19 +64,19 @@ class Company
     private $video;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      * @var string
      */
     private $description;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      * @var string
      */
     private $corporateCulture;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      * @var string
      */
     private $csr;
@@ -123,18 +130,6 @@ class Company
     public function setContactEmail(string $contactEmail): self
     {
         $this->contactEmail = $contactEmail;
-
-        return $this;
-    }
-
-    public function getApeNb(): ?int
-    {
-        return $this->apeNb;
-    }
-
-    public function setApeNb(int $apeNb): self
-    {
-        $this->apeNb = $apeNb;
 
         return $this;
     }
@@ -261,6 +256,23 @@ class Company
     public function setSiretNb(string $siretNb): self
     {
         $this->siretNb = $siretNb;
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getName();
+    }
+
+    public function getApeNb(): ?string
+    {
+        return $this->apeNb;
+    }
+
+    public function setApeNb(string $apeNb): self
+    {
+        $this->apeNb = $apeNb;
 
         return $this;
     }

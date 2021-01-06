@@ -175,4 +175,21 @@ class City
 
         return $this;
     }
+
+    public function getCity(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setCity(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getCity();
+    }
 }

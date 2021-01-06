@@ -37,7 +37,7 @@ class CompanyFixtures extends Fixture implements DependentFixtureInterface
             $company->setName($faker->company());
             $company->setSiretNb($faker->numerify("##############"));
             $company->setContactEmail($faker->email());
-            $company->setApeNb($faker->randomNumber(4, false));
+            $company->setApeNb($faker->numerify("#####"));
             $company->setPicture(self::PICTURES[rand(0, 2)]);
             $company->setVideo('https://player.vimeo.com/external/372304294.
             sd.mp4?s=68f05e893665288fc91021b717b24292bd326364&profile_id=139&oauth2_token_id=57447761');

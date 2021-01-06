@@ -74,12 +74,13 @@ h1 {
     margin-top: 50px;
 }
 
-#footer-buttons:hover {
-    cursor: pointer;
-}
-
 #footer-buttons-link {
     color: #ffffff;
+}
+
+#footer-buttons-link:hover {
+    color: $police-color;
+    cursor: pointer;
 }
 
 /* Index company style */
@@ -294,8 +295,18 @@ h1 {
         width: 280px;
     }
 
+    #home-list-buttons:hover {
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+
     #diversityBig1 {
         display: block;
+        height: 400px;
+        width: 600px;
     }
 
     nav.navbar.navbar-expand-lg.navbar-light.bg-clairNavbar {
@@ -433,12 +444,22 @@ h1 {
         margin-top: 110px;
         width: 100%;
         display: flex;
-        justify-content: space-evenly;
+        justify-content: space-around;
         align-items: center;
         flex-wrap: wrap;
     }
 
     .login-form{
         min-width: 400px;
+    }
+
+    #loginPageButtons {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    /* Company Registration */
+    #company-register {
+        margin: auto;
     }
 }

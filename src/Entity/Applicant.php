@@ -21,26 +21,26 @@ class Applicant
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, nullable=true)
      * @var string
      */
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, nullable=true)
      * @var string
      */
     private $lastname;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      * @var string
      */
     private $personality;
 
     /**
      * @ORM\ManyToOne(targetEntity=City::class, inversedBy="applicants")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      * @var City
      */
     private $city;

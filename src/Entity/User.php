@@ -7,6 +7,7 @@ use _HumbugBox5f65e914a905\phpDocumentor\Reflection\Types\Collection;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -49,6 +50,7 @@ class User implements UserInterface
     /**
      * @ORM\OneToOne(targetEntity=Company::class, mappedBy="user", cascade={"persist", "remove"})
      * @var Company
+     * @Assert\Valid()
      */
     private $company;
 
@@ -165,7 +167,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getCompanyProperties(): string
+    public function __toString(): string
     {
         return $this->getCompany()->getName();
     }
