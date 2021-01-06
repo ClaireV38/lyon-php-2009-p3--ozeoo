@@ -98,8 +98,8 @@ class Offer
 
     /**
      * @ORM\ManyToMany(targetEntity=Skill::class, inversedBy="softOffers")
-     * @ORM\JoinTable(name="applicant_soft_skills",
-     *      joinColumns={@ORM\JoinColumn(name="applicant_id", referencedColumnName="id")},
+     * @ORM\JoinTable(name="offer_soft_skills",
+     *      joinColumns={@ORM\JoinColumn(name="offer_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="skill_id", referencedColumnName="id")}
      *     )
      * @var Collection<Skill>
@@ -108,8 +108,8 @@ class Offer
 
     /**
      * @ORM\ManyToMany(targetEntity=Skill::class, inversedBy="hardOffers")
-     * @ORM\JoinTable(name="applicant_hard_skills",
-     *      joinColumns={@ORM\JoinColumn(name="applicant_id", referencedColumnName="id")},
+     * @ORM\JoinTable(name="offer_hard_skills",
+     *      joinColumns={@ORM\JoinColumn(name="offer_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="skill_id", referencedColumnName="id")}
      *     )
      * @var Collection<Skill>
