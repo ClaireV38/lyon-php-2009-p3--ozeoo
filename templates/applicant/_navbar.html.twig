@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item nav">
-                <a id="buttonNav" class="nav-link" href="{{ path('') }}"><button type="button" class="btn btn-orangeOze">Profil</button></a>
+                <a id="buttonNav" class="nav-link" href="{{ path("applicant_show", {'id': app.user.applicant.id}) }}"><button type="button" class="btn btn-orangeOze">Profil</button></a>
             </li>
             <div class="button2">
                 <li class="nav-item">
