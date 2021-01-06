@@ -20,22 +20,34 @@
             <div class="skillSelection">
                     <div class="hardSkills">
                         <h5>Compétences Techniques <small>(10 max)</small></h5>
-{#                            {{ form_row(form.skills) }}#}
-                        <h3>Tags</h3>
-                        <ul class="skills">
-                            {% for tag in form.skills %}
-                                <li>{{ form_row(skill.name) }}</li>
-                            {% endfor %}
-                        </ul>
-                        <button type="button" class="add_item_link" data-collection-holder-class="tags">+1 Skill</button>
+                        {{ form_row(form.hardSkills) }}
+
                     </div>
                     <div class="softSkills">
                         <h5>Compétences Comportementales <small>(10 max)</small></h5>
+                        {{ form_row(form.softSkills) }}
                     </div>
             </div>
         </div>
     <div class="buttonApplicant">
-        <input type='submit' class="btn btn-orangeOze" value='C parti'>
+        <input type='submit' class="btn btn-vertOze" value='Valider'>
     </div>
     {{ form_end(form) }}
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+    $('#applicant_softSkills').select2({
+            maximumSelectionLength: 10
+    })
+    $('#applicant_hardSkills').select2({
+        maximumSelectionLength: 10
+    });
+});</script>
 {% endblock %}

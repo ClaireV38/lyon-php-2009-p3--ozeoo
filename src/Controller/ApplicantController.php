@@ -29,9 +29,11 @@ class ApplicantController extends AbstractController
     /**
      * @Route("/new", name="applicant_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, ApplicantRepository $applicantRepository): Response
     {
-        $applicant = new Applicant();
+//        $applicant = new Applicant();
+//        $applicant->setUser($this->getUser());
+        $applicant = $applicantRepository->findOneByUser($this->getUser());
         $form = $this->createForm(ApplicantType::class, $applicant);
         $form->handleRequest($request);
 

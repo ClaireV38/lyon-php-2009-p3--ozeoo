@@ -33,33 +33,36 @@ class ApplicantType extends AbstractType
             ->add('lastname')
             ->add('personality')
             ->add('mobility', TextType::class)
-            ->add('skills', CollectionType::class, [
-                'entry_type' => SkillType::class,
-                'entry_options' => ['label' => false],
-                'allow_add' => true,
+            ->add('softSkills', EntityType::class, [
+                'multiple' => true,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('s')
+                        ->join('s.skillCategory', 'c')
+                        ->where('c.isHard = false')
+                        ->orderBy('s.name', 'ASC');
+                },
+                'group_by' => function ($skill) {
+                    return $skill->getSkillCategory()->getName();
+                },
+                'class' => Skill::class,
+                'choice_label' => 'name',
+
+        ])
+            ->add('hardSkills', EntityType::class, [
+                'multiple' => true,
+                'query_builder' => function (EntityRepository $er) {
+                        return $er->createQueryBuilder('s')
+                            ->join('s.skillCategory', 'c')
+                            ->where('c.isHard = true')
+                            ->orderBy('s.name', 'ASC');
+                },
+                'group_by' => function ($skill) {
+                    return $skill->getSkillCategory()->getName();
+                },
+                'class' => Skill::class,
+                'choice_label' => 'name',
+
             ]);
-//            ->add('skills', null, [
-////              'expanded' => true,
-//                'multiple' => true,
-//                'label' => false,
-//                'query_builder' => function (EntityRepository $er) {
-//                    return $er->createQueryBuilder('s')
-//                        ;
-//                },
-//              'choices' => $builder->getData()->getSkillCategory(),
-//                'choice_label' => 'name',
-//            ])
-//            ->add('skillCategory', EntityType::class, [
-//                'class' => SkillCategory::class,
-//                'expanded' =>true,
-//                'mapped' => false,
-//                'multiple' => true,
-//                'choice_label' => 'name',
-//            ])
-//            ->add('skills', TextType::class, [
-//                'choice_label' => 'name',
-//            ])
-        ;
     }
 
     /**
