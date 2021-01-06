@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\OfferRepository;
+use ContainerDv8rw2p\get_ServiceLocator_C9JCBPCService;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -50,7 +51,7 @@ class Offer
     private $duration;
 
     /**
-     * @Assert\GreaterThan("today")
+     * @Assert\GreaterThanOrEqual("today")
      * @Assert\NotBlank(message="Il vous faut indiquer la date de début du contrat")
      * @ORM\Column(type="date")
      * @var \DateTimeInterface
@@ -64,7 +65,6 @@ class Offer
     private $creationDate;
 
     /**
-     * @Assert\NotBlank(message="Il vous faut indiquer la date limite de candidature")
      * @ORM\Column(type="date", nullable=true)
      * @var \DateTimeInterface
      */
@@ -84,9 +84,8 @@ class Offer
     private $isAnonymous;
 
     /**
-     * @ORM\ManyToOne(targetEntity=City::class, inversedBy="offers")
-     * @ORM\JoinColumn(nullable=false)
-     * @var City
+     * @ORM\Column(nullable=true)
+     * @var string
      */
     private $city;
 
@@ -199,7 +198,7 @@ class Offer
         return $this->endDate;
     }
 
-    public function setEndDate(\DateTimeInterface $endDate): self
+    public function setEndDate(?\DateTimeInterface $endDate): self
     {
         $this->endDate = $endDate;
 

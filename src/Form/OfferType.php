@@ -26,10 +26,19 @@ class OfferType extends AbstractType
             ->add('salary', null, ['required' => false])
             ->add('duration', null, ['required' => false])
             ->add('startDate', DateType::class, ['format' => 'ddMMMyyyy'])
-            ->add('endDate', DateType::class, ['format' => 'ddMMMyyyy', 'placeholder'=> ['year' => 'Année', 'month' => 'Mois', 'day' => 'Jour',]])
+            ->add('endDate', DateType::class, [
+                'format' => 'ddMMMyyyy',
+                'placeholder' => [
+                'year' => 'Année',
+                    'month' => 'Mois',
+                    'day' => 'Jour'
+                ],
+                'required' => false,
+                'choice_translation_domain' => true,
+            ])
             ->add('description')
             ->add('isAnonymous')
-            //->add('city', null, ['choice_label' =>'name'])
+           //->add('city', ['choice_label' =>'name'])
             //->add('company')
             ->add('skills', null, [
                 'choice_label' => 'name',

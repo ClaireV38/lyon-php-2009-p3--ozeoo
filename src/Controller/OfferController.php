@@ -40,7 +40,7 @@ class OfferController extends AbstractController
             $entityManager->flush();
 
             //voir avec groupe où rediriger
-            return $this->redirectToRoute('offer_index');
+            return $this->redirectToRoute('company_show');
         }
 
         return $this->render('offer/new.html.twig', [
