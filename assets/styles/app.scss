@@ -211,6 +211,7 @@ h1 {
 .applicantForm {
     padding: 0 10px 0 10px;
 }
+
 .buttonApplicant{
     display: flex;
     justify-content: center;
@@ -380,9 +381,11 @@ h1 {
     #presentationOze {
         flex-direction: column;
     }
+
     .btn_candidateHome_createProfile {
         display: none;
     }
+
     #buttonRedirectProfil {
         flex-direction: column;
     }
@@ -459,15 +462,18 @@ h1 {
         flex-direction: column;
         justify-content: center;
     }
+
     .infoForm{
         width: 40%;
         margin: auto;
     }
+
     .skillSelection{
         width: 50%;
         margin: auto;
         padding: 10px 0 10px 0;
     }
+
     .titleApplicant{
         text-align: center;
         padding: 20px;
