@@ -21,7 +21,7 @@ class ApplicantFixtures extends Fixture implements DependentFixtureInterface
 
     public function getDependencies()
     {
-        return [UserFixtures::class, CityFixtures::class, SkillFixtures::class];
+        return [UserFixtures::class, SkillFixtures::class];
     }
 
     public function load(ObjectManager $manager)

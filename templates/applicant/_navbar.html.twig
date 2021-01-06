@@ -10,13 +10,13 @@
                 <a id="buttonNav" class="nav-link" href="{{ path("applicant_show", {'id': app.user.applicant.id}) }}"><button type="button" class="btn btn-orangeOze">Profil</button></a>
             </li>
             <div class="button2">
-                <li class="nav-item">
-                    <a id="buttonNav" class="nav-link " href="#"><button type="button" class="btn btn-vertOze">Annonce</button></a>
+                <li class="nav-item nav mt-3 mt-md-0">
+                    <a id="buttonNav" class="btn btn-vertOze" class="nav-link " href="#">Annonce</a>
                 </li>
             </div>
             {% if app.user %}
-            <li class="nav-item ">
-                <a id="buttonNav" class="nav-link " href="{{ path('app_logout') }}"><button type="button" class="btn btn-bleuOze">Logout</button></a>
+            <li class="nav-item nav mt-3 mt-md-0">
+                <a id="buttonNav" class="btn btn-bleuOze" class="nav-link" href="{{ path('app_logout') }}">Logout</a>
             </li>
             {% endif %}
         </ul>

@@ -43,13 +43,17 @@ class Applicant
     private $personality;
 
     /**
+<<<<<<< HEAD
      * @ORM\Column(type="string", length=100, nullable=true)
+=======
+     * @ORM\Column(type="text")
+>>>>>>> afe598411201acaadff79e0ab7d7dcd903e9ecf8
      * @var string
      */
     private $city;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, inversedBy="applicant", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="applicants", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      * @var User
      */

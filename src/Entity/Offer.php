@@ -75,9 +75,8 @@ class Offer
     private $isAnonymous;
 
     /**
-     * @ORM\ManyToOne(targetEntity=City::class, inversedBy="offers")
-     * @ORM\JoinColumn(nullable=false)
-     * @var City
+     * @ORM\Column(type="text")
+     * @var string
      */
     private $city;
 
@@ -89,7 +88,7 @@ class Offer
     private $company;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Skill::class, mappedBy="offer")
+     * @ORM\ManyToMany(targetEntity=Skill::class, mappedBy="offers")
      * @var Collection<Skill>
      */
     private $skills;
@@ -219,18 +218,6 @@ class Offer
         return $this;
     }
 
-    public function getCity(): ?City
-    {
-        return $this->city;
-    }
-
-    public function setCity(City $city): self
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
     public function getCompany(): ?Company
     {
         return $this->company;
@@ -290,6 +277,18 @@ class Offer
     public function removeApplicant(Applicant $applicant): self
     {
         $this->applicant->removeElement($applicant);
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
 
         return $this;
     }

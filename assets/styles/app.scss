@@ -61,12 +61,13 @@ h1 {
 
 #diversite1 {
     height: auto;
-    width: auto;
+    width: 100%;
 }
 
 #diversite2 {
     height: 80px;
 }
+
 
 /*Footer*/
 #sticky-footer {
@@ -248,7 +249,7 @@ h1 {
 
 /*login*/
 .btn-130px{
-    min-width: 130px;
+    width: 130px;
     padding: 3px;
 }
 

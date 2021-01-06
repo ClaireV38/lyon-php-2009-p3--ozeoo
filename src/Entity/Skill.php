@@ -54,13 +54,13 @@ class Skill
      * @ORM\ManyToMany(targetEntity=Offer::class, inversedBy="skills")
      * @var Collection<Offer>
      */
-    private $offer;
+    private $offers;
 
     public function __construct()
     {
         $this->softApplicants = new ArrayCollection();
         $this->hardApplicants = new ArrayCollection();
-        $this->offer = new ArrayCollection();
+        $this->offers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -97,13 +97,13 @@ class Skill
      */
     public function getOffer(): Collection
     {
-        return $this->offer;
+        return $this->offers;
     }
 
     public function addOffer(Offer $offer): self
     {
-        if (!$this->offer->contains($offer)) {
-            $this->offer[] = $offer;
+        if (!$this->offers->contains($offer)) {
+            $this->offers[] = $offer;
         }
 
         return $this;
@@ -111,7 +111,7 @@ class Skill
 
     public function removeOffer(Offer $offer): self
     {
-        $this->offer->removeElement($offer);
+        $this->offers->removeElement($offer);
 
         return $this;
     }
@@ -166,7 +166,6 @@ class Skill
         if ($this->hardApplicants->removeElement($hardApplicant)) {
             $hardApplicant->removeHardSkill($this);
         }
-
         return $this;
     }
 }
