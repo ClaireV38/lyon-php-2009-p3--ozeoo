@@ -1,9 +1,86 @@
 @import 'variables.scss';
 @import "~bootstrap/scss/bootstrap";
 
+/*Body*/
+
+html, body {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     background-color: $light-color;
     color: $police-color;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex-grow: 1;
+}
+
+.btn-center {
+    display: block;
+    margin : 20px auto;
+}
+
+/*Homepage*/
+
+#home-list-overall {
+    width: 100%;
+}
+
+#home-list-pictures {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 25px;
+}
+
+#home-list {
+    text-align: center;
+}
+
+#home-list-buttons {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    color: #ffffff;
+}
+
+#diversityBig1 {
+    display: none;
+}
+
+#diversite1 {
+    height: auto;
+    width: 100%;
+}
+
+#diversite2 {
+    height: 80px;
+}
+
+
+/*Footer*/
+#sticky-footer {
+    flex-shrink: 0;
+    margin-top: 50px;
+}
+
+#footer-buttons:hover {
+    cursor: pointer;
+}
+
+#footer-buttons-link {
+    color: #ffffff;
 }
 
 /* Index company style */
@@ -170,6 +247,12 @@ body {
     display: none;
 }
 
+/*login*/
+.btn-130px{
+    width: 130px;
+    padding: 3px;
+}
+
 @media (min-width: 768px) {
     /* Navbar */
     .logoright {
@@ -182,6 +265,38 @@ body {
 
     .navbar-brand {
         padding-right: 30px;
+    }
+
+    h1 {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 25px;
+    }
+
+    /*Homepage*/
+
+    #home-list {
+        text-align: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    #home-list-of-buttons {
+        max-width: 100%;
+    }
+
+    #home-list-buttons {
+        text-align: center;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        width: 280px;
+    }
+
+    #diversityBig1 {
+        display: block;
     }
 
     nav.navbar.navbar-expand-lg.navbar-light.bg-clairNavbar {
@@ -315,5 +430,22 @@ body {
     .btn_candidateHome_createProfileDesktop {
         margin-bottom: 20px;
     }
-}
 
+    /*login*/
+    .login-container {
+        height: 100%;
+    }
+
+    .main-row{
+        margin-top: 110px;
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .login-form{
+        min-width: 400px;
+    }
+}
