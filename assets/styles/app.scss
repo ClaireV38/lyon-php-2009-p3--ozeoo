@@ -212,6 +212,11 @@ h1 {
     padding: 0 10px 0 10px;
 }
 
+.buttonApplicant{
+    display: flex;
+    justify-content: center;
+}
+
 .applicant_home_welcome_mainTitle {
     margin-top: 10px;
 }
@@ -402,9 +407,11 @@ h1 {
     #presentationOze {
         flex-direction: column;
     }
+
     .btn_candidateHome_createProfile {
         display: none;
     }
+
     #buttonRedirectProfil {
         flex-direction: column;
     }
@@ -487,20 +494,20 @@ h1 {
         flex-direction: column;
         justify-content: center;
     }
+
     .infoForm{
-        width: 50%;
+        width: 40%;
         margin: auto;
     }
+
     .skillSelection{
-        display: flex;
+        width: 50%;
+        margin: auto;
         padding: 10px 0 10px 0;
     }
+
     .titleApplicant{
         text-align: center;
         padding: 20px;
-    }
-    .buttonApplicant{
-        display: flex;
-        justify-content: center;
     }
 }
