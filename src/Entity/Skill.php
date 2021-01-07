@@ -6,6 +6,7 @@ use App\Repository\SkillRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=SkillRepository::class)
@@ -22,6 +23,10 @@ class Skill
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Count(
+     *      max = 10,
+     *      maxMessage = "Tu ne peux pas choisir plus de 10 compétences"
+     * )
      * @var string
      */
     private $name;
@@ -34,10 +39,16 @@ class Skill
     private $skillCategory;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Applicant::class, inversedBy="skills")
+     * @ORM\ManyToMany(targetEntity=Applicant::class, mappedBy="softSkills")
      * @var Collection<Applicant>
      */
-    private $applicants;
+    private $softApplicants;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Applicant::class, mappedBy="hardSkills")
+     * @var Collection<Applicant>
+     */
+    private $hardApplicants;
 
     /**
      * @ORM\ManyToMany(targetEntity=Offer::class, inversedBy="skills")
@@ -47,7 +58,8 @@ class Skill
 
     public function __construct()
     {
-        $this->applicants = new ArrayCollection();
+        $this->softApplicants = new ArrayCollection();
+        $this->hardApplicants = new ArrayCollection();
         $this->offers = new ArrayCollection();
     }
 
@@ -81,30 +93,6 @@ class Skill
     }
 
     /**
-     * @return Collection|Applicant[]
-     */
-    public function getApplicant(): Collection
-    {
-        return $this->applicants;
-    }
-
-    public function addApplicant(Applicant $applicant): self
-    {
-        if (!$this->applicants->contains($applicant)) {
-            $this->applicants[] = $applicant;
-        }
-
-        return $this;
-    }
-
-    public function removeApplicant(Applicant $applicant): self
-    {
-        $this->applicants->removeElement($applicant);
-
-        return $this;
-    }
-
-    /**
      * @return Collection|Offer[]
      */
     public function getOffer(): Collection
@@ -131,16 +119,53 @@ class Skill
     /**
      * @return Collection|Applicant[]
      */
-    public function getApplicants(): Collection
+    public function getSoftApplicants(): Collection
     {
-        return $this->applicants;
+        return $this->softApplicants;
+    }
+
+    public function addSoftApplicant(Applicant $softApplicant): self
+    {
+        if (!$this->softApplicants->contains($softApplicant)) {
+            $this->softApplicants[] = $softApplicant;
+            $softApplicant->addSoftSkill($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSoftApplicant(Applicant $softApplicant): self
+    {
+        if ($this->softApplicants->removeElement($softApplicant)) {
+            $softApplicant->removeSoftSkill($this);
+        }
+
+        return $this;
     }
 
     /**
-     * @return Collection|Offer[]
+     * @return Collection|Applicant[]
      */
-    public function getOffers(): Collection
+    public function getHardApplicants(): Collection
     {
-        return $this->offers;
+        return $this->hardApplicants;
+    }
+
+    public function addHardApplicant(Applicant $hardApplicant): self
+    {
+        if (!$this->hardApplicants->contains($hardApplicant)) {
+            $this->hardApplicants[] = $hardApplicant;
+            $hardApplicant->addHardSkill($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHardApplicant(Applicant $hardApplicant): self
+    {
+        if ($this->hardApplicants->removeElement($hardApplicant)) {
+            $hardApplicant->removeHardSkill($this);
+        }
+        return $this;
     }
 }
