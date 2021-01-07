@@ -23,6 +23,7 @@ class OfferType extends AbstractType
     {
         $builder
             ->add('title')
+            ->add('city')
             ->add('contractType')
             ->add('salary', null, ['required' => false])
             ->add('duration', null, ['required' => false])

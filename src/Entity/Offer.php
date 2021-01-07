@@ -84,7 +84,9 @@ class Offer
     private $isAnonymous;
 
     /**
-     * @ORM\Column(nullable=true)
+     * @Assert\NotBlank(message="Il vous faut indiquer une ville")
+     * @Assert\Length(max="50", maxMessage="L'intitulé ne doit pas faire plus de 100 caractères")
+     * @ORM\Column(type="string", nullable=true)
      * @var string|null
      */
     private $city;
