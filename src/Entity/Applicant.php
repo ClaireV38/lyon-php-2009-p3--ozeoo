@@ -39,14 +39,13 @@ class Applicant
     private $personality;
 
     /**
-     * @ORM\ManyToOne(targetEntity=City::class, inversedBy="applicants")
-     * @ORM\JoinColumn(nullable=false)
-     * @var City
+     * @ORM\Column(type="text")
+     * @var string
      */
     private $city;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, inversedBy="applicant", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="applicants", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      * @var User
      */
@@ -113,18 +112,6 @@ class Applicant
     public function setPersonality(string $personality): self
     {
         $this->personality = $personality;
-
-        return $this;
-    }
-
-    public function getCity(): ?City
-    {
-        return $this->city;
-    }
-
-    public function setCity(City $city): self
-    {
-        $this->city = $city;
 
         return $this;
     }
@@ -203,6 +190,18 @@ class Applicant
     public function setMobility(string $mobility): self
     {
         $this->mobility = $mobility;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
 
         return $this;
     }

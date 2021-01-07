@@ -33,7 +33,7 @@ class Company
     private $siretNb;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @var string
      */
     private $contactEmail;
@@ -82,8 +82,8 @@ class Company
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity=City::class, inversedBy="companies")
-     * @var City
+     * @ORM\Column(type="text")
+     * @var string
      */
     private $city;
 
@@ -211,18 +211,6 @@ class Company
         return $this;
     }
 
-    public function getCity(): ?City
-    {
-        return $this->city;
-    }
-
-    public function setCity(City $city): self
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Offer[]
      */
@@ -261,6 +249,18 @@ class Company
     public function setSiretNb(string $siretNb): self
     {
         $this->siretNb = $siretNb;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
 
         return $this;
     }
