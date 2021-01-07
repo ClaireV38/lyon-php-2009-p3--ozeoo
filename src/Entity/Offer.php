@@ -342,5 +342,4 @@ class Offer
 
         return $this;
     }
-
 }
