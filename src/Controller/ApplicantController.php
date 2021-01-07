@@ -19,10 +19,9 @@ class ApplicantController extends AbstractController
     /**
      * @Route("/", name="applicant_index", methods={"GET"})
      */
-    public function index(ApplicantRepository $applicantRepository): Response
+    public function index(): Response
     {
         return $this->render('applicant/index.html.twig', [
-//            'applicants' => $applicantRepository->findAll(),
         ]);
     }
 
@@ -31,7 +30,6 @@ class ApplicantController extends AbstractController
      */
     public function new(Request $request, Applicant $applicant): Response
     {
-//        $applicant = $applicantRepository->findOneByUser($this->getUser());
         $form = $this->createForm(ApplicantType::class, $applicant);
         $form->handleRequest($request);
 
