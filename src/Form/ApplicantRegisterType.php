@@ -21,35 +21,20 @@ class ApplicantRegisterType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
-                /*'constraints' => [
+                'constraints' => [
                     new NotBlank([
                         'message' => 'Veuillez saisir un email valide',
-                    ]),*/
-                ])
+                    ]),
+                ],
+            ])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'Veuillez saisir un mot de passe.',
                 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
-                'first_options'  => ['label' => 'Password'],
-                'second_options' => ['label' => 'Repeat Password'],
+                'first_options'  => ['label' => 'Mot de passe'],
+                'second_options' => ['label' => 'Confirmation du mot de passe'],
             ])
-            /*->add('plainPassword', PasswordType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
-                'mapped' => false,
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Veuillez saisir un mot de passe',
-                    ]),
-                    new Length([
-                        'min' => 6,
-                        'minMessage' => 'Votre mot de passe doit faire au moins {{ limit }} caractères',
-                        // max length allowed by Symfony for security reasons
-                        'max' => 4096,
-                    ]),
-                ],
-            ])*/
             ->add('accepterLesTermes', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
