@@ -27,7 +27,6 @@ final class Version20210106091533 extends AbstractMigration
         $this->addSql('ALTER TABLE applicant_hard_skills ADD CONSTRAINT FK_949A6BAF97139001 FOREIGN KEY (applicant_id) REFERENCES applicant (id)');
         $this->addSql('ALTER TABLE applicant_hard_skills ADD CONSTRAINT FK_949A6BAF5585C142 FOREIGN KEY (skill_id) REFERENCES skill (id)');
         $this->addSql('DROP TABLE skill_applicant');
-        $this->addSql('ALTER TABLE applicant CHANGE city_id city_id INT NOT NULL');
     }
 
     public function down(Schema $schema) : void

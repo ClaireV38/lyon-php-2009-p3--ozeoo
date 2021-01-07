@@ -21,8 +21,7 @@ class ApplicantController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('applicant/index.html.twig', [
-        ]);
+        return $this->render('applicant/index.html.twig');
     }
 
     /**
