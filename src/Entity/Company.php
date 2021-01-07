@@ -32,8 +32,9 @@ class Company
     /**
      * @ORM\Column(type="string", length=15)
      * @var string
-     * @Assert\Regex("/^\d{14}$/")
-     * @Assert\NotBlank(message="Veuillez saisir un numéro de SIRET composé de 14 chiffres")
+     * @Assert\Regex("/^\d{14}$/",
+     *      message="Le numéro de SIRET doit être composé de 14 chiffres.")
+     * @Assert\NotBlank(message="Veuillez saisir un numéro de SIRET composé de 14 chiffres.")
      */
     private $siretNb;
 
@@ -137,12 +138,12 @@ class Company
         return $this;
     }
 
-    public function getApeNb(): ?int
+    public function getApeNb(): ?string
     {
         return $this->apeNb;
     }
 
-    public function setApeNb(int $apeNb): self
+    public function setApeNb(string $apeNb): self
     {
         $this->apeNb = $apeNb;
 
