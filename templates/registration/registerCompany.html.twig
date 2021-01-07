@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création de compte entreprise{% endblock %}
+
+{% block body %}
+    {% include '/company/_navbar.html.twig' %}
+    {% for flashError in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+
+    <h1>Création de compte entreprise</h1>
+    <div class="container" id="company-register">
+    {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.company.name, {
+            'label': "Nom de l'entreprise"
+        }) }}
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.password, {
+            label: 'Mot de passe'
+        }) }}
+        {{ form_row(registrationForm.company.siretNb, {
+            'label': "Numéro de SIRET"
+        }) }}
+        {{ form_row(registrationForm.company.apeNb, {
+            'label': "Numéro d'APE"
+        }) }}
+        {{ form_row(registrationForm.accepterLesTermes) }}
+
+        <button class="btn btn-orangeOze">{{ button_label|default('S\'inscrire') }}</button>
+    {{ form_end(registrationForm) }}
+    </div>
+{% endblock %}

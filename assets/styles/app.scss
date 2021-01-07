@@ -75,12 +75,13 @@ h1 {
     margin-top: 50px;
 }
 
-#footer-buttons:hover {
-    cursor: pointer;
-}
-
 #footer-buttons-link {
     color: #ffffff;
+}
+
+#footer-buttons-link:hover {
+    color: $police-color;
+    cursor: pointer;
 }
 
 /* Index company style */
@@ -212,6 +213,11 @@ h1 {
     padding: 0 10px 0 10px;
 }
 
+.buttonApplicant{
+    display: flex;
+    justify-content: center;
+}
+
 .applicant_home_welcome_mainTitle {
     margin-top: 10px;
 }
@@ -266,7 +272,7 @@ h1 {
 
 /*login*/
 .btn-130px{
-    width: 130px;
+    width: 235px;
     padding: 3px;
 }
 
@@ -328,8 +334,18 @@ h1 {
         width: 280px;
     }
 
+    #home-list-buttons:hover {
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+
     #diversityBig1 {
         display: block;
+        height: 420px;
+        width: 620px;
     }
 
     nav.navbar.navbar-expand-lg.navbar-light.bg-clairNavbar {
@@ -409,9 +425,11 @@ h1 {
     #presentationOze {
         flex-direction: column;
     }
+
     .btn_candidateHome_createProfile {
         display: none;
     }
+
     #buttonRedirectProfil {
         flex-direction: column;
     }
@@ -473,7 +491,7 @@ h1 {
         margin-top: 110px;
         width: 100%;
         display: flex;
-        justify-content: space-evenly;
+        justify-content: space-around;
         align-items: center;
         flex-wrap: wrap;
     }
@@ -483,9 +501,18 @@ h1 {
     }
 
     /* Offer form */
-
     .offerHardSkills {
         width: 45%;
+    }
+
+    #loginPageButtons {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    /* Company Registration */
+    #company-register {
+        margin: auto;
     }
 
     /* New Applicant profile */
@@ -494,20 +521,20 @@ h1 {
         flex-direction: column;
         justify-content: center;
     }
+
     .infoForm{
-        width: 50%;
+        width: 40%;
         margin: auto;
     }
+
     .skillSelection{
-        display: flex;
+        width: 50%;
+        margin: auto;
         padding: 10px 0 10px 0;
     }
+
     .titleApplicant{
         text-align: center;
         padding: 20px;
-    }
-    .buttonApplicant{
-        display: flex;
-        justify-content: center;
     }
 }

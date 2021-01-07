@@ -22,22 +22,22 @@ class Applicant
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=100, nullable=true)
      * @Assert\NotBlank(message="Le champ est vide")
-     * @ORM\Column(type="string", length=100)
      * @var string
      */
     private $firstname;
 
     /**
+     * @ORM\Column(type="string", length=100, nullable=true)
      * @Assert\NotBlank(message="Le champ est vide")
-     * @ORM\Column(type="string", length=100)
      * @var string
      */
     private $lastname;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
      * @Assert\NotBlank(message="Le champ est vide")
-     * @ORM\Column(type="text")
      * @var string
      */
     private $personality;

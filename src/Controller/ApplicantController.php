@@ -29,7 +29,6 @@ class ApplicantController extends AbstractController
      */
     public function new(Request $request, Applicant $applicant): Response
     {
-//        $applicant = $applicantRepository->findOneByUser($this->getUser());
         $form = $this->createForm(ApplicantType::class, $applicant);
         $form->handleRequest($request);
 

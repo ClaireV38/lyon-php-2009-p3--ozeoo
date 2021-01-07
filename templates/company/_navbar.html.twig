@@ -1,11 +1,12 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-clairNavbar">
-    <a class="navbar-brand" href="#"><img src="{{ asset('build/images/logoNavBar_noBg.png') }}" width="192px" height="74px" alt="logoOze"/></a>
+    <a class="navbar-brand" href="/"><img src="{{ asset('build/images/logoNavBar_noBg.png') }}" width="192px" height="74px" alt="logoOze"/></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
+            {% if app.user %}
             <li class="nav-item nav mt-3 mt-md-0">
                 <a  id="buttonNav" class="btn btn-orangeOze" class="nav-link" href="{{ path('company_edit', {id: app.user.company.id}) }}">Fiche</a>
             </li>
@@ -14,7 +15,6 @@
                     <a id="buttonNav" class="btn btn-vertOze" class="nav-link " href="{{ path('offer_new') }}">Créer une annonce</a>
                 </li>
             </div>
-            {% if app.user %}
             <li class="nav-item nav mt-3 mt-md-0">
                 <a id="buttonNav" class="btn btn-bleuOze" class="nav-link" href="{{ path('app_logout') }}">Logout</a>
             </li>

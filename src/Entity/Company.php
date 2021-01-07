@@ -44,7 +44,7 @@ class Company
      * @Assert\NotBlank()
      * @Assert\Length(max="255", maxMessage="L'email ne doit pas exceder 255 caractères.")
      */
-    private $contactEmail;
+    private $contactEmail = "";
 
     /**
      * @ORM\Column(type="string")
@@ -67,20 +67,20 @@ class Company
     private $video;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      * @var string
      * @Assert\NotBlank()
      */
     private $description;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      * @var string
      */
     private $corporateCulture;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      * @var string
      */
     private $csr;
@@ -93,7 +93,7 @@ class Company
     private $user;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      * @var string
      */
     private $city;
@@ -272,7 +272,6 @@ class Company
     public function setCity(string $city): self
     {
         $this->city = $city;
-
         return $this;
     }
 }
