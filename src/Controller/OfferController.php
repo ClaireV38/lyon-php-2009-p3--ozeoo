@@ -40,7 +40,7 @@ class OfferController extends AbstractController
             $entityManager->persist($offer);
             $entityManager->flush();
 
-            return $this->redirectToRoute('company_show', ['id' => $offer->getCompany()->getId()
+            return $this->redirectToRoute('offer_show', ['id' => $offer->getId()
 
             ]);
         }
