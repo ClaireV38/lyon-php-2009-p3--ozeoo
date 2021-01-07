@@ -7,9 +7,9 @@
     <!-- mobile -->
     <div class="container applicant_index_tuto">
         <h1 class="applicant_home_welcome_mainTitle">Bienvenue!</h1>
-        <a href="{{ path("applicant_new") }}"><button type="button" class="btn btn-vertOze btn_candidateHome_createProfile">Créez votre profil candidat</button></a>
+        <a href="{{ path("applicant_edit", {'id': app.user.applicant.id}) }}"><button type="button" class="btn btn-vertOze btn_candidateHome_createProfile">Créez votre profil candidat</button></a>
         <div class="card candidate_ozeoPresentationCard">
-            <div class="card-body">
+            <div class="card-body" id="presentationOze">
                 <h5 class="card-title candidate_welcome_title">Présentation de OzéO</h5>
                 <p class="card-text">  OzéO, est une plateforme digitale intuitive et inclusive, permettant de simplifier l’accès à l’emploi et de recruter différemment.
                     Notre but est de faire en sorte que des profils éloignés de l’emploi,
@@ -30,8 +30,8 @@
 <!-- desktop -->
 <div class="container desktop_candidate_tuto">
     <a href="#"><div class="card desktop_candidate_tutoCard1 row align-self-center">
-        <div class="card-body">
-            <B>Oze</B> créer ton profil <a href="{{ path("applicant_new") }}"><button type="button" class="btn btn-vertOze btn_candidateHome_createProfileDesktop">ici!</button></a>
+        <div class="card-body" id="buttonRedirectProfil">
+            <B>Oze</B> créer ton profil <a href="{{ path("applicant_edit", {'id': app.user.applicant.id}) }}"><button type="button" class="btn btn-vertOze btn_candidateHome_createProfileDesktop">ici!</button></a>
         </div>
     </div></a>
     <img src="{{ asset('build/images/fleche.png') }}" alt="flèche">

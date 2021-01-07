@@ -6,6 +6,7 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
+            {% if app.user %}
             <li class="nav-item nav mt-1 mt-md-0">
                 <a  id="buttonNav" class="btn btn-orangeOze" class="nav-link" href="#">Fiche</a>
             </li>
@@ -14,7 +15,6 @@
                     <a id="buttonNav" class="btn btn-vertOze" class="nav-link " href="#">Annonce</a>
                 </li>
             </div>
-            {% if app.user %}
             <li class="nav-item nav mt-3 mt-md-0">
                 <a id="buttonNav" class="btn btn-bleuOze" class="nav-link" href="{{ path('app_logout') }}">Logout</a>
             </li>

@@ -213,6 +213,11 @@ h1 {
     padding: 0 10px 0 10px;
 }
 
+.buttonApplicant{
+    display: flex;
+    justify-content: center;
+}
+
 .applicant_home_welcome_mainTitle {
     margin-top: 10px;
 }
@@ -384,8 +389,16 @@ h1 {
     }
 
     /* Page accueil candidat*/
+    #presentationOze {
+        flex-direction: column;
+    }
+
     .btn_candidateHome_createProfile {
         display: none;
+    }
+
+    #buttonRedirectProfil {
+        flex-direction: column;
     }
 
     .candidate_ozeoPresentationCard {
@@ -433,7 +446,7 @@ h1 {
     }
 
     .btn_candidateHome_createProfileDesktop {
-        margin-top: 10px;
+        margin-bottom: 20px;
     }
 
     /*login*/
@@ -462,5 +475,28 @@ h1 {
     /* Company Registration */
     #company-register {
         margin: auto;
+    }
+
+    /* New Applicant profile */
+    .applicantForm{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .infoForm{
+        width: 40%;
+        margin: auto;
+    }
+
+    .skillSelection{
+        width: 50%;
+        margin: auto;
+        padding: 10px 0 10px 0;
+    }
+
+    .titleApplicant{
+        text-align: center;
+        padding: 20px;
     }
 }

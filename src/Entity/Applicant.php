@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ApplicantRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,41 +23,57 @@ class Applicant
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
+     * @Assert\NotBlank(message="Le champ est vide")
      * @var string
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
+     * @Assert\NotBlank(message="Le champ est vide")
      * @var string
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Assert\NotBlank(message="Le champ est vide")
      * @var string
      */
     private $personality;
 
     /**
-     * @ORM\ManyToOne(targetEntity=City::class, inversedBy="applicants")
-     * @ORM\JoinColumn(nullable=true)
-     * @var City
+     * @ORM\Column(type="string", length=100, nullable=true)
+     * @var string
      */
     private $city;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, inversedBy="applicant", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="applicants", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      * @var User
      */
     private $user;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Skill::class, mappedBy="applicant")
+     * @ORM\ManyToMany(targetEntity=Skill::class, inversedBy="softApplicants")
+     * @ORM\JoinTable(name="applicant_soft_skills",
+     *      joinColumns={@ORM\JoinColumn(name="applicant_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="skill_id", referencedColumnName="id")}
+     *     )
      * @var Collection<Skill>
      */
-    private $skills;
+    private $softSkills;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Skill::class, inversedBy="hardApplicants")
+     * @ORM\JoinTable(name="applicant_hard_skills",
+     *      joinColumns={@ORM\JoinColumn(name="applicant_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="skill_id", referencedColumnName="id")}
+     *     )
+     * @var Collection<Skill>
+     */
+    private $hardSkills;
 
     /**
      * @ORM\ManyToMany(targetEntity=Offer::class, mappedBy="applicant")
@@ -72,7 +89,8 @@ class Applicant
 
     public function __construct()
     {
-        $this->skills = new ArrayCollection();
+        $this->softSkills = new ArrayCollection();
+        $this->hardSkills = new ArrayCollection();
         $this->offers = new ArrayCollection();
     }
 
@@ -117,17 +135,6 @@ class Applicant
         return $this;
     }
 
-    public function getCity(): ?City
-    {
-        return $this->city;
-    }
-
-    public function setCity(City $city): self
-    {
-        $this->city = $city;
-
-        return $this;
-    }
 
     public function getUser(): ?User
     {
@@ -137,33 +144,6 @@ class Applicant
     public function setUser(User $user): self
     {
         $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Skill[]
-     */
-    public function getSkills(): Collection
-    {
-        return $this->skills;
-    }
-
-    public function addSkill(Skill $skill): self
-    {
-        if (!$this->skills->contains($skill)) {
-            $this->skills[] = $skill;
-            $skill->addApplicant($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSkill(Skill $skill): self
-    {
-        if ($this->skills->removeElement($skill)) {
-            $skill->removeApplicant($this);
-        }
 
         return $this;
     }
@@ -203,6 +183,66 @@ class Applicant
     public function setMobility(string $mobility): self
     {
         $this->mobility = $mobility;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Skill[]
+     */
+    public function getSoftSkills(): Collection
+    {
+        return $this->softSkills;
+    }
+
+    public function addSoftSkill(Skill $softSkill): self
+    {
+        if (!$this->softSkills->contains($softSkill)) {
+            $this->softSkills[] = $softSkill;
+        }
+
+        return $this;
+    }
+
+    public function removeSoftSkill(Skill $softSkill): self
+    {
+        $this->softSkills->removeElement($softSkill);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Skill[]
+     */
+    public function getHardSkills(): Collection
+    {
+        return $this->hardSkills;
+    }
+
+    public function addHardSkill(Skill $hardSkill): self
+    {
+        if (!$this->hardSkills->contains($hardSkill)) {
+            $this->hardSkills[] = $hardSkill;
+        }
+
+        return $this;
+    }
+
+    public function removeHardSkill(Skill $hardSkill): self
+    {
+        $this->hardSkills->removeElement($hardSkill);
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
 
         return $this;
     }

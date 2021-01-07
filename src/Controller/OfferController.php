@@ -42,7 +42,7 @@ class OfferController extends AbstractController
             return $this->redirectToRoute('offer_index');
         }
 
-        return $this->render('offer/new.html.twig', [
+        return $this->render('offer/edit.html.twig', [
             'offer' => $offer,
             'form' => $form->createView(),
         ]);

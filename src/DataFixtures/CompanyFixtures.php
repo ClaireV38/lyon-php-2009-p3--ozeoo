@@ -7,7 +7,6 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker;
 use App\Entity\Company;
-use App\DataFixtures\CityFixtures;
 
 class CompanyFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -24,7 +23,7 @@ class CompanyFixtures extends Fixture implements DependentFixtureInterface
 
     public function getDependencies()
     {
-        return [UserFixtures::class, CityFixtures::class];
+        return [UserFixtures::class];
     }
 
     public function load(ObjectManager $manager)
@@ -33,7 +32,7 @@ class CompanyFixtures extends Fixture implements DependentFixtureInterface
         for ($i = 1; $i <= self::NB_OBJECT; $i++) {
             $company = new Company();
             $company->setUser($this->getReference('comp_user_' . $i));
-            $company->setCity($this->getReference('city_' . rand(1, CityFixtures::NB_OBJECT)));
+            $company->setCity($faker->text(20));
             $company->setName($faker->company());
             $company->setSiretNb($faker->numerify("##############"));
             $company->setContactEmail($faker->email());

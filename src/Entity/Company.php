@@ -89,8 +89,8 @@ class Company
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity=City::class, inversedBy="companies")
-     * @var City
+     * @ORM\Column(type="text", nullable=true)
+     * @var string
      */
     private $city;
 
@@ -206,18 +206,6 @@ class Company
         return $this;
     }
 
-    public function getCity(): ?City
-    {
-        return $this->city;
-    }
-
-    public function setCity(City $city): self
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Offer[]
      */
@@ -257,6 +245,17 @@ class Company
     {
         $this->siretNb = $siretNb;
 
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
         return $this;
     }
 
