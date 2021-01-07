@@ -12,6 +12,7 @@
         "doctrine/orm": "^2.7",
         "fzaninotto/faker": "^1.9",
         "phpdocumentor/reflection-docblock": "^5.2",
+        "pugx/autocompleter-bundle": "^1.7",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/asset": "5.1.*",
         "symfony/console": "5.1.*",

@@ -14,7 +14,8 @@
         "regenerator-runtime": "^0.13.2",
         "sass-lint": "^1.13.1",
         "sass-loader": "^10.0.5",
-        "webpack-notifier": "^1.6.0"
+        "webpack-notifier": "^1.6.0",
+        "@pugx/autocompleter-bundle": "file:vendor/pugx/autocompleter-bundle/assets"
     },
     "license": "UNLICENSED",
     "private": true,
@@ -24,5 +25,7 @@
         "watch": "encore dev --watch",
         "build": "encore production --progress"
     },
-    "dependencies": {}
+    "dependencies": {
+        "bootstrap-autocomplete": "^2.3.7"
+    }
 }

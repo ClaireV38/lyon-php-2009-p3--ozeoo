@@ -61,12 +61,13 @@ h1 {
 
 #diversite1 {
     height: auto;
-    width: auto;
+    width: 100%;
 }
 
 #diversite2 {
     height: 80px;
 }
+
 
 /*Footer*/
 #sticky-footer {
@@ -246,9 +247,26 @@ h1 {
     display: none;
 }
 
+/* Offer form */
+
+.jobOffer {
+    width: 50%;
+    margin: auto;
+}
+
+.btn_validate {
+    background-color: $vertOze;
+    margin:auto;
+}
+
+.offerSkillsTitle {
+    margin-top: 50px;
+    text-align: center;
+}
+
 /*login*/
 .btn-130px{
-    min-width: 130px;
+    width: 130px;
     padding: 3px;
 }
 
@@ -257,6 +275,15 @@ h1 {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+/*flex*/
+.flex{
+    display: flex;
+}
+
+.offer_date {
+    flex-direction: row;
 }
 
 @media (min-width: 768px) {
@@ -379,8 +406,14 @@ h1 {
     }
 
     /* Page accueil candidat*/
+    #presentationOze {
+        flex-direction: column;
+    }
     .btn_candidateHome_createProfile {
         display: none;
+    }
+    #buttonRedirectProfil {
+        flex-direction: column;
     }
 
     .candidate_ozeoPresentationCard {
@@ -428,7 +461,7 @@ h1 {
     }
 
     .btn_candidateHome_createProfileDesktop {
-        margin-top: 10px;
+        margin-bottom: 20px;
     }
 
     /*login*/
@@ -447,5 +480,34 @@ h1 {
 
     .login-form{
         min-width: 400px;
+    }
+
+    /* Offer form */
+
+    .offerHardSkills {
+        width: 45%;
+    }
+
+    /* New Applicant profile */
+    .applicantForm{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .infoForm{
+        width: 50%;
+        margin: auto;
+    }
+    .skillSelection{
+        display: flex;
+        padding: 10px 0 10px 0;
+    }
+    .titleApplicant{
+        text-align: center;
+        padding: 20px;
+    }
+    .buttonApplicant{
+        display: flex;
+        justify-content: center;
     }
 }

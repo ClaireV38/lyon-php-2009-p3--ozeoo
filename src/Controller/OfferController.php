@@ -31,6 +31,7 @@ class OfferController extends AbstractController
     public function new(Request $request): Response
     {
         $offer = new Offer();
+        $offer->setCompany($this->getUser()->getCompany());
         $form = $this->createForm(OfferType::class, $offer);
         $form->handleRequest($request);
 
@@ -39,7 +40,9 @@ class OfferController extends AbstractController
             $entityManager->persist($offer);
             $entityManager->flush();
 
-            return $this->redirectToRoute('offer_index');
+            return $this->redirectToRoute('offer_show', ['id' => $offer->getId()
+
+            ]);
         }
 
         return $this->render('offer/new.html.twig', [
