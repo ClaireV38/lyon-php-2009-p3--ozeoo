@@ -150,6 +150,61 @@ class Skill
         if ($this->hardApplicants->removeElement($hardApplicant)) {
             $hardApplicant->removeHardSkill($this);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Applicant[]
+     */
+    public function getSoftOffers(): Collection
+    {
+        return $this->softOffers;
+    }
+
+    public function addSoftOffer(Applicant $softOffer): self
+    {
+        if (!$this->softOffers->contains($softOffer)) {
+            $this->softOffers[] = $softOffer;
+            $softOffer->addSoftSkill($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSoftOffer(Applicant $softOffer): self
+    {
+        if ($this->softOffers->removeElement($softOffer)) {
+            $softOffer->removeSoftSkill($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Applicant[]
+     */
+    public function getHardOffers(): Collection
+    {
+        return $this->hardOffers;
+    }
+
+    public function addHardOffer(Applicant $hardOffer): self
+    {
+        if (!$this->hardOffers->contains($hardOffer)) {
+            $this->hardOffers[] = $hardOffer;
+            $hardOffer->addHardSkill($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHardOffer(Applicant $hardOffer): self
+    {
+        if ($this->hardOffers->removeElement($hardOffer)) {
+            $hardOffer->removeHardSkill($this);
+        }
+
         return $this;
     }
 
