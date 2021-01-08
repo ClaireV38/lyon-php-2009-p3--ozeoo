@@ -203,7 +203,6 @@ class Skill
         if ($this->hardOffers->removeElement($hardOffer)) {
             $hardOffer->removeHardSkill($this);
         }
-
         return $this;
     }
 }
