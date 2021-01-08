@@ -314,7 +314,6 @@ h1 {
     }
 
     /*Homepage*/
-
     #home-list {
         text-align: center;
         display: flex;
@@ -513,6 +512,11 @@ h1 {
     /* Company Registration */
     #company-register {
         margin: auto;
+    }
+
+    /* Offer form */
+    .offerHardSkills {
+        width: 45%;
     }
 
     /* New Applicant profile */
