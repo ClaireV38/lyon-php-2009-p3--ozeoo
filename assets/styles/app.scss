@@ -252,10 +252,36 @@ h1 {
     display: none;
 }
 
+/* Offer form */
+
+.jobOffer {
+    width: 50%;
+    margin: auto;
+}
+
+.btn_validate {
+    background-color: $vertOze;
+    margin:auto;
+}
+
+.offerSkillsTitle {
+    margin-top: 50px;
+    text-align: center;
+}
+
 /*login*/
 .btn-130px{
     width: 130px;
     padding: 3px;
+}
+
+/*flex*/
+.flex{
+    display: flex;
+}
+
+.offer_date {
+    flex-direction: row;
 }
 
 @media (min-width: 768px) {
@@ -454,6 +480,12 @@ h1 {
 
     .login-form{
         min-width: 400px;
+    }
+
+    /* Offer form */
+
+    .offerHardSkills {
+        width: 45%;
     }
 
     /* New Applicant profile */

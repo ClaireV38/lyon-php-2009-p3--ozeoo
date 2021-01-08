@@ -51,16 +51,24 @@ class Skill
     private $hardApplicants;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Offer::class, inversedBy="skills")
-     * @var Collection<Offer>
+     * @ORM\ManyToMany(targetEntity=Applicant::class, mappedBy="softSkills")
+     * @var Collection<Applicant>
      */
-    private $offers;
+    private $softOffers;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Applicant::class, mappedBy="hardSkills")
+     * @var Collection<Applicant>
+     */
+    private $hardOffers;
+
 
     public function __construct()
     {
         $this->softApplicants = new ArrayCollection();
         $this->hardApplicants = new ArrayCollection();
-        $this->offers = new ArrayCollection();
+        $this->softOffers = new ArrayCollection();
+        $this->hardOffers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -88,30 +96,6 @@ class Skill
     public function setSkillCategory(SkillCategory $skillCategory): self
     {
         $this->skillCategory = $skillCategory;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Offer[]
-     */
-    public function getOffer(): Collection
-    {
-        return $this->offers;
-    }
-
-    public function addOffer(Offer $offer): self
-    {
-        if (!$this->offers->contains($offer)) {
-            $this->offers[] = $offer;
-        }
-
-        return $this;
-    }
-
-    public function removeOffer(Offer $offer): self
-    {
-        $this->offers->removeElement($offer);
 
         return $this;
     }
@@ -166,6 +150,61 @@ class Skill
         if ($this->hardApplicants->removeElement($hardApplicant)) {
             $hardApplicant->removeHardSkill($this);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Applicant[]
+     */
+    public function getSoftOffers(): Collection
+    {
+        return $this->softOffers;
+    }
+
+    public function addSoftOffer(Applicant $softOffer): self
+    {
+        if (!$this->softOffers->contains($softOffer)) {
+            $this->softOffers[] = $softOffer;
+            $softOffer->addSoftSkill($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSoftOffer(Applicant $softOffer): self
+    {
+        if ($this->softOffers->removeElement($softOffer)) {
+            $softOffer->removeSoftSkill($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Applicant[]
+     */
+    public function getHardOffers(): Collection
+    {
+        return $this->hardOffers;
+    }
+
+    public function addHardOffer(Applicant $hardOffer): self
+    {
+        if (!$this->hardOffers->contains($hardOffer)) {
+            $this->hardOffers[] = $hardOffer;
+            $hardOffer->addHardSkill($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHardOffer(Applicant $hardOffer): self
+    {
+        if ($this->hardOffers->removeElement($hardOffer)) {
+            $hardOffer->removeHardSkill($this);
+        }
+
         return $this;
     }
 }

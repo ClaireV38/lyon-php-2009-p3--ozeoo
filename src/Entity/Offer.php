@@ -3,9 +3,12 @@
 namespace App\Entity;
 
 use App\Repository\OfferRepository;
+use ContainerDv8rw2p\get_ServiceLocator_C9JCBPCService;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use DateTime;
 
 /**
  * @ORM\Entity(repositoryClass=OfferRepository::class)
@@ -21,12 +24,15 @@ class Offer
     private $id;
 
     /**
+     * @Assert\NotBlank(message="Il vous faut indiquer l'intitulé du poste")
+     * @Assert\Length(max="255", maxMessage="L'intitulé ne doit pas faire plus de 255 caractères")
      * @ORM\Column(type="string", length=255)
      * @var string
      */
     private $title;
 
     /**
+     * @Assert\NotBlank(message="Il vous faut indiquer un type de contrat")
      * @ORM\Column(type="string", length=50)
      * @var string
      */
@@ -45,6 +51,8 @@ class Offer
     private $duration;
 
     /**
+     * @Assert\GreaterThanOrEqual("today")
+     * @Assert\NotBlank(message="Il vous faut indiquer la date de début du contrat")
      * @ORM\Column(type="date")
      * @var \DateTimeInterface
      */
@@ -58,11 +66,12 @@ class Offer
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @var \DateTimeInterface
+     * @var \DateTimeInterface|null
      */
     private $endDate;
 
     /**
+     * @Assert\NotBlank(message="Il vous faut indiquer une description du poste")
      * @ORM\Column(type="text")
      * @var string
      */
@@ -75,8 +84,10 @@ class Offer
     private $isAnonymous;
 
     /**
-     * @ORM\Column(type="text")
-     * @var string
+     * @Assert\NotBlank(message="Il vous faut indiquer une ville")
+     * @Assert\Length(max="50", maxMessage="L'intitulé ne doit pas faire plus de 100 caractères")
+     * @ORM\Column(type="string", nullable=true)
+     * @var string|null
      */
     private $city;
 
@@ -88,10 +99,25 @@ class Offer
     private $company;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Skill::class, mappedBy="offers")
+     * @ORM\ManyToMany(targetEntity=Skill::class, inversedBy="softOffers")
+     * @ORM\JoinTable(name="offer_soft_skills",
+     *      joinColumns={@ORM\JoinColumn(name="offer_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="skill_id", referencedColumnName="id")}
+     *     )
      * @var Collection<Skill>
      */
-    private $skills;
+    private $softSkills;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Skill::class, inversedBy="hardOffers")
+     * @ORM\JoinTable(name="offer_hard_skills",
+     *      joinColumns={@ORM\JoinColumn(name="offer_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="skill_id", referencedColumnName="id")}
+     *     )
+     * @var Collection<Skill>
+     */
+    private $hardSkills;
+
 
     /**
      * @ORM\ManyToMany(targetEntity=Applicant::class, inversedBy="offers")
@@ -101,8 +127,11 @@ class Offer
 
     public function __construct()
     {
-        $this->skills = new ArrayCollection();
         $this->applicant = new ArrayCollection();
+        $this->creationDate = new DateTime();
+        $this->startDate = new DateTime();
+        $this->softSkills = new ArrayCollection();
+        $this->hardSkills = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -187,7 +216,7 @@ class Offer
         return $this->endDate;
     }
 
-    public function setEndDate(\DateTimeInterface $endDate): self
+    public function setEndDate(?\DateTimeInterface $endDate): self
     {
         $this->endDate = $endDate;
 
@@ -218,6 +247,18 @@ class Offer
         return $this;
     }
 
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(?string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
     public function getCompany(): ?Company
     {
         return $this->company;
@@ -226,33 +267,6 @@ class Offer
     public function setCompany(Company $company): self
     {
         $this->company = $company;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Skill[]
-     */
-    public function getSkills(): Collection
-    {
-        return $this->skills;
-    }
-
-    public function addSkill(Skill $skill): self
-    {
-        if (!$this->skills->contains($skill)) {
-            $this->skills[] = $skill;
-            $skill->addOffer($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSkill(Skill $skill): self
-    {
-        if ($this->skills->removeElement($skill)) {
-            $skill->removeOffer($this);
-        }
 
         return $this;
     }
@@ -281,14 +295,50 @@ class Offer
         return $this;
     }
 
-    public function getCity(): ?string
+    /**
+     * @return Collection|Skill[]
+     */
+    public function getSoftSkills(): Collection
     {
-        return $this->city;
+        return $this->softSkills;
     }
 
-    public function setCity(string $city): self
+    public function addSoftSkill(Skill $softSkill): self
     {
-        $this->city = $city;
+        if (!$this->softSkills->contains($softSkill)) {
+            $this->softSkills[] = $softSkill;
+        }
+
+        return $this;
+    }
+
+    public function removeSoftSkill(Skill $softSkill): self
+    {
+        $this->softSkills->removeElement($softSkill);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Skill[]
+     */
+    public function getHardSkills(): Collection
+    {
+        return $this->hardSkills;
+    }
+
+    public function addHardSkill(Skill $hardSkill): self
+    {
+        if (!$this->hardSkills->contains($hardSkill)) {
+            $this->hardSkills[] = $hardSkill;
+        }
+
+        return $this;
+    }
+
+    public function removeHardSkill(Skill $hardSkill): self
+    {
+        $this->hardSkills->removeElement($hardSkill);
 
         return $this;
     }
