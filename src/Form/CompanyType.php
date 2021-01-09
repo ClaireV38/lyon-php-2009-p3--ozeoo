@@ -12,6 +12,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\User;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class CompanyType extends AbstractType
 {
@@ -29,21 +30,27 @@ class CompanyType extends AbstractType
                 'label' => 'Numéro de siret'
             ])
             ->add('contactEmail', EmailType::class, [
-                'label' => 'Email de contact'
+                'label' => 'Email de contact',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'ce champ est requis',
+                    ]),
+                ],
             ])
             ->add('apeNb', TextType::class, [
                 'label' => 'Numéro APE'
             ])
             ->add('description', TextareaType::class, [
-                'label' => 'Description de l\'entreprise'
+                'label' => 'Description de l\'entreprise',
             ])
             ->add('corporateCulture', TextareaType::class, [
+                'required' => false,
                 'label' => 'Culture de l\'entreprise'
             ])
             ->add('csr', TextareaType::class, [
+                'required' => false,
                 'label' => 'Responsabilité Sociale de l\'Entreprise'
-            ])
-        ;
+            ]);
     }
 
     /**
