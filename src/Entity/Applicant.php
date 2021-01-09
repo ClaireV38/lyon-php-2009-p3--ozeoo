@@ -49,7 +49,7 @@ class Applicant
     private $city;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, inversedBy="applicants", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="applicant", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      * @var User
      */
