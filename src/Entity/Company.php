@@ -67,7 +67,7 @@ class Company
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @var string|null
+     * @var string
      */
     private $description;
 

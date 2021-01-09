@@ -33,7 +33,7 @@ class CompanyType extends AbstractType
                 'label' => 'Email de contact',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'ce champ est requis',
+                        'message' => 'Ce champ est requis',
                     ]),
                 ],
             ])
@@ -42,6 +42,11 @@ class CompanyType extends AbstractType
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description de l\'entreprise',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Ce champ est requis',
+                    ]),
+                ],
             ])
             ->add('corporateCulture', TextareaType::class, [
                 'required' => false,
