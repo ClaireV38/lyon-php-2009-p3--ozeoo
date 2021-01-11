@@ -52,10 +52,7 @@ class RegistrationController extends AbstractController
                 ->from($this->getParameter('mailer_from'))
                 ->to($user->getEmail())
                 ->subject('Prise en compte de votre inscription')
-                ->html('<p>Votre inscription en tant qu\'entreprise 
-                sur notre site OZELADIVERSITE est bien prise en compte
-                et est en cours de validation par notre équipe. Vous aurez accès aux service sous 24 à 48h</p>');
-
+                ->html($this->renderView('company/newCompanyEmail.html.twig'));
                 $mailer->send($email);
 
             return $guardHandler->authenticateUserAndHandleSuccess(
