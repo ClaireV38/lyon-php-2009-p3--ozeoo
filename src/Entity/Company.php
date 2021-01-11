@@ -24,7 +24,7 @@ class Company
     /**
      * @ORM\Column(type="string", length=255)
      * @var string
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Veuillez rentrer votre nom.")
      * @Assert\Length(max="255", maxMessage="Le nom ne doit pas exceder 255 caractères.")
      */
     private $name;
@@ -32,16 +32,18 @@ class Company
     /**
      * @ORM\Column(type="string", length=15)
      * @var string
-     * @Assert\Regex("/^\d{14}$/")
-     * @Assert\NotBlank(message="Veuillez saisir un numéro de SIRET composé de 14 chiffres")
+     * @Assert\Regex("/^\d{14}$/",
+     *      message="Le numéro de SIRET doit être composé de 14 chiffres.")
+     * @Assert\NotBlank(message="Veuillez saisir un numéro de SIRET composé de 14 chiffres.")
      */
     private $siretNb;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @var string
+     * @Assert\Length(max="255", maxMessage="L'email ne doit pas exceder 255 caractères.")
      */
-    private $contactEmail = "";
+    private $contactEmail;
 
     /**
      * @ORM\Column(type="string")
@@ -130,6 +132,18 @@ class Company
     public function setContactEmail(string $contactEmail): self
     {
         $this->contactEmail = $contactEmail;
+
+        return $this;
+    }
+
+    public function getApeNb(): ?string
+    {
+        return $this->apeNb;
+    }
+
+    public function setApeNb(string $apeNb): self
+    {
+        $this->apeNb = $apeNb;
 
         return $this;
     }
@@ -256,18 +270,6 @@ class Company
     public function setCity(string $city): self
     {
         $this->city = $city;
-        return $this;
-    }
-
-    public function getApeNb(): ?string
-    {
-        return $this->apeNb;
-    }
-
-    public function setApeNb(string $apeNb): self
-    {
-        $this->apeNb = $apeNb;
-
         return $this;
     }
 }
