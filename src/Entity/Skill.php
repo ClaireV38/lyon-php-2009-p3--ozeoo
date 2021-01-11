@@ -150,7 +150,6 @@ class Skill
         if ($this->hardApplicants->removeElement($hardApplicant)) {
             $hardApplicant->removeHardSkill($this);
         }
-
         return $this;
     }
 
@@ -204,7 +203,6 @@ class Skill
         if ($this->hardOffers->removeElement($hardOffer)) {
             $hardOffer->removeHardSkill($this);
         }
-
         return $this;
     }
 }
