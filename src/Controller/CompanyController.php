@@ -31,7 +31,9 @@ class CompanyController extends AbstractController
     public function edit(Request $request, Company $company): Response
     {
 
-        $form = $this->createForm(CompanyType::class, $company);
+        $form = $this->createForm(CompanyType::class, $company, [
+            'validation_groups' => ['company'],
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

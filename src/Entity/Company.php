@@ -41,6 +41,7 @@ class Company
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @var string
+     * @Assert\NotBlank(groups={"company"})
      * @Assert\Length(max="255", maxMessage="L'email ne doit pas exceder 255 caractères.")
      */
     private $contactEmail;
@@ -68,6 +69,7 @@ class Company
     /**
      * @ORM\Column(type="text", nullable=true)
      * @var string
+     * @Assert\NotBlank(groups={"company"})
      */
     private $description;
 
