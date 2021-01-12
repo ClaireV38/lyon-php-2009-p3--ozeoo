@@ -2,6 +2,8 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Applicant;
+use App\Entity\Company;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -48,6 +50,31 @@ class UserFixtures extends Fixture
             $this->addReference('comp_user_' . $i, $company);
             $manager->persist($company);
         }
+
+        $applicant = new User();
+        $applicant->setEmail('applicant@monsite.com');
+        $applicant->setRoles(['ROLE_APPLICANT']);
+        $applicant->setPassword($this->passwordEncoder->encodePassword(
+            $applicant,
+            'applicantpassword'
+        ));
+        $applicantAccount = new Applicant();
+        $applicant->setApplicant($applicantAccount);
+        $manager->persist($applicant);
+
+        $company = new User();
+        $company->setEmail('company@monsite.com');
+        $company->setRoles(['ROLE_COMPANY']);
+        $company->setPassword($this->passwordEncoder->encodePassword(
+            $company,
+            'companypassword'
+        ));
+        $companyAccount = new Company();
+        $companyAccount->setName('entreprise.sas');
+        $companyAccount->setApeNb('123456789123456');
+        $companyAccount->setSiretNb('1234A');
+        $company->setCompany($companyAccount);
+        $manager->persist($company);
 
         // Création d’un utilisateur de type “administrateur”
         $admin = new User();
