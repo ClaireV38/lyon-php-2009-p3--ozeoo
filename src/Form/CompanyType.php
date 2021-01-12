@@ -31,22 +31,12 @@ class CompanyType extends AbstractType
             ])
             ->add('contactEmail', EmailType::class, [
                 'label' => 'Email de contact',
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Ce champ est requis',
-                    ]),
-                ],
             ])
             ->add('apeNb', TextType::class, [
                 'label' => 'Numéro APE'
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description de l\'entreprise',
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Ce champ est requis',
-                    ]),
-                ],
             ])
             ->add('corporateCulture', TextareaType::class, [
                 'required' => false,
@@ -65,7 +55,8 @@ class CompanyType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Company::class,
-            "allow_extra_fields" => true
+            "allow_extra_fields" => true,
+            'validation_groups' => ['company'],
         ]);
     }
 }
