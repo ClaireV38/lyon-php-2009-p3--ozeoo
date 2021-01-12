@@ -3,13 +3,18 @@
 namespace App\Entity;
 
 use App\Repository\CompanyRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Serializer\Annotation\Ignore;
 
 /**
  * @ORM\Entity(repositoryClass=CompanyRepository::class)
+ * @Vich\Uploadable
  */
 class Company
 {
@@ -56,9 +61,22 @@ class Company
 
     /**
      * @ORM\Column(type="string", length=500, nullable=true)
-     * @var string
+     * @var string|null
      */
     private $picture;
+
+    /**
+     * @Vich\UploadableField(mapping="company_images", fileNameProperty="picture")
+     * @var File|null
+     * @Ignore()
+     */
+    private $pictureFile;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @var DateTime
+     */
+    private $updatedAt;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -150,16 +168,44 @@ class Company
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getPicture(): ?string
     {
         return $this->picture;
     }
 
-    public function setPicture(string $picture): self
+    /**
+     * @param string|null $picture
+     * @return $this
+     */
+    public function setPicture(?string $picture): self
     {
         $this->picture = $picture;
 
         return $this;
+    }
+
+    /**
+     * @return File|null
+     * @Ignore()
+     */
+    public function getPictureFile(): ?File
+    {
+        return $this->pictureFile;
+    }
+
+    /**
+     * @param File|null $pictureFile
+     */
+    public function setPictureFile(?File $pictureFile = null): void
+    {
+        $this->pictureFile = $pictureFile;
+       // return $this;
+        if (null !== $pictureFile) {
+            $this->updatedAt = new DateTime("now");
+        }
     }
 
     public function getVideo(): ?string

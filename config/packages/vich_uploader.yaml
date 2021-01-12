@@ -1,0 +1,7 @@
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        company_images:
+            uri_prefix: /uploads/images/company
+            upload_destination: '%upload_directory%'
