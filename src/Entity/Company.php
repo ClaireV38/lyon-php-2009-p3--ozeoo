@@ -7,6 +7,7 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Serializable;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
@@ -16,7 +17,7 @@ use Symfony\Component\Serializer\Annotation\Ignore;
  * @ORM\Entity(repositoryClass=CompanyRepository::class)
  * @Vich\Uploadable
  */
-class Company
+class Company implements \Serializable
 {
     /**
      * @ORM\Id
@@ -202,7 +203,7 @@ class Company
     public function setPictureFile(?File $pictureFile = null): void
     {
         $this->pictureFile = $pictureFile;
-       // return $this;
+        // return $this;
         if (null !== $pictureFile) {
             $this->updatedAt = new DateTime("now");
         }
@@ -319,5 +320,19 @@ class Company
     {
         $this->city = $city;
         return $this;
+    }
+
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+        ));
+    }
+
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            ) = unserialize($serialized, array('allowed_classes' => false));
     }
 }
