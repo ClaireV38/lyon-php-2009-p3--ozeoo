@@ -51,13 +51,13 @@ class Skill
     private $hardApplicants;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Applicant::class, mappedBy="softSkills")
+     * @ORM\ManyToMany(targetEntity=Offer::class, mappedBy="softSkills")
      * @var Collection<Applicant>
      */
     private $softOffers;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Applicant::class, mappedBy="hardSkills")
+     * @ORM\ManyToMany(targetEntity=Offer::class, mappedBy="hardSkills")
      * @var Collection<Applicant>
      */
     private $hardOffers;
@@ -150,7 +150,6 @@ class Skill
         if ($this->hardApplicants->removeElement($hardApplicant)) {
             $hardApplicant->removeHardSkill($this);
         }
-
         return $this;
     }
 
@@ -204,7 +203,6 @@ class Skill
         if ($this->hardOffers->removeElement($hardOffer)) {
             $hardOffer->removeHardSkill($this);
         }
-
         return $this;
     }
 }

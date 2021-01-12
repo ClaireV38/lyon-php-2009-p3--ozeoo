@@ -271,9 +271,16 @@ h1 {
 }
 
 /*login*/
-.btn-130px{
+.btn-235px{
     width: 235px;
     padding: 3px;
+}
+
+/* Company Form */
+#companyCreateFormButton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 /*flex*/
@@ -307,7 +314,6 @@ h1 {
     }
 
     /*Homepage*/
-
     #home-list {
         text-align: center;
         display: flex;
@@ -493,6 +499,11 @@ h1 {
         min-width: 400px;
     }
 
+    /* Offer form */
+    .offerHardSkills {
+        width: 45%;
+    }
+
     #loginPageButtons {
         padding-left: 15px;
         padding-right: 15px;
@@ -502,6 +513,7 @@ h1 {
     #company-register {
         margin: auto;
     }
+
     /* Offer form */
     .offerHardSkills {
         width: 45%;
