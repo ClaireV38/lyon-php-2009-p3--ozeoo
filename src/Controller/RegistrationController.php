@@ -76,7 +76,8 @@ class RegistrationController extends AbstractController
         Request $request,
         UserPasswordEncoderInterface $passwordEncoder,
         GuardAuthenticatorHandler $guardHandler,
-        LoginFormAuthenticator $authenticator
+        LoginFormAuthenticator $authenticator,
+        MailerInterface $mailer
     ): ?Response {
         $user = new User();
         $applicant = new Applicant();
@@ -98,6 +99,12 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
             // do anything else you need here, like send an email
+            $email = (new Email())
+                ->from($this->getParameter('mailer_from'))
+                ->to($user->getEmail())
+                ->subject('Confirmation de création de compte')
+                ->html($this->renderView('applicant/newApplicantEmail.html.twig'));
+            $mailer->send($email);
 
             return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,
