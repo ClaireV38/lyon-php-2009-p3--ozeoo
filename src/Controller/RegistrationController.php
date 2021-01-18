@@ -17,11 +17,15 @@ use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class RegistrationController extends AbstractController
 {
+    /**
+     * @var EmailVerifier
+     */
     private $emailVerifier;
 
     public function __construct(EmailVerifier $emailVerifier)
@@ -31,6 +35,10 @@ class RegistrationController extends AbstractController
 
     /**
      * @Route("/register/company", name="app_register_company")
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param GuardAuthenticatorHandler $guardHandler
+     * @param LoginFormAuthenticator $authenticator
      * @return Response
      */
     public function registerCompany(
@@ -59,7 +67,9 @@ class RegistrationController extends AbstractController
             // do anything else you need here, like send an email
 
             // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+            $this->emailVerifier->sendEmailConfirmation(
+                'app_verify_email',
+                $user,
                 (new TemplatedEmail())
                     ->from(new Address('your_email@example.com', 'Ozé La Diversité'))
                     ->to($user->getEmail())
@@ -83,6 +93,10 @@ class RegistrationController extends AbstractController
 
     /**
      * @Route("/register/applicant", name="app_register_applicant")
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param GuardAuthenticatorHandler $guardHandler
+     * @param LoginFormAuthenticator $authenticator
      * @return Response
      */
     public function registerApplicant(
@@ -113,7 +127,9 @@ class RegistrationController extends AbstractController
             // do anything else you need here, like send an email
 
             // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+            $this->emailVerifier->sendEmailConfirmation(
+                'app_verify_email',
+                $user,
                 (new TemplatedEmail())
                     ->from(new Address('your_email@example.com', 'Ozé La Diversité'))
                     ->to($user->getEmail())
@@ -137,8 +153,11 @@ class RegistrationController extends AbstractController
 
     /**
      * @Route("/verify/email", name="app_verify_email")
+     * @param Request $request
+     * @param UserInterface $user
+     * @return Response
      */
-    public function verifyUserEmail(Request $request): Response
+    public function verifyUserEmail(Request $request, UserInterface $user): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
@@ -157,4 +176,3 @@ class RegistrationController extends AbstractController
         return $this->redirectToRoute('home');
     }
 }
-
