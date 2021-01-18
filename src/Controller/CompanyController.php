@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Company;
 use App\Form\CompanyType;
 use App\Repository\CompanyRepository;
+use App\Repository\OfferRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,11 +19,16 @@ class CompanyController extends AbstractController
     /**
      * @Route("/index", name="company_index", methods={"GET"})
      */
-    public function index(CompanyRepository $companyRepository): Response
+    public function index(CompanyRepository $companyRepository, OfferRepository $offerRepository): Response
     {
         $company = $this->getUser()->getCompany();
+        $offers = $offerRepository->findBy(
+            ['company' => $company],
+            ['id' => 'DESC']
+        );
         return $this->render('company/index.html.twig', [
             'company' => $company,
+            'offers' => $offers
         ]);
     }
 
