@@ -4,8 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Applicant;
 use App\Entity\Offer;
+use App\Entity\User;
 use App\Form\ApplicantType;
 use App\Repository\ApplicantRepository;
+use App\Repository\OfferRepository;
+use App\Repository\SkillRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,9 +23,25 @@ class ApplicantController extends AbstractController
 {
     /**
      * @Route("/", name="applicant_index", methods={"GET"})
+     * @param OfferRepository $offerRepository
+     * @param SkillRepository $skillRepository
+     * @param ApplicantRepository $applicantRepository
+     * @return Response
      */
-    public function index(): Response
+    public function index(OfferRepository $offerRepository, SkillRepository $skillRepository, ApplicantRepository $applicantRepository): Response
     {
+       $allOffers = $offerRepository->findAll();
+       $matchOffers = [];
+       foreach ($allOffers as $offer)
+       {
+           $skillsMatch = $skillRepository->findMatchSkills($offer, $this->getUser()->getApplicant());
+           if (count($skillsMatch) >= 5)
+           {
+               $matchOffers[] = $offer;
+           }
+       }
+        var_dump($matchOffers);
+        die();
         return $this->render('applicant/index.html.twig');
     }
 
@@ -73,13 +92,12 @@ class ApplicantController extends AbstractController
     }
 
     /**
-     * @Route {"/{id}/offer", name="applicant_offer", methods={"GET"})
-     * @param ApplicantRepository $applicantRepository
+     * @Route {"/offer/{id}", name="applicant_offer", methods={"GET"})
      * @return Response
      */
-    public function showMatch(ApplicantRepository $applicantRepository): Response
+    public function showMatch(Applicant $applicant, OfferRepository $offerRepository ): Response
     {
-        $matchOffer = $applicantRepository->findMatchOffer();
+        $matchOffer = $offerRepository->findMatchOffer(1);
 
         return $this->render('applicant/offer.html.twig', [
             'matchOffer' => $matchOffer,

@@ -1,25 +1,27 @@
-{{ form_start(form) }}
-{#{{ form_widget(form) }}#}
-<div class="jobOffer">
-    {{ form_row(form.title, { 'label': 'Intitulé du poste' }) }}
-    {{ form_row(form.city, { 'label': 'Ville' }) }}
-    <div class="offer_date flex">
-    {{ form_row(form.startDate, { 'label': 'Date de début' }) }}
-    </div>
-    {{ form_row(form.contractType, { 'label': 'Type de contrat' }) }}
-    {{ form_row(form.duration, { 'label': 'Durée de la mission (si durée limitée)' }) }}
-    {{ form_row(form.salary, { 'label': 'Salaire (facultatif)' }) }}
-    {{ form_row(form.description, { 'label': 'Description de l\'offre' }) }}
-    <div class="offer_date flex">
-    {{ form_row(form.endDate, { 'label': 'Date limite de candidature' }) }}
-    </div>
-    {{ form_row(form.isAnonymous, { 'label': 'Cochez si vous souhaitez que l\'entreprise reste anonyme' }) }}
-<h2 class="offerSkillsTitle">Compétences</h2>
-    <h5>Compétences techniques (5min, 10max)</h5>
-        {{ form_row(form.hardSkills, {'label': " " }) }}
-    <h5>Compétences comportementales (5min, 10max)</h5>
-        {{ form_row(form.softSkills, {'label': " " }) }}
-</div>
+{% block body %}
+        {{ form_start(form) }}
+        {#{{ form_widget(form) }}#}
+            <div class="jobOffer">
+                {{ form_row(form.title, { 'label': 'Intitulé du poste' }) }}
+                {{ form_row(form.city, { 'label': 'Ville' }) }}
+                    <div class="offer_date flex">
+                    {{ form_row(form.startDate, { 'label': 'Date de début' }) }}
+                    </div>
+                {{ form_row(form.contractType, { 'label': 'Type de contrat' }) }}
+                {{ form_row(form.duration, { 'label': 'Durée de la mission (si durée limitée)' }) }}
+                {{ form_row(form.salary, { 'label': 'Salaire (facultatif)' }) }}
+                {{ form_row(form.description, { 'label': 'Description de l\'offre' }) }}
+                    <div class="offer_date flex">
+                    {{ form_row(form.endDate, { 'label': 'Date limite de candidature' }) }}
+                    </div>
+                {{ form_row(form.isAnonymous, { 'label': 'Cochez si vous souhaitez que l\'entreprise reste anonyme' }) }}
+            <h2 class="offerSkillsTitle">Compétences</h2>
+                <h5>Compétences techniques (5min, 10max)</h5>
+                    {{ form_row(form.hardSkills, {'label': " " }) }}
+                <h5>Compétences comportementales (5min, 10max)</h5>
+                    {{ form_row(form.softSkills, {'label': " " }) }}
+            </div>
 
-<button class="btn btn_validate flex">{{ button_label|default('Valider') }}</button>
-{{ form_end(form) }}
+            <a href="{{ path('company_index') }}"><button class="btn btn_validate flex">Valider</button></a>
+        {{ form_end(form) }}
+{% endblock %}

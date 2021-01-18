@@ -2,6 +2,8 @@
 
 namespace App\Repository;
 
+use App\Entity\Applicant;
+use App\Entity\Offer;
 use App\Entity\Skill;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -17,6 +19,27 @@ class SkillRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Skill::class);
+    }
+
+    /**
+     * @param Offer $offer
+     * @param Applicant $applicant
+     * @return int|mixed|string
+     */
+    public function findMatchSkills(Offer $offer, Applicant $applicant)
+    {
+        return $this->createQueryBuilder('s')
+//            ->select('o.hardSkills')
+            ->join('s.hardOffers', 'o', 'WITH', 'o IN (:offer)')
+            ->join('s.hardApplicants', 'a', 'WITH', 'a IN (:applicant)')
+            ->setParameter('offer', $offer )
+            ->setParameter('applicant', $applicant)
+//            ->where('a.hardSkills = o.hardSkills')
+//            ->andWhere('o.hardSkills = :skill')
+//            ->setParameter('skillId', $skillId)
+            ->getQuery()
+            ->getResult()
+            ;
     }
 
     // /**
