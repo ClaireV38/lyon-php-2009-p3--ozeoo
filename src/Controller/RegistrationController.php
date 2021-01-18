@@ -163,6 +163,7 @@ class RegistrationController extends AbstractController
 
         // validate email confirmation link, sets User::isVerified=true and persists
         try {
+            /* @phpstan-ignore-next-line */
             $this->emailVerifier->handleEmailConfirmation($request, $this->getUser());
         } catch (VerifyEmailExceptionInterface $exception) {
             $this->addFlash('verify_email_error', $exception->getReason());
@@ -176,3 +177,4 @@ class RegistrationController extends AbstractController
         return $this->redirectToRoute('home');
     }
 }
+
