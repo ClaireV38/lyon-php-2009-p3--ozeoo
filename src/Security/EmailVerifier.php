@@ -9,12 +9,13 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
+use App\Entity\User;
 
 class EmailVerifier
 {
-    private $verifyEmailHelper;
-    private $mailer;
-    private $entityManager;
+    private VerifyEmailHelperInterface $verifyEmailHelper;
+    private MailerInterface $mailer;
+    private EntityManagerInterface $entityManager;
 
     public function __construct(
         VerifyEmailHelperInterface $helper,
@@ -28,12 +29,12 @@ class EmailVerifier
 
     public function sendEmailConfirmation(
         string $verifyEmailRouteName,
-        UserInterface $user,
+        User $user,
         TemplatedEmail $email
     ): void {
         $signatureComponents = $this->verifyEmailHelper->generateSignature(
             $verifyEmailRouteName,
-            $user->getId(),
+            strval($user->getId()),
             $user->getEmail()
         );
 
@@ -48,12 +49,16 @@ class EmailVerifier
 
     /**
      * @param Request $request
-     * @param UserInterface $user
+     * @param User $user
      * @throws VerifyEmailExceptionInterface
      */
-    public function handleEmailConfirmation(Request $request, UserInterface $user): void
+    public function handleEmailConfirmation(Request $request, User $user): void
     {
-        $this->verifyEmailHelper->validateEmailConfirmation($request->getUri(), $user->getId(), $user->getEmail());
+        $this->verifyEmailHelper->validateEmailConfirmation(
+            $request->getUri(),
+            strval($user->getId()),
+            $user->getEmail()
+        );
 
         $user->setIsVerified(true);
 
