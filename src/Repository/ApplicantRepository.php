@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Applicant;
+use App\Entity\Offer;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -17,6 +18,24 @@ class ApplicantRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Applicant::class);
+    }
+
+    public function findMatch (Applicant $applicant)
+    {
+        return $this->createQueryBuilder('a')
+            ->addSelect('COUNT(DISTINCT ahs)')
+//            ->addSelect('COUNT(DISTINCT ss.id)')
+            ->addSelect('ao.id')
+            ->join('a.hardSkills', 'ahs')
+//            ->join('a.softSkills', 'ass')
+            ->join('ahs.hardOffers', 'ao')
+            ->where('a = :appl')
+            ->setParameter('appl', $applicant)
+            ->groupBy('ao')
+            ->having('COUNT(DISTINCT ahs) >= 5')
+            ->getQuery()
+            ->getResult()
+            ;
     }
 
 //    public function findMatchOffer(array $offer): array

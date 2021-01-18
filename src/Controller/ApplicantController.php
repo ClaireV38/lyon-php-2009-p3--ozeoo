@@ -30,16 +30,18 @@ class ApplicantController extends AbstractController
      */
     public function index(OfferRepository $offerRepository, SkillRepository $skillRepository, ApplicantRepository $applicantRepository): Response
     {
-       $allOffers = $offerRepository->findAll();
-       $matchOffers = [];
-       foreach ($allOffers as $offer)
-       {
-           $skillsMatch = $skillRepository->findMatchSkills($offer, $this->getUser()->getApplicant());
-           if (count($skillsMatch) >= 5)
-           {
-               $matchOffers[] = $offer;
-           }
-       }
+//       $allOffers = $offerRepository->findAll();
+//       $matchOffers = [];
+//       foreach ($allOffers as $offer)
+//       {
+//           $hardSkillsMatch = $skillRepository->findMatchHardSkills($offer, $this->getUser()->getApplicant());
+//           $softSkillsMatch = $skillRepository->findMatchSoftSkills($offer, $this->getUser()->getApplicant());
+//           if (count($hardSkillsMatch) >= 5 && count($softSkillsMatch) >= 5)
+//           {
+//               $matchOffers[] = $offer;
+//           }
+//       }
+        $matchOffers = $applicantRepository->findMatch($this->getUser()->getApplicant());
         var_dump($matchOffers);
         die();
         return $this->render('applicant/index.html.twig');
@@ -95,15 +97,8 @@ class ApplicantController extends AbstractController
      * @Route {"/offer/{id}", name="applicant_offer", methods={"GET"})
      * @return Response
      */
-    public function showMatch(Applicant $applicant, OfferRepository $offerRepository ): Response
+    public function showMatch(): Response
     {
-        $matchOffer = $offerRepository->findMatchOffer(1);
 
-        return $this->render('applicant/offer.html.twig', [
-            'matchOffer' => $matchOffer,
-        ]);
-//        $matchOffer = $this->getDoctrine()
-//            ->getRepository(Applicant::class)
-//            ->findMatchOffer();
     }
 }
