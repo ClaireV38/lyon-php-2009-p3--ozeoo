@@ -147,14 +147,12 @@ h1 {
     padding: 5px;
 }
 
-#square-number-candidate-people-legend {
-    background-color: #C9E364;
-    border: solid 1px #C9E364;
-    width: 40px;
-    height: 40px;
-    border-radius: 2px;
-    display: flex;
-    justify-content: center;
+.btn-offer {
+    width: fit-content;
+}
+
+.row-btn-offer {
+    width: 100%;
 }
 
 #text-square-people-legend {
@@ -167,16 +165,6 @@ h1 {
 
 #text-legend-announce-company {
     margin: 10px 0 0 5px;
-}
-
-#square-number-match-people-legend {
-    background-color: #00C2CB;
-    border: solid 1px #00C2CB;
-    width: 40px;
-    height: 40px;
-    border-radius: 2px;
-    display: flex;
-    justify-content: center;
 }
 
 #text-square-people-legend {
@@ -362,17 +350,6 @@ h1 {
     #announce-card-homecompany {
         width: 90%;
         margin-top: 15px;
-        height: 90px;
-    }
-
-    #title-announce-desktop {
-        align-self: center;
-    }
-
-    .card-body {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
     }
 
     #announce-list-homecompany {
@@ -383,20 +360,31 @@ h1 {
         display: contents;
     }
 
-    #square-number-match-people {
-        background-color: #00C2CB;
-        border: solid 1px #00C2CB;
-        width: 40px;
-        height: 40px;
-        border-radius: 2px;
+    .row-announce {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
     }
 
-    #square-number-candidate-people {
-        background-color: #C9E364;
-        border: solid 1px #C9E364;
-        width: 40px;
-        height: 40px;
-        border-radius: 2px;
+    #title-announce-desktop {
+        align-self: center
+    }
+
+    .row-info-right {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .row-info-nb {
+        width: fit-content;
+        display: inline-block;
+    }
+
+    .row-btn-offer {
+        width: fit-content;
+        display: inline-block;
     }
 
     #logo-people {
