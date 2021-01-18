@@ -68,8 +68,12 @@ class Company implements \Serializable
 
     /**
      * @Vich\UploadableField(mapping="company_images", fileNameProperty="picture")
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes={"png", "jpeg", "jpg"},
+     *     mimeTypesMessage = "Seul les fichiers jpeg, jpg, png sont autorisés."
+     * )
      * @var File|null
-     * @Ignore()
      */
     private $pictureFile;
 
