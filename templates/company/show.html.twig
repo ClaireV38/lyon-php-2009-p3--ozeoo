@@ -6,16 +6,38 @@
     {% include '/company/_navbar.html.twig' %}
     <h1>{{ company.name }}</h1>
 
-    <div class="container-fluid align-content-center" id="companyDetails">
-        <img src="https://via.placeholder.com/150/0000FF/808080 ?Text=Digital.com" class="img-fluid rounded mx-auto d-block" alt="Responsive image">
+    <div class="container d-md-none" id="companyDetailsMobile">
+        {% if company.picture is not empty %}
+            <img src="{{asset('uploads/images/company/'~company.picture)}}" class="img-fluid rounded mx-auto d-block" alt="Responsive image">
+        {% endif %}
         <h2 class="text-center">Qui sommes-nous ?</h2>
         <p class="text-center">{{ company.description }}</p>
         <h2 class="text-center">Nos Valeurs</h2>
         <p class="text-center">{{ company.csr }}</p>
-        <div class="embed-responsive embed-responsive-4by3">
-            <iframe class="embed-responsive-item" src="https://player.vimeo.com/external/372304294.
-            sd.mp4?s=68f05e893665288fc91021b717b24292bd326364&profile_id=139&oauth2_token_id=57447761"></iframe>
+        {% if company.picture is not empty %}
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="{{ company.video }}"></iframe>
+            </div>
+        {% endif %}
+{#        <a class="btn btn-bleuOze" href="{{ path('company_index') }}">Retour à l'accueil</a>#}
+    </div>
+
+    <div class="container d-none d-md-block" id="companyDetailsDesktop">
+        <div class="row">
+            <div class="col-md-5" id="companyDetailsMedia">
+                {% if company.picture is not empty %}
+                    <img src="{{asset('uploads/images/company/'~company.picture)}}" class="img-fluid rounded mx-auto d-block" alt="Responsive image">
+                {% endif %}
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="{{ company.video }}"></iframe>
+                </div>
+            </div>
+            <div class="col-md-5" id="companyDetailsText">
+                <h2 class="text-center">Qui sommes-nous ?</h2>
+                <p class="text-center">{{ company.description }}</p>
+                <h2 class="text-center">Nos Valeurs</h2>
+                <p class="text-center">{{ company.csr }}</p>
+            </div>
         </div>
-        <a class="btn btn-bleuOze" href="{{ path('company_index') }}">Retour à l'accueil</a>
     </div>
 {% endblock %}
