@@ -15,10 +15,13 @@
 
 <div class="container d-block" id="announce-list-homecompany">
     <h1 class="text-center">Liste de vos annonces</h1>
-    {% for offer in company.offers %}
+    {% for offer in offers %}
         <div class="card container" id="announce-card-homecompany">
             <div class="row-announce card-body flex-column flex-md-row align-items-center justify-content-between">
-                <h5 class="d-inline-block mb-2 mr-md-2 w-100 card-title mb-0 text-center" id="title-announce-desktop">{{ offer.title }}</h5>
+                <div class="d-inline-block mb-2 mr-md-2 w-100 mb-0 text-center">
+                    <h5 class="card-title" id="title-announce-desktop">{{ offer.title }}</h5>
+                    <p class="mb-0"> début mission : {{ offer.startDate|date("d/m/Y") }}</p>
+                </div>
                 <div class="row-info-right w-100 flex-md-row">
                     <div class="row-info-nb d-md-inline-block flex-md-row align-items-center text-center">
                         <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> nb matchs :
@@ -28,7 +31,8 @@
                     </div>
                     <div class="row-btn-offer d-md-inline-block flex justify-content-around">
                         <a href="#" class="d-inline-block btn btn-offer btn-orangeOze d-inline-flex">Voir matchs</a>
-                        <a href="{{ path("offer_edit", {id: offer.id}) }}" class="d-inline-block btn btn-offer btn-bleuOze d-inline-flex">Editer</a>
+                        <a href="{{ path("offer_edit", {id: offer.id}) }}"
+                           class="d-inline-block btn btn-offer btn-bleuOze d-inline-flex">Editer</a>
                     </div>
                 </div>
             </div>
