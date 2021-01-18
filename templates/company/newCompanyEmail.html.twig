@@ -3,12 +3,9 @@
         Merci de confirmer votre adresse email.
     {% endblock %}
     {% block mailContent%}
-        <p>
         Nous vous remercions pour votre demande d'inscription en tant qu'entreprise.
         Cette dernière est en cours de validation par notre équipe, cela se fera sous 24 à 48h.
 
-            En attendant, merci de confirmer votre adresse email en cliquant sur le lien suivant : <br><br>
-            <a href="{{ signedUrl|raw }}">Confirmer l'adresse email</a>.
-            Ce lien expirera dans {{ expiresAt|date('g') }} heure.
-        </p>
+        En attendant, merci de confirmer votre adresse email en cliquant sur le lien  ci-dessous qui expirera dans {{ expiresAt|date('g') }} heure(s) : <br><br><br>
+        <a href="{{ signedUrl|raw }}" id="confirmationEmail">Confirmer l'adresse email</a>.
     {% endblock%}

@@ -49,6 +49,12 @@ class User implements UserInterface
     private $applicant;
 
     /**
+     * @ORM\Column(type="boolean", nullable=false, options={"default" : 0})
+     * @var boolean
+     */
+    private $isVerified = false;
+
+    /**
      * @ORM\OneToOne(targetEntity=Company::class, mappedBy="user", cascade={"persist", "remove"})
      * @var Company
      * @Assert\Valid()
@@ -164,6 +170,18 @@ class User implements UserInterface
         if ($company->getUser() !== $this) {
             $company->setUser($this);
         }
+
+        return $this;
+    }
+
+    public function getIsVerified(): ?bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
 
         return $this;
     }
