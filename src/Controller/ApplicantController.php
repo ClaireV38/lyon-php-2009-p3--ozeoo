@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Applicant;
+use App\Entity\Offer;
 use App\Form\ApplicantType;
 use App\Repository\ApplicantRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -68,5 +70,22 @@ class ApplicantController extends AbstractController
         }
 
         return $this->redirectToRoute('applicant_index');
+    }
+
+    /**
+     * @Route {"/{id}/offer", name="applicant_offer", methods={"GET"})
+     * @param ApplicantRepository $applicantRepository
+     * @return Response
+     */
+    public function showMatch(ApplicantRepository $applicantRepository): Response
+    {
+        $matchOffer = $applicantRepository->findMatchOffer();
+
+        return $this->render('applicant/offer.html.twig', [
+            'matchOffer' => $matchOffer,
+        ]);
+//        $matchOffer = $this->getDoctrine()
+//            ->getRepository(Applicant::class)
+//            ->findMatchOffer();
     }
 }

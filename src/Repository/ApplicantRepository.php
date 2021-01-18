@@ -19,6 +19,17 @@ class ApplicantRepository extends ServiceEntityRepository
         parent::__construct($registry, Applicant::class);
     }
 
+    public function findMatchOffer()
+    {
+        return $this->createQueryBuilder('a')
+            ->innerjoin('a.offer', 'o')
+            ->where('a.exampleField = :val')
+            ->orderBy( 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     // /**
     //  * @return Applicant[] Returns an array of Applicant objects
     //  */
