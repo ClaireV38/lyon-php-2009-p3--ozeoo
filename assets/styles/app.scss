@@ -191,6 +191,10 @@ h1 {
 .button2 {
     padding: 0;
 }
+.button3 {
+    padding: 0;
+    margin-right: 30px;
+}
 
 .navbar-nav {
     padding-left: 10px;
@@ -528,5 +532,23 @@ h1 {
     .titleApplicant{
         text-align: center;
         padding: 20px;
+    }
+
+    /* Detail company page */
+    #companyDetailsMedia > img {
+        margin-bottom: 10px;
+    }
+
+    #companyDetailsMedia {
+        margin-left: -10px;
+        margin-right: 30px;
+    }
+
+    #companyDetailsDesktop {
+        padding: 10px;
+    }
+
+    #companyDetailsText {
+        margin-left: auto;
     }
 }
