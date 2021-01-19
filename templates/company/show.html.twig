@@ -14,7 +14,7 @@
         <p class="text-center">{{ company.description }}</p>
         <h2 class="text-center">Nos Valeurs</h2>
         <p class="text-center">{{ company.csr }}</p>
-        {% if company.picture is not empty %}
+        {% if company.video is not empty %}
             <div class="embed-responsive embed-responsive-16by9">
                 <iframe class="embed-responsive-item" src="{{ company.video }}"></iframe>
             </div>
@@ -27,7 +27,7 @@
                 {% if company.picture is not empty %}
                     <img src="{{asset('uploads/images/company/'~company.picture)}}" class="img-fluid rounded mx-auto d-block" alt="{{ company.name }}">
                 {% endif %}
-                {% if company.picture is not empty %}
+                {% if company.video is not empty %}
                 <div class="embed-responsive embed-responsive-16by9">
                     <iframe class="embed-responsive-item" src="{{ company.video }}"></iframe>
                 </div>
