@@ -31,6 +31,7 @@ class OfferController extends AbstractController
     public function new(Request $request): Response
     {
         $offer = new Offer();
+        /* @phpstan-ignore-next-line */
         $offer->setCompany($this->getUser()->getCompany());
         $form = $this->createForm(OfferType::class, $offer);
         $form->handleRequest($request);
