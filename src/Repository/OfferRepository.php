@@ -41,7 +41,8 @@ class OfferRepository extends ServiceEntityRepository
 
         $sql = $this->getEntityManager()->createNativeQuery('
         SELECT COUNT(distinct hs.id) as `match_hs`, COUNT(distinct ss.id) as `match_ss`,
-         a.id as `applicant_id`, a.firstname, a.personality, a.mobility, a.city
+         a.id as `applicant_id`, a.firstname, a.personality, a.mobility, a.city,
+         SUM(distinct hs.id + ss.id) as total
         FROM offer o
             JOIN offer_hard_skills ohs on o.id = ohs.offer_id
             JOIN applicant_hard_skills ahs on ohs.skill_id = ahs.skill_id
@@ -53,7 +54,7 @@ class OfferRepository extends ServiceEntityRepository
         WHERE o.id = :offer
         GROUP BY a.id
         HAVING `match_hs` >= 5 and `match_ss` >= 5
-        ORDER BY SUM(match_ss + match_hs) DESC
+        ORDER BY total DESC
         ', $rsm);
         $sql->setParameters((array('offer' => $o->getId())));
         return $sql->getArrayResult();

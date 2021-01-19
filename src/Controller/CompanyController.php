@@ -49,7 +49,6 @@ class CompanyController extends AbstractController
             'validation_groups' => ['company'],
         ]);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($company);
@@ -66,6 +65,8 @@ class CompanyController extends AbstractController
 
     /**
      * @Route("/{id}", name="company_show", methods={"GET"})
+     * @param Company $company
+     * @return Response
      */
     public function show(Company $company): Response
     {
