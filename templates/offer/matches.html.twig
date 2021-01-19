@@ -29,9 +29,9 @@
                 </div>
                 <div class="row-info-nb d-md-inline-block flex-md-row align-items-center text-center">
                     <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> nb hardskills :
-                        <strong>120</strong></p>
+                        <strong>{{ applicant.match_hs }}</strong></p>
                     <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> nb softskills :
-                        <strong>10</strong></p>
+                        <strong>{{ applicant.match_hs }}</strong></p>
                 </div>
                 <div class="row-info-right w-100 flex-md-row">
                     <a href="{{ path("applicant_show", {id: applicant.applicant_id}) }}"

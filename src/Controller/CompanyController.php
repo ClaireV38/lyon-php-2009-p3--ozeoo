@@ -22,13 +22,20 @@ class CompanyController extends AbstractController
     public function index(CompanyRepository $companyRepository, OfferRepository $offerRepository): Response
     {
         $company = $this->getUser()->getCompany();
+
         $offers = $offerRepository->findBy(
             ['company' => $company],
             ['id' => 'DESC']
         );
+        $nbMatches = [];
+        foreach ($offers as $offer) {
+            $matchApplicants = $offerRepository->findMatchingApplicantsForOffer($offer);
+            $nbMatches[$offer->getId()] = count($matchApplicants);
+        }
         return $this->render('company/index.html.twig', [
             'company' => $company,
-            'offers' => $offers
+            'offers' => $offers,
+            'nbMatches' => $nbMatches
         ]);
     }
 
