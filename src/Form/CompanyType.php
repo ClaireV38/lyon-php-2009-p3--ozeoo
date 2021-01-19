@@ -40,7 +40,7 @@ class CompanyType extends AbstractType
                 'label' => 'Numéro APE'
             ])
             ->add('pictureFile', FileType::class, [
-                'label' => 'Photo de l\'entreprise',
+                'label' => 'Photo de l\'entreprise (formats autorisés: png, jpeg, jpg)',
                 'required'      => false,
                 'attr' => array(
                     'accept' => "image/jpeg, image/png"
