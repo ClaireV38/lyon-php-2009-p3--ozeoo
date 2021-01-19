@@ -280,6 +280,11 @@ h1 {
     flex-direction: row;
 }
 
+/*MatchOffer*/
+#announce-card-matchOffer {
+    margin-bottom: 10px;
+}
+
 @media (min-width: 768px) {
     /* Navbar */
     .logoright {
@@ -337,6 +342,17 @@ h1 {
 
     nav.navbar.navbar-expand-lg.navbar-light.bg-clairNavbar {
         padding: 0 10px 0 0;
+    }
+    /*Offer Match Applicant*/
+
+    #announce-card-matchOffer {
+        width: 90%;
+        margin-top: 15px;
+    }
+    #textMatchOffer {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
     }
 
     /* Desktop index company style */

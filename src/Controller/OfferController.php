@@ -53,6 +53,8 @@ class OfferController extends AbstractController
 
     /**
      * @Route("/{id}", name="offer_show", methods={"GET"})
+     * @param Offer $offer
+     * @return Response
      */
     public function show(Offer $offer): Response
     {
@@ -63,6 +65,9 @@ class OfferController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="offer_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Offer $offer
+     * @return Response
      */
     public function edit(Request $request, Offer $offer): Response
     {
@@ -72,7 +77,7 @@ class OfferController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('offer_index');
+            return $this->redirectToRoute('company_index');
         }
 
         return $this->render('offer/edit.html.twig', [

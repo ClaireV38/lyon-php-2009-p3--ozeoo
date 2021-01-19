@@ -29,10 +29,15 @@ class ApplicantRepository extends ServiceEntityRepository
         $rsm->addScalarResult('offer_id', 'offer_id');
         $rsm->addScalarResult('title', 'offer_title');
         $rsm->addScalarResult('contract_type', 'contract_type');
-        $rsm->addScalarResult('contract_date', 'contract_date');
+        $rsm->addScalarResult('creation_date', 'creation_date');
+        $rsm->addScalarResult('start_date', 'start_date');
+        $rsm->addScalarResult('city', 'city');
+
+
 
         $sql = $this->getEntityManager()->createNativeQuery('
-        SELECT COUNT(distinct hs.id) as `match_hs`, COUNT(distinct ss.id) as `match_ss`, o.id as `offer_id`, o.title, o.contract_type, o.creation_date
+        SELECT COUNT(distinct hs.id) as `match_hs`, COUNT(distinct ss.id) as `match_ss`, 
+            o.id as `offer_id`, o.title, o.contract_type, o.creation_date, o.start_date, o.city
         FROM applicant a
             JOIN applicant_hard_skills ahs on a.id = ahs.applicant_id
             JOIN offer_hard_skills ohs on ahs.skill_id = ohs.skill_id
@@ -44,6 +49,7 @@ class ApplicantRepository extends ServiceEntityRepository
         WHERE a.id = :applicant
         GROUP BY o.id
         HAVING `match_hs` >= 5 and `match_ss` >= 5
+        ORDER BY o.id DESC 
         ' , $rsm);
         $sql->setParameters((array('applicant' => $a->getId())));
         return $sql->getArrayResult();
