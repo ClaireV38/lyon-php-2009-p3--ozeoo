@@ -22,7 +22,8 @@ class ApplicantRepository extends ServiceEntityRepository
         parent::__construct($registry, Applicant::class);
     }
 
-    public function findMatchingOffersForApplicant(Applicant $a) {
+    public function findMatchingOffersForApplicant(Applicant $a): array
+    {
         $rsm = new ResultSetMapping();
         $rsm->addScalarResult('match_hs', 'match_hs');
         $rsm->addScalarResult('match_ss', 'match_ss');

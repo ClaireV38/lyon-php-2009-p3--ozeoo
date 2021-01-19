@@ -17,6 +17,8 @@ class OfferController extends AbstractController
 {
     /**
      * @Route("/", name="offer_index", methods={"GET"})
+     * @param OfferRepository $offerRepository
+     * @return Response
      */
     public function index(OfferRepository $offerRepository): Response
     {
@@ -27,6 +29,8 @@ class OfferController extends AbstractController
 
     /**
      * @Route("/new", name="offer_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
