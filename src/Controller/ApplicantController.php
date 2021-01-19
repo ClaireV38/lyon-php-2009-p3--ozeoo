@@ -3,18 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Applicant;
-use App\Entity\Offer;
-use App\Entity\User;
 use App\Form\ApplicantType;
 use App\Repository\ApplicantRepository;
-use App\Repository\OfferRepository;
-use App\Repository\SkillRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @Route("/applicant")

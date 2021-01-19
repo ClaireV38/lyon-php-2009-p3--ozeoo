@@ -51,7 +51,7 @@ class ApplicantRepository extends ServiceEntityRepository
         GROUP BY o.id
         HAVING `match_hs` >= 5 and `match_ss` >= 5
         ORDER BY o.id DESC 
-        ' , $rsm);
+        ', $rsm);
         $sql->setParameters((array('applicant' => $a->getId())));
         return $sql->getArrayResult();
     }

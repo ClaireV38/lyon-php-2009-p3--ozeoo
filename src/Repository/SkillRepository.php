@@ -31,7 +31,7 @@ class SkillRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('s')
             ->join('s.hardOffers', 'o', 'WITH', 'o IN (:offer)')
             ->join('s.hardApplicants', 'a', 'WITH', 'a IN (:applicant)')
-            ->setParameter('offer', $offer )
+            ->setParameter('offer', $offer)
             ->setParameter('applicant', $applicant)
             ->getQuery()
             ->getResult()
