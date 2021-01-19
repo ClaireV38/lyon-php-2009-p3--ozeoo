@@ -5,9 +5,7 @@
 {% block body %}
     <h1>Modifier son profil</h1>
     <div class="container" id="createCompanyForm">
-        {{ include('company/_form.html.twig', {'button_label': 'Update'}) }}
+        {{ include('company/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 
-        <a href="{{ path('company_index') }}">back to list</a>
     </div>
-    {{ include('company/_delete_form.html.twig') }}
 {% endblock %}
