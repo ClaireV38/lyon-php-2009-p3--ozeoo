@@ -41,16 +41,16 @@ class CompanyType extends AbstractType
                     'placeholder' => "Choisir votre photo"
                 ],
                 'constraints' => [
-                    new File([
-                        'maxSize' => '2M',
-                        'mimeTypes' => [
-                            'image/jpeg',
-                            'image/png',
-                        ],
-                        'mimeTypesMessage' => 'Please upload a JPG or PNG',
-                    ])
-                ]
-            ])
+                        new File([
+                            'maxSize' => '2M',
+                            'mimeTypes' => [
+                                'image/jpeg',
+                                'image/png',
+                            ],
+                            'mimeTypesMessage' => 'Please upload a JPG or PNG',
+                        ])
+                    ]
+                ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description de l\'entreprise',
             ])
