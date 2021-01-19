@@ -30,18 +30,9 @@ class ApplicantController extends AbstractController
      */
     public function index(OfferRepository $offerRepository, SkillRepository $skillRepository, ApplicantRepository $applicantRepository): Response
     {
-//       $allOffers = $offerRepository->findAll();
-//       $matchOffers = [];
-//       foreach ($allOffers as $offer)
-//       {
-//           $hardSkillsMatch = $skillRepository->findMatchHardSkills($offer, $this->getUser()->getApplicant());
-//           $softSkillsMatch = $skillRepository->findMatchSoftSkills($offer, $this->getUser()->getApplicant());
-//           if (count($hardSkillsMatch) >= 5 && count($softSkillsMatch) >= 5)
-//           {
-//               $matchOffers[] = $offer;
-//           }
-//       }
-        $matchOffers = $applicantRepository->findMatch($this->getUser()->getApplicant());
+
+        $matchOffers = $applicantRepository->findMatchingOffersForApplicant($this->getUser()->getApplicant());
+
         var_dump($matchOffers);
         die();
         return $this->render('applicant/index.html.twig');

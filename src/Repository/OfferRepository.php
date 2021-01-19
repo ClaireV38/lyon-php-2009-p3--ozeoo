@@ -6,6 +6,7 @@ use App\Entity\Applicant;
 use App\Entity\Offer;
 use App\Entity\Skill;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -20,21 +21,6 @@ class OfferRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Offer::class);
     }
-
-//    /**
-//     * @param Skill $skill
-//     * @return int|mixed|string
-//     */
-//    public function findMatchOffer(Skill $skill)
-//    {
-//        return $this->createQueryBuilder('o')
-//            ->innerJoin('o.hardSkills', 's')
-//            ->where(':skill MEMBER OF o.hardSkills')
-//            ->setParameter('skill', $skill)
-//            ->getQuery()
-//            ->getResult()
-//            ;
-//    }
 
     // /**
     //  * @return Offer[] Returns an array of Offer objects

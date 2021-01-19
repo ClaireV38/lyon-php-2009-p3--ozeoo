@@ -6,6 +6,8 @@ use App\Entity\Applicant;
 use App\Entity\Offer;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query\ResultSetMapping;
+use Doctrine\ORM\Query\ResultSetMappingBuilder;
 
 /**
  * @method Applicant|null find($id, $lockMode = null, $lockVersion = null)
@@ -20,34 +22,32 @@ class ApplicantRepository extends ServiceEntityRepository
         parent::__construct($registry, Applicant::class);
     }
 
-    public function findMatch (Applicant $applicant)
-    {
-        return $this->createQueryBuilder('a')
-            ->addSelect('COUNT(DISTINCT ahs)')
-//            ->addSelect('COUNT(DISTINCT ss.id)')
-            ->addSelect('ao.id')
-            ->join('a.hardSkills', 'ahs')
-//            ->join('a.softSkills', 'ass')
-            ->join('ahs.hardOffers', 'ao')
-            ->where('a = :appl')
-            ->setParameter('appl', $applicant)
-            ->groupBy('ao')
-            ->having('COUNT(DISTINCT ahs) >= 5')
-            ->getQuery()
-            ->getResult()
-            ;
-    }
+    public function findMatchingOffersForApplicant(Applicant $a) {
+        $rsm = new ResultSetMapping();
+        $rsm->addScalarResult('match_hs', 'match_hs');
+        $rsm->addScalarResult('match_ss', 'match_ss');
+        $rsm->addScalarResult('offer_id', 'offer_id');
+        $rsm->addScalarResult('title', 'offer_title');
+        $rsm->addScalarResult('contract_type', 'contract_type');
+        $rsm->addScalarResult('contract_date', 'contract_date');
 
-//    public function findMatchOffer(array $offer): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->innerjoin('a.offer', 'o')
-//            ->where('a.exampleField = :val')
-//            ->orderBy( 'ASC')
-//            ->getQuery()
-//            ->getResult()
-//            ;
-//    }
+        $sql = $this->getEntityManager()->createNativeQuery('
+        SELECT COUNT(distinct hs.id) as `match_hs`, COUNT(distinct ss.id) as `match_ss`, o.id as `offer_id`, o.title, o.contract_type, o.creation_date
+        FROM applicant a
+            JOIN applicant_hard_skills ahs on a.id = ahs.applicant_id
+            JOIN offer_hard_skills ohs on ahs.skill_id = ohs.skill_id
+            JOIN skill hs on ahs.skill_id = hs.id
+            JOIN applicant_soft_skills ass on a.id = ass.applicant_id
+            JOIN offer_soft_skills oss on ass.skill_id = oss.skill_id
+            JOIN skill ss on ass.skill_id = ss.id
+            JOIN offer o on ohs.offer_id = o.id and oss.offer_id = o.id
+        WHERE a.id = :applicant
+        GROUP BY o.id
+        HAVING `match_hs` >= 5 and `match_ss` >= 5
+        ' , $rsm);
+        $sql->setParameters((array('applicant' => $a->getId())));
+        return $sql->getArrayResult();
+    }
 
     // /**
     //  * @return Applicant[] Returns an array of Applicant objects
