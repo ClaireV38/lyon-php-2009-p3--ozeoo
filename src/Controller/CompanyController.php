@@ -35,7 +35,6 @@ class CompanyController extends AbstractController
             'validation_groups' => ['company'],
         ]);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($company);

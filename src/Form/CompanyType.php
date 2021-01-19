@@ -6,6 +6,7 @@ use App\Entity\Company;
 use Symfony\Component\DomCrawler\Field\TextareaFormField;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -15,6 +16,7 @@ use App\Entity\User;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 use Vich\UploaderBundle\Form\Type\VichImageType;
+use Symfony\Component\Validator\Constraints\File;
 
 class CompanyType extends AbstractType
 {
@@ -37,12 +39,22 @@ class CompanyType extends AbstractType
             ->add('apeNb', TextType::class, [
                 'label' => 'Numéro APE'
             ])
-            ->add('pictureFile', VichImageType::class, [
+            ->add('pictureFile', FileType::class, [
                 'label' => 'Photo de l\'entreprise',
                 'required'      => false,
-                'allow_delete'  => true, // not mandatory, default is true
-                'download_uri' => true, // not mandatory, default is true
-                'asset_helper' => true
+                'attr' => array(
+                    'accept' => "image/jpeg, image/png"
+                ),
+                'constraints' => [
+                    new File([
+                        'maxSize' => '2M',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                        ],
+                        'mimeTypesMessage' => 'Please upload a JPG or PNG',
+                    ])
+                ]
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description de l\'entreprise',

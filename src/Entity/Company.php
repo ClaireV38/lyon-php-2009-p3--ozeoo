@@ -12,6 +12,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Annotation\Ignore;
+use Symfony\Component\Validator\Constraints\ImageValidator;
+use Symfony\Component\Validator\Constraints\Image;
 
 /**
  * @ORM\Entity(repositoryClass=CompanyRepository::class)
@@ -68,12 +70,13 @@ class Company implements \Serializable
 
     /**
      * @Vich\UploadableField(mapping="company_images", fileNameProperty="picture")
-     * @Assert\File(
-     *     maxSize = "1024k",
-     *     mimeTypes={"png", "jpeg", "jpg"},
-     *     mimeTypesMessage = "Seul les fichiers jpeg, jpg, png sont autorisés."
-     * )
      * @var File|null
+     * @Assert\File(
+     * maxSize="2000k",
+     * maxSizeMessage="Le fichier excède 2000Ko.",
+     * mimeTypes={"image/png", "image/jpeg", "image/jpg"},
+     * mimeTypesMessage= "formats autorisés: png, jpeg, jpg"
+     * )
      */
     private $pictureFile;
 
