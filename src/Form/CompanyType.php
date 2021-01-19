@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Company;
-use Symfony\Component\DomCrawler\Field\TextareaFormField;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -11,11 +10,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use App\Entity\User;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Vich\UploaderBundle\Form\Type\VichFileType;
-use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Component\Validator\Constraints\File;
 
 class CompanyType extends AbstractType
@@ -42,9 +36,10 @@ class CompanyType extends AbstractType
             ->add('pictureFile', FileType::class, [
                 'label' => 'Photo de l\'entreprise (formats autorisés: png, jpeg, jpg)',
                 'required'      => false,
-                'attr' => array(
-                    'accept' => "image/jpeg, image/png"
-                ),
+                'attr' => [
+                    'accept' => "image/jpeg, image/png",
+                    'placeholder' => "Choisir votre photo"
+                ],
                 'constraints' => [
                     new File([
                         'maxSize' => '2M',
