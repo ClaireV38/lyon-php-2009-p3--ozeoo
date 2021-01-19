@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class CompanyType extends AbstractType
 {
@@ -33,9 +34,10 @@ class CompanyType extends AbstractType
             ->add('apeNb', TextType::class, [
                 'label' => 'Numéro APE'
             ])
-            ->add('pictureFile', FileType::class, [
+            ->add('pictureFile', VichImageType::class, [
                 'label' => 'Photo de l\'entreprise (formats autorisés: png, jpeg, jpg)',
                 'required'      => false,
+                'allow_delete' => true,
                 'attr' => [
                     'accept' => "image/jpeg, image/png",
                     'placeholder' => "Choisir votre photo"
