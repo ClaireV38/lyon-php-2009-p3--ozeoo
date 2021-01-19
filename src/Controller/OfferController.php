@@ -94,4 +94,18 @@ class OfferController extends AbstractController
 
         return $this->redirectToRoute('offer_index');
     }
+
+    /**
+     * @Route("/{id}/matches", name="offer_matches", methods={"GET"})
+     * @param Offer $offer
+     * @return Response
+     */
+    public function showMatches(Offer $offer, OfferRepository $offerRepository): Response
+    {
+        $matchApplicants = $offerRepository->findMatchingApplicantsForOffer($offer);
+        return $this->render('offer/matches.html.twig', [
+            'offer' => $offer,
+            'applicants' => $matchApplicants
+        ]);
+    }
 }

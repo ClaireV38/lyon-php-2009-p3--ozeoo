@@ -23,18 +23,10 @@ class ApplicantController extends AbstractController
 {
     /**
      * @Route("/", name="applicant_index", methods={"GET"})
-     * @param OfferRepository $offerRepository
-     * @param SkillRepository $skillRepository
-     * @param ApplicantRepository $applicantRepository
      * @return Response
      */
-    public function index(OfferRepository $offerRepository, SkillRepository $skillRepository, ApplicantRepository $applicantRepository): Response
+    public function index(): Response
     {
-
-        $matchOffers = $applicantRepository->findMatchingOffersForApplicant($this->getUser()->getApplicant());
-
-        var_dump($matchOffers);
-        die();
         return $this->render('applicant/index.html.twig');
     }
 
@@ -82,14 +74,5 @@ class ApplicantController extends AbstractController
         }
 
         return $this->redirectToRoute('applicant_index');
-    }
-
-    /**
-     * @Route {"/offer/{id}", name="applicant_offer", methods={"GET"})
-     * @return Response
-     */
-    public function showMatch(): Response
-    {
-
     }
 }

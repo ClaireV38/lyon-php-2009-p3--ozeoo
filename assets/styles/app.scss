@@ -280,6 +280,12 @@ h1 {
     flex-direction: row;
 }
 
+/*offer list matches*/
+#announce-card-matches {
+    width: 18rem;
+    margin-top: 15px;
+}
+
 @media (min-width: 768px) {
     /* Navbar */
     .logoright {
@@ -347,7 +353,7 @@ h1 {
         margin-right: auto;
     }
 
-    #announce-card-homecompany {
+    #announce-card-homecompany{
         width: 90%;
         margin-top: 15px;
     }
@@ -528,5 +534,11 @@ h1 {
     .titleApplicant{
         text-align: center;
         padding: 20px;
+    }
+
+    /*offer list matches*/
+    #announce-card-matches {
+        width: 90%;
+        margin-top: 15px;
     }
 }
