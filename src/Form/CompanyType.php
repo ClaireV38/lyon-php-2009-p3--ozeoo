@@ -3,16 +3,15 @@
 namespace App\Form;
 
 use App\Entity\Company;
-use Symfony\Component\DomCrawler\Field\TextareaFormField;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use App\Entity\User;
-use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\File;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class CompanyType extends AbstractType
 {
@@ -30,11 +29,30 @@ class CompanyType extends AbstractType
                 'label' => 'Numéro de siret'
             ])
             ->add('contactEmail', EmailType::class, [
-                'label' => 'Email de contact',
+                'label' => 'Email de contact'
             ])
             ->add('apeNb', TextType::class, [
                 'label' => 'Numéro APE'
             ])
+            ->add('pictureFile', VichImageType::class, [
+                'label' => 'Photo de l\'entreprise (formats autorisés: png, jpeg, jpg)',
+                'required'      => false,
+                'allow_delete' => true,
+                'attr' => [
+                    'accept' => "image/jpeg, image/png",
+                    'placeholder' => "Choisir votre photo"
+                ],
+                'constraints' => [
+                        new File([
+                            'maxSize' => '2M',
+                            'mimeTypes' => [
+                                'image/jpeg',
+                                'image/png',
+                            ],
+                            'mimeTypesMessage' => 'Please upload a JPG or PNG',
+                        ])
+                    ]
+                ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description de l\'entreprise',
             ])
