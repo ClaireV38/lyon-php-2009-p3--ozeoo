@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\UserRepository;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use App\Security\EmailVerifier;
 use App\Entity\Applicant;
@@ -154,17 +155,25 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/verify/email", name="app_verify_email")
      * @param Request $request
-     * @param UserInterface $user
+     * @param UserRepository $userRepository
      * @return Response
      */
-    public function verifyUserEmail(Request $request, UserInterface $user): Response
+    public function verifyUserEmail(Request $request, UserRepository $userRepository): Response
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $id = $request->get('id');
+        // Verify the user id exists and is not null
+        if (null === $id) {
+            return $this->redirectToRoute('home');
+        }
 
         // validate email confirmation link, sets User::isVerified=true and persists
         try {
-            /* @phpstan-ignore-next-line */
-            $this->emailVerifier->handleEmailConfirmation($request, $this->getUser());
+            $user = $userRepository->find($id);
+            // Ensure the user exists in persistence
+            if (null === $user) {
+                return $this->redirectToRoute('home');
+            }
+            $this->emailVerifier->handleEmailConfirmation($request, $user);
         } catch (VerifyEmailExceptionInterface $exception) {
             $this->addFlash('verify_email_error', $exception->getReason());
 
