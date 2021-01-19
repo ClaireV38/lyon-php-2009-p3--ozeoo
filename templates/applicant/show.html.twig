@@ -1,34 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Applicant{% endblock %}
+{% block title %}Ma fiche candidat{% endblock %}
 
 {% block body %}
-    <h1>Applicant</h1>
+    {% include '/applicant/_navbar.html.twig' %}
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ applicant.id }}</td>
-            </tr>
-            <tr>
-                <th>Firstname</th>
-                <td>{{ applicant.firstname }}</td>
-            </tr>
-            <tr>
-                <th>Lastname</th>
-                <td>{{ applicant.lastname }}</td>
-            </tr>
-            <tr>
-                <th>Personality</th>
-                <td>{{ applicant.personality }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="container">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading"></div>
+            <div class="panel-body">
+                <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8" >
+                    <div class="container" >
+                        <h2>{{ applicant.firstname ~ ' ' ~ applicant.lastname }}</h2>
+                    </div>
+                    <hr>
+                    <ul class="container details" >
+                        <li><p><span class="glyphicon glyphicon-user one" style="width:50px;"></span>Mail</p></li>
+                        <li><p><span class="glyphicon glyphicon-envelope one" style="width:50px;"></span>Localisation : {{ applicant.city }}</p></li>
+                    </ul>
+                    <hr>
+                    <ul class="container details-skills" >
+                        <li><p><span class="glyphicon glyphicon-user one" style="width:50px;"></span>{{ applicant.personality }}</p></li>
+                        <li><p><span class="glyphicon glyphicon-envelope one" style="width:50px;"></span>Skills :</p></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <a href="{{ path('applicant_index') }}">back to list</a>
+    <a href="{{ path('applicant_index') }}"><button class="btn btn-vertOze">Retour à l'accueil</button></a>
 
-    <a href="{{ path('applicant_edit', {'id': applicant.id}) }}">edit</a>
+    <a href="{{ path('applicant_edit', {'id': applicant.id}) }}"><button class="btn  btn-vertOze">Mofidier mon profil</button></a>
 
-    {{ include('applicant/_delete_form.html.twig') }}
 {% endblock %}
