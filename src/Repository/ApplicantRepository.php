@@ -22,7 +22,7 @@ class ApplicantRepository extends ServiceEntityRepository
         parent::__construct($registry, Applicant::class);
     }
 
-    public function findMatchingOffersForApplicant(Applicant $a): array
+    public function findMatchingOffersForApplicant(Applicant $applicant): array
     {
         $rsm = new ResultSetMapping();
         $rsm->addScalarResult('match_hs', 'match_hs');
@@ -52,7 +52,7 @@ class ApplicantRepository extends ServiceEntityRepository
         HAVING `match_hs` >= 5 and `match_ss` >= 5
         ORDER BY o.id DESC 
         ', $rsm);
-        $sql->setParameters((array('applicant' => $a->getId())));
+        $sql->setParameters((array('applicant' => $applicant->getId())));
         return $sql->getArrayResult();
     }
 
