@@ -13,6 +13,7 @@ use App\Repository\OfferRepository;
 use App\Repository\SkillRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -114,15 +115,27 @@ class ApplicantController extends AbstractController
      */
     public function showOfferDetail(Applicant $applicant, Offer $offer, Company $company): Response
     {
-        $hardOffer = $offer->getHardSkills();
-        $softOffer = $offer->getSoftSkills();
-
         return $this->render('applicant/offerDetail.html.twig', [
            'applicant' => $applicant,
            'offer' => $offer,
            'company' => $company,
-            'hardOffer' => $hardOffer,
-            'softOffer' => $softOffer
         ]);
+    }
+
+    /**
+     * @Route ("/Apply/{id}", name="applicant_offer_apply", methods={"GET"})
+     * @param Offer $offer
+     * @param EntityManagerInterface $entityManager
+     * @return RedirectResponse
+     */
+    public function apply(Offer $offer, EntityManagerInterface $entityManager)
+    {
+
+        /* @phpstan-ignore-next-line */
+        $applicant = $this->getUser()->getApplicant();
+        $applicant->addOffer($offer);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('applicant_index');
     }
 }
