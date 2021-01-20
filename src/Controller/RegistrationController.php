@@ -137,13 +137,6 @@ class RegistrationController extends AbstractController
             $this->addFlash('success', 'Votre inscription a bien été prise en compte,
             merci de confirmer votre adresse email.');
             return $this->redirectToRoute('home');
-
-            /*return $guardHandler->authenticateUserAndHandleSuccess(
-                $user,
-                $request,
-                $authenticator,
-                'main' // firewall name in security.yaml
-            );*/
         }
 
         return $this->render('registration/registerApplicant.html.twig', [
