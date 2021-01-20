@@ -285,6 +285,30 @@ h1 {
     flex-direction: row;
 }
 
+/* Detail Candidate - Candidate Side */
+#list-HardSkill {
+    line-height: normal;
+    margin: auto auto 10px auto;
+    font-size: 13px;
+}
+
+#list-SoftSkill {
+    line-height: normal;
+    font-size: 13px;
+}
+
+#buttonDetails {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+
+
+/*MatchOffer*/
+#announce-card-matchOffer {
+    margin-bottom: 10px;
+}
+
 @media (min-width: 768px) {
     /* Navbar */
     .logoright {
@@ -565,6 +589,7 @@ h1 {
     #companyDetailsText {
         margin-left: auto;
     }
+
     /*Offer Detail*/
     .profilCompany {
         display: flex;
@@ -646,5 +671,31 @@ h1 {
     #announce-card-matches {
         width: 90%;
         margin-top: 15px;
+    }
+
+    /* Detail Candidate - Candidate Side */
+    #skillsList {
+        display: flex;
+        flex-direction: row;
+        padding: 10px;
+    }
+
+    #list-HardSkill {
+        line-height: normal;
+        padding-left: 10px;
+        padding-right: 10px;
+        font-size: 13px;
+    }
+
+    #list-SoftSkill {
+        line-height: normal;
+        padding-left: 10px;
+        padding-right: 10px;
+        font-size: 13px;
+    }
+
+    #buttonDetails {
+        display: flex;
+        justify-content: space-around;
     }
 }
