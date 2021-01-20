@@ -9,7 +9,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @Route("/applicant")
@@ -26,6 +25,9 @@ class ApplicantController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="applicant_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Applicant $applicant
+     * @return Response
      */
     public function new(Request $request, Applicant $applicant): Response
     {
@@ -48,6 +50,8 @@ class ApplicantController extends AbstractController
 
     /**
      * @Route("/{id}", name="applicant_show", methods={"GET"})
+     * @param Applicant $applicant
+     * @return Response
      */
     public function show(Applicant $applicant): Response
     {
@@ -58,6 +62,9 @@ class ApplicantController extends AbstractController
 
     /**
      * @Route("/{id}", name="applicant_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Applicant $applicant
+     * @return Response
      */
     public function delete(Request $request, Applicant $applicant): Response
     {
@@ -68,5 +75,20 @@ class ApplicantController extends AbstractController
         }
 
         return $this->redirectToRoute('applicant_index');
+    }
+
+    /**
+     * @Route ("/{id}/offer", name="applicant_offer", methods={"GET"})
+     * @param ApplicantRepository $applicantRepository
+     * @param Applicant $applicant
+     * @return Response
+     */
+    public function showMatchOffers(ApplicantRepository $applicantRepository, Applicant $applicant): Response
+    {
+        $matchOffers = $applicantRepository->findMatchingOffersForApplicant($this->getUser()->getApplicant());
+        return $this->render('applicant/offer.html.twig', [
+            'applicant' => $applicant,
+            'matchOffers' => $matchOffers
+        ]);
     }
 }

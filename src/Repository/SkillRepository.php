@@ -2,6 +2,8 @@
 
 namespace App\Repository;
 
+use App\Entity\Applicant;
+use App\Entity\Offer;
 use App\Entity\Skill;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -18,6 +20,39 @@ class SkillRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Skill::class);
     }
+
+    /**
+     * @param Offer $offer
+     * @param Applicant $applicant
+     * @return int|mixed|string
+     */
+    public function findMatchSkills(Offer $offer, Applicant $applicant)
+    {
+        return $this->createQueryBuilder('s')
+            ->join('s.hardOffers', 'o', 'WITH', 'o IN (:offer)')
+            ->join('s.hardApplicants', 'a', 'WITH', 'a IN (:applicant)')
+            ->setParameter('offer', $offer)
+            ->setParameter('applicant', $applicant)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+//    /**
+//     * @param Offer $offer
+//     * @param Applicant $applicant
+//     * @return int|mixed|string
+//     */
+//    public function findMatchSoftSkills(Offer $offer, Applicant $applicant)
+//    {
+//        return $this->createQueryBuilder('s')
+//            ->join('s.softOffers', 'o', 'WITH', 'o IN (:offer)')
+//            ->join('s.softApplicants', 'a', 'WITH', 'a IN (:applicant)')
+//            ->setParameter('offer', $offer )
+//            ->setParameter('applicant', $applicant)
+//            ->getQuery()
+//            ->getResult()
+//            ;
+//    }
 
     // /**
     //  * @return Skill[] Returns an array of Skill objects

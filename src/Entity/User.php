@@ -24,8 +24,10 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
-     * @Assert\NotBlank(message="Veuillez saisir une adresse email valide")
+     * @ORM\Column(type="string", length=180, unique=true, nullable=false)
+     * @Assert\Email(
+     *     message = "L'email '{{ value }}' n'est pas un email au format valide."
+     * )
      * @var string
      */
     private $email;
@@ -39,6 +41,9 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="Veuillez saisir un mot de passe.")
+     * @Assert\Length(min="6",
+     *     minMessage="Le mot de passe doit contenir au moins 6 caractères.")
      */
     private $password;
 
@@ -47,6 +52,12 @@ class User implements UserInterface
      * @var Applicant
      */
     private $applicant;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=false, options={"default" : 0})
+     * @var boolean
+     */
+    private $isVerified = false;
 
     /**
      * @ORM\OneToOne(targetEntity=Company::class, mappedBy="user", cascade={"persist", "remove"})
@@ -60,7 +71,7 @@ class User implements UserInterface
         return $this->id;
     }
 
-    public function getEmail(): ?string
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -164,6 +175,18 @@ class User implements UserInterface
         if ($company->getUser() !== $this) {
             $company->setUser($this);
         }
+
+        return $this;
+    }
+
+    public function getIsVerified(): ?bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
 
         return $this;
     }
