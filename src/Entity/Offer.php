@@ -48,7 +48,7 @@ class Offer
      * @ORM\Column(type="string", length=255, nullable=true)
      * @var string
      */
-    private $duration;
+    private $duration ;
 
     /**
      * @Assert\GreaterThanOrEqual("today")
