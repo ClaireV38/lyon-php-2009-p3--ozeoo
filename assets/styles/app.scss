@@ -300,6 +300,12 @@ h1 {
     font-size: 13px;
 }
 
+#buttonDetails {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+
 
 /*MatchOffer*/
 #announce-card-matchOffer {
@@ -604,5 +610,10 @@ h1 {
         padding-left: 10px;
         padding-right: 10px;
         font-size: 13px;
+    }
+
+    #buttonDetails {
+        display: flex;
+        justify-content: space-around;
     }
 }
