@@ -108,10 +108,15 @@ class ApplicantController extends AbstractController
      */
     public function showOfferDetail(Applicant $applicant, Offer $offer, Company $company): Response
     {
+        $hardOffer = $offer->getHardSkills();
+        $softOffer = $offer->getSoftSkills();
+
         return $this->render('applicant/offerDetail.html.twig', [
            'applicant' => $applicant,
            'offer' => $offer,
-           'company' => $company
+           'company' => $company,
+            'hardOffer' => $hardOffer,
+            'softOffer' => $softOffer
         ]);
     }
 }

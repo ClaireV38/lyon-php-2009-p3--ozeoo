@@ -569,7 +569,7 @@ h1 {
     #companyDetailsText {
         margin-left: auto;
     }
-
+    /*Offer Detail*/
     .profilCompany {
         display: flex;
         margin: 10px;
@@ -579,4 +579,64 @@ h1 {
         margin-bottom: 10px;
     }
 
+    .photoVideoCompany {
+        flex: 1;
+    }
+
+    .descriptionCompanyOfferDetail {
+        flex: 2;
+    }
+
+    .card.startDateContractType {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        margin-bottom: 10px;
+    }
+
+    .offerDetail {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 75%;
+        margin: auto;
+    }
+
+    .card.citySalaryOfferDetail {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        margin-bottom: 10px;
+    }
+
+    .descriptionCompanyOfferDetail {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    .skillsOfferDetail {
+        display: flex;
+        margin-top: 20px;
+    }
+
+    .softSkillsOfferDetail {
+        margin-left: 10px;
+    }
+
+    .list-group.softSkills {
+        padding-top: 10px;
+    }
+
+    .list-group.hardSkills {
+        padding-top: 10px;
+    }
+
+    h4.card-header {
+        width: fit-content;
+    }
+
+    #textOfferDetail {
+        margin-top: 10px;
+    }
 }
