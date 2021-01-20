@@ -20,7 +20,7 @@
 
 
 <div class="container d-block">
-    <h1 class="text-center">Liste des candidats qui matchent</h1>
+    <h1 class="text-center">Liste des candidats qui ont postulé</h1>
     {% for applicant in applicants %}
         <div class="card container" id="announce-card-matches">
             <div class="row-announce card-body flex-column flex-md-row align-items-center justify-content-between">
@@ -33,7 +33,6 @@
                             <strong>{{ applicant.match_hs }}</strong></p>
                         <p class="d-md-inline-block mr-md-1 mb-0" class="card-text"> nb softskills :
                             <strong>{{ applicant.match_ss }}</strong></p>
-                        <p class="d-md-inline-block mr-md-1 mb-0" class="card-text"> n'a pas postulé</p>
                     </div>
                     <div class="row-btn-offer d-md-inline-block flex justify-content-around">
                         <a href="{{ path("offer_applicant_show", { offerId: offer.id , applicantId: applicant.applicant_id}) }}"

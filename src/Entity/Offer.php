@@ -123,11 +123,11 @@ class Offer
      * @ORM\ManyToMany(targetEntity=Applicant::class, inversedBy="offers")
      * @var Collection<Applicant>
      */
-    private $applicant;
+    private $applicants;
 
     public function __construct()
     {
-        $this->applicant = new ArrayCollection();
+        $this->applicants = new ArrayCollection();
         $this->creationDate = new DateTime();
         $this->startDate = new DateTime();
         $this->softSkills = new ArrayCollection();
@@ -274,15 +274,15 @@ class Offer
     /**
      * @return Collection|Applicant[]
      */
-    public function getApplicant(): Collection
+    public function getApplicants(): Collection
     {
-        return $this->applicant;
+        return $this->applicants;
     }
 
     public function addApplicant(Applicant $applicant): self
     {
-        if (!$this->applicant->contains($applicant)) {
-            $this->applicant[] = $applicant;
+        if (!$this->applicants->contains($applicant)) {
+            $this->applicants[] = $applicant;
         }
 
         return $this;
@@ -290,7 +290,7 @@ class Offer
 
     public function removeApplicant(Applicant $applicant): self
     {
-        $this->applicant->removeElement($applicant);
+        $this->applicants->removeElement($applicant);
 
         return $this;
     }
