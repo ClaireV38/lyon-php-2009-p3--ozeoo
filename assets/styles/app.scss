@@ -285,19 +285,21 @@ h1 {
 }
 
 /* Detail Candidate - Candidate Side */
-#skillsList {
-    width: auto;
-    display: flex;
-    flex-direction: column;
+#list-HardSkill {
+    line-height: normal;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 10px;
+    font-size: 13px;
 }
 
 #list-SoftSkill {
-    padding: 10px;
+    line-height: normal;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 13px;
 }
 
-#list-HardSkill {
-    padding: 10px;
-}
 
 /*MatchOffer*/
 #announce-card-matchOffer {
@@ -585,16 +587,22 @@ h1 {
 
     /* Detail Candidate - Candidate Side */
     #skillsList {
-        width: auto;
         display: flex;
         flex-direction: row;
-    }
-
-    #list-SoftSkill {
         padding: 10px;
     }
 
     #list-HardSkill {
-        padding: 10px;
+        line-height: normal;
+        padding-left: 10px;
+        padding-right: 10px;
+        font-size: 13px;
+    }
+
+    #list-SoftSkill {
+        line-height: normal;
+        padding-left: 10px;
+        padding-right: 10px;
+        font-size: 13px;
     }
 }

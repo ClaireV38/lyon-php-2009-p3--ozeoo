@@ -5,44 +5,32 @@
 {% block body %}
     {% include '/applicant/_navbar.html.twig' %}
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="panel panel-default">
-                <div class="panel-heading"></div>
-                <div class="panel-body">
-                    <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8" >
-                        <div class="container" >
-                            <h2>{{ applicant.firstname ~ ' ' ~ applicant.lastname }}</h2>
-                        </div>
-                        <ul class="container details" >
-                            <li><p><span class="glyphicon glyphicon-user one" style="width:50px;"></span>Mail</p></li>
-                            <li><p><span class="glyphicon glyphicon-envelope one" style="width:50px;"></span>Localisation : {{ applicant.city }}</p></li>
-                        </ul>
-                        <ul class="container details-skills" >
-                            <li><p><span class="glyphicon glyphicon-user one" style="width:50px;"></span>{{ applicant.personality }}</p></li>
-                        </ul>
-                        <div id="skillsList">
-                            <ul class="list-group" id="list-HardSkill">
-                                <li class="list-group-item active btn-bleuOze">Compétences techniques</li>
-                                {% for hardSkill in applicant.hardSkills %}
-                                    <li class="list-group-item">{{ hardSkill.name }}</li>
-                                {% endfor %}
-                            </ul>
-                            <ul class="list-group" id="list-SoftSkill">
-                                <li class="list-group-item active btn-bleuOze">Compétences Comportementales</li>
-                                {% for softSkill in applicant.softSkills %}
-                                    <li class="list-group-item">{{ softSkill.name }}</li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-md-4">
+                <h1>{{ applicant.firstname ~ ' ' ~ applicant.lastname }}</h1>
+                <p class="text-center">{{ applicant.personality }}</p>
+                <p class="text-center">{{ applicant.city }}</p>
+            </div>
+            <div class="col-md" id="skillsList">
+                <ul class="list-group" id="list-HardSkill">
+                    <li class="list-group-item active btn-bleuOze">Compétences techniques</li>
+                    {% for hardSkill in applicant.hardSkills %}
+                        <li class="list-group-item">{{ hardSkill.name }}</li>
+                    {% endfor %}
+                </ul>
+                <ul class="list-group" id="list-SoftSkill">
+                    <li class="list-group-item active btn-bleuOze">Compétences Comportementales</li>
+                    {% for softSkill in applicant.softSkills %}
+                        <li class="list-group-item">{{ softSkill.name }}</li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
     </div>
 
-    <a href="{{ path('applicant_index') }}"><button class="btn btn-vertOze">Retour à l'accueil</button></a>
+{#    <a href="{{ path('applicant_index') }}"><button class="btn btn-vertOze">Retour à l'accueil</button></a>
 
-    <a href="{{ path('applicant_edit', {'id': applicant.id}) }}"><button class="btn  btn-vertOze">Modifier mon profil</button></a>
+    <a href="{{ path('applicant_edit', {'id': applicant.id}) }}"><button class="btn  btn-vertOze">Modifier mon profil</button></a>#}
 
 {% endblock %}
