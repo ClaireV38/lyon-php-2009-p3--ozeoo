@@ -24,18 +24,19 @@
                 <div class="row-info-right w-100 flex-md-row">
                     <div class="row-info-nb d-md-inline-block flex-md-row align-items-center text-center">
                         <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> nb matchs :
-                            <strong>120</strong></p>
+                            <strong>{{ nbMatches[offer.id] }}</strong></p>
                         <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> nb candidats :
                             <strong>10</strong></p>
                     </div>
                     <div class="row-btn-offer d-md-inline-block flex justify-content-around">
-                        <a href="#" class="d-inline-block btn btn-offer btn-orangeOze d-inline-flex">Voir matchs</a>
+                        <a href="{{ path("offer_matches", {id: offer.id}) }}" class="d-inline-block btn btn-offer btn-orangeOze d-inline-flex">Voir matchs</a>
                         <a href="{{ path("offer_edit", {id: offer.id}) }}"
                            class="d-inline-block btn btn-offer btn-bleuOze d-inline-flex">Editer</a>
                     </div>
                 </div>
             </div>
         </div>
-
+        {% else %}
+            <h5 class="text-center"> vous n'avez pas encore d'annonces</h5>
     {% endfor %}
     {% endblock %}
