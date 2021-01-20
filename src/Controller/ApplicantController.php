@@ -85,6 +85,7 @@ class ApplicantController extends AbstractController
      */
     public function showMatchOffers(ApplicantRepository $applicantRepository, Applicant $applicant): Response
     {
+        /* @phpstan-ignore-next-line */
         $matchOffers = $applicantRepository->findMatchingOffersForApplicant($this->getUser()->getApplicant());
         return $this->render('applicant/offer.html.twig', [
             'applicant' => $applicant,
