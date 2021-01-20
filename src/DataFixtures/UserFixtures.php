@@ -36,6 +36,7 @@ class UserFixtures extends Fixture
                 $applicant,
                 'applicantpassword'
             ));
+            $applicant->setIsVerified(true);
             $this->addReference('appl_user_' . $i, $applicant);
             $manager->persist($applicant);
 
@@ -47,6 +48,7 @@ class UserFixtures extends Fixture
                 $company,
                 'companypassword'
             ));
+            $company->setIsVerified(true);
             $this->addReference('comp_user_' . $i, $company);
             $manager->persist($company);
         }
@@ -60,6 +62,7 @@ class UserFixtures extends Fixture
         ));
         $applicantAccount = new Applicant();
         $applicant->setApplicant($applicantAccount);
+        $applicant->setIsVerified(true);
         $manager->persist($applicant);
 
         $company = new User();
@@ -74,6 +77,7 @@ class UserFixtures extends Fixture
         $companyAccount->setApeNb('123456789123456');
         $companyAccount->setSiretNb('1234A');
         $company->setCompany($companyAccount);
+        $company->setIsVerified(true);
         $manager->persist($company);
 
         // Création d’un utilisateur de type “administrateur”
@@ -84,6 +88,7 @@ class UserFixtures extends Fixture
             $admin,
             'adminpassword'
         ));
+        $admin->setIsVerified(true);
         $manager->persist($admin);
 
         // Sauvegarde des 3 nouveaux utilisateurs :

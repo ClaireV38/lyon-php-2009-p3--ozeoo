@@ -12,7 +12,7 @@
             </li>
             <div class="button2">
                 <li class="nav-item nav mt-3 mt-md-0">
-                    <a id="buttonNav" class="btn btn-vertOze" class="nav-link " href="#">Annonce</a>
+                    <a id="buttonNav" class="btn btn-vertOze" class="nav-link " href="{{ path("applicant_offer",{'id': app.user.applicant.id}) }}">Annonce</a>
                 </li>
             </div>
             {% endif %}

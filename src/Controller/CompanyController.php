@@ -21,6 +21,7 @@ class CompanyController extends AbstractController
      */
     public function index(CompanyRepository $companyRepository, OfferRepository $offerRepository): Response
     {
+        /* @phpstan-ignore-next-line */
         $company = $this->getUser()->getCompany();
 
         $offers = $offerRepository->findBy(

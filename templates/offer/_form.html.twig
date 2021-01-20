@@ -21,7 +21,6 @@
                 <h5>Compétences comportementales (5min, 10max)</h5>
                     {{ form_row(form.softSkills, {'label': " " }) }}
             </div>
-
-            <a href="{{ path('company_index') }}"><button class="btn btn_validate flex">Valider</button></a>
-        {{ form_end(form) }}
+             <button class="btn btn_validate flex">{{ button_label|default('Valider') }}</button>
+     {{ form_end(form) }}
 {% endblock %}

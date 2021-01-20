@@ -4,4 +4,28 @@
 
 {% block body%}
     {% include '/applicant/_navbar.html.twig' %}
+        <h1 class="text-center">Liste de vos annonces</h1>
+        {% for matchOffer in matchOffers %}
+            <div class="card container" id="announce-card-matchOffer">
+                <div class="row-announce card-body flex-column flex-md-row align-items-center justify-content-between">
+                    <div class="d-inline-block mb-2 mr-md-2 w-100 mb-0 text-center">
+                        <h5 class="card-title" id="title-announce-desktop">{{ matchOffer.offer_title }}</h5>
+                        <p class="mb-0"> Publié le : {{ matchOffer.creation_date|date("d/m/Y") }}</p>
+                    </div>
+                    <div class="row-info-right w-100 flex-md-row">
+                        <div class="row-info-nb " id="textMatchOffer">
+                            <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> Type de contrat :
+                                <strong>{{ matchOffer.contract_type }}</strong></p>
+                            <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> Début du contrat :
+                                <strong>{{ matchOffer.start_date|date("d/m/Y")}}</strong></p>
+                            <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> Lieu :
+                                <strong>{{ matchOffer.city}}</strong></p>
+                        </div>
+                        <div class="row-btn-offer d-md-inline-block flex justify-content-around">
+                            <a href="#" class="d-inline-block btn btn-offer btn-orangeOze d-inline-flex">Voir Annonce</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    {% endfor %}
 {% endblock %}
