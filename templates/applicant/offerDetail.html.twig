@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail de l'offre{% endblock %}
+
+{% block body%}
+    {% include '/applicant/_navbar.html.twig' %}
+    <h1>{{ company.name }}</h1>
+    <div class="profilCompany">
+        <div class="photoVideoCompany">
+            <div class="photoCompany">
+                {% if company.picture is not empty %}
+                    <img src="{{asset('uploads/images/company/'~company.picture)}}" class="img-fluid rounded mx-auto d-block" alt="Responsive image">
+                {% endif %}
+            </div>
+            <div class="videoCompany">
+                {% if company.video is not empty %}
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" src="{{ company.video }}"></iframe>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div>
+            <h2 class="text-center">Qui sommes-nous ?</h2>
+            <p class="text-center">{{ company.description }}</p>
+            <h2 class="text-center">Nos Valeurs</h2>
+            <p class="text-center">{{ company.csr }}</p>
+        </div>
+    </div>
+
+{#    <div class="container d-none d-md-block" id="companyDetailsDesktop">#}
+{#        <div class="row">#}
+{#            <div class="col-md-5" id="companyDetailsMedia">#}
+{#                {% if company.picture is not empty %}#}
+{#                    <img src="{{asset('uploads/images/company/'~company.picture)}}" class="img-fluid rounded mx-auto d-block" alt="{{ company.name }}">#}
+{#                {% endif %}#}
+{#                {% if company.video is not empty %}#}
+{#                    <div class="embed-responsive embed-responsive-16by9">#}
+{#                        <iframe class="embed-responsive-item" src="{{ company.video }}"></iframe>#}
+{#                    </div>#}
+{#                {% endif %}#}
+{#            </div>#}
+{#            <div class="col-md-5" id="companyDetailsText">#}
+{#                <h2 class="text-center">Qui sommes-nous ?</h2>#}
+{#                <p class="text-center">{{ company.description }}</p>#}
+{#                <h2 class="text-center">Nos Valeurs</h2>#}
+{#                <p class="text-center">{{ company.csr }}</p>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{% endblock %}

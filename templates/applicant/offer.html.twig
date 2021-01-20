@@ -22,7 +22,9 @@
                                 <strong>{{ matchOffer.city}}</strong></p>
                         </div>
                         <div class="row-btn-offer d-md-inline-block flex justify-content-around">
-                            <a href="#" class="d-inline-block btn btn-offer btn-orangeOze d-inline-flex">Voir Annonce</a>
+                            <a href="{{ path("offer_detail" ,
+                                {applicantId: app.user.applicant.id, companyId:matchOffer.company_id, offerId: matchOffer.offer_id })}}"
+                               class="d-inline-block btn btn-offer btn-orangeOze d-inline-flex">Voir Annonce</a>
                         </div>
                     </div>
                 </div>

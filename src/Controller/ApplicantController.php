@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Applicant;
+use App\Entity\Company;
+use App\Entity\Offer;
 use App\Form\ApplicantType;
 use App\Repository\ApplicantRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -89,6 +92,25 @@ class ApplicantController extends AbstractController
         return $this->render('applicant/offer.html.twig', [
             'applicant' => $applicant,
             'matchOffers' => $matchOffers
+        ]);
+    }
+
+    /**
+     * @Route ("/{applicantId}/company/{companyId}/offer/{offerId}", methods={"GET", "POST"}, name="offer_detail")
+     * @ParamConverter("applicant", class="App\Entity\Applicant", options={"mapping": {"applicantId": "id"}})
+     * @ParamConverter("offer", class="App\Entity\Offer", options={"mapping": {"offerId": "id"}})
+     * @ParamConverter("company", class="App\Entity\Company", options={"mapping": {"companyId": "id"}})
+     * @param Applicant $applicant
+     * @param Offer $offer
+     * @param Company $company
+     * @return Response
+     */
+    public function showOfferDetail(Applicant $applicant, Offer $offer, Company $company): Response
+    {
+        return $this->render('applicant/offerDetail.html.twig', [
+           'applicant' => $applicant,
+           'offer' => $offer,
+           'company' => $company
         ]);
     }
 }
