@@ -108,16 +108,28 @@ class OfferController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/matches", name="offer_matches", methods={"GET"})
+     * @Route("/{id}/applicants", name="offer_applicants", methods={"GET"})
      * @param Offer $offer
      * @return Response
      */
-    public function showMatches(Offer $offer, OfferRepository $offerRepository): Response
+    public function showApplicants(Offer $offer, OfferRepository $offerRepository): Response
     {
+        $applicants = $offer->getApplicants();
+        $applicantsID = [];
+        foreach ($applicants as $applicant) {
+            $applicantsID[] = $applicant->getId();
+        }
         $matchApplicants = $offerRepository->findMatchingApplicantsForOffer($offer);
-        return $this->render('offer/matches.html.twig', [
+        $applicantsInArray = [];
+        foreach ($matchApplicants as $matchApplicant) {
+            if (in_array($matchApplicant['applicant_id'], $applicantsID)) {
+                $applicantsInArray[] = $matchApplicant;
+            }
+        }
+
+        return $this->render('offer/applicants.html.twig', [
             'offer' => $offer,
-            'applicants' => $matchApplicants
+            'applicants' => $applicantsInArray
         ]);
     }
 

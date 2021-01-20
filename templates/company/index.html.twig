@@ -26,10 +26,10 @@
                         <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> nb matchs :
                             <strong>{{ nbMatches[offer.id] }}</strong></p>
                         <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> nb candidats :
-                            <strong>10</strong></p>
+                            <strong>{{ offer.applicants |length }}</strong></p>
                     </div>
                     <div class="row-btn-offer d-md-inline-block flex justify-content-around">
-                        <a href="{{ path("offer_matches", {id: offer.id}) }}" class="d-inline-block btn btn-offer btn-orangeOze d-inline-flex">Voir matchs</a>
+                        <a href="{{ path("offer_applicants", {id: offer.id}) }}" class="d-inline-block btn btn-offer btn-orangeOze d-inline-flex">Voir les candidats</a>
                         <a href="{{ path("offer_edit", {id: offer.id}) }}"
                            class="d-inline-block btn btn-offer btn-bleuOze d-inline-flex">Editer</a>
                     </div>
