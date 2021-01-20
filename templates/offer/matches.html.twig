@@ -27,13 +27,13 @@
                 <div class="d-inline-block flex-column justify-content-center mr-md-2 w-100 mb-0 text-center">
                     <h5 class="card-title mb-0" id="title-announce-desktop">{{ applicant.firstname }}</h5>
                 </div>
-                <div class="row-info-right w-100 flex-md-row">
+                <div class="row-info-right w-100 flex-md-grow-1 flex-md-row">
                     <div class="row-info-nb d-md-inline-block flex-md-row align-items-center text-center">
-                        <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> nb hardskills :
+                        <p class="d-md-inline-block mr-md-1 mb-0" class="card-text"> nb hardskills :
                             <strong>{{ applicant.match_hs }}</strong></p>
-                        <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> nb softskills :
+                        <p class="d-md-inline-block mr-md-1 mb-0" class="card-text"> nb softskills :
                             <strong>{{ applicant.match_ss }}</strong></p>
-                        <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> n'a pas postulé</p>
+                        <p class="d-md-inline-block mr-md-1 mb-0" class="card-text"> n'a pas postulé</p>
                     </div>
                     <div class="row-btn-offer d-md-inline-block flex justify-content-around">
                         <a href="{{ path("applicant_show", {id: applicant.applicant_id}) }}"
