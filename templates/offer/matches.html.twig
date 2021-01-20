@@ -36,7 +36,7 @@
                         <p class="d-md-inline-block mr-md-1 mb-0" class="card-text"> n'a pas postulé</p>
                     </div>
                     <div class="row-btn-offer d-md-inline-block flex justify-content-around">
-                        <a href="{{ path("applicant_show", {id: applicant.applicant_id}) }}"
+                        <a href="{{ path("offer_applicant_show", { offerId: offer.id , applicantId: applicant.applicant_id}) }}"
                            class="d-inline-block btn btn-offer btn-bleuOze d-inline-flex">Voir fiche</a>
                     </div>
                 </div>

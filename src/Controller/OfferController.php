@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Applicant;
 use App\Entity\Offer;
 use App\Form\OfferType;
 use App\Repository\OfferRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -116,6 +118,20 @@ class OfferController extends AbstractController
         return $this->render('offer/matches.html.twig', [
             'offer' => $offer,
             'applicants' => $matchApplicants
+        ]);
+    }
+
+    /**
+     * @Route("/{offerId}/applicant/{applicantId}", name="offer_applicant_show", methods={"GET"})
+     * @ParamConverter("offer", class="App\Entity\Offer", options={"mapping": {"offerId": "id"}})
+     * @ParamConverter("applicant", class="App\Entity\Applicant", options={"mapping": {"applicantId": "id"}})
+     * @param Applicant $applicant
+     * @return Response
+     */
+    public function applicantShow(Offer $offer, Applicant $applicant): Response
+    {
+        return $this->render('applicant/show.html.twig', [
+            'applicant' => $applicant,
         ]);
     }
 }
