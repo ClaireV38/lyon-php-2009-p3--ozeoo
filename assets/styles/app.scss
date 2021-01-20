@@ -284,6 +284,21 @@ h1 {
     flex-direction: row;
 }
 
+/* Detail Candidate - Candidate Side */
+#skillsList {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+#list-SoftSkill {
+    padding: 10px;
+}
+
+#list-HardSkill {
+    padding: 10px;
+}
+
 /*MatchOffer*/
 #announce-card-matchOffer {
     margin-bottom: 10px;
@@ -566,5 +581,20 @@ h1 {
 
     #companyDetailsText {
         margin-left: auto;
+    }
+
+    /* Detail Candidate - Candidate Side */
+    #skillsList {
+        width: auto;
+        display: flex;
+        flex-direction: row;
+    }
+
+    #list-SoftSkill {
+        padding: 10px;
+    }
+
+    #list-HardSkill {
+        padding: 10px;
     }
 }
