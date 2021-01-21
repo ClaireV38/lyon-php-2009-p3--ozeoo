@@ -7,7 +7,6 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker;
 use App\Entity\Company;
-use App\DataFixtures\CityFixtures;
 
 class CompanyFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -24,7 +23,7 @@ class CompanyFixtures extends Fixture implements DependentFixtureInterface
 
     public function getDependencies()
     {
-        return [UserFixtures::class, CityFixtures::class];
+        return [UserFixtures::class];
     }
 
     public function load(ObjectManager $manager)
@@ -33,11 +32,11 @@ class CompanyFixtures extends Fixture implements DependentFixtureInterface
         for ($i = 1; $i <= self::NB_OBJECT; $i++) {
             $company = new Company();
             $company->setUser($this->getReference('comp_user_' . $i));
-            $company->setCity($this->getReference('city_' . rand(1, CityFixtures::NB_OBJECT)));
+            $company->setCity($faker->text(20));
             $company->setName($faker->company());
             $company->setSiretNb($faker->numerify("##############"));
             $company->setContactEmail($faker->email());
-            $company->setApeNb($faker->randomNumber(4, false));
+            $company->setApeNb($faker->numerify("#####"));
             $company->setPicture(self::PICTURES[rand(0, 2)]);
             $company->setVideo('https://player.vimeo.com/external/372304294.
             sd.mp4?s=68f05e893665288fc91021b717b24292bd326364&profile_id=139&oauth2_token_id=57447761');

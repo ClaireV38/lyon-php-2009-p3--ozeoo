@@ -2,6 +2,8 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Applicant;
+use App\Entity\Company;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -34,10 +36,12 @@ class UserFixtures extends Fixture
                 $applicant,
                 'applicantpassword'
             ));
+            $applicant->setIsVerified(true);
             $this->addReference('appl_user_' . $i, $applicant);
             $manager->persist($applicant);
-
+        }
             // Création d’un utilisateur de type “company”
+        for ($i = 2; $i <= self::NB_OBJECT; $i++) {
             $company = new User();
             $company->setEmail('comp' . $faker->email());
             $company->setRoles(['ROLE_COMPANY']);
@@ -45,9 +49,49 @@ class UserFixtures extends Fixture
                 $company,
                 'companypassword'
             ));
+            $company->setIsVerified(true);
             $this->addReference('comp_user_' . $i, $company);
             $manager->persist($company);
         }
+
+        $applicant = new User();
+        $applicant->setEmail('applicant@monsite.com');
+        $applicant->setRoles(['ROLE_APPLICANT']);
+        $applicant->setPassword($this->passwordEncoder->encodePassword(
+            $applicant,
+            'applicantpassword'
+        ));
+        $applicantAccount = new Applicant();
+        $applicant->setApplicant($applicantAccount);
+        $applicant->setIsVerified(true);
+        $manager->persist($applicant);
+
+        $company1 = new User();
+        $company1->setEmail('company1@monsite.com');
+        $company1->setRoles(['ROLE_COMPANY']);
+        $company1->setPassword($this->passwordEncoder->encodePassword(
+            $company,
+            'companypassword'
+        ));
+        $this->addReference('comp_user_' . 1, $company1);
+        $company1->setIsVerified(true);
+        $manager->persist($company1);
+
+
+        $company = new User();
+        $company->setEmail('company@monsite.com');
+        $company->setRoles(['ROLE_COMPANY']);
+        $company->setPassword($this->passwordEncoder->encodePassword(
+            $company,
+            'companypassword'
+        ));
+        $companyAccount = new Company();
+        $companyAccount->setName('entreprise.sas');
+        $companyAccount->setApeNb('123456789123456');
+        $companyAccount->setSiretNb('1234A');
+        $company->setCompany($companyAccount);
+        $company->setIsVerified(true);
+        $manager->persist($company);
 
         // Création d’un utilisateur de type “administrateur”
         $admin = new User();
@@ -57,6 +101,7 @@ class UserFixtures extends Fixture
             $admin,
             'adminpassword'
         ));
+        $admin->setIsVerified(true);
         $manager->persist($admin);
 
         // Sauvegarde des 3 nouveaux utilisateurs :

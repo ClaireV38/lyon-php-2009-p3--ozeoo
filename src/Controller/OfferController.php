@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Applicant;
 use App\Entity\Offer;
 use App\Form\OfferType;
 use App\Repository\OfferRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,6 +19,8 @@ class OfferController extends AbstractController
 {
     /**
      * @Route("/", name="offer_index", methods={"GET"})
+     * @param OfferRepository $offerRepository
+     * @return Response
      */
     public function index(OfferRepository $offerRepository): Response
     {
@@ -27,10 +31,14 @@ class OfferController extends AbstractController
 
     /**
      * @Route("/new", name="offer_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
         $offer = new Offer();
+        /* @phpstan-ignore-next-line */
+        $offer->setCompany($this->getUser()->getCompany());
         $form = $this->createForm(OfferType::class, $offer);
         $form->handleRequest($request);
 
@@ -39,7 +47,9 @@ class OfferController extends AbstractController
             $entityManager->persist($offer);
             $entityManager->flush();
 
-            return $this->redirectToRoute('offer_index');
+            return $this->redirectToRoute('offer_show', ['id' => $offer->getId()
+
+            ]);
         }
 
         return $this->render('offer/new.html.twig', [
@@ -50,6 +60,8 @@ class OfferController extends AbstractController
 
     /**
      * @Route("/{id}", name="offer_show", methods={"GET"})
+     * @param Offer $offer
+     * @return Response
      */
     public function show(Offer $offer): Response
     {
@@ -60,6 +72,9 @@ class OfferController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="offer_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Offer $offer
+     * @return Response
      */
     public function edit(Request $request, Offer $offer): Response
     {
@@ -69,7 +84,7 @@ class OfferController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('offer_index');
+            return $this->redirectToRoute('company_index');
         }
 
         return $this->render('offer/edit.html.twig', [
@@ -90,5 +105,45 @@ class OfferController extends AbstractController
         }
 
         return $this->redirectToRoute('offer_index');
+    }
+
+    /**
+     * @Route("/{id}/applicants", name="offer_applicants", methods={"GET"})
+     * @param Offer $offer
+     * @return Response
+     */
+    public function showApplicants(Offer $offer, OfferRepository $offerRepository): Response
+    {
+        $applicants = $offer->getApplicants();
+        $applicantsID = [];
+        foreach ($applicants as $applicant) {
+            $applicantsID[] = $applicant->getId();
+        }
+        $matchApplicants = $offerRepository->findMatchingApplicantsForOffer($offer);
+        $applicantsInArray = [];
+        foreach ($matchApplicants as $matchApplicant) {
+            if (in_array($matchApplicant['applicant_id'], $applicantsID)) {
+                $applicantsInArray[] = $matchApplicant;
+            }
+        }
+
+        return $this->render('offer/applicants.html.twig', [
+            'offer' => $offer,
+            'applicants' => $applicantsInArray
+        ]);
+    }
+
+    /**
+     * @Route("/{offerId}/applicant/{applicantId}", name="offer_applicant_show", methods={"GET"})
+     * @ParamConverter("offer", class="App\Entity\Offer", options={"mapping": {"offerId": "id"}})
+     * @ParamConverter("applicant", class="App\Entity\Applicant", options={"mapping": {"applicantId": "id"}})
+     * @param Applicant $applicant
+     * @return Response
+     */
+    public function applicantShow(Offer $offer, Applicant $applicant): Response
+    {
+        return $this->render('applicant/show.html.twig', [
+            'applicant' => $applicant,
+        ]);
     }
 }

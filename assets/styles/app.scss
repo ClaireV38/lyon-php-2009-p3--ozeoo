@@ -20,6 +20,11 @@ main {
     flex-grow: 1;
 }
 
+.btn-center {
+    display: block;
+    margin : 20px auto;
+}
+
 /*Homepage*/
 
 #home-list-overall {
@@ -56,12 +61,13 @@ h1 {
 
 #diversite1 {
     height: auto;
-    width: auto;
+    width: 100%;
 }
 
 #diversite2 {
     height: 80px;
 }
+
 
 /*Footer*/
 #sticky-footer {
@@ -69,12 +75,13 @@ h1 {
     margin-top: 50px;
 }
 
-#footer-buttons:hover {
-    cursor: pointer;
-}
-
 #footer-buttons-link {
     color: #ffffff;
+}
+
+#footer-buttons-link:hover {
+    color: $police-color;
+    cursor: pointer;
 }
 
 /* Index company style */
@@ -140,14 +147,12 @@ h1 {
     padding: 5px;
 }
 
-#square-number-candidate-people-legend {
-    background-color: #C9E364;
-    border: solid 1px #C9E364;
-    width: 40px;
-    height: 40px;
-    border-radius: 2px;
-    display: flex;
-    justify-content: center;
+.btn-offer {
+    width: fit-content;
+}
+
+.row-btn-offer {
+    width: 100%;
 }
 
 #text-square-people-legend {
@@ -160,16 +165,6 @@ h1 {
 
 #text-legend-announce-company {
     margin: 10px 0 0 5px;
-}
-
-#square-number-match-people-legend {
-    background-color: #00C2CB;
-    border: solid 1px #00C2CB;
-    width: 40px;
-    height: 40px;
-    border-radius: 2px;
-    display: flex;
-    justify-content: center;
 }
 
 #text-square-people-legend {
@@ -197,6 +192,11 @@ h1 {
     padding: 0;
 }
 
+.button3 {
+    padding: 0;
+    margin-right: 30px;
+}
+
 .navbar-nav {
     padding-left: 10px;
 }
@@ -204,6 +204,11 @@ h1 {
 /* form applicant */
 .applicantForm {
     padding: 0 10px 0 10px;
+}
+
+.buttonApplicant{
+    display: flex;
+    justify-content: center;
 }
 
 .applicant_home_welcome_mainTitle {
@@ -241,6 +246,67 @@ h1 {
     display: none;
 }
 
+/* Offer form */
+
+.jobOffer {
+    width: 50%;
+    margin: auto;
+}
+
+.btn_validate {
+    background-color: $vertOze;
+    margin:auto;
+}
+
+.offerSkillsTitle {
+    margin-top: 50px;
+    text-align: center;
+}
+
+/*login*/
+.btn-235px{
+    width: 235px;
+    padding: 3px;
+}
+
+/* Company Form */
+#companyCreateFormButton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/*flex*/
+.flex{
+    display: flex;
+}
+
+.offer_date {
+    flex-direction: row;
+}
+
+/* Detail Candidate - Candidate Side */
+#list-HardSkill {
+    font-size: 13px;
+    line-height: initial;
+}
+
+#list-SoftSkill {
+    font-size: 13px;
+    line-height: initial;
+}
+
+#buttonDetails {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+
+/*MatchOffer*/
+#announce-card-matchOffer {
+    margin-bottom: 10px;
+}
+
 @media (min-width: 768px) {
     /* Navbar */
     .logoright {
@@ -263,7 +329,6 @@ h1 {
     }
 
     /*Homepage*/
-
     #home-list {
         text-align: center;
         display: flex;
@@ -283,12 +348,35 @@ h1 {
         width: 280px;
     }
 
+    #home-list-buttons:hover {
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+
     #diversityBig1 {
         display: block;
+        height: 420px;
+        width: 620px;
     }
 
     nav.navbar.navbar-expand-lg.navbar-light.bg-clairNavbar {
         padding: 0 10px 0 0;
+    }
+
+    /*Offer Match Applicant*/
+
+    #announce-card-matchOffer {
+        width: 90%;
+        margin-top: 15px;
+    }
+
+    #textMatchOffer {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
     }
 
     /* Desktop index company style */
@@ -302,17 +390,6 @@ h1 {
     #announce-card-homecompany {
         width: 90%;
         margin-top: 15px;
-        height: 90px;
-    }
-
-    #title-announce-desktop {
-        align-self: center;
-    }
-
-    .card-body {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
     }
 
     #announce-list-homecompany {
@@ -323,20 +400,31 @@ h1 {
         display: contents;
     }
 
-    #square-number-match-people {
-        background-color: #00C2CB;
-        border: solid 1px #00C2CB;
-        width: 40px;
-        height: 40px;
-        border-radius: 2px;
+    .row-announce {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
     }
 
-    #square-number-candidate-people {
-        background-color: #C9E364;
-        border: solid 1px #C9E364;
-        width: 40px;
-        height: 40px;
-        border-radius: 2px;
+    #title-announce-desktop {
+        align-self: center
+    }
+
+    .row-info-right {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .row-info-nb {
+        width: fit-content;
+        display: inline-block;
+    }
+
+    .row-btn-offer {
+        width: fit-content;
+        display: inline-block;
     }
 
     #logo-people {
@@ -361,8 +449,16 @@ h1 {
     }
 
     /* Page accueil candidat*/
+    #presentationOze {
+        flex-direction: column;
+    }
+
     .btn_candidateHome_createProfile {
         display: none;
+    }
+
+    #buttonRedirectProfil {
+        flex-direction: column;
     }
 
     .candidate_ozeoPresentationCard {
@@ -410,6 +506,117 @@ h1 {
     }
 
     .btn_candidateHome_createProfileDesktop {
-        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    /*login*/
+    .login-container {
+        height: 100%;
+    }
+
+    .main-row{
+        margin-top: 110px;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .login-form{
+        min-width: 400px;
+    }
+
+    /* Offer form */
+    .offerHardSkills {
+        width: 45%;
+    }
+
+    #loginPageButtons {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    /* Company Registration */
+    #company-register {
+        margin: auto;
+    }
+
+    /* Offer form */
+    .offerHardSkills {
+        width: 45%;
+    }
+
+    /* New Applicant profile */
+    .applicantForm{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .infoForm{
+        width: 40%;
+        margin: auto;
+    }
+
+    .skillSelection{
+        width: 50%;
+        margin: auto;
+        padding: 10px 0 10px 0;
+    }
+
+    .titleApplicant{
+        text-align: center;
+        padding: 20px;
+    }
+
+    /* Detail company page */
+    #companyDetailsMedia > img {
+        margin-bottom: 10px;
+    }
+
+    #companyDetailsMedia {
+        margin-left: -10px;
+        margin-right: 30px;
+    }
+
+    #companyDetailsDesktop {
+        padding: 10px;
+    }
+
+    #companyDetailsText {
+        margin-left: auto;
+    }
+
+    /* Detail Candidate - Candidate Side */
+    #skillsList {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    #list-SoftSkill {
+        width: 90%;
+        font-size: 13px;
+        line-height: initial;
+    }
+
+    #list-HardSkill {
+        width: 90%;
+        margin-bottom: 10px;
+        font-size: 13px;
+        line-height: initial;
+    }
+
+    #buttonDetails {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    /*offer list matches*/
+    #announce-card-matches {
+        width: 90%;
+        margin-top: 15px;
     }
 }

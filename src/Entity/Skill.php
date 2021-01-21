@@ -6,6 +6,7 @@ use App\Repository\SkillRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=SkillRepository::class)
@@ -22,6 +23,10 @@ class Skill
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Count(
+     *      max = 10,
+     *      maxMessage = "Tu ne peux pas choisir plus de 10 compétences"
+     * )
      * @var string
      */
     private $name;
@@ -34,21 +39,36 @@ class Skill
     private $skillCategory;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Applicant::class, inversedBy="skills")
+     * @ORM\ManyToMany(targetEntity=Applicant::class, mappedBy="softSkills")
      * @var Collection<Applicant>
      */
-    private $applicant;
+    private $softApplicants;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Offer::class, inversedBy="skills")
-     * @var Collection<Offer>
+     * @ORM\ManyToMany(targetEntity=Applicant::class, mappedBy="hardSkills")
+     * @var Collection<Applicant>
      */
-    private $offer;
+    private $hardApplicants;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Offer::class, mappedBy="softSkills")
+     * @var Collection<Applicant>
+     */
+    private $softOffers;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Offer::class, mappedBy="hardSkills")
+     * @var Collection<Applicant>
+     */
+    private $hardOffers;
+
 
     public function __construct()
     {
-        $this->applicant = new ArrayCollection();
-        $this->offer = new ArrayCollection();
+        $this->softApplicants = new ArrayCollection();
+        $this->hardApplicants = new ArrayCollection();
+        $this->softOffers = new ArrayCollection();
+        $this->hardOffers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -83,48 +103,106 @@ class Skill
     /**
      * @return Collection|Applicant[]
      */
-    public function getApplicant(): Collection
+    public function getSoftApplicants(): Collection
     {
-        return $this->applicant;
+        return $this->softApplicants;
     }
 
-    public function addApplicant(Applicant $applicant): self
+    public function addSoftApplicant(Applicant $softApplicant): self
     {
-        if (!$this->applicant->contains($applicant)) {
-            $this->applicant[] = $applicant;
+        if (!$this->softApplicants->contains($softApplicant)) {
+            $this->softApplicants[] = $softApplicant;
+            $softApplicant->addSoftSkill($this);
         }
 
         return $this;
     }
 
-    public function removeApplicant(Applicant $applicant): self
+    public function removeSoftApplicant(Applicant $softApplicant): self
     {
-        $this->applicant->removeElement($applicant);
+        if ($this->softApplicants->removeElement($softApplicant)) {
+            $softApplicant->removeSoftSkill($this);
+        }
 
         return $this;
     }
 
     /**
-     * @return Collection|Offer[]
+     * @return Collection|Applicant[]
      */
-    public function getOffer(): Collection
+    public function getHardApplicants(): Collection
     {
-        return $this->offer;
+        return $this->hardApplicants;
     }
 
-    public function addOffer(Offer $offer): self
+    public function addHardApplicant(Applicant $hardApplicant): self
     {
-        if (!$this->offer->contains($offer)) {
-            $this->offer[] = $offer;
+        if (!$this->hardApplicants->contains($hardApplicant)) {
+            $this->hardApplicants[] = $hardApplicant;
+            $hardApplicant->addHardSkill($this);
         }
 
         return $this;
     }
 
-    public function removeOffer(Offer $offer): self
+    public function removeHardApplicant(Applicant $hardApplicant): self
     {
-        $this->offer->removeElement($offer);
+        if ($this->hardApplicants->removeElement($hardApplicant)) {
+            $hardApplicant->removeHardSkill($this);
+        }
+        return $this;
+    }
 
+    /**
+     * @return Collection|Applicant[]
+     */
+    public function getSoftOffers(): Collection
+    {
+        return $this->softOffers;
+    }
+
+    public function addSoftOffer(Applicant $softOffer): self
+    {
+        if (!$this->softOffers->contains($softOffer)) {
+            $this->softOffers[] = $softOffer;
+            $softOffer->addSoftSkill($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSoftOffer(Applicant $softOffer): self
+    {
+        if ($this->softOffers->removeElement($softOffer)) {
+            $softOffer->removeSoftSkill($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Applicant[]
+     */
+    public function getHardOffers(): Collection
+    {
+        return $this->hardOffers;
+    }
+
+    public function addHardOffer(Applicant $hardOffer): self
+    {
+        if (!$this->hardOffers->contains($hardOffer)) {
+            $this->hardOffers[] = $hardOffer;
+            $hardOffer->addHardSkill($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHardOffer(Applicant $hardOffer): self
+    {
+        if ($this->hardOffers->removeElement($hardOffer)) {
+            $hardOffer->removeHardSkill($this);
+        }
         return $this;
     }
 }

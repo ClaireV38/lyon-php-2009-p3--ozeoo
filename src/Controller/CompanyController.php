@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Company;
 use App\Form\CompanyType;
 use App\Repository\CompanyRepository;
+use App\Repository\OfferRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,43 +19,24 @@ class CompanyController extends AbstractController
     /**
      * @Route("/index", name="company_index", methods={"GET"})
      */
-    public function index(CompanyRepository $companyRepository): Response
+    public function index(CompanyRepository $companyRepository, OfferRepository $offerRepository): Response
     {
-        return $this->render('company/index.html.twig', [
-            'companies' => $companyRepository->findAll(),
-        ]);
-    }
+        /* @phpstan-ignore-next-line */
+        $company = $this->getUser()->getCompany();
 
-    /**
-     * @Route("/new", name="company_new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $company = new Company();
-        $form = $this->createForm(CompanyType::class, $company);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($company);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('company_index');
+        $offers = $offerRepository->findBy(
+            ['company' => $company],
+            ['id' => 'DESC']
+        );
+        $nbMatches = [];
+        foreach ($offers as $offer) {
+            $matchApplicants = $offerRepository->findMatchingApplicantsForOffer($offer);
+            $nbMatches[$offer->getId()] = count($matchApplicants);
         }
-
-        return $this->render('company/new.html.twig', [
+        return $this->render('company/index.html.twig', [
             'company' => $company,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="company_show", methods={"GET"})
-     */
-    public function show(Company $company): Response
-    {
-        return $this->render('company/show.html.twig', [
-            'company' => $company,
+            'offers' => $offers,
+            'nbMatches' => $nbMatches
         ]);
     }
 
@@ -63,11 +45,15 @@ class CompanyController extends AbstractController
      */
     public function edit(Request $request, Company $company): Response
     {
-        $form = $this->createForm(CompanyType::class, $company);
-        $form->handleRequest($request);
 
+        $form = $this->createForm(CompanyType::class, $company, [
+            'validation_groups' => ['company'],
+        ]);
+        $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($company);
+            $entityManager->flush();
 
             return $this->redirectToRoute('company_index');
         }
@@ -75,6 +61,18 @@ class CompanyController extends AbstractController
         return $this->render('company/edit.html.twig', [
             'company' => $company,
             'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="company_show", methods={"GET"})
+     * @param Company $company
+     * @return Response
+     */
+    public function show(Company $company): Response
+    {
+        return $this->render('company/show.html.twig', [
+            'company' => $company,
         ]);
     }
 
