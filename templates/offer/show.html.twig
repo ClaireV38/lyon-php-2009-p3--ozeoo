@@ -1,58 +1,53 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Offer{% endblock %}
+{% block title %}Annonce {{ offer.title }}{% endblock %}
 
 {% block body %}
-    <h1>Offer</h1>
+    {% include '/company/_navbar.html.twig' %}
+<div class="container offerDetail">
+    <h1>{{ offer.title }}</h1>
+    <div class="card startDateContractType border-bleuOze">
+        <div class="startDateOfferDetail">
+            <h3>Date de début : </h3>
+            <h5>{{ offer.startDate |date("d/m/Y") }}</h5>
+        </div>
+        <div class="contractTypeOfferDetail">
+            <h3>Type de Contrat : </h3>
+            <h5>{{ offer.contractType }}</h5>
+        </div>
+        <div class="cityOfferDetail">
+            <h3>Où ? : </h3>
+            <h5>{{ offer.city }}</h5>
+        </div>
+        <div class="salaryOfferDetail">
+            <h3>Salaire : </h3>
+            <h5>{{ offer.salary }}</h5>
+        </div>
+    </div>
+    <div class="card border-orangeOze mb-3">
+        <div class="card-body">
+            <h5 class="card-title">Description de l'offre :</h5>
+            <p class="card-text">{{ offer.description }}</p>
+        </div>
+    </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ offer.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ offer.title }}</td>
-            </tr>
-            <tr>
-                <th>ContractType</th>
-                <td>{{ offer.contractType }}</td>
-            </tr>
-            <tr>
-                <th>Salary</th>
-                <td>{{ offer.salary }}</td>
-            </tr>
-            <tr>
-                <th>Duration</th>
-                <td>{{ offer.duration }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{{ offer.startDate ? offer.startDate|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>CreationDate</th>
-                <td>{{ offer.creationDate ? offer.creationDate|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>EndDate</th>
-                <td>{{ offer.endDate ? offer.endDate|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ offer.description }}</td>
-            </tr>
-            <tr>
-                <th>IsAnonymous</th>
-                <td>{{ offer.isAnonymous ? 'Yes' : 'No' }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('offer_index') }}">back to list</a>
-
-    <a href="{{ path('offer_edit', {'id': offer.id}) }}">edit</a>
-
-    {{ include('offer/_delete_form.html.twig') }}
+    <div class="skillsOfferDetail">
+        <div class="hardSkillsOfferDetail">
+            <ul class="list-group hardSkills">
+                <li class="list-group-item active btn-bleuOze">Compétences Techniques</li>
+                {% for hardSkill in offer.hardSkills %}
+                    <li class="list-group-item">{{ hardSkill.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="softSkillsOfferDetail">
+            <ul class="list-group softSkills">
+                <li class="list-group-item active btn-bleuOze">Compétences Comportementales</li>
+                {% for softSkill in offer.softSkills %}
+                    <li class="list-group-item">{{ softSkill.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
 {% endblock %}

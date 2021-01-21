@@ -12,21 +12,21 @@
                 <p class="text-center">{{ applicant.personality }}</p>
                 <p class="text-center">{{ applicant.city }}</p>
                 <div id="buttonDetails">
-                    <a href="{{ path('applicant_index') }}"><button class="btn btn-vertOze">Retour à l'accueil</button></a>
+                    <a href="{{ path('company_index') }}"><button class="btn btn-vertOze">Retour à l'accueil</button></a>
                 </div>
             </div>
             <div class="col-md" id="skillsList">
                 <ul class="list-group" id="list-HardSkill">
                     <li class="list-group-item active btn-bleuOze">Compétences techniques</li>
                     {% for hardSkill in applicant.hardSkills %}
-                        <li class="list-group-item {% if hardSkill in matchHardSkills %} bg-vertOze border-1 {% endif %}">
+                        <li class="list-group-item {% if hardSkill in matchHardSkills %} bg-vertOze {% endif %}">
                             {{ hardSkill.name }}</li>
                     {% endfor %}
                 </ul>
                 <ul class="list-group" id="list-SoftSkill">
                     <li class="list-group-item active btn-bleuOze">Compétences Comportementales</li>
                     {% for softSkill in applicant.softSkills %}
-                        <li class="list-group-item {% if softSkill in matchSoftSkills %} bg-vertOze border-1 {% endif %}">
+                        <li class="list-group-item {% if softSkill in matchSoftSkills %} bg-vertOze {% endif %}">
                             {{ softSkill.name }} </li>
                     {% endfor %}
                 </ul>
