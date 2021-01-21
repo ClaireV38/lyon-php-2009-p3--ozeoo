@@ -285,6 +285,30 @@ h1 {
     flex-direction: row;
 }
 
+/* Detail Candidate - Candidate Side */
+#list-HardSkill {
+    line-height: normal;
+    margin: auto auto 10px auto;
+    font-size: 13px;
+}
+
+#list-SoftSkill {
+    line-height: normal;
+    font-size: 13px;
+}
+
+#buttonDetails {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+
+
+/*MatchOffer*/
+#announce-card-matchOffer {
+    margin-bottom: 10px;
+}
+
 @media (min-width: 768px) {
     /* Navbar */
     .logoright {
@@ -566,9 +590,112 @@ h1 {
         margin-left: auto;
     }
 
+    /*Offer Detail*/
+    .profilCompany {
+        display: flex;
+        margin: 10px;
+    }
+
+    .photoCompany {
+        margin-bottom: 10px;
+    }
+
+    .photoVideoCompany {
+        flex: 1;
+    }
+
+    .descriptionCompanyOfferDetail {
+        flex: 2;
+    }
+
+    .card.startDateContractType {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        margin-bottom: 10px;
+    }
+
+    .offerDetail {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 75%;
+        margin: auto;
+    }
+
+    .card.citySalaryOfferDetail {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        margin-bottom: 10px;
+    }
+
+    .descriptionCompanyOfferDetail {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    .skillsOfferDetail {
+        display: flex;
+        margin-top: 20px;
+    }
+
+    .softSkillsOfferDetail {
+        margin-left: 10px;
+    }
+
+    .list-group.softSkills {
+        padding-top: 10px;
+    }
+
+    .list-group.hardSkills {
+        padding-top: 10px;
+    }
+
+    h4.card-header {
+        width: fit-content;
+    }
+
+    #textOfferDetail {
+        margin-top: 10px;
+    }
+
+    .buttonPostule {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
     /*offer list matches*/
     #announce-card-matches {
         width: 90%;
         margin-top: 15px;
+    }
+
+    /* Detail Candidate - Candidate Side */
+    #skillsList {
+        display: flex;
+        flex-direction: row;
+        padding: 10px;
+    }
+
+    #list-HardSkill {
+        line-height: normal;
+        padding-left: 10px;
+        padding-right: 10px;
+        font-size: 13px;
+    }
+
+    #list-SoftSkill {
+        line-height: normal;
+        padding-left: 10px;
+        padding-right: 10px;
+        font-size: 13px;
+    }
+
+    #buttonDetails {
+        display: flex;
+        justify-content: space-around;
     }
 }

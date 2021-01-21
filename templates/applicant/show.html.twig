@@ -1,34 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Applicant{% endblock %}
+{% block title %}Ma fiche candidat{% endblock %}
 
 {% block body %}
-    <h1>Applicant</h1>
+    {% include '/applicant/_navbar.html.twig' %}
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ applicant.id }}</td>
-            </tr>
-            <tr>
-                <th>Firstname</th>
-                <td>{{ applicant.firstname }}</td>
-            </tr>
-            <tr>
-                <th>Lastname</th>
-                <td>{{ applicant.lastname }}</td>
-            </tr>
-            <tr>
-                <th>Personality</th>
-                <td>{{ applicant.personality }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('applicant_index') }}">back to list</a>
-
-    <a href="{{ path('applicant_edit', {'id': applicant.id}) }}">edit</a>
-
-    {{ include('applicant/_delete_form.html.twig') }}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4" id="candidateInfo">
+                <h1>{{ applicant.firstname ~ ' ' ~ applicant.lastname }}</h1>
+                <p class="text-center">{{ applicant.personality }}</p>
+                <p class="text-center">{{ applicant.city }}</p>
+                <div id="buttonDetails">
+                    <a href="{{ path('applicant_index') }}"><button class="btn btn-vertOze">Retour à l'accueil</button></a>
+                    <a href="{{ path('applicant_edit', {'id': applicant.id}) }}"><button class="btn  btn-vertOze">Modifier mon profil</button></a>
+                </div>
+            </div>
+            <div class="col-md" id="skillsList">
+                <ul class="list-group" id="list-HardSkill">
+                    <li class="list-group-item active btn-bleuOze">Compétences Techniques</li>
+                    {% for hardSkill in applicant.hardSkills %}
+                        <li class="list-group-item">{{ hardSkill.name }}</li>
+                    {% endfor %}
+                </ul>
+                <ul class="list-group" id="list-SoftSkill">
+                    <li class="list-group-item active btn-bleuOze">Compétences Comportementales</li>
+                    {% for softSkill in applicant.softSkills %}
+                        <li class="list-group-item">{{ softSkill.name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
 {% endblock %}
