@@ -1,0 +1,12 @@
+{% extends '_mail_layout.html.twig' %}
+
+{% block mailTitle %}
+    Un candidat a postulé à une de vos offre.
+{% endblock %}
+    {% block mailContent%}
+        {{ applicant.firstname }} a postulé à votre offre {{ offer.title }}:<br>
+        sa mobilité : {{ applicant.mobility }}<br>
+        sa disponibilité {{ applicant.availability }}<br>
+
+        Nous vous invitons à vous rendre sur le site OZEO pour plus de détails et pour contacter le candidat
+    {% endblock%}

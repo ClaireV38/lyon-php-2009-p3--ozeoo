@@ -16,6 +16,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -128,13 +130,29 @@ class ApplicantController extends AbstractController
      * @param EntityManagerInterface $entityManager
      * @return RedirectResponse
      */
-    public function apply(Offer $offer, EntityManagerInterface $entityManager)
-    {
+    public function apply(
+        Offer $offer,
+        EntityManagerInterface $entityManager,
+        MailerInterface $mailer
+    ): Response {
 
         /* @phpstan-ignore-next-line */
         $applicant = $this->getUser()->getApplicant();
         $applicant->addOffer($offer);
         $entityManager->flush();
+
+        /* @phpstan-ignore-next-line */
+        if($offer->getCompany() != null && $offer->getCompany()->getUser() != null){
+        $email = (new Email())
+            ->from($this->getParameter('mailer_from'))
+            ->to($offer->getCompany()->getUser()->getEmail())
+            ->subject('Un candidat a postulé à une de vos offres')
+            ->html($this->renderView('applicant/applicationOfferEmail.html.twig', [
+                'applicant' => $applicant,
+                'offer' => $offer
+            ]));
+        $mailer->send($email);
+        }
 
         return $this->redirectToRoute('applicant_index');
     }

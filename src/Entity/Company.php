@@ -31,7 +31,7 @@ class Company implements \Serializable
      * @ORM\Column(type="string", length=255)
      * @var string
      * @Assert\NotBlank(message="Veuillez saisir votre nom.")
-     * @Assert\Length(max="255", maxMessage="Le nom ne doit pas exceder 255 caractères.")
+     * g
      */
     private $name;
 
