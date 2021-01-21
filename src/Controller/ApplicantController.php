@@ -127,10 +127,12 @@ class ApplicantController extends AbstractController
     /**
      * @Route ("/Apply/{id}", name="applicant_offer_apply", methods={"GET"})
      * @param Offer $offer
+     * @param Company $company
      * @param EntityManagerInterface $entityManager
      * @return RedirectResponse
      */
     public function apply(
+        Company $company,
         Offer $offer,
         EntityManagerInterface $entityManager,
         MailerInterface $mailer
@@ -142,15 +144,23 @@ class ApplicantController extends AbstractController
         $entityManager->flush();
 
         /* @phpstan-ignore-next-line */
-        $email = (new Email())
-            ->from($this->getParameter('mailer_from'))
-            ->to($offer->getCompany()->getUser()->getEmail())
-            ->subject('Un candidat a postulé à une de vos offres')
-            ->html($this->renderView('applicant/applicationOfferEmail.html.twig', [
-                'applicant' => $applicant,
-                'offer' => $offer
-            ]));
-        $mailer->send($email);
+        $mailTo = $offer->getCompany()->getUser()->getEmail();
+        /* @phpstan-ignore-next-line */
+        if ($offer->getCompany()->getContactEmail()) {
+            /* @phpstan-ignore-next-line */
+            $mailTo = $offer->getCompany()->getContactEmail();
+        }
+        if ($mailTo !== null) {
+            $email = (new Email())
+                ->from($this->getParameter('mailer_from'))
+                ->to($mailTo)
+                    ->subject('Un candidat a postulé à une de vos offres')
+                    ->html($this->renderView('applicant/applicationOfferEmail.html.twig', [
+                        'applicant' => $applicant,
+                        'offer' => $offer
+                    ]));
+            $mailer->send($email);
+        }
 
         return $this->redirectToRoute('applicant_index');
     }

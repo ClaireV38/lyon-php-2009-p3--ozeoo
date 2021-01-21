@@ -44,6 +44,7 @@ class Company implements \Serializable
      */
     private $siretNb;
 
+    /* @phpstan-ignore-next-line */
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @var string
@@ -155,8 +156,9 @@ class Company implements \Serializable
         return $this->contactEmail;
     }
 
-    public function setContactEmail(string $contactEmail): self
+    public function setContactEmail(?string $contactEmail): self
     {
+        /* @phpstan-ignore-next-line */
         $this->contactEmail = $contactEmail;
 
         return $this;
