@@ -55,45 +55,6 @@ class SkillRepository extends ServiceEntityRepository
             ;
     }
 
-    /**
-     * @param Offer $offer
-     * @param Applicant $applicant
-     * @return int|mixed|string
-     */
-    public function findMatchingSkills(Offer $offer, Applicant $applicant)
-    {
-        return $this->createQueryBuilder('s')
-            ->innerJoin('s.hardApplicants', 'aps')
-            ->innerJoin('s.hardOffers', 'hos')
-            ->innerJoin('s.softApplicants', 'sas')
-            ->innerJoin('s.softOffers', 'sos')
-            ->where('aps = :appl')
-            ->where('hos = :offr')
-            ->andWhere('sas = :appl')
-            ->andWhere('sos = :offr')
-            ->setParameter('appl', $applicant)
-            ->setParameter('offr', $offer)
-            ->getQuery()
-            ->getResult()
-            ;
-    }
-//    /**
-//     * @param Offer $offer
-//     * @param Applicant $applicant
-//     * @return int|mixed|string
-//     */
-//    public function findMatchSoftSkills(Offer $offer, Applicant $applicant)
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->join('s.softOffers', 'o', 'WITH', 'o IN (:offer)')
-//            ->join('s.softApplicants', 'a', 'WITH', 'a IN (:applicant)')
-//            ->setParameter('offer', $offer )
-//            ->setParameter('applicant', $applicant)
-//            ->getQuery()
-//            ->getResult()
-//            ;
-//    }
-
     // /**
     //  * @return Skill[] Returns an array of Skill objects
     //  */
