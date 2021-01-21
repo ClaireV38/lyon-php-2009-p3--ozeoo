@@ -36,6 +36,7 @@ class ApplicantRegisterType extends AbstractType
                 'second_options' => ['label' => 'Confirmation du mot de passe'],
             ])
             ->add('accepterLesTermes', CheckboxType::class, [
+                'label' => false,
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([

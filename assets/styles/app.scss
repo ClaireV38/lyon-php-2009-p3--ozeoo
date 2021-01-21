@@ -518,6 +518,17 @@ h1 {
     /* Company Registration */
     #company-register {
         margin: auto;
+        width: 35%;
+    }
+
+    #registerFormShape {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    #registerBtn {
+        width: 35%;
+        font-size: 20px;
     }
 
     /* Offer form */
@@ -570,5 +581,20 @@ h1 {
     #announce-card-matches {
         width: 90%;
         margin-top: 15px;
+    }
+
+    /*Legal Terms*/
+    #legalTerms {
+        margin: auto;
+        width: 50%;
+    }
+
+    #applicantImg {
+        width: 560px;
+        height: 360px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 30px;
     }
 }

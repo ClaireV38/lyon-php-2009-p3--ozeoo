@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mentions légales{% endblock %}
+
+{% block body %}
+    {% include '/applicant/_navbar.html.twig' %}
+    <div class="card" id="legalTerms">
+        <div class="card-header">
+            Ozéo, une plateforme d'Ozé La Diversité
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Mentions légales</h5>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultrices felis velit,
+                quis tempor ipsum vulputate at. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+            <a href="{{ path("home") }}" class="btn btn-bleuOze">Retour à l'accueil</a>
+        </div>
+    </div>
+{% endblock %}
