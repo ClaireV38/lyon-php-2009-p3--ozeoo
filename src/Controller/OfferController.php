@@ -142,7 +142,7 @@ class OfferController extends AbstractController
      */
     public function applicantShow(Offer $offer, Applicant $applicant): Response
     {
-        return $this->render('applicant/show.html.twig', [
+        return $this->render('offer/applicant_show.html.twig', [
             'applicant' => $applicant,
         ]);
     }
