@@ -27,7 +27,34 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
         $faker  =  Faker\Factory::create('fr_FR');
-        for ($i = 1; $i <= self::NB_OBJECT; $i++) {
+        $offer1 = new Offer();
+        $offer1->setCity($faker->text(20));
+        $offer1->setCompany($this->getReference('company_' . 1));
+        for ($j = 1; $j <= rand(0, 5); $j++) {
+            $offer1->addApplicant($this->getReference('applicant_' . rand(1, ApplicantFixtures::NB_OBJECT)));
+        }
+        $offer1->setTitle($faker->sentence(6, true));
+        $offer1->setContractType($faker->sentence(2, true));
+        $offer1->setSalary($faker->bothify('????? ??? #### € ???'));
+        $offer1->setDuration($faker->sentence(4, true));
+        $offer1->setStartDate(
+            $faker->dateTimebetween(new DateTime('now'), '2023-00-00 00:00:00')
+        );
+        $offer1->setCreationDate(new DateTime('now'));
+        $offer1->setEndDate(
+            $faker->dateTimeBetween($offer1->getStartDate(), '2023-00-00 00:00:00')
+        );
+        $offer1->setDescription($faker->text(255));
+        $offer1->setIsAnonymous(rand(0, 1));
+        for ($j = 1; $j <= 10; $j++) {
+            $offer1->addHardSkill($this->getReference('hardskill_' . $j));
+        }
+        for ($j = 1; $j <= 10; $j++) {
+            $offer1->addSoftSkill($this->getReference('softskill_' . $j));
+        }
+        $manager->persist($offer1);
+        $this->addReference('offer_' . 1, $offer1);
+        for ($i = 2; $i <= self::NB_OBJECT; $i++) {
             $offer = new Offer();
             $offer->setCity($faker->text(20));
             $offer->setCompany($this->getReference('company_' . rand(1, CompanyFixtures::NB_OBJECT)));
