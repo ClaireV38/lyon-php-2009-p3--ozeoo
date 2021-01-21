@@ -35,7 +35,9 @@ class ApplicantType extends AbstractType
             ->add('personality')
             ->add('mobility', TextType::class)
             ->add('city', TextType::class)
-            ->add('availability', TextType::class)
+            ->add('availability', TextType::class, [
+                'required'   => false,
+            ])
             ->add('softSkills', EntityType::class, [
                 'multiple' => true,
                 'query_builder' => function (EntityRepository $er) {

@@ -26,13 +26,53 @@ class SkillRepository extends ServiceEntityRepository
      * @param Applicant $applicant
      * @return int|mixed|string
      */
-    public function findMatchSkills(Offer $offer, Applicant $applicant)
+    public function findMatchHardSkills(Offer $offer, Applicant $applicant)
     {
         return $this->createQueryBuilder('s')
-            ->join('s.hardOffers', 'o', 'WITH', 'o IN (:offer)')
-            ->join('s.hardApplicants', 'a', 'WITH', 'a IN (:applicant)')
+            ->innerJoin('s.hardOffers', 'ho', 'WITH', 'ho IN (:offer)')
+            ->innerJoin('s.hardApplicants', 'ha', 'WITH', 'ha IN (:applicant)')
             ->setParameter('offer', $offer)
             ->setParameter('applicant', $applicant)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    /**
+     * @param Offer $offer
+     * @param Applicant $applicant
+     * @return int|mixed|string
+     */
+    public function findMatchSoftSkills(Offer $offer, Applicant $applicant)
+    {
+        return $this->createQueryBuilder('s')
+            ->innerJoin('s.softOffers', 'so', 'WITH', 'so IN (:offer)')
+            ->innerJoin('s.softApplicants', 'sa', 'WITH', 'sa IN (:applicant)')
+            ->setParameter('offer', $offer)
+            ->setParameter('applicant', $applicant)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    /**
+     * @param Offer $offer
+     * @param Applicant $applicant
+     * @return int|mixed|string
+     */
+    public function findMatchingSkills(Offer $offer, Applicant $applicant)
+    {
+        return $this->createQueryBuilder('s')
+            ->innerJoin('s.hardApplicants', 'aps')
+            ->innerJoin('s.hardOffers', 'hos')
+            ->innerJoin('s.softApplicants', 'sas')
+            ->innerJoin('s.softOffers', 'sos')
+            ->where('aps = :appl')
+            ->where('hos = :offr')
+            ->andWhere('sas = :appl')
+            ->andWhere('sos = :offr')
+            ->setParameter('appl', $applicant)
+            ->setParameter('offr', $offer)
             ->getQuery()
             ->getResult()
             ;

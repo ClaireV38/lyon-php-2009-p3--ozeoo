@@ -90,7 +90,7 @@ class Applicant
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Length(max="255", maxMessage="Le texte ne doit pas exceder 255 caractères.")
-     * @var string
+     * @var string|null
      */
     private $availability;
 
@@ -258,7 +258,7 @@ class Applicant
         return $this->availability;
     }
 
-    public function setAvailability(string $availability): self
+    public function setAvailability(?string $availability): self
     {
         $this->availability = $availability;
 

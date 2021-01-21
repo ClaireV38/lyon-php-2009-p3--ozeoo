@@ -6,6 +6,7 @@ use App\Entity\Applicant;
 use App\Entity\Offer;
 use App\Form\OfferType;
 use App\Repository\OfferRepository;
+use App\Repository\SkillRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -137,13 +138,19 @@ class OfferController extends AbstractController
      * @Route("/{offerId}/applicant/{applicantId}", name="offer_applicant_show", methods={"GET"})
      * @ParamConverter("offer", class="App\Entity\Offer", options={"mapping": {"offerId": "id"}})
      * @ParamConverter("applicant", class="App\Entity\Applicant", options={"mapping": {"applicantId": "id"}})
+     * @param Offer $offer
      * @param Applicant $applicant
+     * @param SkillRepository $skillRepository
      * @return Response
      */
-    public function applicantShow(Offer $offer, Applicant $applicant): Response
+    public function applicantShow(Offer $offer, Applicant $applicant, SkillRepository $skillRepository): Response
     {
+        $matchHardSkills = $skillRepository->findMatchHardSkills($offer, $applicant);
+        $matchSoftSkills = $skillRepository->findMatchSoftSkills($offer, $applicant);
         return $this->render('offer/applicant_show.html.twig', [
             'applicant' => $applicant,
+            'matchHardSkills' => $matchHardSkills,
+            'matchSoftSkills' => $matchSoftSkills,
         ]);
     }
 }
