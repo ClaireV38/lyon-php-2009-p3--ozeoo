@@ -38,7 +38,7 @@ security:
     role_hierarchy:
         ROLE_COMPANY: ROLE_USER
         ROLE_APPLICANT: ROLE_USER
-        ROLE_ADMIN: ROLE_COMPANY, ROLE_APPLICANT
+        ROLE_ADMIN: ROLE_USER
     access_control:
         - { path: ^/applicant, roles: ROLE_APPLICANT }
         - { path: ^/company, roles: ROLE_COMPANY }
