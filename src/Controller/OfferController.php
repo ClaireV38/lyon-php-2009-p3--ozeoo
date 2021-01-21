@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Applicant;
 use App\Entity\Offer;
 use App\Form\OfferType;
 use App\Repository\OfferRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -103,5 +105,45 @@ class OfferController extends AbstractController
         }
 
         return $this->redirectToRoute('offer_index');
+    }
+
+    /**
+     * @Route("/{id}/applicants", name="offer_applicants", methods={"GET"})
+     * @param Offer $offer
+     * @return Response
+     */
+    public function showApplicants(Offer $offer, OfferRepository $offerRepository): Response
+    {
+        $applicants = $offer->getApplicants();
+        $applicantsID = [];
+        foreach ($applicants as $applicant) {
+            $applicantsID[] = $applicant->getId();
+        }
+        $matchApplicants = $offerRepository->findMatchingApplicantsForOffer($offer);
+        $applicantsInArray = [];
+        foreach ($matchApplicants as $matchApplicant) {
+            if (in_array($matchApplicant['applicant_id'], $applicantsID)) {
+                $applicantsInArray[] = $matchApplicant;
+            }
+        }
+
+        return $this->render('offer/applicants.html.twig', [
+            'offer' => $offer,
+            'applicants' => $applicantsInArray
+        ]);
+    }
+
+    /**
+     * @Route("/{offerId}/applicant/{applicantId}", name="offer_applicant_show", methods={"GET"})
+     * @ParamConverter("offer", class="App\Entity\Offer", options={"mapping": {"offerId": "id"}})
+     * @ParamConverter("applicant", class="App\Entity\Applicant", options={"mapping": {"applicantId": "id"}})
+     * @param Applicant $applicant
+     * @return Response
+     */
+    public function applicantShow(Offer $offer, Applicant $applicant): Response
+    {
+        return $this->render('applicant/show.html.twig', [
+            'applicant' => $applicant,
+        ]);
     }
 }
