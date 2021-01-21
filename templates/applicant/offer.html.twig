@@ -11,6 +11,11 @@
                     <div class="d-inline-block mb-2 mr-md-2 w-100 mb-0 text-center">
                         <h5 class="card-title" id="title-announce-desktop">{{ matchOffer.offer_title }}</h5>
                         <p class="mb-0"> Publié le : {{ matchOffer.creation_date|date("d/m/Y") }}</p>
+                        {% if matchOffer in offers %}
+                            <div class="alert alert-bleuOze" id="messagePostule" role="alert">
+                                Vous avez déja postulé à cette offre
+                            </div>
+                        {% endif %}
                     </div>
                     <div class="row-info-right w-100 flex-md-row">
                         <div class="row-info-nb " id="textMatchOffer">
@@ -29,5 +34,8 @@
                     </div>
                 </div>
             </div>
+
+            {% else %}
+                <h5 class="text-center"> vous n'avez pas encore d'annonces qui match vos compétences</h5>
     {% endfor %}
 {% endblock %}

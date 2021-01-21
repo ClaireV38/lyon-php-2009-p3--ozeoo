@@ -110,6 +110,7 @@ class OfferController extends AbstractController
     /**
      * @Route("/{id}/applicants", name="offer_applicants", methods={"GET"})
      * @param Offer $offer
+     * @param OfferRepository $offerRepository
      * @return Response
      */
     public function showApplicants(Offer $offer, OfferRepository $offerRepository): Response

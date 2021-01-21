@@ -83,7 +83,10 @@
             </div>
         </div>
     </div>
-    <div class="buttonPostule">
-        <a class="btn btn-vertOze" href="{{ path('applicant_offer_apply' , {id: offer.id}) }}">Postuler</a>
-    </div>
+    {% if matchOffer in offers %}
+    {% else %}
+        <div class="buttonPostule">
+            <a class="btn btn-vertOze" href="{{ path('applicant_offer_apply' , {id: offer.id}) }}">Postuler</a>
+        </div>
+    {% endif %}
 {% endblock %}

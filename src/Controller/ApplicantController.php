@@ -95,11 +95,23 @@ class ApplicantController extends AbstractController
      */
     public function showMatchOffers(ApplicantRepository $applicantRepository, Applicant $applicant): Response
     {
+        $offers = $applicant->getOffers();
+        $offerId = [];
+        foreach ($offers as $offer) {
+            $offerId[] = $offer->getId();
+        }
         /* @phpstan-ignore-next-line */
         $matchOffers = $applicantRepository->findMatchingOffersForApplicant($this->getUser()->getApplicant());
+        $offersInArray = [];
+        foreach ($matchOffers as $matchOffer) {
+            if (in_array($matchOffer['offer_id'], $offerId)) {
+                $offersInArray[] = $matchOffer;
+            }
+        }
         return $this->render('applicant/offer.html.twig', [
             'applicant' => $applicant,
-            'matchOffers' => $matchOffers
+            'matchOffers' => $matchOffers,
+            'offers' => $offersInArray
         ]);
     }
 
@@ -115,6 +127,7 @@ class ApplicantController extends AbstractController
      */
     public function showOfferDetail(Applicant $applicant, Offer $offer, Company $company): Response
     {
+
         return $this->render('applicant/offerDetail.html.twig', [
            'applicant' => $applicant,
            'offer' => $offer,
@@ -133,8 +146,11 @@ class ApplicantController extends AbstractController
 
         /* @phpstan-ignore-next-line */
         $applicant = $this->getUser()->getApplicant();
+
         $applicant->addOffer($offer);
         $entityManager->flush();
+
+        $this->addFlash('success', 'Félicitations tu viens de postuler à l\'offre');
 
         return $this->redirectToRoute('applicant_index');
     }
