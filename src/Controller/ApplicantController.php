@@ -142,7 +142,6 @@ class ApplicantController extends AbstractController
         $entityManager->flush();
 
         /* @phpstan-ignore-next-line */
-        if($offer->getCompany() != null && $offer->getCompany()->getUser() != null){
         $email = (new Email())
             ->from($this->getParameter('mailer_from'))
             ->to($offer->getCompany()->getUser()->getEmail())
@@ -152,7 +151,6 @@ class ApplicantController extends AbstractController
                 'offer' => $offer
             ]));
         $mailer->send($email);
-        }
 
         return $this->redirectToRoute('applicant_index');
     }
