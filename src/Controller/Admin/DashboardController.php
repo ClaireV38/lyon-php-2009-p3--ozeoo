@@ -11,17 +11,30 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\ApplicantRepository;
+use App\Repository\OfferRepository;
 
 class DashboardController extends AbstractDashboardController
 {
 
-    protected UserRepository $UserRepository;
-    protected CompanyRepository $CompanyRepository;
+    protected UserRepository $userRepository;
+    protected CompanyRepository $companyRepository;
+    protected ApplicantRepository $applicantRepository;
+    protected OfferRepository $offerRepository;
+    /**
+     * @var CompanyRepository
+     */
 
-    public function __construct(UserRepository $userRepository, CompanyRepository $companyRepository)
-    {
-        $this->UserRepository = $userRepository;
-        $this->CompanyRepository = $companyRepository;
+    public function __construct(
+        UserRepository $userRepository,
+        CompanyRepository $companyRepository,
+        ApplicantRepository $applicantRepository,
+        OfferRepository $offerRepository
+    ) {
+        $this->userRepository = $userRepository;
+        $this->companyRepository = $companyRepository;
+        $this->applicantRepository = $applicantRepository;
+        $this->offerRepository = $offerRepository;
     }
 
     /**
@@ -29,7 +42,11 @@ class DashboardController extends AbstractDashboardController
      */
     public function index(): Response
     {
-        return parent::index();
+        return $this->render('@EasyAdmin/welcome.html.twig', [
+            'countApplicant' => $this->applicantRepository->countApplicant(),
+            'countCompany' => $this->companyRepository->countCompany(),
+            'countOffers' => $this->offerRepository->countOffers()
+            ]);
     }
 
     public function configureDashboard(): Dashboard
@@ -41,8 +58,6 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Liste entreprise', 'fas fa-list', User::class);
-        yield MenuItem::linkToCrud('Liste Company', 'fas fa-list', Company::class);
-
+        yield MenuItem::linkToCrud('Gestion Entreprises', 'fas fa-list', Company::class);
     }
 }

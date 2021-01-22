@@ -14,13 +14,15 @@ use EasyCorp\Bundle\EasyAdminBundle\Filter\BooleanFilter;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Router\CrudUrlGenerator;
 
 class CompanyCrudController extends AbstractCrudController
 {
-    private $em;
+    private $emi;
 
-    public function __construct(EntityManagerInterface $em) {
-        $this->em = $em;
+    public function __construct(EntityManagerInterface $emi)
+    {
+        $this->emi = $emi;
     }
 
     public static function getEntityFqcn(): string
@@ -31,16 +33,15 @@ class CompanyCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
-            TextField::new('name'),
-            TextField::new('siretNb'),
-            TextField::new('apeNb'),
-            BooleanField::new('isVerified')
+            TextField::new('name', 'Nom de l\'entreprise'),
+            TextField::new('siretNb', 'Numéro Siret'),
+            TextField::new('apeNb', 'Numéro APE'),
+            BooleanField::new('isVerified', 'Vérifié')->setFormTypeOption('disabled', 'disabled'),
         ];
     }
     public function configureActions(Actions $actions): Actions
     {
-        $activeCompany = Action::new('activateCompany', 'Activate', 'fa fa-file-invoice')
+        $activeCompany = Action::new('activateCompany', 'Activate', 'fas fa-clone')
             ->linkToCrudAction('activateCompany');
         return $actions
             // ...
@@ -52,14 +53,9 @@ class CompanyCrudController extends AbstractCrudController
         $company = $context->getEntity()->getInstance();
         $user = $company->getUser();
         $user->setIsVerified('true');
-        $this->em->persist($user);
-        $this->em->flush();
+        $this->emi->persist($user);
+        $this->emi->flush();
 
-        return $this->redirectToRoute('easyadmin', array(
-            'action' => 'edit',
-            'id' => $company->getId(),
-            'entity' => $company
-        ));
-        // add your logic here...
+        return $this->redirect($this->get(CrudUrlGenerator::class)->build()->setAction(Action::EDIT)->generateUrl());
     }
 }

@@ -56,6 +56,12 @@ class ApplicantRepository extends ServiceEntityRepository
         return $sql->getArrayResult();
     }
 
+    public function countApplicant()
+    {
+        $queryBuilder =  $this->createQueryBuilder('a');
+        $queryBuilder->select('COUNT(a.id) as value');
+        return $queryBuilder->getQuery()->getOneOrNullResult();
+    }
     // /**
     //  * @return Applicant[] Returns an array of Applicant objects
     //  */
