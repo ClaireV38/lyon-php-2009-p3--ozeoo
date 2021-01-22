@@ -43,6 +43,8 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     {
         return $this->createQueryBuilder('u')
             ->addSelect('c.name')
+            ->addSelect('c.apeNb')
+            ->addSelect('c.siretNb')
             ->andWhere('u.isVerified = 0')
             ->join('u.company', 'c')
             ->orderBy('c.name', 'ASC')

@@ -6,6 +6,9 @@ use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use App\Repository\UserRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\ArrayFilter;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
@@ -13,7 +16,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Orm\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
-use App\Entity\Company;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class UserCrudController extends AbstractCrudController
 {
@@ -32,25 +35,7 @@ class UserCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+            TextField::new('email'),
         ];
     }*/
-
-/*    public function createIndexQueryBuilder($searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder
-    {
-
-        $response = $this->get(User::class)->createQueryBuilder($searchDto, $entityDto, $fields, $filters);
-        $response->where("roles NOT LIKE '1'");
-        return $response;
-/*        $qb = $this->get(User::class)->
-            createQueryBuilder('u')
-            ->addSelect('c.name')
-            ->andWhere('u.isVerified = 0')
-            ->join('u.company', 'c')
-            ->orderBy('c.name', 'ASC')
-            ->getQuery()
-            ->getResult();
-        return $qb;*/
-//    }
 }
