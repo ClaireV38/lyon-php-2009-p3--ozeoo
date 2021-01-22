@@ -287,14 +287,13 @@ h1 {
 
 /* Detail Candidate - Candidate Side */
 #list-HardSkill {
-    line-height: normal;
-    margin: auto auto 10px auto;
     font-size: 13px;
+    line-height: initial;
 }
 
 #list-SoftSkill {
-    line-height: normal;
     font-size: 13px;
+    line-height: initial;
 }
 
 #buttonDetails {
@@ -302,7 +301,6 @@ h1 {
     justify-content: space-around;
     margin-bottom: 10px;
 }
-
 
 /*MatchOffer*/
 #announce-card-matchOffer {
@@ -676,22 +674,22 @@ h1 {
     /* Detail Candidate - Candidate Side */
     #skillsList {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
+        align-items: center;
         padding: 10px;
     }
 
-    #list-HardSkill {
-        line-height: normal;
-        padding-left: 10px;
-        padding-right: 10px;
+    #list-SoftSkill {
+        width: 90%;
         font-size: 13px;
+        line-height: initial;
     }
 
-    #list-SoftSkill {
-        line-height: normal;
-        padding-left: 10px;
-        padding-right: 10px;
+    #list-HardSkill {
+        width: 90%;
+        margin-bottom: 10px;
         font-size: 13px;
+        line-height: initial;
     }
 
     #buttonDetails {
@@ -702,5 +700,11 @@ h1 {
     #messagePostule {
         width: fit-content;
         margin: auto;
+    }
+
+    /*offer list matches*/
+    #announce-card-matches {
+        width: 90%;
+        margin-top: 15px;
     }
 }

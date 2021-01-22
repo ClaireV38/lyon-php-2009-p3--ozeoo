@@ -97,10 +97,16 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         }
 
         if (!$user->getIsVerified()) {
-            // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException(
-                'Veuillez confirmer votre adresse email en cliquant sur le lien de confirmation qui vous a été envoyé.'
-            );
+            if (in_array('ROLE_APPLICANT', $user->getRoles())) {
+                throw new CustomUserMessageAuthenticationException(
+                    'Veuillez confirmer votre adresse email en cliquant
+                    sur le lien de confirmation qui vous a été envoyé.'
+                );
+            } elseif (in_array('ROLE_COMPANY', $user->getRoles())) {
+                throw new CustomUserMessageAuthenticationException(
+                    'Votre inscription est en cours de validation.'
+                );
+            }
         }
 
         return $user;

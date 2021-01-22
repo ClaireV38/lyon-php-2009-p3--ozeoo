@@ -12,16 +12,16 @@
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
     </head>
-    {% block body %}{% endblock %}
-    {% for category, messages in app.flashes %}
-        {% for message in messages %}
-            <div class="alert alert-{{ category }}">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endfor %}
     <body>
         <main>
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            {% block body %}{% endblock %}
         </main>
         {% include '_footer.html.twig' %}
     <script src="/build/app.js"></script>
