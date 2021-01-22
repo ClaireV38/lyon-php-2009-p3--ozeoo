@@ -76,7 +76,7 @@ class Applicant
     private $hardSkills;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Offer::class, mappedBy="applicant")
+     * @ORM\ManyToMany(targetEntity=Offer::class, mappedBy="applicants")
      * @var Collection<Offer>
      */
     private $offers;
