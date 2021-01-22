@@ -43,8 +43,21 @@
                     </button>
                 </a>
             </form>
-            <a id="loginPageButtons" href="{{ path('app_register_applicant') }}" class="btn btn-lg btn-bleuOze btn-center btn-235px">Inscription candidat</a>
-            <a id="loginPageButtons" href="{{ path('app_register_company') }}" class="btn btn-lg btn-orangeOze btn-center btn-235px">Inscription entreprise</a>
+                <div class="card" id="buttonInscription">
+
+                    <ul class="list-group list-group-flush">
+                        <div>
+                            <a id="loginPageButtons" href="{{ path('app_register_applicant') }}" >
+                                <li class="list-group-item bg-bleuOze">Inscription candidat</li>
+                            </a>
+                        </div>
+                        <div>
+                            <a id="loginPageButtons" href="{{ path('app_register_company') }}" >
+                                <li class="list-group-item bg-orangeOze">Inscription entreprise</li>
+                            </a>
+                        </div>
+                    </ul>
+                </div>
         </div>
             <img id="diversityBig1" src="{{ asset('build/images/diversityBig1.jpg') }}" height="350" width="500"
                  class="ml-2" alt="Montage d'images de différentes personnes représentant la diversité">
