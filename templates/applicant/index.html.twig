@@ -4,7 +4,7 @@
 
 {% block body%}
     {% include '/applicant/_navbar.html.twig' %}
-        {% if applicant.firstname is defined %}
+        {% if applicant.firstname is not null %}
             <div class="container applicant_index_tuto">
                 <h1 class="applicant_home_welcome_mainTitle">Bienvenue {{ applicant.firstname }} !</h1>
             </div>

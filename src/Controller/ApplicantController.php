@@ -25,16 +25,30 @@ use Doctrine\Common\Collections\ArrayCollection;
 class ApplicantController extends AbstractController
 {
     /**
-     * @Route("/", name="applicant_index", methods={"GET"})
+     * @Route("/", name="applicant_index", methods={"GET","POST"})
+     * @param Request $request
      * @return Response
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
         /* @phpstan-ignore-next-line */
         $applicant = $this->getUser()->getApplicant();
 
+        $form = $this->createForm(ApplicantType::class, $applicant);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($applicant);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('applicant_index');
+        }
+
+
         return $this->render('applicant/index.html.twig', [
             'applicant' => $applicant,
+            'form' => $form->createView(),
         ]);
     }
 
