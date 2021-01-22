@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Candidat ayant postulé{% endblock %}
+
+{% block body %}
+    {% include '/company/_navbar.html.twig' %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4" id="candidateInfo">
+                <h1>{{ applicant.firstname }}</h1>
+                <p class="text-center">{{ applicant.personality }}</p>
+                <p class="text-center">{{ applicant.city }}</p>
+                <div id="buttonDetails">
+                    <a href="{{ path('company_index') }}"><button class="btn btn-vertOze">Retour à l'accueil</button></a>
+                </div>
+            </div>
+            <div class="col-md" id="skillsList">
+                <ul class="list-group" id="list-HardSkill">
+                    <li class="list-group-item active btn-bleuOze">Compétences techniques</li>
+                    {% for hardSkill in applicant.hardSkills %}
+                        <li class="list-group-item {% if hardSkill in matchHardSkills %} bg-vertOze {% endif %}">
+                            {{ hardSkill.name }}</li>
+                    {% endfor %}
+                </ul>
+                <ul class="list-group" id="list-SoftSkill">
+                    <li class="list-group-item active btn-bleuOze">Compétences Comportementales</li>
+                    {% for softSkill in applicant.softSkills %}
+                        <li class="list-group-item {% if softSkill in matchSoftSkills %} bg-vertOze {% endif %}">
+                            {{ softSkill.name }} </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
