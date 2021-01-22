@@ -154,7 +154,6 @@ class ApplicantController extends AbstractController
         $applicant = $this->getUser()->getApplicant();
         $applicant->addOffer($offer);
         $entityManager->flush();
-      
         $this->addFlash('success', 'Félicitation tu viens de postuler à l\'offre');
 
         /* @phpstan-ignore-next-line */
