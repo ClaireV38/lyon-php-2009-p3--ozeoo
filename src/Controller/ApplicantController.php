@@ -150,7 +150,7 @@ class ApplicantController extends AbstractController
         $applicant->addOffer($offer);
         $entityManager->flush();
 
-        $this->addFlash('success', 'Félicitation tu viens de postuler à l\'offre');
+        $this->addFlash('success', 'Félicitations tu viens de postuler à l\'offre');
 
         return $this->redirectToRoute('applicant_index');
     }
