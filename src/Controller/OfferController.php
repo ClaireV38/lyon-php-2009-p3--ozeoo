@@ -105,7 +105,7 @@ class OfferController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('offer_index');
+        return $this->redirectToRoute('company_index');
     }
 
     /**
