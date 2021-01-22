@@ -8,13 +8,21 @@
             <div class="container applicant_index_tuto">
                 <h1 class="applicant_home_welcome_mainTitle">Bienvenue {{ applicant.firstname }} !</h1>
             </div>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-4" id="candidateInfo">
-                        <p class="text-center">{{ applicant.personality }}</p>
-                        <p class="text-center">{{ applicant.city }}</p>
+            <div class="ApplicantInfo">
+{#                    <div class="col-md-4" id="candidateInfo">#}
+{#                        <p class="text-center">{{ applicant.personality }}</p>#}
+{#                        <p class="text-center">{{ applicant.city }}</p>#}
+{#                    </div>#}
+                    <div id="listApplicantInfo">
+                        <ul class="list-group list-group-flush" >
+                            <li class="list-group-item">Description : {{ applicant.personality }}</li>
+                            <li class="list-group-item">Ville : {{ applicant.city }}</li>
+                            <li class="list-group-item">Mobilité : {{ applicant.mobility }}</li>
+                            <li class="list-group-item">Porta ac consectetur ac</li>
+                            <li class="list-group-item">Vestibulum at eros</li>
+                        </ul>
                     </div>
-                    <div class="col-md" id="skillsList">
+                    <div id="skillsList">
                         <ul class="list-group" id="list-HardSkill">
                             <li class="list-group-item active btn-bleuOze">Compétences techniques</li>
                             {% for hardSkill in applicant.hardSkills %}
@@ -28,7 +36,6 @@
                             {% endfor %}
                         </ul>
                     </div>
-                </div>
             </div>
         {% else %}
         <div class="applicantForm">

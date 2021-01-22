@@ -313,12 +313,27 @@ h1 {
 }
 
 @media (min-width: 768px) {
+
+    .ApplicantInfo {
+        display: flex;
+        justify-content: space-around;
+    }
+    #skillsList {
+        width: 50%;
+    }
+
+    #listApplicantInfo {
+        width: fit-content;
+    }
+
     #formLoginPhoto {
         justify-content: space-evenly;
     }
+
     #presentationOze {
         font-size: larger;
     }
+
     #home-list-pictures {
         background-color: #ffffff;
     }
