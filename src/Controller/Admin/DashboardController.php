@@ -29,9 +29,7 @@ class DashboardController extends AbstractDashboardController
      */
     public function index(): Response
     {
-        return $this->render('@EasyAdmin/welcome.html.twig', [
-            'companyPending' => $this->UserRepository->findByExampleField()
-        ]);
+        return parent::index();
     }
 
     public function configureDashboard(): Dashboard
@@ -44,5 +42,7 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Liste entreprise', 'fas fa-list', User::class);
+        yield MenuItem::linkToCrud('Liste Company', 'fas fa-list', Company::class);
+
     }
 }

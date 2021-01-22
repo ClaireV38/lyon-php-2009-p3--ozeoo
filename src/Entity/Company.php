@@ -340,4 +340,9 @@ class Company implements \Serializable
             $this->id,
             ) = unserialize($serialized, array('allowed_classes' => false));
     }
+
+    public function getIsVerified()
+    {
+        return $this->getUser()->getIsVerified();
+    }
 }
