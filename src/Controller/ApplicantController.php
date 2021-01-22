@@ -23,7 +23,6 @@ class ApplicantController extends AbstractController
 {
     /**
      * @Route("/", name="applicant_index", methods={"GET"})
-     * @param Applicant $applicant
      * @return Response
      */
     public function index(): Response
