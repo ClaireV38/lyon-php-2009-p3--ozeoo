@@ -24,4 +24,13 @@ class HomeController extends AbstractController
         }
         return $this->render('home/index.html.twig');
     }
+
+    /**
+     * @Route("/legal_terms", name="legalTerms")
+     * @return Response
+     */
+    public function legalTerms(): Response
+    {
+        return $this->render('home/legalTerms.html.twig');
+    }
 }
