@@ -3,14 +3,17 @@
 namespace App\Controller;
 
 use App\Entity\Applicant;
+use App\Entity\Company;
 use App\Entity\Offer;
-use App\Entity\User;
 use App\Form\ApplicantType;
 use App\Repository\ApplicantRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use App\Entity\User;
 use App\Repository\OfferRepository;
 use App\Repository\SkillRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -97,11 +100,63 @@ class ApplicantController extends AbstractController
      */
     public function showMatchOffers(ApplicantRepository $applicantRepository, Applicant $applicant): Response
     {
+        $offers = $applicant->getOffers();
+        $offerId = [];
+        foreach ($offers as $offer) {
+            $offerId[] = $offer->getId();
+        }
         /* @phpstan-ignore-next-line */
         $matchOffers = $applicantRepository->findMatchingOffersForApplicant($this->getUser()->getApplicant());
+        $offersInArray = [];
+        foreach ($matchOffers as $matchOffer) {
+            if (in_array($matchOffer['offer_id'], $offerId)) {
+                $offersInArray[] = $matchOffer;
+            }
+        }
         return $this->render('applicant/offer.html.twig', [
             'applicant' => $applicant,
-            'matchOffers' => $matchOffers
+            'matchOffers' => $matchOffers,
+            'offers' => $offersInArray
         ]);
+    }
+
+    /**
+     * @Route ("/{applicantId}/company/{companyId}/offer/{offerId}", methods={"GET", "POST"}, name="offer_detail")
+     * @ParamConverter("applicant", class="App\Entity\Applicant", options={"mapping": {"applicantId": "id"}})
+     * @ParamConverter("offer", class="App\Entity\Offer", options={"mapping": {"offerId": "id"}})
+     * @ParamConverter("company", class="App\Entity\Company", options={"mapping": {"companyId": "id"}})
+     * @param Applicant $applicant
+     * @param Offer $offer
+     * @param Company $company
+     * @return Response
+     */
+    public function showOfferDetail(Applicant $applicant, Offer $offer, Company $company): Response
+    {
+
+        return $this->render('applicant/offerDetail.html.twig', [
+            'applicant' => $applicant,
+            'offer' => $offer,
+            'company' => $company,
+        ]);
+    }
+
+    /**
+     * @Route ("/Apply/{id}", name="applicant_offer_apply", methods={"GET"})
+     * @param Offer $offer
+     * @param EntityManagerInterface $entityManager
+     * @return RedirectResponse
+     */
+    public function apply(Offer $offer, EntityManagerInterface $entityManager)
+    {
+
+        /* @phpstan-ignore-next-line */
+        $applicant = $this->getUser()->getApplicant();
+
+        $applicant->addOffer($offer);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Félicitation tu viens de postuler à l\'offre');
+
+        return $this->redirectToRoute('applicant_index');
     }
 }
