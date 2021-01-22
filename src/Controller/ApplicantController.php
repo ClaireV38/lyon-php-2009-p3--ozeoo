@@ -23,11 +23,17 @@ class ApplicantController extends AbstractController
 {
     /**
      * @Route("/", name="applicant_index", methods={"GET"})
+     * @param Applicant $applicant
      * @return Response
      */
     public function index(): Response
     {
-        return $this->render('applicant/index.html.twig');
+        /* @phpstan-ignore-next-line */
+        $applicant = $this->getUser()->getApplicant();
+
+        return $this->render('applicant/index.html.twig', [
+            'applicant' => $applicant,
+        ]);
     }
 
     /**

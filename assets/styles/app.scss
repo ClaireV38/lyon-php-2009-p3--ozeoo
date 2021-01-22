@@ -313,10 +313,23 @@ h1 {
 }
 
 @media (min-width: 768px) {
+    #formLoginPhoto {
+        justify-content: space-evenly;
+    }
+    #presentationOze {
+        font-size: larger;
+    }
+    #home-list-pictures {
+        background-color: #ffffff;
+    }
 
-    #buttonInscription {
+    .buttonInscription {
         display: flex;
-        flex-direction: row;
+        padding-top: 20px;
+    }
+
+    #loginPageButtons.btn.btn-lg.btn-orangeOze.btn-center.btn-235px {
+        margin-left: 10px;
     }
 
     .applicant_home_welcome_mainTitle {
@@ -505,17 +518,17 @@ h1 {
 
     .desktop_candidate_tutoCard1 {
         padding-top:40px;
-        border: 1px solid $orangeOze;
+        border: 1px solid black;
     }
 
     .desktop_candidate_tutoCard2 {
-        padding-top: 15px;
-        border: 1px solid $violetOze;
+        padding-top: 28px;
+        border: 1px solid black;
     }
 
     .desktop_candidate_tutoCard3 {
         padding-top: 40px;
-        border: 1px solid $bleuOze;
+        border: 1px solid black;
     }
 
     .btn_candidateHome_createProfileDesktop {
