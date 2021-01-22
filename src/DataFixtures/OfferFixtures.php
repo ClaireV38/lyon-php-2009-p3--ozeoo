@@ -30,9 +30,7 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
         $offer1 = new Offer();
         $offer1->setCity($faker->text(20));
         $offer1->setCompany($this->getReference('company_' . 1));
-        for ($j = 1; $j <= rand(0, 5); $j++) {
-            $offer1->addApplicant($this->getReference('applicant_' . rand(1, ApplicantFixtures::NB_OBJECT)));
-        }
+        $offer1->addApplicant($this->getReference('applicant_' . 1));
         $offer1->setTitle($faker->sentence(6, true));
         $offer1->setContractType($faker->sentence(2, true));
         $offer1->setSalary($faker->bothify('????? ??? #### € ???'));
