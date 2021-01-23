@@ -17,7 +17,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Router\CrudUrlGenerator;
 
 class CompanyCrudController extends AbstractCrudController
 {
-    private $emi;
+    private EntityManangerInterface $emi;
 
     public function __construct(EntityManagerInterface $emi)
     {
