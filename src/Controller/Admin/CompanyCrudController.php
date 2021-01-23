@@ -8,7 +8,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\BooleanFilter;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
@@ -39,23 +38,46 @@ class CompanyCrudController extends AbstractCrudController
             BooleanField::new('isVerified', 'Vérifié')->setFormTypeOption('disabled', 'disabled'),
         ];
     }
+
     public function configureActions(Actions $actions): Actions
     {
         $activeCompany = Action::new('activateCompany', 'Activate', 'fas fa-clone')
             ->linkToCrudAction('activateCompany');
+        $desactivateCompany = Action::new('desactivateCompany', 'Desactivate', 'fas fa-clone')
+            ->linkToCrudAction('desactivateCompany');
         return $actions
             // ...
-            ->add(Crud::PAGE_EDIT, $activeCompany);
+            ->add(Crud::PAGE_EDIT, $activeCompany)
+            ->add(Crud::PAGE_EDIT, $desactivateCompany);
     }
 
     public function activateCompany(AdminContext $context)
     {
         $company = $context->getEntity()->getInstance();
         $user = $company->getUser();
-        $user->setIsVerified('true');
+        $user->setIsVerified('1');
         $this->emi->persist($user);
         $this->emi->flush();
 
         return $this->redirect($this->get(CrudUrlGenerator::class)->build()->setAction(Action::EDIT)->generateUrl());
+    }
+
+    public function desactivateCompany(AdminContext $context)
+    {
+        $company = $context->getEntity()->getInstance();
+        $user = $company->getUser();
+        $user->setIsVerified('0');
+        $this->emi->persist($user);
+        $this->emi->flush();
+
+        return $this->redirect($this->get(CrudUrlGenerator::class)->build()->setAction(Action::EDIT)->generateUrl());
+    }
+
+    public function activateFilter(AdminContext $context)
+    {
+        $company = $context->getEntity()->getInstance();
+        $user = $company->getUser();
+        $user->$company->getIsVerified();
+        return $this;
     }
 }
