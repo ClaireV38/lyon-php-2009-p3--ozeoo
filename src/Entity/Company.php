@@ -123,7 +123,7 @@ class Company implements \Serializable
     private $city;
 
     /**
-     * @ORM\OneToMany(targetEntity=Offer::class, mappedBy="company")
+     * @ORM\OneToMany(targetEntity=Offer::class, mappedBy="company", cascade={"remove"})
      * @var Collection<Offer>
      */
     private $offers;

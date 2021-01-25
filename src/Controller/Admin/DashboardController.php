@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Applicant;
 use App\Entity\Company;
 use App\Entity\User;
 use App\Repository\CompanyRepository;
@@ -21,10 +22,14 @@ class DashboardController extends AbstractDashboardController
     protected CompanyRepository $companyRepository;
     protected ApplicantRepository $applicantRepository;
     protected OfferRepository $offerRepository;
-    /**
-     * @var CompanyRepository
-     */
 
+    /**
+     *
+     * @param UserRepository $userRepository
+     * @param CompanyRepository $companyRepository
+     * @param ApplicantRepository $applicantRepository
+     * @param OfferRepository $offerRepository
+     */
     public function __construct(
         UserRepository $userRepository,
         CompanyRepository $companyRepository,
@@ -42,7 +47,7 @@ class DashboardController extends AbstractDashboardController
      */
     public function index(): Response
     {
-        return $this->render('@EasyAdmin/welcome.html.twig', [
+        return $this->render('admin/dashboard.html.twig', [
             'countApplicant' => $this->applicantRepository->countApplicant(),
             'countCompany' => $this->companyRepository->countCompany(),
             'countOffers' => $this->offerRepository->countOffers()

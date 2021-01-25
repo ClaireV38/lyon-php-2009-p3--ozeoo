@@ -4,20 +4,20 @@ namespace App\Controller\Admin;
 
 use App\Entity\Company;
 use Doctrine\ORM\EntityManagerInterface;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Filter\BooleanFilter;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
 use EasyCorp\Bundle\EasyAdminBundle\Router\CrudUrlGenerator;
 
 class CompanyCrudController extends AbstractCrudController
 {
-    private EntityManangerInterface $emi;
+    private EntityManagerInterface $emi;
 
     public function __construct(EntityManagerInterface $emi)
     {
@@ -41,9 +41,9 @@ class CompanyCrudController extends AbstractCrudController
 
     public function configureActions(Actions $actions): Actions
     {
-        $activeCompany = Action::new('activateCompany', 'Activate', 'fas fa-clone')
+        $activeCompany = Action::new('activateCompany', 'Vérifier', 'fa fa-toggle-on')
             ->linkToCrudAction('activateCompany');
-        $desactivateCompany = Action::new('desactivateCompany', 'Desactivate', 'fas fa-clone')
+        $desactivateCompany = Action::new('desactivateCompany', 'Enlever vérification', 'fa fa-toggle-off')
             ->linkToCrudAction('desactivateCompany');
         return $actions
             // ...
@@ -73,7 +73,7 @@ class CompanyCrudController extends AbstractCrudController
         return $this->redirect($this->get(CrudUrlGenerator::class)->build()->setAction(Action::EDIT)->generateUrl());
     }
 
-    public function activateFilter(AdminContext $context)
+    public function activateFilter(AdminContext $context): self
     {
         $company = $context->getEntity()->getInstance();
         $user = $company->getUser();
