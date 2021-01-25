@@ -18,8 +18,10 @@ class CompanyController extends AbstractController
 {
     /**
      * @Route("/index", name="company_index", methods={"GET"})
+     * @param OfferRepository $offerRepository
+     * @return Response
      */
-    public function index(CompanyRepository $companyRepository, OfferRepository $offerRepository): Response
+    public function index(OfferRepository $offerRepository): Response
     {
         /* @phpstan-ignore-next-line */
         $company = $this->getUser()->getCompany();
@@ -42,6 +44,9 @@ class CompanyController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="company_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Company $company
+     * @return Response
      */
     public function edit(Request $request, Company $company): Response
     {

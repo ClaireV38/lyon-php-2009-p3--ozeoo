@@ -123,14 +123,14 @@ class ApplicantController extends AbstractController
         return $this->redirectToRoute('applicant_index');
     }
 
-    /**
-     * @Route ("/{id}/offer", name="applicant_offer", methods={"GET"})
-     * @param ApplicantRepository $applicantRepository
-     * @param Applicant $applicant
-     * @return Response
-     */
-    public function showMatchOffers(ApplicantRepository $applicantRepository, Applicant $applicant): Response
-    {
+//    /**
+//     * @Route ("/{id}/offer", name="applicant_offer", methods={"GET"})
+//     * @param ApplicantRepository $applicantRepository
+//     * @param Applicant $applicant
+//     * @return Response
+//     */
+//    public function showMatchOffers(ApplicantRepository $applicantRepository, Applicant $applicant): Response
+//    {
 //        $offers = $applicant->getOffers();
 //        $offerId = [];
 //        foreach ($offers as $offer) {
@@ -149,7 +149,7 @@ class ApplicantController extends AbstractController
 //            'matchOffers' => $matchOffers,
 //            'offers' => $offersInArray
 //        ]);
-    }
+//    }
 
     /**
      * @Route ("/{applicantId}/company/{companyId}/offer/{offerId}", methods={"GET", "POST"}, name="offer_detail")

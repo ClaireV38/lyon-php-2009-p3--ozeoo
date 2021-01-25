@@ -87,6 +87,7 @@ h1 {
 /* Index company style */
 #company-home-body {
     width: 90%;
+    margin-bottom: 20px;
 }
 
 #announce-list-homecompany {
@@ -313,6 +314,16 @@ h1 {
 }
 
 @media (min-width: 768px) {
+    .buttonHomeCompany {
+        text-align: center;
+        margin-top: 100px;
+    }
+
+    .buttonEditCompany {
+        padding-top: 50px;
+        text-align: center;
+    }
+
     #buttonDetails {
         padding-top: 10px;
     }
@@ -355,7 +366,12 @@ h1 {
     }
     /* Navbar */
     .logoright {
-        display: block;
+        display: contents;
+    }
+
+    #buttonNavLogout {
+        width: 220px;
+        margin-right: 20px;
     }
 
     .button2 {
@@ -638,10 +654,6 @@ h1 {
 
     #companyDetailsDesktop {
         padding: 10px;
-    }
-
-    #companyDetailsText {
-        margin-left: auto;
     }
 
     /*Offer Detail*/
