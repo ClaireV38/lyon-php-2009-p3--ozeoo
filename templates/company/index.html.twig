@@ -4,16 +4,16 @@
 
 {% block body %}
     {% include '/company/_navbar.html.twig' %}
-<div class="container d-flex flex-column" id="company-home-body">
-    <h1 class="d-block text-center">Accueil entreprise</h1>
-    <a class="d-block btn btn-bleuOze btn-lg align-content-center"
-       id="create-company-card" href="{{ path("company_edit", {id: app.user.company.id}) }}" role="button">
-        Créer sa fiche entreprise
-    </a>
-</div>
-
-
-    <h1 class="text-center">Liste de vos annonces</h1>
+        <h1 class="text-center">Bienvenue {{ company.name }} ! </h1>
+            {% if company.contactEmail is null %}
+                <div class="container d-flex flex-column" id="company-home-body">
+                    <a class="d-block btn btn-bleuOze btn-lg align-content-center"
+                       id="create-company-card" href="{{ path("company_edit", {id: app.user.company.id}) }}" role="button">
+                        Créer son profil entreprise
+                    </a>
+                </div>
+            {% endif %}
+    <h4 id="titleListOffer">Liste de vos Annonces :</h4>
     {% for offer in offers %}
         <div class="card container" id="announce-card-homecompany">
             <div class="row-announce card-body flex-column flex-md-row align-items-center justify-content-between">
@@ -37,6 +37,8 @@
             </div>
         </div>
         {% else %}
-            <h5 class="text-center"> vous n'avez pas encore d'annonces</h5>
+                <div class="card-body">
+                    <h5 class="text-center"> Vous n'avez pas encore d'annonces</h5>
+                </div>
     {% endfor %}
-    {% endblock %}
+{% endblock %}

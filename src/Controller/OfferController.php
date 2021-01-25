@@ -48,9 +48,7 @@ class OfferController extends AbstractController
             $entityManager->persist($offer);
             $entityManager->flush();
 
-            return $this->redirectToRoute('offer_show', ['id' => $offer->getId()
-
-            ]);
+            return $this->redirectToRoute('company_index');
         }
 
         return $this->render('offer/new.html.twig', [

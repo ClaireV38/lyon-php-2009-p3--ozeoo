@@ -11,13 +11,12 @@
                 <h1>{{ applicant.firstname ~ ' ' ~ applicant.lastname }}</h1>
                 <div id="listApplicantInfo">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Description : {{ applicant.personality }}</li>
-                        <li class="list-group-item">Ville : {{ applicant.city }}</li>
-                        <li class="list-group-item">Mobilité : {{ applicant.mobility }}</li>
+                        <li class="list-group-item"><strong>Description : </strong>{{ applicant.personality }}</li>
+                        <li class="list-group-item"><strong>Ville : </strong>{{ applicant.city }}</li>
+                        <li class="list-group-item"><strong>Mobilité : </strong>{{ applicant.mobility }}</li>
                     </ul>
                 </div>
                 <div id="buttonDetails">
-                    <a href="{{ path('applicant_index') }}"><button class="btn btn-vertOze">Retour à l'accueil</button></a>
                     <a href="{{ path('applicant_edit', {'id': applicant.id}) }}"><button class="btn  btn-vertOze">Modifier mon profil</button></a>
                 </div>
             </div>

@@ -31,7 +31,7 @@ class Company implements \Serializable
      * @ORM\Column(type="string", length=255)
      * @var string
      * @Assert\NotBlank(message="Veuillez saisir votre nom.")
-     * @Assert\Length(max="255", maxMessage="Le nom ne doit pas exceder 255 caractères.")
+     * g
      */
     private $name;
 
@@ -44,6 +44,7 @@ class Company implements \Serializable
      */
     private $siretNb;
 
+    /* @phpstan-ignore-next-line */
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @var string
@@ -155,8 +156,9 @@ class Company implements \Serializable
         return $this->contactEmail;
     }
 
-    public function setContactEmail(string $contactEmail): self
+    public function setContactEmail(?string $contactEmail): self
     {
+        /* @phpstan-ignore-next-line */
         $this->contactEmail = $contactEmail;
 
         return $this;
