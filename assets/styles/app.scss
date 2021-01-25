@@ -368,7 +368,6 @@ h1 {
     }
 
     /*Offer Match Applicant*/
-
     #announce-card-matchOffer {
         width: 90%;
         margin-top: 15px;
@@ -744,20 +743,20 @@ h1 {
     #buttonDetails {
         display: flex;
         justify-content: space-around;
-        }
+    }
 
         /*Legal Terms*/
     #legalTerms {
-            margin: auto;
-            width: 50%;
-        }
+        margin: auto;
+        width: 50%;
+    }
 
     #applicantImg {
-            width: 560px;
-            height: 360px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            margin-bottom: 30px;
-        }
+        width: 560px;
+        height: 360px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 30px;
+    }
 }
