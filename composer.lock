@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1fd6375bc8beed086eae1963c623dcc4",
+    "content-hash": "2d2e87bf277ad18abe19de7d77df1961",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -4376,6 +4376,9 @@
             ],
             "description": "Symfony Mailer Component",
             "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/mailer/tree/v5.1.10"
+            },
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",

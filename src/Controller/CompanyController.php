@@ -78,6 +78,9 @@ class CompanyController extends AbstractController
 
     /**
      * @Route("/{id}", name="company_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Company $company
+     * @return Response
      */
     public function delete(Request $request, Company $company): Response
     {

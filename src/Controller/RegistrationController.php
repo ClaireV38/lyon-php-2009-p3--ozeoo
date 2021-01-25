@@ -14,6 +14,7 @@ use App\Security\LoginFormAuthenticator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
@@ -40,13 +41,16 @@ class RegistrationController extends AbstractController
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param GuardAuthenticatorHandler $guardHandler
      * @param LoginFormAuthenticator $authenticator
+     * @param MailerInterface $mailer
      * @return Response
+     * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
      */
     public function registerCompany(
         Request $request,
         UserPasswordEncoderInterface $passwordEncoder,
         GuardAuthenticatorHandler $guardHandler,
-        LoginFormAuthenticator $authenticator
+        LoginFormAuthenticator $authenticator,
+        MailerInterface $mailer
     ): ?Response {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -67,24 +71,16 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
             // do anything else you need here, like send an email
 
-            // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation(
-                'app_verify_email',
-                $user,
-                (new TemplatedEmail())
-                    ->from(new Address('contact@ozeladiversite.com', 'Ozé La Diversité'))
-                    ->to($user->getEmail())
-                    ->subject('Ozé La Diversité : Merci de confirmer votre adresse email')
-                    ->htmlTemplate('company/newCompanyEmail.html.twig')
-            );
-            // do anything else you need here, like send an email
+            $email = (new Email());
+            $email->from('contact@ozeladiversite.com');
+            $email->to($user->getEmail());
+            $email->subject('Ozé La Diversité : Demande d\'inscription en cours');
+            $email->html($this->renderView('company/newCompanyEmail.html.twig'));
+            $mailer->send($email);
 
-            return $guardHandler->authenticateUserAndHandleSuccess(
-                $user,
-                $request,
-                $authenticator,
-                'main' // firewall name in security.yaml
-            );
+            $this->addFlash('success', 'Votre inscription a bien été prise en compte,
+            votre compte sera validé par notre administrateur sous 24 à 48H.');
+            return $this->redirectToRoute('home');
         }
 
         return $this->render('registration/registerCompany.html.twig', [
@@ -137,14 +133,10 @@ class RegistrationController extends AbstractController
                     ->subject('Ozé La Diversité : Merci de confirmer votre adresse email')
                     ->htmlTemplate('applicant/newApplicantEmail.html.twig')
             );
-            // do anything else you need here, like send an email
 
-            return $guardHandler->authenticateUserAndHandleSuccess(
-                $user,
-                $request,
-                $authenticator,
-                'main' // firewall name in security.yaml
-            );
+            $this->addFlash('success', 'Votre inscription a bien été prise en compte,
+            merci de confirmer votre adresse email.');
+            return $this->redirectToRoute('home');
         }
 
         return $this->render('registration/registerApplicant.html.twig', [
@@ -181,7 +173,7 @@ class RegistrationController extends AbstractController
         }
 
         // @TODO Change the redirect on success and handle or remove the flash message in your templates
-        $this->addFlash('success', 'Your email address has been verified.');
+        $this->addFlash('success', 'Votre adresse email a bien été vérifiée.');
 
         return $this->redirectToRoute('home');
     }

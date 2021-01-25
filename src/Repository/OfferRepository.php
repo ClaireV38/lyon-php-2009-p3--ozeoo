@@ -6,6 +6,7 @@ use App\Entity\Applicant;
 use App\Entity\Offer;
 use App\Entity\Skill;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\Query\ResultSetMapping;
@@ -60,12 +61,13 @@ class OfferRepository extends ServiceEntityRepository
         return $sql->getArrayResult();
     }
 
-    public function countOffers()
+    public function countOffers(): array
     {
         $queryBuilder =  $this->createQueryBuilder('o');
         $queryBuilder->select('COUNT(o.id) as value');
         return $queryBuilder->getQuery()->getOneOrNullResult();
     }
+
     // /**
     //  * @return Offer[] Returns an array of Offer objects
     //  */

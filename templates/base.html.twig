@@ -14,13 +14,18 @@
     </head>
     <body>
         <main>
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
             {% block body %}{% endblock %}
         </main>
         {% include '_footer.html.twig' %}
     <script src="/build/app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
-
-
         {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
     {% endblock %}

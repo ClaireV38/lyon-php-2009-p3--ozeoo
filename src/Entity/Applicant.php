@@ -87,6 +87,13 @@ class Applicant
      */
     private $mobility;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max="255", maxMessage="Le texte ne doit pas exceder 255 caractères.")
+     * @var string|null
+     */
+    private $availability;
+
     public function __construct()
     {
         $this->softSkills = new ArrayCollection();
@@ -242,6 +249,18 @@ class Applicant
     public function setCity(string $city): self
     {
         $this->city = $city;
+
+        return $this;
+    }
+
+    public function getAvailability(): ?string
+    {
+        return $this->availability;
+    }
+
+    public function setAvailability(?string $availability): self
+    {
+        $this->availability = $availability;
 
         return $this;
     }

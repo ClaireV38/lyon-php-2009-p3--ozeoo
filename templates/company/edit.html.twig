@@ -3,6 +3,8 @@
 {% block title %}Edit Company{% endblock %}
 
 {% block body %}
+    {% include 'company/_navbar.html.twig' %}
+
     <h1>Modifier son profil</h1>
     <div class="container" id="createCompanyForm">
         {{ include('company/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
