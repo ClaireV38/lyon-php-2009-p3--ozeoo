@@ -5,7 +5,7 @@
 {% block body %}
     {% include '/company/_navbar.html.twig' %}
         <h1 class="text-center">Bienvenue {{ company.name }} ! </h1>
-            {% if company.contactEmail or company.description or company.corporateCulture is null %}
+            {% if company.contactEmail is null %}
                 <div class="container d-flex flex-column" id="company-home-body">
                     <a class="d-block btn btn-bleuOze btn-lg align-content-center"
                        id="create-company-card" href="{{ path("company_edit", {id: app.user.company.id}) }}" role="button">

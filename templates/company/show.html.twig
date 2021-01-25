@@ -4,8 +4,15 @@
 
 {% block body %}
     {% include '/company/_navbar.html.twig' %}
-    <h1>{{ company.name }}</h1>
-
+    <h1 >{{ company.name }}</h1>
+    {% if company.contactEmail is null %}
+        <div class="container d-flex flex-column" id="company-home-body">
+            <a class="d-block btn btn-bleuOze btn-lg align-content-center"
+               id="create-company-card" href="{{ path("company_edit", {id: app.user.company.id}) }}" role="button">
+                Créer son profil entreprise
+            </a>
+        </div>
+    {% endif %}
     <div class="container d-md-none" id="companyDetailsMobile">
         {% if company.picture is not empty %}
             <img src="{{asset('uploads/images/company/'~company.picture)}}" class="img-fluid rounded mx-auto d-block" alt="Responsive image">
@@ -33,25 +40,27 @@
                 </div>
                 {% endif %}
             </div>
-            <div class="col-md-5" id="companyDetailsText">
-                <div class="card">
-                    <div class="card-header">
-                        Qui sommes-nous ?
+                {% if company.description or company.csr is not empty  %}
+                    <div class="col-md-5" id="companyDetailsText">
+                        <div class="card">
+                            <div class="card-header">
+                                Qui sommes-nous ?
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">{{ company.description }}</p>
+                            </div>
+                            <div class="card-header">
+                                Nos Valeurs
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">{{ company.csr }}</p>
+                            </div>
+                        </div>
+                        <div class="buttonEditCompany">
+                            <a  id="buttonNav" class="btn btn-orangeOze" class="nav-link" href="{{ path('company_edit', {id: app.user.company.id}) }}">Modifier mon Profil</a>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <p class="card-text">{{ company.description }}</p>
-                    </div>
-                    <div class="card-header">
-                        Nos Valeurs
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">{{ company.csr }}</p>
-                    </div>
-                </div>
-                <div class="buttonEditCompany">
-                    <a  id="buttonNav" class="btn btn-orangeOze" class="nav-link" href="{{ path('company_edit', {id: app.user.company.id}) }}">Modifier mon Profil</a>
-                </div>
-            </div>
+                {% endif %}
             <div class="buttonHomeCompany">
                 <a  id="buttonNav" class="btn btn-vertOze" class="nav-link" href="{{ path('company_index') }}">Accueil</a>
             </div>
