@@ -233,8 +233,8 @@ h1 {
 }
 
 .candidate_ozeoPresentationCard {
-    border: 1px solid $orangeOze ;
     width: 18rem;
+
 }
 
 .candidate_ozeoTutoCard {
@@ -313,11 +313,18 @@ h1 {
 }
 
 @media (min-width: 768px) {
-
-    .ApplicantInfo {
-        display: flex;
-        justify-content: space-around;
+    #buttonDetails {
+        padding-top: 10px;
     }
+
+    .applicant_home_welcome_mainTitle {
+        color: $orangeOze;
+    }
+
+    #titleListOffer {
+        margin-left: 280px;
+    }
+
     #skillsList {
         width: 50%;
     }
@@ -328,10 +335,6 @@ h1 {
 
     #formLoginPhoto {
         justify-content: space-evenly;
-    }
-
-    #presentationOze {
-        font-size: larger;
     }
 
     #home-list-pictures {
@@ -493,6 +496,7 @@ h1 {
     /* Page accueil candidat*/
     #presentationOze {
         flex-direction: column;
+        font-size: larger;
     }
 
     .btn_candidateHome_createProfile {

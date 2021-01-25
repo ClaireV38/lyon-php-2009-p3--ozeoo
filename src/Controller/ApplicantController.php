@@ -27,9 +27,10 @@ class ApplicantController extends AbstractController
     /**
      * @Route("/", name="applicant_index", methods={"GET","POST"})
      * @param Request $request
+     * @param ApplicantRepository $applicantRepository
      * @return Response
      */
-    public function index(Request $request): Response
+    public function index(Request $request, ApplicantRepository $applicantRepository): Response
     {
         /* @phpstan-ignore-next-line */
         $applicant = $this->getUser()->getApplicant();
@@ -45,10 +46,26 @@ class ApplicantController extends AbstractController
             return $this->redirectToRoute('applicant_index');
         }
 
+        $offers = $applicant->getOffers();
+        $offerId = [];
+        foreach ($offers as $offer) {
+            $offerId[] = $offer->getId();
+        }
+        /* @phpstan-ignore-next-line */
+        $matchOffers = $applicantRepository->findMatchingOffersForApplicant($this->getUser()->getApplicant());
+        $offersInArray = [];
+        foreach ($matchOffers as $matchOffer) {
+            if (in_array($matchOffer['offer_id'], $offerId)) {
+                $offersInArray[] = $matchOffer;
+            }
+        }
+
 
         return $this->render('applicant/index.html.twig', [
             'applicant' => $applicant,
             'form' => $form->createView(),
+            'matchOffers' => $matchOffers,
+            'offers' => $offersInArray
         ]);
     }
 
@@ -114,24 +131,24 @@ class ApplicantController extends AbstractController
      */
     public function showMatchOffers(ApplicantRepository $applicantRepository, Applicant $applicant): Response
     {
-        $offers = $applicant->getOffers();
-        $offerId = [];
-        foreach ($offers as $offer) {
-            $offerId[] = $offer->getId();
-        }
-        /* @phpstan-ignore-next-line */
-        $matchOffers = $applicantRepository->findMatchingOffersForApplicant($this->getUser()->getApplicant());
-        $offersInArray = [];
-        foreach ($matchOffers as $matchOffer) {
-            if (in_array($matchOffer['offer_id'], $offerId)) {
-                $offersInArray[] = $matchOffer;
-            }
-        }
-        return $this->render('applicant/offer.html.twig', [
-            'applicant' => $applicant,
-            'matchOffers' => $matchOffers,
-            'offers' => $offersInArray
-        ]);
+//        $offers = $applicant->getOffers();
+//        $offerId = [];
+//        foreach ($offers as $offer) {
+//            $offerId[] = $offer->getId();
+//        }
+//        /* @phpstan-ignore-next-line */
+//        $matchOffers = $applicantRepository->findMatchingOffersForApplicant($this->getUser()->getApplicant());
+//        $offersInArray = [];
+//        foreach ($matchOffers as $matchOffer) {
+//            if (in_array($matchOffer['offer_id'], $offerId)) {
+//                $offersInArray[] = $matchOffer;
+//            }
+//        }
+//        return $this->render('applicant/offer.html.twig', [
+//            'applicant' => $applicant,
+//            'matchOffers' => $matchOffers,
+//            'offers' => $offersInArray
+//        ]);
     }
 
     /**

@@ -8,35 +8,68 @@
             <div class="container applicant_index_tuto">
                 <h1 class="applicant_home_welcome_mainTitle">Bienvenue {{ applicant.firstname }} !</h1>
             </div>
-            <div class="ApplicantInfo">
 {#                    <div class="col-md-4" id="candidateInfo">#}
 {#                        <p class="text-center">{{ applicant.personality }}</p>#}
 {#                        <p class="text-center">{{ applicant.city }}</p>#}
 {#                    </div>#}
-                    <div id="listApplicantInfo">
-                        <ul class="list-group list-group-flush" >
-                            <li class="list-group-item">Description : {{ applicant.personality }}</li>
-                            <li class="list-group-item">Ville : {{ applicant.city }}</li>
-                            <li class="list-group-item">Mobilité : {{ applicant.mobility }}</li>
-                            <li class="list-group-item">Porta ac consectetur ac</li>
-                            <li class="list-group-item">Vestibulum at eros</li>
-                        </ul>
+{#                    <div id="listApplicantInfo">#}
+{#                        <ul class="list-group list-group-flush" >#}
+{#                            <li class="list-group-item">Description : {{ applicant.personality }}</li>#}
+{#                            <li class="list-group-item">Ville : {{ applicant.city }}</li>#}
+{#                            <li class="list-group-item">Mobilité : {{ applicant.mobility }}</li>#}
+{#                            <li class="list-group-item">Porta ac consectetur ac</li>#}
+{#                            <li class="list-group-item">Vestibulum at eros</li>#}
+{#                        </ul>#}
+{#                    </div>#}
+{#                    <div id="skillsList">#}
+{#                        <ul class="list-group" id="list-HardSkill">#}
+{#                            <li class="list-group-item active btn-bleuOze">Compétences techniques</li>#}
+{#                            {% for hardSkill in applicant.hardSkills %}#}
+{#                                <li class="list-group-item">{{ hardSkill.name }}</li>#}
+{#                            {% endfor %}#}
+{#                        </ul>#}
+{#                        <ul class="list-group" id="list-SoftSkill">#}
+{#                            <li class="list-group-item active btn-bleuOze">Compétences Comportementales</li>#}
+{#                            {% for softSkill in applicant.softSkills %}#}
+{#                                <li class="list-group-item">{{ softSkill.name }}</li>#}
+{#                            {% endfor %}#}
+{#                        </ul>#}
+{#                    </div>#}
+{#            </div>#}
+                <h4 id="titleListOffer">Liste de vos Annonces :</h4>
+                {% for matchOffer in matchOffers %}
+                    <div class="card container" id="announce-card-matchOffer">
+                        <div class="row-announce card-body flex-column flex-md-row align-items-center justify-content-between">
+                            <div class="d-inline-block mb-2 mr-md-2 w-100 mb-0 text-center">
+                                <h5 class="card-title" id="title-announce-desktop">{{ matchOffer.offer_title }}</h5>
+                                <p class="mb-0"> Publié le : {{ matchOffer.creation_date|date("d/m/Y") }}</p>
+                                {% if matchOffer in offers %}
+                                    <div class="alert alert-bleuOze" id="messagePostule" role="alert">
+                                        Vous avez déja postulé à cette offre
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="row-info-right w-100 flex-md-row">
+                                <div class="row-info-nb " id="textMatchOffer">
+                                    <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> Type de contrat :
+                                        <strong>{{ matchOffer.contract_type }}</strong></p>
+                                    <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> Début du contrat :
+                                        <strong>{{ matchOffer.start_date|date("d/m/Y")}}</strong></p>
+                                    <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> Lieu :
+                                        <strong>{{ matchOffer.city}}</strong></p>
+                                </div>
+                                <div class="row-btn-offer d-md-inline-block flex justify-content-around">
+                                    <a href="{{ path("offer_detail" ,
+                                        {applicantId: app.user.applicant.id, companyId:matchOffer.company_id, offerId: matchOffer.offer_id })}}"
+                                       class="d-inline-block btn btn-offer btn-orangeOze d-inline-flex">Voir Annonce</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div id="skillsList">
-                        <ul class="list-group" id="list-HardSkill">
-                            <li class="list-group-item active btn-bleuOze">Compétences techniques</li>
-                            {% for hardSkill in applicant.hardSkills %}
-                                <li class="list-group-item">{{ hardSkill.name }}</li>
-                            {% endfor %}
-                        </ul>
-                        <ul class="list-group" id="list-SoftSkill">
-                            <li class="list-group-item active btn-bleuOze">Compétences Comportementales</li>
-                            {% for softSkill in applicant.softSkills %}
-                                <li class="list-group-item">{{ softSkill.name }}</li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-            </div>
+
+                {% else %}
+                    <h5 class="text-center"> vous n'avez pas encore d'annonces qui match vos compétences</h5>
+                {% endfor %}
         {% else %}
         <div class="applicantForm">
             <div class="infoForm">

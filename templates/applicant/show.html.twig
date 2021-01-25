@@ -9,8 +9,13 @@
         <div class="row">
             <div class="col-md-4" id="candidateInfo">
                 <h1>{{ applicant.firstname ~ ' ' ~ applicant.lastname }}</h1>
-                <p class="text-center">{{ applicant.personality }}</p>
-                <p class="text-center">{{ applicant.city }}</p>
+                <div id="listApplicantInfo">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Description : {{ applicant.personality }}</li>
+                        <li class="list-group-item">Ville : {{ applicant.city }}</li>
+                        <li class="list-group-item">Mobilité : {{ applicant.mobility }}</li>
+                    </ul>
+                </div>
                 <div id="buttonDetails">
                     <a href="{{ path('applicant_index') }}"><button class="btn btn-vertOze">Retour à l'accueil</button></a>
                     <a href="{{ path('applicant_edit', {'id': applicant.id}) }}"><button class="btn  btn-vertOze">Modifier mon profil</button></a>
