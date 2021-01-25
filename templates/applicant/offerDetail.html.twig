@@ -4,39 +4,41 @@
 
 {% block body%}
     {% include '/applicant/_navbar.html.twig' %}
-    <h1>{{ company.name }}</h1>
-    <div class="profilCompany">
-        <div class="photoVideoCompany">
-            <div class="photoCompany">
-                {% if company.picture is not empty %}
-                    <img src="{{asset('uploads/images/company/'~company.picture)}}" class="img-fluid rounded mx-auto d-block" alt="Responsive image">
-                {% endif %}
-            </div>
-            <div class="videoCompany">
-                {% if company.video is not empty %}
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" src="{{ company.video }}"></iframe>
+        {% if offer.isAnonymous == false %}
+            <h1>{{ company.name }}</h1>
+            <div class="profilCompany">
+                <div class="photoVideoCompany">
+                    <div class="photoCompany">
+                        {% if company.picture is not empty %}
+                            <img src="{{asset('uploads/images/company/'~company.picture)}}" class="img-fluid rounded mx-auto d-block" alt="Responsive image">
+                        {% endif %}
                     </div>
-                {% endif %}
-            </div>
-        </div>
+                    <div class="videoCompany">
+                        {% if company.video is not empty %}
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe class="embed-responsive-item" src="{{ company.video }}"></iframe>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
 
-        <div class="descriptionCompanyOfferDetail" >
-            <div class="card " style="margin-left: 10px">
-                <div class="card-body descriptionCompanyOfferDetail">
-                    <h4 class="card-header text-center">Qui sommes-nous ?</h4>
-                    <p class="card-text" id="textOfferDetail">{{ company.description }}</p>
+                <div class="descriptionCompanyOfferDetail" >
+                    <div class="card " style="margin-left: 10px">
+                        <div class="card-body descriptionCompanyOfferDetail">
+                            <h4 class="card-header text-center">Qui sommes-nous ?</h4>
+                            <p class="card-text" id="textOfferDetail">{{ company.description }}</p>
+                        </div>
+                    </div>
+                    <div class="card " style="margin-left: 10px">
+                        <div class="card-body descriptionCompanyOfferDetail">
+                            <h4 class="card-header text-center">Nos Valeurs</h4>
+                            <p class="card-text" id="textOfferDetail">{{ company.csr }}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="card " style="margin-left: 10px">
-                <div class="card-body descriptionCompanyOfferDetail">
-                    <h4 class="card-header text-center">Nos Valeurs</h4>
-                    <p class="card-text" id="textOfferDetail">{{ company.csr }}</p>
-                </div>
-            </div>
-        </div>
-    </div>
     <hr>
+        {% endif %}
     <div class="offerDetail">
         <h1 >{{ offer.title }}</h1>
             <div class="card startDateContractType ">
