@@ -341,7 +341,7 @@ class Company implements \Serializable
             ) = unserialize($serialized, array('allowed_classes' => false));
     }
 
-    public function getIsVerified(): ?bool
+    public function getIsVerified(): bool
     {
         return $this->getUser()->getIsVerified();
     }
