@@ -33,8 +33,8 @@ main {
 
 #home-list-pictures {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
+
 }
 
 h1 {
@@ -307,7 +307,49 @@ h1 {
     margin-bottom: 10px;
 }
 
+.applicant_home_welcome_mainTitle {
+
+    display: none;
+}
+
 @media (min-width: 768px) {
+
+    .ApplicantInfo {
+        display: flex;
+        justify-content: space-around;
+    }
+    #skillsList {
+        width: 50%;
+    }
+
+    #listApplicantInfo {
+        width: fit-content;
+    }
+
+    #formLoginPhoto {
+        justify-content: space-evenly;
+    }
+
+    #presentationOze {
+        font-size: larger;
+    }
+
+    #home-list-pictures {
+        background-color: #ffffff;
+    }
+
+    .buttonInscription {
+        display: flex;
+        padding-top: 20px;
+    }
+
+    #loginPageButtons.btn.btn-lg.btn-orangeOze.btn-center.btn-235px {
+        margin-left: 10px;
+    }
+
+    .applicant_home_welcome_mainTitle {
+        display: block;
+    }
     /* Navbar */
     .logoright {
         display: block;
@@ -459,6 +501,7 @@ h1 {
 
     #buttonRedirectProfil {
         flex-direction: column;
+        margin-top: 20px;
     }
 
     .candidate_ozeoPresentationCard {
@@ -470,7 +513,6 @@ h1 {
     }
 
     .desktop_candidate_tuto {
-        margin-top: 60px;
         display: flex;
         flex-direction: row;
         justify-content: space-around;
@@ -491,18 +533,17 @@ h1 {
 
     .desktop_candidate_tutoCard1 {
         padding-top:40px;
-        border: 1px solid $orangeOze;
-        text-decoration: none;
+        border: 1px solid black;
     }
 
     .desktop_candidate_tutoCard2 {
-        padding-top: 15px;
-        border: 1px solid $violetOze;
+        padding-top: 28px;
+        border: 1px solid black;
     }
 
     .desktop_candidate_tutoCard3 {
-        padding-top: 20px;
-        border: 1px solid $bleuOze;
+        padding-top: 40px;
+        border: 1px solid black;
     }
 
     .btn_candidateHome_createProfileDesktop {

@@ -3,7 +3,7 @@
 {% block title %}Se connecter{% endblock %}
 
 {% block body %}
-    <div class="container login-container">
+
         <div id="home-list-pictures">
             <div id="home-list-picture1">
                 <a href="{{ path("home") }}">
@@ -11,7 +11,7 @@
                 </a>
             </div>
         </div>
-        <div class="main-row">
+        <div class="main-row" id="formLoginPhoto">
             <div>
             <form class="login-form" method="post">
                 {% if error %}
@@ -43,11 +43,13 @@
                     </button>
                 </a>
             </form>
-            <a id="loginPageButtons" href="{{ path('app_register_applicant') }}" class="btn btn-lg btn-bleuOze btn-center btn-235px">Inscription candidat</a>
-            <a id="loginPageButtons" href="{{ path('app_register_company') }}" class="btn btn-lg btn-orangeOze btn-center btn-235px">Inscription entreprise</a>
+                <div class="buttonInscription">
+                    <a id="loginPageButtons" href="{{ path('app_register_applicant') }}" class="btn btn-lg btn-bleuOze btn-center btn-235px" style="color: black">Inscription candidat</a>
+                    <a id="loginPageButtons" href="{{ path('app_register_company') }}" class="btn btn-lg btn-orangeOze btn-center btn-235px" >Inscription entreprise</a>
+                </div>
         </div>
             <img id="diversityBig1" src="{{ asset('build/images/diversityBig1.jpg') }}" height="350" width="500"
                  class="ml-2" alt="Montage d'images de différentes personnes représentant la diversité">
         </div>
-    </div>
+
 {% endblock %}
