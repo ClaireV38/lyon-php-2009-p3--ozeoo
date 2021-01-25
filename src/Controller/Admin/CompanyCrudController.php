@@ -59,6 +59,7 @@ class CompanyCrudController extends AbstractCrudController
         $user->setIsVerified('1');
         $this->emi->persist($user);
         $this->emi->flush();
+        $this->addFlash('success', 'Entreprise Vérifié');
 
         return $this->redirect($this->get(CrudUrlGenerator::class)->build()->setAction(Action::EDIT)->generateUrl());
     }
@@ -70,6 +71,7 @@ class CompanyCrudController extends AbstractCrudController
         $user->setIsVerified('0');
         $this->emi->persist($user);
         $this->emi->flush();
+        $this->addFlash('success', 'Entreprise non vérifié');
 
         return $this->redirect($this->get(CrudUrlGenerator::class)->build()->setAction(Action::EDIT)->generateUrl());
     }
