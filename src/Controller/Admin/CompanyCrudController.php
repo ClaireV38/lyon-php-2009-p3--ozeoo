@@ -14,6 +14,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
 use EasyCorp\Bundle\EasyAdminBundle\Router\CrudUrlGenerator;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class CompanyCrudController extends AbstractCrudController
 {
@@ -51,7 +52,7 @@ class CompanyCrudController extends AbstractCrudController
             ->add(Crud::PAGE_EDIT, $desactivateCompany);
     }
 
-    public function activateCompany(AdminContext $context)
+    public function activateCompany(AdminContext $context): RedirectResponse
     {
         $company = $context->getEntity()->getInstance();
         $user = $company->getUser();
@@ -62,7 +63,7 @@ class CompanyCrudController extends AbstractCrudController
         return $this->redirect($this->get(CrudUrlGenerator::class)->build()->setAction(Action::EDIT)->generateUrl());
     }
 
-    public function desactivateCompany(AdminContext $context)
+    public function desactivateCompany(AdminContext $context): RedirectResponse
     {
         $company = $context->getEntity()->getInstance();
         $user = $company->getUser();

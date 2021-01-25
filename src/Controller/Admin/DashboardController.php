@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ApplicantRepository;
 use App\Repository\OfferRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class DashboardController extends AbstractDashboardController
 {
@@ -44,6 +45,7 @@ class DashboardController extends AbstractDashboardController
 
     /**
      * @Route("/admin", name="admin")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function index(): Response
     {
