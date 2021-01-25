@@ -365,6 +365,7 @@ h1 {
     .applicant_home_welcome_mainTitle {
         display: block;
     }
+
     /* Navbar */
     .logoright {
         display: contents;
@@ -732,6 +733,7 @@ h1 {
         justify-content: center;
         margin-top: 20px;
     }
+
     #buttonPostuleOffer {
         padding: 30px;
         font-size: larger;
@@ -833,20 +835,20 @@ h1 {
     #buttonDetails {
         display: flex;
         justify-content: space-around;
-        }
+    }
 
-        /*Legal Terms*/
+    /*Legal Terms*/
     #legalTerms {
-            margin: auto;
-            width: 50%;
-        }
+        margin: auto;
+        width: 50%;
+    }
 
     #applicantImg {
-            width: 560px;
-            height: 360px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            margin-bottom: 30px;
-        }
+        width: 560px;
+        height: 360px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 30px;
+    }
 }
