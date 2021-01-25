@@ -744,14 +744,15 @@ h1 {
     #buttonDetails {
         display: flex;
         justify-content: space-around;
+        }
 
         /*Legal Terms*/
-        #legalTerms {
+    #legalTerms {
             margin: auto;
             width: 50%;
         }
 
-        #applicantImg {
+    #applicantImg {
             width: 560px;
             height: 360px;
             display: block;
@@ -759,5 +760,4 @@ h1 {
             margin-right: auto;
             margin-bottom: 30px;
         }
-    }
 }
