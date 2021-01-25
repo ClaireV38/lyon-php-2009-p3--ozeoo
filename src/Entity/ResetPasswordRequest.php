@@ -18,12 +18,14 @@ class ResetPasswordRequest implements ResetPasswordRequestInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @var integer
      */
     private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class)
      * @ORM\JoinColumn(nullable=false)
+     * @var User
      */
     private $user;
 
