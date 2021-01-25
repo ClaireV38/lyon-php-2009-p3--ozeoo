@@ -1,8 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Password Reset Email Sent{% endblock %}
+{% block title %}Email de réinitialisation envoyé{% endblock %}
 
 {% block body %}
-    <p>An email has been sent that contains a link that you can click to reset your password. This link will expire in {{ tokenLifetime|date('g') }} hour(s).</p>
-    <p>If you don't receive an email please check your spam folder or <a href="{{ path('app_forgot_password_request') }}">try again</a>.</p>
+    {% include '/reset_password/_navbar.html.twig' %}
+
+    <div id="reset-password-container">
+        <h1>Demande prise en compte</h1>
+        <p>Un email contenant un lien de réinitialisation de mot de passe vous a été envoyé. Ce lien expirera dans {{ tokenLifetime|date('g') }} heure(s).</p>
+        <p>Si vous ne recevez pas d'email, n'oubliez pas de vérifier vos spams ou <a href="{{ path('app_forgot_password_request') }}">renvoyer un email</a>.</p>
+    </div>
+
+    <div class="center">
+        <img id="requestImg" src="{{ asset('build/images/request1.jpg') }}" alt="Image d'une joyeuse réunion de bureau">
+    </div>
 {% endblock %}

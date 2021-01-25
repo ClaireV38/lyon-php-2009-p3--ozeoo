@@ -1,9 +1,8 @@
-<h1>Hi!</h1>
-
-<p>To reset your password, please visit the following link</p>
-
-<a href="{{ url('app_reset_password', {token: resetToken.token}) }}">{{ url('app_reset_password', {token: resetToken.token}) }}</a>
-
-<p>This link will expire in {{ tokenLifetime|date('g') }} hour(s).</p>
-
-<p>Cheers!</p>
+{% extends '_mail_layout.html.twig' %}
+    {% block mailTitle %}
+        Demande de réinitialisation du mot de passe
+    {% endblock %}
+    {% block mailContent%}
+        Pour réinitialiser votre mot de passe, merci de cliquer sur le lien suivant qui expirera dans {{ tokenLifetime|date('g') }} heure(s) :
+        <a href="{{ url('app_reset_password', {token: resetToken.token}) }}">{{ url('app_reset_password', {token: resetToken.token}) }}</a>
+    {% endblock%}

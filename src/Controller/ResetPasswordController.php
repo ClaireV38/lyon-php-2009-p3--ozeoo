@@ -80,7 +80,6 @@ class ResetPasswordController extends AbstractController
      *
      * @Route("/reset/{token}", name="app_reset_password")
      * @param Request $request
-     * @param UserInterface $user
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param string|null $token
      * @return Response
@@ -88,7 +87,6 @@ class ResetPasswordController extends AbstractController
     public function reset(
         Request $request,
         UserPasswordEncoderInterface $passwordEncoder,
-        UserInterface $user,
         string $token = null
     ): Response {
         if ($token) {
@@ -169,14 +167,13 @@ class ResetPasswordController extends AbstractController
             //     'There was a problem handling your password reset request - %s',
             //     $e->getReason()
             // ));
-
             return $this->redirectToRoute('app_check_email');
         }
 
         $email = (new TemplatedEmail())
-            ->from(new Address('contact@ozeladiversite.com', 'Oz�o par Oz� La Diversit�'))
+            ->from(new Address('contact@ozeladiversite.com', 'Ozéo par Ozé La Diversité'))
             ->to($user->getEmail())
-            ->subject('Your password reset request')
+            ->subject('Ozéo : Demande de réinitialisation de mot de passe')
             ->htmlTemplate('reset_password/email.html.twig')
             ->context([
                 'resetToken' => $resetToken,
