@@ -19,7 +19,7 @@ class CompanyRepository extends ServiceEntityRepository
         parent::__construct($registry, Company::class);
     }
 
-    public function countCompany()
+    public function countCompany(): array
     {
         $queryBuilder =  $this->createQueryBuilder('c');
         $queryBuilder->select('COUNT(c.id) as value');
