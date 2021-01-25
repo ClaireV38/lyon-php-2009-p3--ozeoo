@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% include 'bundles/TwigBundle/Exception/_errorTemplate.html.twig' %}
+
+    <h1>Page introuvable</h1>
+    <div class="errorMessage flex">
+        <p>Cette page n'existe pas!</p>
+        <p><a href="{{ path('home') }}">retourner à l'accueil</a></p>
+    </div>
+{% endblock %}
