@@ -4,6 +4,12 @@
 
 {% block body%}
     {% include '/applicant/_navbar.html.twig' %}
+    {% if offer in applicant.offers %}
+    {% else %}
+        <div class="buttonPostule">
+            <a class="btn btn-vertOze" id="buttonPostuleOffer" href="{{ path('applicant_offer_apply' , {id: offer.id}) }}">Postuler</a>
+        </div>
+    {% endif %}
         {% if offer.isAnonymous == false %}
             <h1>{{ company.name }}</h1>
             <div class="profilCompany">
@@ -89,7 +95,7 @@
         {% if offer in applicant.offers %}
             {% else %}
             <div class="buttonPostule">
-                <a class="btn btn-vertOze" href="{{ path('applicant_offer_apply' , {id: offer.id}) }}">Postuler</a>
+                <a class="btn btn-vertOze" id="buttonPostuleOffer" href="{{ path('applicant_offer_apply' , {id: offer.id}) }}">Postuler</a>
             </div>
         {% endif %}
 {% endblock %}
