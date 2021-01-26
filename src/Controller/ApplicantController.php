@@ -149,9 +149,11 @@ class ApplicantController extends AbstractController
      * @return Response
      */
     public function showOfferDetail(
-        Applicant $applicant, Offer $offer, Company $company, SkillRepository $skillRepository
-    ): Response
-    {
+        Applicant $applicant,
+        Offer $offer,
+        Company $company,
+        SkillRepository $skillRepository
+    ): Response {
         /* @phpstan-ignore-next-line */
         $user = $this->getUser();
 
