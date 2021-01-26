@@ -12,12 +12,14 @@
         </a>
     </div>
 
-
     <h1 class="text-center">Liste de vos annonces</h1>
-    <div id="index-container">
+    <div id="index-container" class="center">
             {{ form_start(form) }}
-            {{ form_widget(form) }}
-            <button>Search</button>
+                <label id="sortFormShape">Trier {{ form_widget(form.sort) }}</label>
+            <div id="index-container-second">
+                <label id="sortFormShape">Chercher {{ form_widget(form.search) }}</label>
+            </div>
+            <button id="index-container-button" class="btn-center btn btn-vertOze">Trier</button>
             {{ form_end(form) }}
     </div>
     {% for offer in offers %}
