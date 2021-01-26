@@ -98,6 +98,13 @@ h1 {
     width: 18rem;
     margin-top: 15px;
 }
+.offerDetail {
+    text-align: center;
+}
+
+.profilCompany {
+    text-align: center;
+}
 
 #people-box-card {
     display: flex;
@@ -326,10 +333,6 @@ h1 {
 
     .applicant_home_welcome_mainTitle {
         color: $orangeOze;
-    }
-
-    #titleListOffer {
-        margin-left: 280px;
     }
 
     #listApplicantInfo {
