@@ -18,9 +18,10 @@ class SearchCompanyOfferType extends AbstractType
     {
         $builder
             ->add('sort', ChoiceType::class, [
+                'label' => false,
                 'choices' => [
                     'Début de mission' => 'startDate',
-                    'Crée le' => 'creationDate',
+                    'Créé le' => 'creationDate',
                     'Date d\'expiration' => 'endDate',
                     'Titre de l\'annonce' => 'title',
                 ],

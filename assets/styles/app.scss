@@ -129,10 +129,39 @@ h1 {
 }
 
 #index-container {
-    width: 30%;
     display: flex;
     flex-direction: row;
-    margin: auto;
+    justify-content: center;
+}
+
+form[name="search_company_offer"] {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+#index-container-second {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#index-container-button {
+    font-size: 18px;
+    margin: 0px;
+}
+
+#sortFormShape {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-around;
+}
+
+input[name="search_company_offer[search]"] {
+    margin-left: 10px;
+}
+
+#search_company_offer_sort {
+    margin-left: 10px;
 }
 
 /* Legend for icons matching & candidate */
