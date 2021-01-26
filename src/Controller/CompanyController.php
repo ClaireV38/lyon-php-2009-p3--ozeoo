@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * @Route("/company", name="company_")
@@ -79,6 +80,9 @@ class CompanyController extends AbstractController
      */
     public function edit(Request $request, Company $company): Response
     {
+        if ($this->getUser() != $company->getUser()) {
+            throw new AccessDeniedException();
+        }
 
         $form = $this->createForm(CompanyType::class, $company, [
             'validation_groups' => ['company'],
@@ -105,6 +109,10 @@ class CompanyController extends AbstractController
      */
     public function show(Company $company): Response
     {
+        if ($this->getUser() != $company->getUser()) {
+            throw new AccessDeniedException();
+        }
+
         return $this->render('company/show.html.twig', [
             'company' => $company,
         ]);
@@ -118,6 +126,10 @@ class CompanyController extends AbstractController
      */
     public function delete(Request $request, Company $company): Response
     {
+        if ($this->getUser() != $company->getUser()) {
+            throw new AccessDeniedException();
+        }
+
         if ($this->isCsrfTokenValid('delete' . $company->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($company);
