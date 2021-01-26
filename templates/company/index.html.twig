@@ -4,49 +4,64 @@
 
 {% block body %}
     {% include '/company/_navbar.html.twig' %}
-<div class="container d-flex flex-column" id="company-home-body">
-    <h1 class="d-block text-center">Accueil entreprise</h1>
-    <a class="d-block btn btn-bleuOze btn-lg align-content-center"
-       id="create-company-card" href="{{ path("company_edit", {id: app.user.company.id}) }}" role="button">
-        Créer sa fiche entreprise
-    </a>
-</div>
+    <div class="container d-flex flex-column" id="company-home-body">
+        <h1 class="d-block text-center">Accueil entreprise</h1>
+        <a class="d-block btn btn-bleuOze btn-lg align-content-center"
+           id="create-company-card" href="{{ path("company_edit", {id: app.user.company.id}) }}" role="button">
+            Créer sa fiche entreprise
+        </a>
+    </div>
 
 
     <h1 class="text-center">Liste de vos annonces</h1>
-    <div class="dropdown">
-        <button class="btn btn-center btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Trier
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Date de création</a>
-            <a class="dropdown-item" href="{{ path("company_offerSortEndDate")}}">Date d'expiration</a>
+    <div id="index-container">
+        <div class="dropdown">
+            <button class="btn btn-center btn-secondary dropdown-toggle btn-sort" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Trier
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="{{ path("company_offerSort", {field: 'title'}) }}">Titre de
+                        l'annonce</a>
+                    <a class="dropdown-item" href="{{ path("company_offerSort", {field: 'startDate'}) }}">Début
+                        mission</a>
+                    <a class="dropdown-item" href="{{ path("company_offerSort", {field: 'creationDate'}) }}">Date de
+                        création</a>
+                    <a class="dropdown-item" href="{{ path("company_offerSort", {field: 'endDate'}) }}">Date
+                        d'expiration</a>
+                </div>
+            </button>
         </div>
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button>Search</button>
+            {{ form_end(form) }}
     </div>
     {% for offer in offers %}
         <div class="card container" id="announce-card-homecompany">
             <div class="row-announce card-body flex-column flex-md-row align-items-center justify-content-between">
                 <div class="d-inline-block mb-2 mb-md-0 mr-md-2 w-100 mb-0 text-center">
                     <h5 class="card-title" id="title-announce-desktop">{{ offer.title }}</h5>
-                    <p class="mb-0"> début mission : {{ offer.startDate|date("d/m/Y") }}</p>
-                    <p class="mb-0"> date d'expiration : {{ offer.endDate|date("d/m/Y") }}</p>
+                    <p class="mb-0"> Créé le : {{ offer.creationDate|date("d/m/Y") }}</p>
+                    <p class="mb-0"> Début mission : {{ offer.startDate|date("d/m/Y") }}</p>
+                    <p class="mb-0"> Expire le : {{ offer.endDate|date("d/m/Y") }}</p>
                 </div>
                 <div class="row-info-right w-100 flex-md-row">
                     <div class="row-info-nb d-md-inline-block flex-md-row align-items-center text-center">
-                        <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> nb matchs :
+                        <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> Nb matchs :
                             <strong>{{ nbMatches[offer.id] }}</strong></p>
-                        <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> nb candidats :
+                        <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> Nb candidats :
                             <strong>{{ offer.applicants |length }}</strong></p>
                     </div>
                     <div class="row-btn-offer d-md-inline-block flex justify-content-around">
-                        <a href="{{ path("offer_applicants", {id: offer.id}) }}" class="d-inline-block btn btn-offer btn-orangeOze d-inline-flex">Voir les candidats</a>
+                        <a href="{{ path("offer_applicants", {id: offer.id}) }}"
+                           class="d-inline-block btn btn-offer btn-orangeOze d-inline-flex">Voir les candidats</a>
                         <a href="{{ path("offer_edit", {id: offer.id}) }}"
                            class="d-inline-block btn btn-offer btn-bleuOze d-inline-flex">Editer</a>
                     </div>
                 </div>
             </div>
         </div>
-        {% else %}
-            <h5 class="text-center"> vous n'avez pas encore d'annonces</h5>
+    {% else %}
+        <h5 class="text-center"> vous n'avez pas encore d'annonces</h5>
     {% endfor %}
-    {% endblock %}
+{% endblock %}

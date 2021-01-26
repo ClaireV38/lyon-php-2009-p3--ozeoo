@@ -4,24 +4,27 @@ namespace App\Controller;
 
 use App\Entity\Company;
 use App\Form\CompanyType;
+use App\Form\SearchCompanyOfferType;
 use App\Repository\CompanyRepository;
 use App\Repository\OfferRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/company")
+ * @Route("/company", name="company_")
  */
 class CompanyController extends AbstractController
 {
     /**
-     * @Route("/index", name="company_index", methods={"GET"})
+     * @Route("/index", name="index", methods={"GET"})
+     * @param Request $request
      * @param OfferRepository $offerRepository
      * @return Response
      */
-    public function index(OfferRepository $offerRepository): Response
+    public function index(Request $request, OfferRepository $offerRepository): Response
     {
         /* @phpstan-ignore-next-line */
         $company = $this->getUser()->getCompany();
@@ -30,6 +33,17 @@ class CompanyController extends AbstractController
             ['company' => $company],
             ['id' => 'DESC']
         );
+
+        $form = $this->createForm(SearchCompanyOfferType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $search = $form->getData()['search'];
+            $offers = $offerRepository->findBy(['title' => $search]);
+        } else {
+            $offers = $offerRepository->findAll();
+        }
+
         $nbMatches = [];
         foreach ($offers as $offer) {
             $matchApplicants = $offerRepository->findMatchingApplicantsForOffer($offer);
@@ -38,38 +52,13 @@ class CompanyController extends AbstractController
         return $this->render('company/index.html.twig', [
             'company' => $company,
             'offers' => $offers,
-            'nbMatches' => $nbMatches
+            'nbMatches' => $nbMatches,
+            'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/sortEndDate", name="company_offerSortEndDate", methods={"GET"})
-     * @param OfferRepository $offerRepository
-     * @return Response
-     */
-    public function sortEndDate(OfferRepository $offerRepository)
-    {
-        /* @phpstan-ignore-next-line */
-        $company = $this->getUser()->getCompany();
-
-        $offers = $offerRepository->findBy(
-            ['company' => $company],
-            ['endDate' => 'DESC']
-        );
-        $nbMatches = [];
-        foreach ($offers as $offer) {
-            $matchApplicants = $offerRepository->findMatchingApplicantsForOffer($offer);
-            $nbMatches[$offer->getId()] = count($matchApplicants);
-        }
-        return $this->render('company/index.html.twig', [
-            'company' => $company,
-            'offers' => $offers,
-            'nbMatches' => $nbMatches
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="company_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Company $company): Response
     {
@@ -93,7 +82,7 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="company_show", methods={"GET"})
+     * @Route("/{id}", name="show", methods={"GET"})
      * @param Company $company
      * @return Response
      */
@@ -105,7 +94,7 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="company_delete", methods={"DELETE"})
+     * @Route("/{id}", name="delete", methods={"DELETE"})
      * @param Request $request
      * @param Company $company
      * @return Response
@@ -119,5 +108,59 @@ class CompanyController extends AbstractController
         }
 
         return $this->redirectToRoute('company_index');
+    }
+
+    /**
+     * @Route("/sort/{field}", name="offerSort", methods={"GET"})
+     * @param string $field
+     * @param OfferRepository $offerRepository
+     * @return Response
+     * @ParamConverter("field", options={"mapping": {"field": "field"}})
+     */
+    public function sort(string $field, OfferRepository $offerRepository): Response
+    {
+        /* @phpstan-ignore-next-line */
+        $company = $this->getUser()->getCompany();
+
+        switch ($field) {
+            case 'endDate':
+                $offers = $offerRepository->findBy(
+                    ['company' => $company],
+                    ['endDate' => 'ASC']
+                );
+                break;
+            case 'creationDate':
+                $offers = $offerRepository->findBy(
+                    ['company' => $company],
+                    ['creationDate' => 'ASC']
+                );
+                break;
+            case 'startDate':
+                $offers = $offerRepository->findBy(
+                    ['company' => $company],
+                    ['startDate' => 'ASC']
+                );
+                break;
+            case 'title':
+                $offers = $offerRepository->findBy(
+                    ['company' => $company],
+                    ['title' => 'ASC']
+                );
+        }
+
+        $nbMatches = [];
+        if (!empty($offers)) {
+            foreach ($offers as $offer) {
+                $matchApplicants = $offerRepository->findMatchingApplicantsForOffer($offer);
+                $nbMatches[$offer->getId()] = count($matchApplicants);
+            }
+        } else {
+            $offers = [];
+        }
+        return $this->render('company/index.html.twig', [
+            'company' => $company,
+            'offers' => $offers,
+            'nbMatches' => $nbMatches
+        ]);
     }
 }

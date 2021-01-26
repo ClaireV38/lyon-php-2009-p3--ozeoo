@@ -115,22 +115,24 @@ h1 {
     justify-content: center;
 }
 
-#square-number-match-people {
-    background-color: #00C2CB;
-    border: solid 1px #00C2CB;
-    width: 40px;
-    height: 40px;
-    border-radius: 2px;
-    display: flex;
-    justify-content: center;
-}
-
 #text-square-people {
     align-self: center;
 }
 
 #logo-people {
     align-self: center;
+}
+
+.btn-sort {
+    width: 10%;
+    font-size: 15px;
+}
+
+#index-container {
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    margin: auto;
 }
 
 /* Legend for icons matching & candidate */
