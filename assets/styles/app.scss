@@ -1,9 +1,9 @@
 @import 'variables.scss';
-@import "~bootstrap/scss/bootstrap";
+@import '~bootstrap/scss/bootstrap';
 
 /*Body*/
-
-html, body {
+html,
+body {
     height: 100vh;
     margin: 0;
     padding: 0;
@@ -312,7 +312,7 @@ h1 {
 }
 
 .applicant_home_welcome_mainTitle {
-        display: none;
+    display: none;
 }
 
 /*error messages */
@@ -761,6 +761,7 @@ h1 {
         align-items: center;
         padding: 10px;
     }
+
     .fas.fa-check-circle {
         color: $vertOze;
     }
