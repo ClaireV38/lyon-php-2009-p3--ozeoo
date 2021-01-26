@@ -77,7 +77,6 @@ class ApplicantController extends AbstractController
         foreach ($matchOffersArray as $matchOffer) {
             $matchOffers[] = $offerRepository->findOneBy(['id' => $matchOffer['offer_id']]);
         }
-        var_dump($applicantOffers);
 
         return $this->render('applicant/index.html.twig', [
             'applicant' => $applicant,
