@@ -1,4 +1,4 @@
-<form method="post" action="{{ path('offer_delete', {'id': offer.id}) }}" onsubmit="return confirm('Etes vous sûrs de vouloir supprimer cette annonce?');">
+<form method="post" action="{{ path('offer_delete', {'id': offer.id}) }}" onsubmit="return confirm('Etes vous sûr de vouloir supprimer cette annonce?');">
     <input type="hidden" name="_method" value="DELETE">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ offer.id) }}">
     <button class="btn btn_delete flex">Supprimer</button>
