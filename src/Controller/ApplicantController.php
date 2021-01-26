@@ -125,34 +125,6 @@ class ApplicantController extends AbstractController
         return $this->redirectToRoute('applicant_index');
     }
 
-//    /**
-//     * @Route ("/{id}/offer", name="applicant_offer", methods={"GET"})
-//     * @param ApplicantRepository $applicantRepository
-//     * @param Applicant $applicant
-//     * @return Response
-//     */
-//    public function showMatchOffers(ApplicantRepository $applicantRepository, Applicant $applicant): Response
-//    {
-//        $offers = $applicant->getOffers();
-//        $offerId = [];
-//        foreach ($offers as $offer) {
-//            $offerId[] = $offer->getId();
-//        }
-//        /* @phpstan-ignore-next-line */
-//        $matchOffers = $applicantRepository->findMatchingOffersForApplicant($this->getUser()->getApplicant());
-//        $offersInArray = [];
-//        foreach ($matchOffers as $matchOffer) {
-//            if (in_array($matchOffer['offer_id'], $offerId)) {
-//                $offersInArray[] = $matchOffer;
-//            }
-//        }
-//        return $this->render('applicant/offer.html.twig', [
-//            'applicant' => $applicant,
-//            'matchOffers' => $matchOffers,
-//            'offers' => $offersInArray
-//        ]);
-//    }
-
     /**
      * @Route ("/{applicantId}/company/{companyId}/offer/{offerId}", methods={"GET", "POST"}, name="offer_detail")
      * @ParamConverter("applicant", class="App\Entity\Applicant", options={"mapping": {"applicantId": "id"}})
@@ -174,10 +146,12 @@ class ApplicantController extends AbstractController
 
     /**
      * @Route ("/Apply/{id}", name="applicant_offer_apply", methods={"GET"})
-     * @param Offer $offer
      * @param Company $company
+     * @param Offer $offer
      * @param EntityManagerInterface $entityManager
+     * @param MailerInterface $mailer
      * @return RedirectResponse
+     * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
      */
     public function apply(
         Company $company,

@@ -4,30 +4,17 @@
 
 {% block body %}
     {% include '/company/_navbar.html.twig' %}
-
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('company_index') }}">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="{{ path("offer_applicants", {id: offer.id}) }}">{{ offer.title }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Candidat</li>
+        </ol>
+    </nav>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-4" id="candidateInfo">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item active" aria-current="page">Home</li>
-                    </ol>
-                </nav>
 
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Library</li>
-                    </ol>
-                </nav>
-
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">Library</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Data</li>
-                    </ol>
-                </nav>
                 <h1>{{ applicant.firstname }}</h1>
                 <div id="listApplicantInfo">
                     <ul class="list-group list-group-flush">
