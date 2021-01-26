@@ -13,9 +13,9 @@
                     <div class="card container" id="announce-card-matchOffer">
                         <div class="row-announce card-body flex-column flex-md-row align-items-center justify-content-between">
                             <div class="d-inline-block mb-2 mr-md-2 w-100 mb-0 text-center">
-                                <h5 class="card-title" id="title-announce-desktop">{{ matchOffer.offer_title }}</h5>
-                                <p class="mb-0"> Publié le : {{ matchOffer.creation_date|date("d/m/Y") }}</p>
-                                {% if matchOffer in offers %}
+                                <h5 class="card-title" id="title-announce-desktop">{{ matchOffer.title }}</h5>
+                                <p class="mb-0"> Publié le : {{ matchOffer.creationDate|date("d/m/Y") }}</p>
+                                {% if matchOffer in applicantOffers %}
                                     <div class="alert alert-bleuOze" id="messagePostule" role="alert">
                                         Vous avez déja postulé à cette offre
                                     </div>

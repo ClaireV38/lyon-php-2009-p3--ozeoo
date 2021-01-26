@@ -33,7 +33,7 @@ class ApplicantController extends AbstractController
      * @param ApplicantRepository $applicantRepository
      * @return Response
      */
-    public function index(Request $request, ApplicantRepository $applicantRepository): Response
+    public function index(Request $request, ApplicantRepository $applicantRepository, OfferRepository $offerRepository): Response
     {
         /* @phpstan-ignore-next-line */
         $applicant = $this->getUser()->getApplicant();
@@ -52,25 +52,35 @@ class ApplicantController extends AbstractController
             return $this->redirectToRoute('applicant_index');
         }
 
-        $offers = $applicant->getOffers();
-        $offerId = [];
-        foreach ($offers as $offer) {
-            $offerId[] = $offer->getId();
-        }
+//        $offers = $applicant->getOffers();
+//        $offerId = [];
+//        foreach ($offers as $offer) {
+//            $offerId[] = $offer->getId();
+//        }
+//        /* @phpstan-ignore-next-line */
+//        $matchOffers = $applicantRepository->findMatchingOffersForApplicant($this->getUser()->getApplicant());
+//        $offersInArray = [];
+//        foreach ($matchOffers as $matchOffer) {
+//            if (in_array($matchOffer['offer_id'], $offerId)) {
+//                $offersInArray[] = $matchOffer;
+//            }
+//        }
+        $applicantOffers = $applicant->getOffers();
+
         /* @phpstan-ignore-next-line */
-        $matchOffers = $applicantRepository->findMatchingOffersForApplicant($this->getUser()->getApplicant());
-        $offersInArray = [];
-        foreach ($matchOffers as $matchOffer) {
-            if (in_array($matchOffer['offer_id'], $offerId)) {
-                $offersInArray[] = $matchOffer;
-            }
+        $matchOffersArray = $applicantRepository->findMatchingOffersForApplicant($this->getUser()->getApplicant());
+        $matchOffers = [];
+        foreach ($matchOffersArray as $matchOffer) {
+            $matchOffers[] = $offerRepository->findOneBy(['id' => $matchOffer['offer_id']]);
         }
+        var_dump($applicantOffers);
 
         return $this->render('applicant/index.html.twig', [
             'applicant' => $applicant,
             'form' => $form->createView(),
             'matchOffers' => $matchOffers,
-            'offers' => $offersInArray,
+            'applicantOffers' => $applicantOffers,
+//            'offers' => $offersInArray,
             'user' => $user
         ]);
     }
