@@ -15,22 +15,6 @@
 
     <h1 class="text-center">Liste de vos annonces</h1>
     <div id="index-container">
-        <div class="dropdown">
-            <button class="btn btn-center btn-secondary dropdown-toggle btn-sort" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Trier
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="{{ path("company_offerSort", {field: 'title'}) }}">Titre de
-                        l'annonce</a>
-                    <a class="dropdown-item" href="{{ path("company_offerSort", {field: 'startDate'}) }}">Début
-                        mission</a>
-                    <a class="dropdown-item" href="{{ path("company_offerSort", {field: 'creationDate'}) }}">Date de
-                        création</a>
-                    <a class="dropdown-item" href="{{ path("company_offerSort", {field: 'endDate'}) }}">Date
-                        d'expiration</a>
-                </div>
-            </button>
-        </div>
             {{ form_start(form) }}
             {{ form_widget(form) }}
             <button>Search</button>

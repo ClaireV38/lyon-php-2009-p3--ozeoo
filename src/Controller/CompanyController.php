@@ -19,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CompanyController extends AbstractController
 {
     /**
-     * @Route("/index", name="index", methods={"GET"})
+     * @Route("/index", name="index", methods={"GET","POST"})
      * @param Request $request
      * @param OfferRepository $offerRepository
      * @return Response
@@ -29,19 +29,36 @@ class CompanyController extends AbstractController
         /* @phpstan-ignore-next-line */
         $company = $this->getUser()->getCompany();
 
-        $offers = $offerRepository->findBy(
-            ['company' => $company],
-            ['id' => 'DESC']
-        );
-
         $form = $this->createForm(SearchCompanyOfferType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $search = $form->getData()['search'];
-            $offers = $offerRepository->findBy(['title' => $search]);
+            if (empty($search)) {
+                $search = "";
+            }
+            $field = $form->getData()['sort'];
+            switch ($field) {
+                case 'startDate':
+                    $offers = $offerRepository->findLikeTitleOrderByStartDate($search, $company);
+                    break;
+                case 'creationDate':
+                    $offers = $offerRepository->findLikeTitleOrderByCreationDate($search, $company);
+                    break;
+                case 'endDate':
+                    $offers = $offerRepository->findLikeTitleOrderByEndDate($search, $company);
+                    break;
+                case 'title':
+                    $offers = $offerRepository->findLikeTitleOrderByTitle($search, $company);
+                    break;
+                default:
+                    $offers = $offerRepository->findLikeTitleOrderById($search, $company);
+            }
         } else {
-            $offers = $offerRepository->findAll();
+            $offers = $offerRepository->findBy(
+                ['company' => $company],
+                ['id' => 'DESC']
+            );
         }
 
         $nbMatches = [];
@@ -108,59 +125,5 @@ class CompanyController extends AbstractController
         }
 
         return $this->redirectToRoute('company_index');
-    }
-
-    /**
-     * @Route("/sort/{field}", name="offerSort", methods={"GET"})
-     * @param string $field
-     * @param OfferRepository $offerRepository
-     * @return Response
-     * @ParamConverter("field", options={"mapping": {"field": "field"}})
-     */
-    public function sort(string $field, OfferRepository $offerRepository): Response
-    {
-        /* @phpstan-ignore-next-line */
-        $company = $this->getUser()->getCompany();
-
-        switch ($field) {
-            case 'endDate':
-                $offers = $offerRepository->findBy(
-                    ['company' => $company],
-                    ['endDate' => 'ASC']
-                );
-                break;
-            case 'creationDate':
-                $offers = $offerRepository->findBy(
-                    ['company' => $company],
-                    ['creationDate' => 'ASC']
-                );
-                break;
-            case 'startDate':
-                $offers = $offerRepository->findBy(
-                    ['company' => $company],
-                    ['startDate' => 'ASC']
-                );
-                break;
-            case 'title':
-                $offers = $offerRepository->findBy(
-                    ['company' => $company],
-                    ['title' => 'ASC']
-                );
-        }
-
-        $nbMatches = [];
-        if (!empty($offers)) {
-            foreach ($offers as $offer) {
-                $matchApplicants = $offerRepository->findMatchingApplicantsForOffer($offer);
-                $nbMatches[$offer->getId()] = count($matchApplicants);
-            }
-        } else {
-            $offers = [];
-        }
-        return $this->render('company/index.html.twig', [
-            'company' => $company,
-            'offers' => $offers,
-            'nbMatches' => $nbMatches
-        ]);
     }
 }

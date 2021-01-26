@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,8 +17,17 @@ class SearchCompanyOfferType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('search', SearchType::class)
-        ;
+            ->add('sort', ChoiceType::class, [
+                'choices' => [
+                    'Début de mission' => 'startDate',
+                    'Crée le' => 'creationDate',
+                    'Date d\'expiration' => 'endDate',
+                    'Titre de l\'annonce' => 'title',
+                ],
+            ])
+            ->add('search', SearchType::class, [
+                'required' => false,
+            ]);
     }
 
     /**
