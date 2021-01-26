@@ -37,6 +37,9 @@ class ApplicantController extends AbstractController
         /* @phpstan-ignore-next-line */
         $applicant = $this->getUser()->getApplicant();
 
+        /* @phpstan-ignore-next-line */
+        $user = $this->getUser();
+
         $form = $this->createForm(ApplicantType::class, $applicant);
         $form->handleRequest($request);
 
@@ -67,7 +70,8 @@ class ApplicantController extends AbstractController
             'applicant' => $applicant,
             'form' => $form->createView(),
             'matchOffers' => $matchOffers,
-            'offers' => $offersInArray
+            'offers' => $offersInArray,
+            'user' => $user
         ]);
     }
 
@@ -79,6 +83,9 @@ class ApplicantController extends AbstractController
      */
     public function new(Request $request, Applicant $applicant): Response
     {
+        /* @phpstan-ignore-next-line */
+        $user = $this->getUser();
+
         $form = $this->createForm(ApplicantType::class, $applicant);
         $form->handleRequest($request);
 
@@ -93,6 +100,7 @@ class ApplicantController extends AbstractController
         return $this->render('applicant/edit.html.twig', [
             'applicant' => $applicant,
             'form' => $form->createView(),
+            'user' => $user,
         ]);
     }
 
@@ -103,8 +111,12 @@ class ApplicantController extends AbstractController
      */
     public function show(Applicant $applicant): Response
     {
+        /* @phpstan-ignore-next-line */
+        $user = $this->getUser();
+
         return $this->render('applicant/show.html.twig', [
             'applicant' => $applicant,
+            'user' => $user,
         ]);
     }
 
@@ -133,14 +145,26 @@ class ApplicantController extends AbstractController
      * @param Applicant $applicant
      * @param Offer $offer
      * @param Company $company
+     * @param SkillRepository $skillRepository
      * @return Response
      */
-    public function showOfferDetail(Applicant $applicant, Offer $offer, Company $company): Response
+    public function showOfferDetail(
+        Applicant $applicant, Offer $offer, Company $company, SkillRepository $skillRepository
+    ): Response
     {
+        /* @phpstan-ignore-next-line */
+        $user = $this->getUser();
+
+        $matchHardSkills = $skillRepository->findMatchHardSkills($offer, $applicant);
+        $matchSoftSkills = $skillRepository->findMatchSoftSkills($offer, $applicant);
+
         return $this->render('applicant/offerDetail.html.twig', [
-           'applicant' => $applicant,
-           'offer' => $offer,
-           'company' => $company,
+            'applicant' => $applicant,
+            'offer' => $offer,
+            'company' => $company,
+            'user' => $user,
+            'matchHardSkills' => $matchHardSkills,
+            'matchSoftSkills' => $matchSoftSkills,
         ]);
     }
 
@@ -159,6 +183,8 @@ class ApplicantController extends AbstractController
         EntityManagerInterface $entityManager,
         MailerInterface $mailer
     ): Response {
+        /* @phpstan-ignore-next-line */
+        $user = $this->getUser();
 
         /* @phpstan-ignore-next-line */
         $applicant = $this->getUser()->getApplicant();
@@ -185,6 +211,8 @@ class ApplicantController extends AbstractController
             $mailer->send($email);
         }
 
-        return $this->redirectToRoute('applicant_index');
+        return $this->redirectToRoute('applicant_index', [
+            'user' => $user,
+        ]);
     }
 }

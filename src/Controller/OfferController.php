@@ -161,13 +161,17 @@ class OfferController extends AbstractController
      */
     public function applicantShow(Offer $offer, Applicant $applicant, SkillRepository $skillRepository): Response
     {
+        /* @phpstan-ignore-next-line */
+        $company = $this->getUser()->getCompany();
+
         $matchHardSkills = $skillRepository->findMatchHardSkills($offer, $applicant);
         $matchSoftSkills = $skillRepository->findMatchSoftSkills($offer, $applicant);
         return $this->render('offer/applicant_show.html.twig', [
             'applicant' => $applicant,
             'matchHardSkills' => $matchHardSkills,
             'matchSoftSkills' => $matchSoftSkills,
-            'offer' => $offer
+            'offer' => $offer,
+            'company' => $company
         ]);
     }
 }
