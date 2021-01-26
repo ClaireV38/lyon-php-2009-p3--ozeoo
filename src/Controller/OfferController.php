@@ -150,6 +150,7 @@ class OfferController extends AbstractController
             'applicant' => $applicant,
             'matchHardSkills' => $matchHardSkills,
             'matchSoftSkills' => $matchSoftSkills,
+            'offer' => $offer
         ]);
     }
 }

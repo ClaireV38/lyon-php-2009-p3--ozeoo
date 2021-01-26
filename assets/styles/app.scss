@@ -288,9 +288,8 @@ h1 {
 
 /* Detail Candidate - Candidate Side */
 #list-HardSkill {
-    line-height: normal;
-    margin: auto auto 10px auto;
     font-size: 13px;
+    width: auto;
 }
 
 #list-SoftSkill {
@@ -323,10 +322,6 @@ h1 {
     .buttonEditCompany {
         padding-top: 50px;
         text-align: center;
-    }
-
-    #buttonDetails {
-        padding-top: 10px;
     }
 
     .applicant_home_welcome_mainTitle {
@@ -749,23 +744,32 @@ h1 {
         align-items: center;
         padding: 10px;
     }
+    .fas.fa-check-circle {
+        color: $vertOze;
+    }
 
-    #list-SoftSkill {
-        width: 60%;
-        font-size: 13px;
-        line-height: initial;
+    .fas.fa-times-circle {
+        color: $orangeOze;
+    }
+
+    .skillMatchApplicant {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        font-size: larger;
+    }
+
+    .skillOfferNotMatch {
+        padding-bottom: 20px;
+        font-size: larger;
+    }
+
+    .extraSkillApplicant {
+        font-size: larger;
     }
 
     #list-HardSkill {
-        width: 60%;
         margin-bottom: 10px;
-        font-size: 13px;
-        line-height: initial;
-    }
-
-    #buttonDetails {
-        display: flex;
-        justify-content: space-around;
+        width: 75%;
     }
 
     #messagePostule {
