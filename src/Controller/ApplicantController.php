@@ -20,6 +20,7 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * @Route("/applicant")
@@ -65,7 +66,6 @@ class ApplicantController extends AbstractController
             }
         }
 
-
         return $this->render('applicant/index.html.twig', [
             'applicant' => $applicant,
             'form' => $form->createView(),
@@ -85,6 +85,9 @@ class ApplicantController extends AbstractController
     {
         /* @phpstan-ignore-next-line */
         $user = $this->getUser();
+        if ($this->getUser() != $applicant->getUser()) {
+            throw new AccessDeniedException();
+        }
 
         $form = $this->createForm(ApplicantType::class, $applicant);
         $form->handleRequest($request);
@@ -114,6 +117,10 @@ class ApplicantController extends AbstractController
         /* @phpstan-ignore-next-line */
         $user = $this->getUser();
 
+        if ($this->getUser() != $applicant->getUser()) {
+            throw new AccessDeniedException();
+        }
+
         return $this->render('applicant/show.html.twig', [
             'applicant' => $applicant,
             'user' => $user,
@@ -128,6 +135,10 @@ class ApplicantController extends AbstractController
      */
     public function delete(Request $request, Applicant $applicant): Response
     {
+        if ($this->getUser() != $applicant->getUser()) {
+            throw new AccessDeniedException();
+        }
+
         if ($this->isCsrfTokenValid('delete' . $applicant->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($applicant);
@@ -138,10 +149,43 @@ class ApplicantController extends AbstractController
     }
 
     /**
+     * @Route ("/{id}/offer", name="applicant_offer", methods={"GET"})
+     * @param ApplicantRepository $applicantRepository
+     * @param Applicant $applicant
+     * @return Response
+     */
+    public function showMatchOffers(ApplicantRepository $applicantRepository, Applicant $applicant): Response
+    {
+        if ($this->getUser() != $applicant->getUser()) {
+            throw new AccessDeniedException();
+        }
+
+        $offers = $applicant->getOffers();
+        $offerId = [];
+        foreach ($offers as $offer) {
+            $offerId[] = $offer->getId();
+        }
+        /* @phpstan-ignore-next-line */
+        $matchOffers = $applicantRepository->findMatchingOffersForApplicant($this->getUser()->getApplicant());
+        $offersInArray = [];
+        foreach ($matchOffers as $matchOffer) {
+            if (in_array($matchOffer['offer_id'], $offerId)) {
+                $offersInArray[] = $matchOffer;
+            }
+        }
+        return $this->render('applicant/offer.html.twig', [
+            'applicant' => $applicant,
+            'matchOffers' => $matchOffers,
+            'offers' => $offersInArray
+        ]);
+    }
+
+    /**
      * @Route ("/{applicantId}/company/{companyId}/offer/{offerId}", methods={"GET", "POST"}, name="offer_detail")
      * @ParamConverter("applicant", class="App\Entity\Applicant", options={"mapping": {"applicantId": "id"}})
      * @ParamConverter("offer", class="App\Entity\Offer", options={"mapping": {"offerId": "id"}})
      * @ParamConverter("company", class="App\Entity\Company", options={"mapping": {"companyId": "id"}})
+     * @param ApplicantRepository $applicantRepository
      * @param Applicant $applicant
      * @param Offer $offer
      * @param Company $company
@@ -149,6 +193,7 @@ class ApplicantController extends AbstractController
      * @return Response
      */
     public function showOfferDetail(
+        ApplicantRepository $applicantRepository,
         Applicant $applicant,
         Offer $offer,
         Company $company,
@@ -159,6 +204,20 @@ class ApplicantController extends AbstractController
 
         $matchHardSkills = $skillRepository->findMatchHardSkills($offer, $applicant);
         $matchSoftSkills = $skillRepository->findMatchSoftSkills($offer, $applicant);
+
+        /* @phpstan-ignore-next-line */
+        $matchOffers = $applicantRepository->findMatchingOffersForApplicant($this->getUser()->getApplicant());
+        $matchOffersId = [];
+        foreach ($matchOffers as $matchOffer) {
+            $matchOffersId[] = $matchOffer['offer_id'];
+        }
+        if (
+            $this->getUser() != $applicant->getUser()
+            || $offer->getCompany() != $company
+            || !(in_array($offer->getId(), $matchOffersId))
+        ) {
+            throw new AccessDeniedException();
+        }
 
         return $this->render('applicant/offerDetail.html.twig', [
             'applicant' => $applicant,

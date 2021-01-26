@@ -13,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * @Route("/offer")
@@ -72,6 +73,11 @@ class OfferController extends AbstractController
         /* @phpstan-ignore-next-line */
         $company = $this->getUser()->getCompany();
 
+        /* @phpstan-ignore-next-line */
+        if ($this->getUser() != $offer->getCompany()->getUser()) {
+            throw new AccessDeniedException();
+        }
+
         return $this->render('offer/show.html.twig', [
             'offer' => $offer,
             'company' => $company
@@ -88,6 +94,11 @@ class OfferController extends AbstractController
     {
         /* @phpstan-ignore-next-line */
         $company = $this->getUser()->getCompany();
+
+        /* @phpstan-ignore-next-line */
+        if ($this->getUser() != $offer->getCompany()->getUser()) {
+            throw new AccessDeniedException();
+        }
 
         $form = $this->createForm(OfferType::class, $offer);
         $form->handleRequest($request);
@@ -110,13 +121,18 @@ class OfferController extends AbstractController
      */
     public function delete(Request $request, Offer $offer): Response
     {
+        /* @phpstan-ignore-next-line */
+        if ($this->getUser() != $offer->getCompany()->getUser()) {
+            throw new AccessDeniedException();
+        }
+
         if ($this->isCsrfTokenValid('delete' . $offer->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($offer);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('offer_index');
+        return $this->redirectToRoute('company_index');
     }
 
     /**
@@ -130,6 +146,10 @@ class OfferController extends AbstractController
         /* @phpstan-ignore-next-line */
         $company = $this->getUser()->getCompany();
 
+        /* @phpstan-ignore-next-line */
+        if ($this->getUser() != $offer->getCompany()->getUser()) {
+            throw new AccessDeniedException();
+        }
         $applicants = $offer->getApplicants();
         $applicantsID = [];
         foreach ($applicants as $applicant) {
@@ -163,6 +183,11 @@ class OfferController extends AbstractController
     {
         /* @phpstan-ignore-next-line */
         $company = $this->getUser()->getCompany();
+
+        /* @phpstan-ignore-next-line */
+        if ($this->getUser() != $offer->getCompany()->getUser() || !($offer->getApplicants()->contains($applicant))) {
+            throw new AccessDeniedException();
+        }
 
         $matchHardSkills = $skillRepository->findMatchHardSkills($offer, $applicant);
         $matchSoftSkills = $skillRepository->findMatchSoftSkills($offer, $applicant);
