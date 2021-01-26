@@ -13,16 +13,19 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
+use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use EasyCorp\Bundle\EasyAdminBundle\Router\CrudUrlGenerator;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class CompanyCrudController extends AbstractCrudController
 {
     private EntityManagerInterface $emi;
+    private $adminUrlGenerator;
 
-    public function __construct(EntityManagerInterface $emi)
+    public function __construct(EntityManagerInterface $emi, AdminUrlGenerator $adminUrlGenerator)
     {
         $this->emi = $emi;
+        $this->adminUrlGenerator = $adminUrlGenerator;
     }
 
     public static function getEntityFqcn(): string
@@ -61,7 +64,11 @@ class CompanyCrudController extends AbstractCrudController
         $this->emi->flush();
         $this->addFlash('success', 'Entreprise Vérifié');
 
-        return $this->redirect($this->get(CrudUrlGenerator::class)->build()->setAction(Action::EDIT)->generateUrl());
+            $url = $this->adminUrlGenerator
+            ->setController(CompanyCrudController::class)
+            ->setAction('edit')
+            ->generateUrl();
+        return $this->redirect($url);
     }
 
     public function desactivateCompany(AdminContext $context): RedirectResponse
@@ -73,7 +80,11 @@ class CompanyCrudController extends AbstractCrudController
         $this->emi->flush();
         $this->addFlash('success', 'Entreprise non vérifié');
 
-        return $this->redirect($this->get(CrudUrlGenerator::class)->build()->setAction(Action::EDIT)->generateUrl());
+            $url = $this->adminUrlGenerator
+            ->setController(CompanyCrudController::class)
+            ->setAction('edit')
+            ->generateUrl();
+        return $this->redirect($url);
     }
 
     public function activateFilter(AdminContext $context): self
