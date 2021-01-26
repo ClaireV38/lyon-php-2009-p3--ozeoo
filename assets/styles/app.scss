@@ -337,10 +337,6 @@ h1 {
         margin-left: 280px;
     }
 
-    #skillsList {
-        width: 50%;
-    }
-
     #listApplicantInfo {
         width: fit-content;
     }
@@ -755,13 +751,13 @@ h1 {
     }
 
     #list-SoftSkill {
-        width: 90%;
+        width: 60%;
         font-size: 13px;
         line-height: initial;
     }
 
     #list-HardSkill {
-        width: 90%;
+        width: 60%;
         margin-bottom: 10px;
         font-size: 13px;
         line-height: initial;
@@ -781,32 +777,6 @@ h1 {
     #announce-card-matches {
         width: 90%;
         margin-top: 15px;
-    }
-
-    /* Detail Candidate - Candidate Side */
-    #skillsList {
-        display: flex;
-        flex-direction: row;
-        padding: 10px;
-    }
-
-    #list-HardSkill {
-        line-height: normal;
-        padding-left: 10px;
-        padding-right: 10px;
-        font-size: 13px;
-    }
-
-    #list-SoftSkill {
-        line-height: normal;
-        padding-left: 10px;
-        padding-right: 10px;
-        font-size: 13px;
-    }
-
-    #buttonDetails {
-        display: flex;
-        justify-content: space-around;
     }
 
     /*Legal Terms*/
