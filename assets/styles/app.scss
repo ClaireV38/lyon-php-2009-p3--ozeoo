@@ -655,6 +655,16 @@ h1 {
         margin: 10px;
     }
 
+    #cardValues {
+        width: 80%;
+        align-self: center;
+    }
+
+    #cardDescription {
+        width: 80%;
+        align-self: center;
+    }
+
     .photoCompany {
         margin-bottom: 10px;
     }
@@ -673,7 +683,7 @@ h1 {
         justify-content: space-around;
         margin-bottom: 10px;
         padding-top: 10px;
-        height: 100px;
+        height: 120px;
     }
 
     .offerDetail {
