@@ -21,18 +21,34 @@
                 </div>
             </div>
             <div class="col-md" id="skillsList">
-                <ul class="list-group" id="list-HardSkill">
-                    <li class="list-group-item active btn-bleuOze">Compétences techniques</li>
-                    {% for hardSkill in applicant.hardSkills %}
-                        <li class="list-group-item {% if hardSkill in matchHardSkills %} bg-vertOze {% endif %}">
-                            {{ hardSkill.name }}</li>
-                    {% endfor %}
-                </ul>
+                <div id="list-HardSkill">
+                    <ul class="list-group" >
+                        <li class="list-group-item active btn-bleuOze">Compétences Techniques Matchées</li>
+                        {% for hardSkill in applicant.hardSkills %}
+                            {% if hardSkill in matchHardSkills %}
+                                <li class="list-group-item ">{{ hardSkill.name }}</li>
+                            {% endif %}
+                        {% endfor %}
+                        <li class="list-group-item active btn-bleuOze">Compétences Techniques Supplémentaires</li>
+                        {% for hardSkill in applicant.hardSkills %}
+                                {% if  hardSkill not in matchHardSkills %}
+                        <li class="list-group-item ">{{ hardSkill.name }}</li>
+                                {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
                 <ul class="list-group" id="list-SoftSkill">
-                    <li class="list-group-item active btn-bleuOze">Compétences Comportementales</li>
+                    <li class="list-group-item active btn-orangeOze">Compétences Comportementales Matchées</li>
                     {% for softSkill in applicant.softSkills %}
-                        <li class="list-group-item {% if softSkill in matchSoftSkills %} bg-vertOze {% endif %}">
-                            {{ softSkill.name }} </li>
+                        {% if softSkill in matchSoftSkills %}
+                            <li class="list-group-item ">{{ softSkill.name }} </li>
+                        {% endif %}
+                    {% endfor %}
+                    <li class="list-group-item active btn-orangeOze">Compétences Comportementales Supplémentaires</li>
+                    {% for softSkill in applicant.softSkills %}
+                        {% if softSkill not in matchSoftSkills %}
+                            <li class="list-group-item ">{{ softSkill.name }}</li>
+                        {% endif %}
                     {% endfor %}
                 </ul>
             </div>
