@@ -1,0 +1,20 @@
+{# @var ea \EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext #}
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block page_title 'Bienvenue sur votre espace administration' %}
+
+{% block page_content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-4 alert-info">
+                <span class="display-3">{{ countApplicant['value'] }}</span> Candidats
+            </div>
+            <div class="col-4 alert-info">
+                <span class="display-3">{{ countCompany['value'] }}</span> Entreprises
+            </div>
+            <div class="col-4 alert-info">
+                <span class="display-3">{{ countOffers['value'] }}</span> Offres d'emplois
+            </div>
+        </div>
+    </div>
+{% endblock %}
