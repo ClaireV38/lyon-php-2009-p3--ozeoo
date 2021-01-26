@@ -18,8 +18,10 @@ class CompanyController extends AbstractController
 {
     /**
      * @Route("/index", name="company_index", methods={"GET"})
+     * @param OfferRepository $offerRepository
+     * @return Response
      */
-    public function index(CompanyRepository $companyRepository, OfferRepository $offerRepository): Response
+    public function index(OfferRepository $offerRepository): Response
     {
         /* @phpstan-ignore-next-line */
         $company = $this->getUser()->getCompany();
@@ -27,6 +29,32 @@ class CompanyController extends AbstractController
         $offers = $offerRepository->findBy(
             ['company' => $company],
             ['id' => 'DESC']
+        );
+        $nbMatches = [];
+        foreach ($offers as $offer) {
+            $matchApplicants = $offerRepository->findMatchingApplicantsForOffer($offer);
+            $nbMatches[$offer->getId()] = count($matchApplicants);
+        }
+        return $this->render('company/index.html.twig', [
+            'company' => $company,
+            'offers' => $offers,
+            'nbMatches' => $nbMatches
+        ]);
+    }
+
+    /**
+     * @Route("/sortEndDate", name="company_offerSortEndDate", methods={"GET"})
+     * @param OfferRepository $offerRepository
+     * @return Response
+     */
+    public function sortEndDate(OfferRepository $offerRepository)
+    {
+        /* @phpstan-ignore-next-line */
+        $company = $this->getUser()->getCompany();
+
+        $offers = $offerRepository->findBy(
+            ['company' => $company],
+            ['endDate' => 'DESC']
         );
         $nbMatches = [];
         foreach ($offers as $offer) {
