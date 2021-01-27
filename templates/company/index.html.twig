@@ -13,13 +13,13 @@
     </div>
 
     <h1 class="text-center">Liste de vos annonces</h1>
-    <div id="index-container" class="center">
+    <div class="center flex-column flex-md-row align-items-center">
             {{ form_start(form) }}
                 <label id="sortFormShape">Trier {{ form_widget(form.sort) }}</label>
             <div id="index-container-second">
                 <label id="sortFormShape">Chercher {{ form_widget(form.search) }}</label>
             </div>
-            <button id="index-container-button" class="btn-center btn btn-vertOze">Trier</button>
+            <button id="index-container-button" class="btn-center btn btn-vertOze">Appliquer</button>
             {{ form_end(form) }}
     </div>
     {% for offer in offers %}
