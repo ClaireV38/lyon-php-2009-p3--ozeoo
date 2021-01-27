@@ -32,6 +32,8 @@ Voila, vous pouvez manger des crepes en testant notre projet.
                                  
  Ils contiennent des annonces avec des matchs ou des annonces qui correspondent au profil
  ns
+ Les matchs se font lors qu'il y a au moins 5 soft skills et 5 hard skills qui correspondent entre le profil candidat et l'annonce de l'entreprise.
+ 
  6/ Pour tester l'inscription, il faut installer le composant mailer: composer require symfony/mailer
  
         mailtrap: https://mailtrap.io/ 
