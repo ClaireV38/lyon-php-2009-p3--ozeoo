@@ -33,6 +33,7 @@ class ApplicantController extends AbstractController
      * @param ApplicantRepository $applicantRepository
      * @return Response
      */
+
     public function index(
         Request $request,
         ApplicantRepository $applicantRepository,
