@@ -4,50 +4,91 @@
 
 {% block body%}
     {% include '/applicant/_navbar.html.twig' %}
-    <!-- mobile -->
-    <div class="container applicant_index_tuto">
-        <h1 class="applicant_home_welcome_mainTitle">Bienvenue!</h1>
-        <a href="{{ path("applicant_edit", {'id': app.user.applicant.id}) }}"><button type="button" class="btn btn-vertOze btn_candidateHome_createProfile">Créez votre profil candidat</button></a>
-        <div class="card candidate_ozeoPresentationCard">
-            <div class="card-body" id="presentationOze">
-                <h5 class="card-title candidate_welcome_title">Présentation de OzéO</h5>
-                <p class="card-text">  OzéO, est une plateforme digitale intuitive et inclusive, permettant de simplifier l’accès à l’emploi et de recruter différemment.
-                    Notre but est de faire en sorte que des profils éloignés de l’emploi,
-                    puissent rencontrer une opportunité grâce à un système de matching ciblant des compétences comportementales et des compétences techniques.
-                    Faire savoir un savoir faire, recruter une personnalité, Ozéo permettra de rencontrer le candidat ou l’entreprise qui vous conviendra le mieux.</p>
+        {% if applicant.firstname is not null %}
+            <div class="container applicant_index_tuto">
+                <h1 class="applicant_home_welcome_mainTitle">Bienvenue {{ applicant.firstname }} !</h1>
+            </div>
+                <h4 id="titleListOffer">Liste de vos Annonces :</h4>
+                {% for matchOffer in matchOffers %}
+                    <div class="card container" id="announce-card-matchOffer">
+                        <div class="row-announce card-body flex-column flex-md-row align-items-center justify-content-between">
+                            <div class="d-inline-block mb-2 mr-md-2 w-100 mb-0 text-center">
+                                <h5 class="card-title" id="title-announce-desktop">{{ matchOffer.title }}</h5>
+                                <p class="mb-0"> Publié le : {{ matchOffer.creationDate|date("d/m/Y") }}</p>
+                                {% if matchOffer in applicantOffers %}
+                                    <div class="alert alert-bleuOze" id="messagePostule" role="alert">
+                                        Vous avez déja postulé à cette offre
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="row-info-right w-100 flex-md-row">
+                                <div class="row-info-nb " id="textMatchOffer">
+                                    <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> Type de contrat :
+                                        <strong>{{ matchOffer.contractType }}</strong></p>
+                                    <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> Début du contrat :
+                                        <strong>{{ matchOffer.startDate|date("d/m/Y")}}</strong></p>
+                                    <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> Lieu :
+                                        <strong>{{ matchOffer.city}}</strong></p>
+                                </div>
+                                <div class="row-btn-offer d-md-inline-block flex justify-content-around">
+                                    <a href="{{ path("offer_detail" ,
+                                        {applicantId: app.user.applicant.id, companyId:matchOffer.company.id, offerId: matchOffer.id })}}"
+                                       class="d-inline-block btn btn-offer btn-orangeOze d-inline-flex">Voir Annonce</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                {% else %}
+                    <h5 class="text-center"> vous n'avez pas encore d'annonces qui match vos compétences</h5>
+                {% endfor %}
+        {% else %}
+        <div class="applicantForm">
+            <div class="infoForm">
+                <h2 class="titleApplicant">Créer ton profil</h2>
+                {{ form_start(form) }}
+                {{ form_row(form.firstname, {'label': 'Ton prénom'}) }}
+                {{ form_row(form.lastname, {'label': 'Ton nom'}) }}
+                {{ form_row(form.city, {'label': 'Ta ville'}) }}
+                {{ form_row(form.mobility, {'label': 'Ta mobilité (Jusqu\'où tu veux aller travailler)'}) }}
+                {{ form_row(form.availability, {'label': 'A partir de quand es-tu disponible?'}) }}
+                {{ form_row(form.personality, {'label': 'Parle nous de toi, de tes hobbies, de tes passions..'}) }}
+            </div>
+            <hr>
+            <h2 class="titleApplicant">Compétences Acquises</h2>
+
+            <div class="skillSelection">
+                <div class="hardSkills">
+                    <h5>Compétences Techniques <small>(10 max)</small></h5>
+                    {{ form_row(form.hardSkills, {'label': ' '}) }}
+                </div>
+                <div class="softSkills">
+                    <h5>Compétences Comportementales <small>(10 max)</small></h5>
+                    {{ form_row(form.softSkills, {'label': ' '}) }}
+                </div>
             </div>
         </div>
-        <div class="card candidate_ozeoTutoCard" >
-            <div class="card-body">
-                <h5 class="card-title candidate_welcome_title">Tutoriel sur l'utilisation du site</h5>
-                <br class="card-text"> Oze créer ton profil en cliquant sur le bouton vert ci-dessus<br />
-                Navigue dans les annonces qui matchent tes comptétences <br />
-                L'entreprise te contacte et te propose un entretien!
-                </p>
-            </div>
+        <div class="buttonApplicant">
+            <input type='submit' class="btn btn-vertOze" value='Valider'>
         </div>
-    </div>
-<!-- desktop -->
-<div class="container desktop_candidate_tuto">
-    <a href="#"><div class="card desktop_candidate_tutoCard1 row align-self-center">
-        <div class="card-body" id="buttonRedirectProfil">
-            <B>Oze</B> créer ton profil <a href="{{ path("applicant_edit", {'id': app.user.applicant.id}) }}"><button type="button" class="btn btn-vertOze btn_candidateHome_createProfileDesktop">ici!</button></a>
-        </div>
-    </div></a>
-    <img src="{{ asset('build/images/fleche.png') }}" alt="flèche">
-    <div class="card desktop_candidate_tutoCard2">
-        <div class="card-body">
-            Navigue dans les annonces qui matchent tes compétences
-            et postule!
-        </div>
-    </div>
-    <img src="{{ asset('build/images/fleche.png') }}" alt="flèche">
-    <div class="card desktop_candidate_tutoCard3">
-        <div class="card-body">
-            L'entreprise te contacte et te propose un entretien!
-        </div>
-    </div>
+        {{ form_end(form) }}
 
-</div>
-
+            {% block stylesheets %}
+                {{ parent() }}
+                <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+            {% endblock %}
+            {% block javascripts %}
+                {{ parent() }}
+                <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        $('#applicant_softSkills').select2({
+                            maximumSelectionLength: 10
+                        })
+                        $('#applicant_hardSkills').select2({
+                            maximumSelectionLength: 10
+                        });
+                    });</script>
+            {% endblock %}
+        {% endif %}
 {% endblock %}

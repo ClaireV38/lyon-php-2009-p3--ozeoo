@@ -4,9 +4,16 @@
 
 {% block body %}
     {% include '/company/_navbar.html.twig' %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('company_index') }}">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="{{ path("offer_applicants", {id: offer.id}) }}">{{ offer.title }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Détail</li>
+        </ol>
+    </nav>
 <div class="container offerDetail">
     <h1>{{ offer.title }}</h1>
-    <div class="card startDateContractType border-bleuOze">
+    <div class="card startDateContractType ">
         <div class="startDateOfferDetail">
             <h3>Date de début : </h3>
             <h5>{{ offer.startDate |date("d/m/Y") }}</h5>
@@ -24,7 +31,7 @@
             <h5>{{ offer.salary }}</h5>
         </div>
     </div>
-    <div class="card border-orangeOze mb-3">
+    <div class="card mb-3">
         <div class="card-body">
             <h5 class="card-title">Description de l'offre :</h5>
             <p class="card-text">{{ offer.description }}</p>

@@ -9,26 +9,46 @@
         <div class="row">
             <div class="col-md-4" id="candidateInfo">
                 <h1>{{ applicant.firstname ~ ' ' ~ applicant.lastname }}</h1>
-                <p class="text-center">{{ applicant.personality }}</p>
-                <p class="text-center">{{ applicant.city }}</p>
+                <div id="listApplicantInfo">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Description : </strong>{{ applicant.personality }}</li>
+                        <li class="list-group-item"><strong>Ville : </strong>{{ applicant.city }}</li>
+                        <li class="list-group-item"><strong>Mobilité : </strong>{{ applicant.mobility }}</li>
+                    </ul>
+                </div>
                 <div id="buttonDetails">
-                    <a href="{{ path('applicant_index') }}"><button class="btn btn-vertOze">Retour à l'accueil</button></a>
-                    <a href="{{ path('applicant_edit', {'id': applicant.id}) }}"><button class="btn  btn-vertOze">Modifier mon profil</button></a>
+                    <a href="{{ path('applicant_edit', {'id': applicant.id}) }}"><button class="btn btn-vertOze">Modifier mon profil</button></a>
                 </div>
             </div>
             <div class="col-md" id="skillsList">
-                <ul class="list-group" id="list-HardSkill">
-                    <li class="list-group-item active btn-bleuOze">Compétences Techniques</li>
-                    {% for hardSkill in applicant.hardSkills %}
-                        <li class="list-group-item">{{ hardSkill.name }}</li>
-                    {% endfor %}
-                </ul>
-                <ul class="list-group" id="list-SoftSkill">
-                    <li class="list-group-item active btn-bleuOze">Compétences Comportementales</li>
-                    {% for softSkill in applicant.softSkills %}
-                        <li class="list-group-item">{{ softSkill.name }}</li>
-                    {% endfor %}
-                </ul>
+                <div class="card" id="list-HardSkill">
+                    <div class="card-body" >
+                        <div class="card-header">
+                            <h5>Compétences Techniques</h5>
+                        </div>
+                        <div class="skillMatchApplicant">
+                            <ul style="list-style: none ">
+                                {% for hardSkill in applicant.hardSkills %}
+                                    <li class="list-group-item"> {{ hardSkill.name }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" id="list-HardSkill">
+                    <div class="card-body" >
+                        <div class="card-header">
+                            <h5>Compétences Comportementales</h5>
+                        </div>
+                        <div class="skillMatchApplicant">
+                            <ul style="list-style: none ">
+                                {% for softSkill in applicant.softSkills %}
+                                        <li class="list-group-item">{{ softSkill.name }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

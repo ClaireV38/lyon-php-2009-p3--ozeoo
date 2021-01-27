@@ -77,6 +77,9 @@ class CompanyController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Company $company
+     * @return Response
      */
     public function edit(Request $request, Company $company): Response
     {

@@ -8,22 +8,18 @@
         <ul class="navbar-nav mr-auto">
             {% if app.user %}
             <li class="nav-item nav mt-3 mt-md-0">
-                <a  id="buttonNav" class="btn btn-orangeOze" class="nav-link" href="{{ path("applicant_show", {'id': app.user.applicant.id}) }}">Profil</a>
+                <a id="buttonNav" class="btn btn-orangeOze" class="nav-link"href="{{ path('applicant_index') }}">Mes Annonces</a>
             </li>
-            <div class="button2">
-                <li class="nav-item nav mt-3 mt-md-0">
-                    <a id="buttonNav" class="btn btn-vertOze" class="nav-link " href="{{ path("applicant_offer",{'id': app.user.applicant.id}) }}">Annonce</a>
-                </li>
-            </div>
-            {% endif %}
-            {% if app.user %}
-            <li class="nav-item nav mt-3 mt-md-0">
-                <a id="buttonNav" class="btn btn-bleuOze" class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a>
-            </li>
-            {% endif %}
         </ul>
-    </div>
-        <div class="logoright">
-            <span class="icon-bar"> <img src="{{ asset('build/images/logoNoBg.png') }}" width="90%" height="90%" alt="logo2Oze"> </span>
+        <div class="dropdown">
+            <button class="btn btn-bleuOze dropdown-toggle" style="color: black" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ user.email }}
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="{{ path("applicant_show", {'id': app.user.applicant.id}) }}"><i class="fas fa-user"></i> Profil</a>
+                <a class="dropdown-item" href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt"></i> Se déconnecter</a>
+            </div>
         </div>
+    </div>
+    {% endif %}
 </nav>
