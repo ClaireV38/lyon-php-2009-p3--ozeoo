@@ -181,7 +181,7 @@ class ApplicantController extends AbstractController
     }
 
     /**
-     * @Route ("/{applicantId}/company/{companyId}/offer/{offerId}", methods={"GET", "POST"}, name="offer_detail")
+     * @Route ("/{applicantId}/entreprise/{companyId}/offre/{offerId}", methods={"GET", "POST"}, name="offer_detail")
      * @ParamConverter("applicant", class="App\Entity\Applicant", options={"mapping": {"applicantId": "id"}})
      * @ParamConverter("offer", class="App\Entity\Offer", options={"mapping": {"offerId": "id"}})
      * @ParamConverter("company", class="App\Entity\Company", options={"mapping": {"companyId": "id"}})
