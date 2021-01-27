@@ -74,7 +74,7 @@ class RegistrationController extends AbstractController
             $email = (new Email());
             $email->from('contact@ozeladiversite.com');
             $email->to($user->getEmail());
-            $email->subject('Ozé La Diversité : Demande d\'inscription en cours');
+            $email->subject('Ozéo : Demande d\'inscription en cours');
             $email->html($this->renderView('company/newCompanyEmail.html.twig'));
             $mailer->send($email);
 
@@ -130,7 +130,7 @@ class RegistrationController extends AbstractController
                 (new TemplatedEmail())
                     ->from(new Address('contact@ozeladiversite.com', 'Ozé La Diversité'))
                     ->to($user->getEmail())
-                    ->subject('Ozé La Diversité : Merci de confirmer votre adresse email')
+                    ->subject('Ozéo : Merci de confirmer votre adresse email')
                     ->htmlTemplate('applicant/newApplicantEmail.html.twig')
             );
 
