@@ -71,7 +71,7 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
             // do anything else you need here, like send an email
 
-            $email = (new Email());
+            $email = (new TemplatedEmail());
             $email->from(new Address($this->getParameter('mailer_from'), 'Ozeoo'));
             $email->to($user->getEmail());
             $email->subject('Ozé La Diversité : Demande d\'inscription en cours');
