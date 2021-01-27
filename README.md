@@ -44,5 +44,15 @@ Voila, vous pouvez manger des crepes en testant notre projet.
       MAILER_DSN= lien donné par mailtrap
       MAILER_FROM_ADDRESS=hello@ozeoo.com
       ###< symfony/mailer ###
+      
+7/ Pour la partie administrateur,
 
+  adresse mail : admin@monsite.com
+  mot de passe : adminpassword
+  
+  La partie administrateur permettra a OzelaDiversité de vérifier les informations de l'entreprise lors de leur inscription.
+  
+  Cliquer sur éditer pour valider ou pas valider une entreprise.
+  
+8/ Voila
 
