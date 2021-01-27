@@ -56,19 +56,6 @@ class ApplicantController extends AbstractController
             return $this->redirectToRoute('applicant_index');
         }
 
-//        $offers = $applicant->getOffers();
-//        $offerId = [];
-//        foreach ($offers as $offer) {
-//            $offerId[] = $offer->getId();
-//        }
-//        /* @phpstan-ignore-next-line */
-//        $matchOffers = $applicantRepository->findMatchingOffersForApplicant($this->getUser()->getApplicant());
-//        $offersInArray = [];
-//        foreach ($matchOffers as $matchOffer) {
-//            if (in_array($matchOffer['offer_id'], $offerId)) {
-//                $offersInArray[] = $matchOffer;
-//            }
-//        }
         $applicantOffers = $applicant->getOffers();
 
         /* @phpstan-ignore-next-line */
@@ -83,7 +70,6 @@ class ApplicantController extends AbstractController
             'form' => $form->createView(),
             'matchOffers' => $matchOffers,
             'applicantOffers' => $applicantOffers,
-//            'offers' => $offersInArray,
             'user' => $user
         ]);
     }
