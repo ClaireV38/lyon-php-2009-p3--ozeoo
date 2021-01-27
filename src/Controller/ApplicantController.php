@@ -6,6 +6,7 @@ use App\Entity\Applicant;
 use App\Entity\Company;
 use App\Entity\Offer;
 use App\Form\ApplicantType;
+use App\Form\SearchApplicantOfferType;
 use App\Repository\ApplicantRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use App\Entity\User;
@@ -23,12 +24,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * @Route("/applicant")
+ * @Route("/applicant", name="applicant_")
  */
 class ApplicantController extends AbstractController
 {
     /**
-     * @Route("/", name="applicant_index", methods={"GET","POST"})
+     * @Route("/", name="index", methods={"GET","POST"})
      * @param Request $request
      * @param ApplicantRepository $applicantRepository
      * @return Response
@@ -58,8 +59,35 @@ class ApplicantController extends AbstractController
 
         $applicantOffers = $applicant->getOffers();
 
-        /* @phpstan-ignore-next-line */
-        $matchOffersArray = $applicantRepository->findMatchingOffersForApplicant($this->getUser()->getApplicant());
+        $matchOffersArray = [];
+        $searchForm = $this->createForm(SearchApplicantOfferType::class);
+        $searchForm->handleRequest($request);
+
+        if ($searchForm->isSubmitted() && $searchForm->isValid()) {
+            $searchTitle = $searchForm->getData()['searchTitle'];
+            $searchCompany = $searchForm->getData()['searchCompany'];
+            if (empty($searchTitle)) {
+                $searchTitle = "";
+            }
+            if (empty($searchCompany)) {
+                $searchCompany = "";
+            }
+            $field = $searchForm->getData()['sort'];
+            switch ($field) {
+                case 'startDate':
+                    $matchOffersArray = $applicantRepository->findMatchingOffersForApplicantOrderByEndDate(
+                        $applicant,
+                        $searchTitle,
+                        $searchCompany,
+                        $field
+                    );
+                    break;
+            }
+        } else {
+            /* @phpstan-ignore-next-line */
+            $matchOffersArray = $applicantRepository->findMatchingOffersForApplicant($this->getUser()->getApplicant());
+        }
+
         $matchOffers = [];
         foreach ($matchOffersArray as $matchOffer) {
             $matchOffers[] = $offerRepository->findOneBy(['id' => $matchOffer['offer_id']]);
@@ -70,7 +98,8 @@ class ApplicantController extends AbstractController
             'form' => $form->createView(),
             'matchOffers' => $matchOffers,
             'applicantOffers' => $applicantOffers,
-            'user' => $user
+            'user' => $user,
+            'searchForm' => $searchForm->createView(),
         ]);
     }
 
@@ -107,7 +136,7 @@ class ApplicantController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="applicant_show", methods={"GET"})
+     * @Route("/{id}", name="show", methods={"GET"})
      * @param Applicant $applicant
      * @return Response
      */
@@ -127,7 +156,7 @@ class ApplicantController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="applicant_delete", methods={"DELETE"})
+     * @Route("/{id}", name="delete", methods={"DELETE"})
      * @param Request $request
      * @param Applicant $applicant
      * @return Response
@@ -145,34 +174,6 @@ class ApplicantController extends AbstractController
         }
 
         return $this->redirectToRoute('applicant_index');
-    }
-
-    /**
-     * @Route ("/{id}/offer", name="applicant_offer", methods={"GET"})
-     * @param ApplicantRepository $applicantRepository
-     * @param Applicant $applicant
-     * @param OfferRepository $offerRepository
-     * @return Response
-     */
-    public function showMatchOffers(
-        ApplicantRepository $applicantRepository,
-        Applicant $applicant,
-        OfferRepository $offerRepository
-    ): Response {
-        $applicantOffers = $applicant->getOffers();
-
-        /* @phpstan-ignore-next-line */
-        $matchOffersArray = $applicantRepository->findMatchingOffersForApplicant($this->getUser()->getApplicant());
-        $matchOffers = [];
-        foreach ($matchOffersArray as $matchOffer) {
-            $matchOffers[] = $offerRepository->findOneBy(['id' => $matchOffer['offer_id']]);
-        }
-
-        return $this->render('applicant/offer.html.twig', [
-            'applicant' => $applicant,
-            'matchOffers' => $matchOffers,
-            'applicantOffers' => $applicantOffers,
-        ]);
     }
 
     /**
@@ -225,7 +226,7 @@ class ApplicantController extends AbstractController
     }
 
     /**
-     * @Route ("/Apply/{id}", name="applicant_offer_apply", methods={"GET"})
+     * @Route ("/Apply/{id}", name="offer_apply", methods={"GET"})
      * @param Company $company
      * @param Offer $offer
      * @param EntityManagerInterface $entityManager
