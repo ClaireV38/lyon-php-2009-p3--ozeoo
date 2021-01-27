@@ -72,7 +72,7 @@ class RegistrationController extends AbstractController
             // do anything else you need here, like send an email
 
             $email = (new Email());
-            $email->from('contact@ozeladiversite.com');
+            $email->from(new Address($this->getParameter('mailer_from'), 'Ozeoo'));
             $email->to($user->getEmail());
             $email->subject('Ozé La Diversité : Demande d\'inscription en cours');
             $email->html($this->renderView('company/newCompanyEmail.html.twig'));
@@ -128,7 +128,7 @@ class RegistrationController extends AbstractController
                 'app_verify_email',
                 $user,
                 (new TemplatedEmail())
-                    ->from(new Address('contact@ozeladiversite.com', 'Ozé La Diversité'))
+                    ->from(new Address($this->getParameter('mailer_from'), 'Ozéoo'))
                     ->to($user->getEmail())
                     ->subject('Ozé La Diversité : Merci de confirmer votre adresse email')
                     ->htmlTemplate('applicant/newApplicantEmail.html.twig')
