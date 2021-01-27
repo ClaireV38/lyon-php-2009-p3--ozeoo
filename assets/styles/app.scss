@@ -359,6 +359,15 @@ h1 {
     justify-content: center;
 }
 
+/* Color Icon Skill Check */
+.fas.fa-check-circle {
+    color: $vertOze;
+}
+
+.fas.fa-times-circle {
+    color: $orangeOze;
+}
+
 @media (min-width: 768px) {
     .buttonHomeCompany {
         text-align: center;
