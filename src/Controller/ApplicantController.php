@@ -23,7 +23,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * @Route("/applicant")
+ * @Route("/candidat")
  */
 class ApplicantController extends AbstractController
 {
@@ -76,7 +76,7 @@ class ApplicantController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="applicant_edit", methods={"GET","POST"})
+     * @Route("/{id}/profil", name="applicant_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Applicant $applicant
      * @return Response
@@ -149,7 +149,7 @@ class ApplicantController extends AbstractController
     }
 
     /**
-     * @Route ("/{id}/offer", name="applicant_offer", methods={"GET"})
+     * @Route ("/{id}/offre", name="applicant_offer", methods={"GET"})
      * @param ApplicantRepository $applicantRepository
      * @param Applicant $applicant
      * @return Response
@@ -230,7 +230,7 @@ class ApplicantController extends AbstractController
     }
 
     /**
-     * @Route ("/Apply/{id}", name="applicant_offer_apply", methods={"GET"})
+     * @Route ("/Postule/{id}", name="applicant_offer_apply", methods={"GET"})
      * @param Company $company
      * @param Offer $offer
      * @param EntityManagerInterface $entityManager

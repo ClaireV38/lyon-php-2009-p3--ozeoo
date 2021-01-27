@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * @Route("/offer")
+ * @Route("/offre")
  */
 class OfferController extends AbstractController
 {
@@ -33,7 +33,7 @@ class OfferController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="offer_new", methods={"GET","POST"})
+     * @Route("/Nouvelle_Offre", name="offer_new", methods={"GET","POST"})
      * @param Request $request
      * @return Response
      */
@@ -85,7 +85,7 @@ class OfferController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="offer_edit", methods={"GET","POST"})
+     * @Route("/{id}/Modifier_Annonce", name="offer_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Offer $offer
      * @return Response
@@ -136,7 +136,7 @@ class OfferController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/applicants", name="offer_applicants", methods={"GET"})
+     * @Route("/{id}/candidats", name="offer_applicants", methods={"GET"})
      * @param Offer $offer
      * @param OfferRepository $offerRepository
      * @return Response
@@ -171,7 +171,7 @@ class OfferController extends AbstractController
     }
 
     /**
-     * @Route("/{offerId}/applicant/{applicantId}", name="offer_applicant_show", methods={"GET"})
+     * @Route("/{offerId}/candidat/{applicantId}", name="offer_applicant_show", methods={"GET"})
      * @ParamConverter("offer", class="App\Entity\Offer", options={"mapping": {"offerId": "id"}})
      * @ParamConverter("applicant", class="App\Entity\Applicant", options={"mapping": {"applicantId": "id"}})
      * @param Offer $offer

@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * @Route("/company")
+ * @Route("/entreprise")
  */
 class CompanyController extends AbstractController
 {
@@ -44,7 +44,7 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="company_edit", methods={"GET","POST"})
+     * @Route("/{id}/Modifier_Profil", name="company_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Company $company
      * @return Response
@@ -88,18 +88,6 @@ class CompanyController extends AbstractController
             'company' => $company,
         ]);
     }
-
-//    /**
-//     * @Route("/navbar", name="navbar_show", methods={"GET"})
-//     * @param Company $company
-//     * @return Response
-//     */
-//    public function displayNavbar(Company $company): Response
-//    {
-//        return $this->render('company/_navbar.html.twig', [
-//            'company' => $company,
-//        ]);
-//    }
 
     /**
      * @Route("/{id}", name="company_delete", methods={"DELETE"})
