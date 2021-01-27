@@ -17,7 +17,9 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -235,8 +237,8 @@ class ApplicantController extends AbstractController
             $mailTo = $offer->getCompany()->getContactEmail();
         }
         if ($mailTo !== null) {
-            $email = (new Email())
-                ->from($this->getParameter('mailer_from'))
+            $email = (new TemplatedEmail())
+                ->from(new Address($this->getParameter('mailer_from'), 'Ozéoo'))
                 ->to($mailTo)
                     ->subject('Un candidat a postulé à l\'une de vos offres')
                     ->html($this->renderView('applicant/applicationOfferEmail.html.twig', [
