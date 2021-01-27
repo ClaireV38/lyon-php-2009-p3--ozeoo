@@ -89,18 +89,6 @@ class CompanyController extends AbstractController
         ]);
     }
 
-//    /**
-//     * @Route("/navbar", name="navbar_show", methods={"GET"})
-//     * @param Company $company
-//     * @return Response
-//     */
-//    public function displayNavbar(Company $company): Response
-//    {
-//        return $this->render('company/_navbar.html.twig', [
-//            'company' => $company,
-//        ]);
-//    }
-
     /**
      * @Route("/{id}", name="company_delete", methods={"DELETE"})
      * @param Request $request
