@@ -20,6 +20,7 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * @Route("/applicant")
@@ -32,10 +33,17 @@ class ApplicantController extends AbstractController
      * @param ApplicantRepository $applicantRepository
      * @return Response
      */
-    public function index(Request $request, ApplicantRepository $applicantRepository): Response
-    {
+    public function index(
+        Request $request,
+        ApplicantRepository $applicantRepository,
+        OfferRepository $offerRepository
+    ): Response {
+
         /* @phpstan-ignore-next-line */
         $applicant = $this->getUser()->getApplicant();
+
+        /* @phpstan-ignore-next-line */
+        $user = $this->getUser();
 
         $form = $this->createForm(ApplicantType::class, $applicant);
         $form->handleRequest($request);
@@ -46,6 +54,109 @@ class ApplicantController extends AbstractController
             $entityManager->flush();
 
             return $this->redirectToRoute('applicant_index');
+        }
+
+        $applicantOffers = $applicant->getOffers();
+
+        /* @phpstan-ignore-next-line */
+        $matchOffersArray = $applicantRepository->findMatchingOffersForApplicant($this->getUser()->getApplicant());
+        $matchOffers = [];
+        foreach ($matchOffersArray as $matchOffer) {
+            $matchOffers[] = $offerRepository->findOneBy(['id' => $matchOffer['offer_id']]);
+        }
+
+        return $this->render('applicant/index.html.twig', [
+            'applicant' => $applicant,
+            'form' => $form->createView(),
+            'matchOffers' => $matchOffers,
+            'applicantOffers' => $applicantOffers,
+            'user' => $user
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/edit", name="applicant_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Applicant $applicant
+     * @return Response
+     */
+    public function new(Request $request, Applicant $applicant): Response
+    {
+        /* @phpstan-ignore-next-line */
+        $user = $this->getUser();
+        if ($this->getUser() != $applicant->getUser()) {
+            throw new AccessDeniedException();
+        }
+
+        $form = $this->createForm(ApplicantType::class, $applicant);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($applicant);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('applicant_index');
+        }
+
+        return $this->render('applicant/edit.html.twig', [
+            'applicant' => $applicant,
+            'form' => $form->createView(),
+            'user' => $user,
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="applicant_show", methods={"GET"})
+     * @param Applicant $applicant
+     * @return Response
+     */
+    public function show(Applicant $applicant): Response
+    {
+        /* @phpstan-ignore-next-line */
+        $user = $this->getUser();
+
+        if ($this->getUser() != $applicant->getUser()) {
+            throw new AccessDeniedException();
+        }
+
+        return $this->render('applicant/show.html.twig', [
+            'applicant' => $applicant,
+            'user' => $user,
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="applicant_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Applicant $applicant
+     * @return Response
+     */
+    public function delete(Request $request, Applicant $applicant): Response
+    {
+        if ($this->getUser() != $applicant->getUser()) {
+            throw new AccessDeniedException();
+        }
+
+        if ($this->isCsrfTokenValid('delete' . $applicant->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($applicant);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('applicant_index');
+    }
+
+    /**
+     * @Route ("/{id}/offer", name="applicant_offer", methods={"GET"})
+     * @param ApplicantRepository $applicantRepository
+     * @param Applicant $applicant
+     * @return Response
+     */
+    public function showMatchOffers(ApplicantRepository $applicantRepository, Applicant $applicant): Response
+    {
+        if ($this->getUser() != $applicant->getUser()) {
+            throw new AccessDeniedException();
         }
 
         $offers = $applicant->getOffers();
@@ -61,68 +172,11 @@ class ApplicantController extends AbstractController
                 $offersInArray[] = $matchOffer;
             }
         }
-
-
-        return $this->render('applicant/index.html.twig', [
+        return $this->render('applicant/offer.html.twig', [
             'applicant' => $applicant,
-            'form' => $form->createView(),
             'matchOffers' => $matchOffers,
             'offers' => $offersInArray
         ]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="applicant_edit", methods={"GET","POST"})
-     * @param Request $request
-     * @param Applicant $applicant
-     * @return Response
-     */
-    public function new(Request $request, Applicant $applicant): Response
-    {
-        $form = $this->createForm(ApplicantType::class, $applicant);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($applicant);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('applicant_index');
-        }
-
-        return $this->render('applicant/edit.html.twig', [
-            'applicant' => $applicant,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="applicant_show", methods={"GET"})
-     * @param Applicant $applicant
-     * @return Response
-     */
-    public function show(Applicant $applicant): Response
-    {
-        return $this->render('applicant/show.html.twig', [
-            'applicant' => $applicant,
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="applicant_delete", methods={"DELETE"})
-     * @param Request $request
-     * @param Applicant $applicant
-     * @return Response
-     */
-    public function delete(Request $request, Applicant $applicant): Response
-    {
-        if ($this->isCsrfTokenValid('delete' . $applicant->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($applicant);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('applicant_index');
     }
 
     /**
@@ -130,17 +184,47 @@ class ApplicantController extends AbstractController
      * @ParamConverter("applicant", class="App\Entity\Applicant", options={"mapping": {"applicantId": "id"}})
      * @ParamConverter("offer", class="App\Entity\Offer", options={"mapping": {"offerId": "id"}})
      * @ParamConverter("company", class="App\Entity\Company", options={"mapping": {"companyId": "id"}})
+     * @param ApplicantRepository $applicantRepository
      * @param Applicant $applicant
      * @param Offer $offer
      * @param Company $company
+     * @param SkillRepository $skillRepository
      * @return Response
      */
-    public function showOfferDetail(Applicant $applicant, Offer $offer, Company $company): Response
-    {
+    public function showOfferDetail(
+        ApplicantRepository $applicantRepository,
+        Applicant $applicant,
+        Offer $offer,
+        Company $company,
+        SkillRepository $skillRepository
+    ): Response {
+        /* @phpstan-ignore-next-line */
+        $user = $this->getUser();
+
+        $matchHardSkills = $skillRepository->findMatchHardSkills($offer, $applicant);
+        $matchSoftSkills = $skillRepository->findMatchSoftSkills($offer, $applicant);
+
+        /* @phpstan-ignore-next-line */
+        $matchOffers = $applicantRepository->findMatchingOffersForApplicant($this->getUser()->getApplicant());
+        $matchOffersId = [];
+        foreach ($matchOffers as $matchOffer) {
+            $matchOffersId[] = $matchOffer['offer_id'];
+        }
+        if (
+            $this->getUser() != $applicant->getUser()
+            || $offer->getCompany() != $company
+            || !(in_array($offer->getId(), $matchOffersId))
+        ) {
+            throw new AccessDeniedException();
+        }
+
         return $this->render('applicant/offerDetail.html.twig', [
-           'applicant' => $applicant,
-           'offer' => $offer,
-           'company' => $company,
+            'applicant' => $applicant,
+            'offer' => $offer,
+            'company' => $company,
+            'user' => $user,
+            'matchHardSkills' => $matchHardSkills,
+            'matchSoftSkills' => $matchSoftSkills,
         ]);
     }
 
@@ -159,6 +243,8 @@ class ApplicantController extends AbstractController
         EntityManagerInterface $entityManager,
         MailerInterface $mailer
     ): Response {
+        /* @phpstan-ignore-next-line */
+        $user = $this->getUser();
 
         /* @phpstan-ignore-next-line */
         $applicant = $this->getUser()->getApplicant();
@@ -185,6 +271,8 @@ class ApplicantController extends AbstractController
             $mailer->send($email);
         }
 
-        return $this->redirectToRoute('applicant_index');
+        return $this->redirectToRoute('applicant_index', [
+            'user' => $user,
+        ]);
     }
 }

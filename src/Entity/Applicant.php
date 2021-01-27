@@ -76,7 +76,7 @@ class Applicant
     private $hardSkills;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Offer::class, mappedBy="applicants")
+     * @ORM\ManyToMany(targetEntity=Offer::class, mappedBy="applicants", cascade={"remove"})
      * @var Collection<Offer>
      */
     private $offers;
