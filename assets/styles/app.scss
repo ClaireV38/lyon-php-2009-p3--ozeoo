@@ -320,6 +320,29 @@ h1 {
     display: none;
 }
 
+/* Tutoriel Index */
+#tutoMobileVersion {
+    margin-top: 20px;
+}
+
+#presentationTuto {
+    font-size: 1.25em;
+    text-align: center;
+}
+
+#linkTuto {
+    text-decoration: none;
+}
+
+#titleTuto {
+    padding: 5px;
+}
+
+#listTuto {
+    margin-bottom: 10px;
+}
+
+
 @media (min-width: 768px) {
     .buttonHomeCompany {
         text-align: center;
@@ -815,4 +838,52 @@ h1 {
         margin-right: auto;
         margin-bottom: 30px;
     }
+
+    /* Tutoriel Index */
+    #tutoImg {
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: row;
+    }
+
+    #textTuto {
+        padding: 10px;
+        font-size: 15px;
+        width: 90%;
+        margin: auto;
+        height: auto;
+    }
+
+    #titleTuto {
+        margin-top: 20px;
+    }
+
+    #circleTuto {
+        border-radius: 100px;
+        width: 12rem;
+        height: 12rem;
+        padding: 10px;
+        margin-left: 40px;
+        margin-right: 40px;
+    }
+
+    #mainTuto {
+        display: flex;
+        flex-flow: row;
+        justify-content: center;
+    }
+
+    #arrowTuto {
+        width: 150px;
+    }
+
+    #textTutoCircle {
+        text-align: center;
+    }
+
+    #presentationTuto {
+        font-size: 1.5em;
+    }
+
+
 }
