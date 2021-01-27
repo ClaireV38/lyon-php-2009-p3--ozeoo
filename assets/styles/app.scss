@@ -33,8 +33,8 @@ main {
 
 #home-list-pictures {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
+
 }
 
 h1 {
@@ -87,6 +87,7 @@ h1 {
 /* Index company style */
 #company-home-body {
     width: 90%;
+    margin-bottom: 20px;
 }
 
 #announce-list-homecompany {
@@ -233,8 +234,8 @@ h1 {
 }
 
 .candidate_ozeoPresentationCard {
-    border: 1px solid $orangeOze ;
     width: 18rem;
+
 }
 
 .candidate_ozeoTutoCard {
@@ -310,6 +311,12 @@ h1 {
     margin-bottom: 10px;
 }
 
+.applicant_home_welcome_mainTitle {
+
+    display: none;
+  
+}
+
 /*error messages */
 .errorMessage {
     flex-direction: column;
@@ -327,9 +334,65 @@ h1 {
 }
 
 @media (min-width: 768px) {
+    .buttonHomeCompany {
+        text-align: center;
+        margin-top: 100px;
+    }
+
+    .buttonEditCompany {
+        padding-top: 50px;
+        text-align: center;
+    }
+
+    #buttonDetails {
+        padding-top: 10px;
+    }
+
+    .applicant_home_welcome_mainTitle {
+        color: $orangeOze;
+    }
+
+    #titleListOffer {
+        margin-left: 280px;
+    }
+
+    #skillsList {
+        width: 50%;
+    }
+
+    #listApplicantInfo {
+        width: fit-content;
+    }
+
+    #formLoginPhoto {
+        justify-content: space-evenly;
+    }
+
+    #home-list-pictures {
+        background-color: #ffffff;
+    }
+
+    .buttonInscription {
+        display: flex;
+        padding-top: 20px;
+    }
+
+    #loginPageButtons.btn.btn-lg.btn-orangeOze.btn-center.btn-235px {
+        margin-left: 10px;
+    }
+
+    .applicant_home_welcome_mainTitle {
+        display: block;
+    }
+
     /* Navbar */
     .logoright {
-        display: block;
+        display: contents;
+    }
+
+    #buttonNavLogout {
+        width: 220px;
+        margin-right: 20px;
     }
 
     .button2 {
@@ -469,6 +532,7 @@ h1 {
     /* Page accueil candidat*/
     #presentationOze {
         flex-direction: column;
+        font-size: larger;
     }
 
     .btn_candidateHome_createProfile {
@@ -477,6 +541,7 @@ h1 {
 
     #buttonRedirectProfil {
         flex-direction: column;
+        margin-top: 20px;
     }
 
     .candidate_ozeoPresentationCard {
@@ -488,7 +553,6 @@ h1 {
     }
 
     .desktop_candidate_tuto {
-        margin-top: 60px;
         display: flex;
         flex-direction: row;
         justify-content: space-around;
@@ -509,18 +573,14 @@ h1 {
 
     .desktop_candidate_tutoCard1 {
         padding-top:40px;
-        border: 1px solid $orangeOze;
-        text-decoration: none;
     }
 
     .desktop_candidate_tutoCard2 {
-        padding-top: 15px;
-        border: 1px solid $violetOze;
+        padding-top: 28px;
     }
 
     .desktop_candidate_tutoCard3 {
-        padding-top: 20px;
-        border: 1px solid $bleuOze;
+        padding-top: 40px;
     }
 
     .btn_candidateHome_createProfileDesktop {
@@ -613,10 +673,6 @@ h1 {
         padding: 10px;
     }
 
-    #companyDetailsText {
-        margin-left: auto;
-    }
-
     /*Offer Detail*/
     .profilCompany {
         display: flex;
@@ -640,6 +696,8 @@ h1 {
         flex-direction: row;
         justify-content: space-around;
         margin-bottom: 10px;
+        padding-top: 10px;
+        height: 100px;
     }
 
     .offerDetail {
@@ -692,6 +750,12 @@ h1 {
         display: flex;
         justify-content: center;
         margin-top: 20px;
+    }
+
+    #buttonPostuleOffer {
+        padding: 30px;
+        font-size: larger;
+        width: 200px;
     }
 
     /*offer list matches*/
@@ -756,6 +820,34 @@ h1 {
         padding-left: 10px;
         padding-right: 10px;
         font-size: 13px;
+    }
+
+    /*Reset password*/
+    #reset-password-container {
+        margin: auto;
+        width: 30%;
+    }
+
+    #reset-password-button {
+        margin-top: 15px;
+    }
+
+    #safetyImg {
+        width: 700px;
+        height: 400px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 30px;
+    }
+
+    #requestImg {
+        width: 700px;
+        height: 450px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 30px;
     }
 
     #buttonDetails {
