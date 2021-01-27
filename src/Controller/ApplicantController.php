@@ -70,8 +70,6 @@ class ApplicantController extends AbstractController
             'matchOffers' => $matchOffers,
             'offers' => $offersInArray
         ]);
-
-        return $this->render('applicant/index.html.twig');
     }
 
     /**
