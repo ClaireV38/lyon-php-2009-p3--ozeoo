@@ -205,5 +205,4 @@ class Skill
         }
         return $this;
     }
-
 }
