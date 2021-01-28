@@ -44,18 +44,10 @@ class ApplicantController extends AbstractController
         /* @phpstan-ignore-next-line */
         $applicant = $this->getUser()->getApplicant();
 
-        /* @phpstan-ignore-next-line */
-        $user = $this->getUser();
-
-        $form = $this->createForm(ApplicantType::class, $applicant);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($applicant);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('applicant_index');
+        if (null == ($applicant->getFirstname())) {
+             return $this->redirectToRoute('applicant_edit', [
+                'id' => $applicant->getId()
+             ]);
         }
 
         $applicantOffers = $applicant->getOffers();
@@ -123,10 +115,8 @@ class ApplicantController extends AbstractController
 
         return $this->render('applicant/index.html.twig', [
             'applicant' => $applicant,
-            'form' => $form->createView(),
             'matchOffers' => $matchOffers,
             'applicantOffers' => $applicantOffers,
-            'user' => $user,
             'searchForm' => $searchForm->createView(),
         ]);
     }

@@ -2,109 +2,56 @@
 
 {% block title %}Applicant index{% endblock %}
 
-{% block body%}
+{% block body %}
     {% include '/applicant/_navbar.html.twig' %}
     <div class="container applicant_index_tuto">
         <h1 class="applicant_home_welcome_mainTitle">Bienvenue {{ applicant.firstname }} !</h1>
     </div>
-        {% if applicant.firstname is not null %}
-                <h4 id="titleListOffer">Liste de vos Annonces :</h4>
-            <div class="center flex-column flex-md-row align-items-center">
-                {{ form_start(searchForm) }}
-                <label id="sortFormShape">Trier {{ form_widget(searchForm.sort) }}</label>
-                <div id="index-container-second">
-                    <label id="sortFormShape">Chercher {{ form_widget(searchForm.searchTitle) }}</label>
-                </div>
-                <div id="index-container-second">
-                    <label id="sortFormShape">entreprise {{ form_widget(searchForm.searchCompany) }}</label>
-                </div>
-                <button id="index-container-button" class="btn-center btn btn-vertOze">Appliquer</button>
-                {{ form_end(searchForm) }}
-            </div>
-                {% for matchOffer in matchOffers %}
+    <h4 id="titleListOffer">Liste de vos Annonces :</h4>
+    <div class="center flex-column flex-md-row align-items-center">
+        {{ form_start(searchForm) }}
+        <label id="sortFormShape">Trier {{ form_widget(searchForm.sort) }}</label>
+        <div id="index-container-second">
+            <label id="sortFormShape">Chercher {{ form_widget(searchForm.searchTitle) }}</label>
+        </div>
+        <div id="index-container-second">
+            <label id="sortFormShape">entreprise {{ form_widget(searchForm.searchCompany) }}</label>
+        </div>
+        <button id="index-container-button" class="btn-center btn btn-vertOze">Appliquer</button>
+        {{ form_end(searchForm) }}
+    </div>
+    {% for matchOffer in matchOffers %}
 
-                <div class="card container" id="announce-card-matchOffer">
-                    <div class="row-announce card-body flex-column flex-md-row align-items-center justify-content-between">
-                        <div class="d-inline-block mb-2 mr-md-2 w-100 mb-0 text-center">
-                            <h5 class="card-title" id="title-announce-desktop">{{ matchOffer.title }}</h5>
-                            <p class="mb-0"> Publié le : {{ matchOffer.startDate|date("d/m/Y") }}</p>
-                            <p class="mb-0"> Entreprise : {{ matchOffer.company.name }}</p>
-                            {% if matchOffer in applicantOffers %}
-                                <div class="alert alert-bleuOze" id="messagePostule" role="alert">
-                                    Vous avez déja postulé à cette offre
-                                </div>
-                            {% endif %}
+        <div class="card container" id="announce-card-matchOffer">
+            <div class="row-announce card-body flex-column flex-md-row align-items-center justify-content-between">
+                <div class="d-inline-block mb-2 mr-md-2 w-100 mb-0 text-center">
+                    <h5 class="card-title" id="title-announce-desktop">{{ matchOffer.title }}</h5>
+                    <p class="mb-0"> Publié le : {{ matchOffer.startDate|date("d/m/Y") }}</p>
+                    <p class="mb-0"> Entreprise : {{ matchOffer.company.name }}</p>
+                    {% if matchOffer in applicantOffers %}
+                        <div class="alert alert-bleuOze" id="messagePostule" role="alert">
+                            Vous avez déja postulé à cette offre
                         </div>
-                        <div class="row-info-right w-100 flex-md-row">
-                            <div class="row-info-nb " id="textMatchOffer">
-                                <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> Type de contrat :
-                                    <strong>{{ matchOffer.contractType }}</strong></p>
-                                <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> Début du contrat :
-                                    <strong>{{ matchOffer.startDate|date("d/m/Y") }}</strong></p>
-                                <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> Lieu :
-                                    <strong>{{ matchOffer.city }}</strong></p>
-                            </div>
-                            <div class="row-btn-offer d-md-inline-block flex justify-content-around">
-                                <a href="{{ path("applicant_offer_detail" ,
-                                    {applicantId: app.user.applicant.id, companyId:matchOffer.company.id, offerId: matchOffer.id }) }}"
-                                   class="d-inline-block btn btn-offer btn-orangeOze d-inline-flex">Voir Annonce</a>
-                            </div>
-                        </div>
+                    {% endif %}
+                </div>
+                <div class="row-info-right w-100 flex-md-row">
+                    <div class="row-info-nb " id="textMatchOffer">
+                        <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> Type de contrat :
+                            <strong>{{ matchOffer.contractType }}</strong></p>
+                        <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> Début du contrat :
+                            <strong>{{ matchOffer.startDate|date("d/m/Y") }}</strong></p>
+                        <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> Lieu :
+                            <strong>{{ matchOffer.city }}</strong></p>
+                    </div>
+                    <div class="row-btn-offer d-md-inline-block flex justify-content-around">
+                        <a href="{{ path("applicant_offer_detail" ,
+                            {applicantId: app.user.applicant.id, companyId:matchOffer.company.id, offerId: matchOffer.id }) }}"
+                           class="d-inline-block btn btn-offer btn-orangeOze d-inline-flex">Voir Annonce</a>
                     </div>
                 </div>
-
-
-
-                {% else %}
-                    <h5 class="text-center"> vous n'avez pas encore d'annonces qui match vos compétences</h5>
-                {% endfor %}
-        {% else %}
-        <div class="applicantForm">
-            <div class="infoForm">
-                <h2 class="titleApplicant">Créer ton profil</h2>
-                {{ form_start(form) }}
-                {{ form_row(form.firstname, {'label': 'Ton prénom'}) }}
-                {{ form_row(form.lastname, {'label': 'Ton nom'}) }}
-                {{ form_row(form.city, {'label': 'Ta ville'}) }}
-                {{ form_row(form.mobility, {'label': 'Ta mobilité (Jusqu\'où tu veux aller travailler)'}) }}
-                {{ form_row(form.availability, {'label': 'A partir de quand es-tu disponible?'}) }}
-                {{ form_row(form.personality, {'label': 'Parle nous de toi, de tes hobbies, de tes passions..'}) }}
-            </div>
-            <hr>
-            <h2 class="titleApplicant">Compétences Acquises</h2>
-
-            <div class="skillSelection">
-                <div class="hardSkills">
-                    <h5>Compétences Techniques <small>(10 max)</small></h5>
-                    {{ form_row(form.hardSkills, {'label': ' '}) }}
-                </div>
-                <div class="softSkills">
-                    <h5>Compétences Comportementales <small>(10 max)</small></h5>
-                    {{ form_row(form.softSkills, {'label': ' '}) }}
-                </div>
             </div>
         </div>
-        <div class="buttonApplicant">
-            <input type='submit' class="btn btn-vertOze" value='Valider'>
-        </div>
-        {{ form_end(form) }}
-
-            {% block stylesheets %}
-                {{ parent() }}
-                <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-            {% endblock %}
-            {% block javascripts %}
-                {{ parent() }}
-                <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-                <script type="text/javascript">
-                    $(document).ready(function() {
-                        $('#applicant_softSkills').select2({
-                            maximumSelectionLength: 10
-                        })
-                        $('#applicant_hardSkills').select2({
-                            maximumSelectionLength: 10
-                        });
-                    });</script>
-            {% endblock %}
-        {% endif %}
+    {% else %}
+        <h5 class="text-center"> vous n'avez pas encore d'annonces qui match vos compétences</h5>
+    {% endfor %}
 {% endblock %}
