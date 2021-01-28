@@ -33,4 +33,13 @@ class HomeController extends AbstractController
     {
         return $this->render('home/legalTerms.html.twig');
     }
+
+    /**
+     * @Route("/tutoriel", name="tutoriel")
+     * @return Response
+     */
+    public function showTuto(): Response
+    {
+        return $this->render('home/tutoriel.html.twig');
+    }
 }
