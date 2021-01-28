@@ -76,11 +76,38 @@ class ApplicantController extends AbstractController
             $field = $searchForm->getData()['sort'];
             switch ($field) {
                 case 'startDate':
+                    $matchOffersArray = $applicantRepository->findMatchingOffersForApplicantOrderBystartDate(
+                        $applicant,
+                        $searchTitle,
+                        $searchCompany,
+                    );
+                    break;
+                case 'creationDate':
+                    $matchOffersArray = $applicantRepository->findMatchingOffersForApplicantOrderByCreationDate(
+                        $applicant,
+                        $searchTitle,
+                        $searchCompany,
+                    );
+                    break;
+                case 'endDate':
                     $matchOffersArray = $applicantRepository->findMatchingOffersForApplicantOrderByEndDate(
                         $applicant,
                         $searchTitle,
                         $searchCompany,
-                        $field
+                    );
+                    break;
+                case 'title':
+                    $matchOffersArray = $applicantRepository->findMatchingOffersForApplicantOrderByTitle(
+                        $applicant,
+                        $searchTitle,
+                        $searchCompany,
+                    );
+                    break;
+                case 'company':
+                    $matchOffersArray = $applicantRepository->findMatchingOffersForApplicantOrderByCompany(
+                        $applicant,
+                        $searchTitle,
+                        $searchCompany,
                     );
                     break;
             }
@@ -105,7 +132,7 @@ class ApplicantController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="applicant_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
      * @param Request $request
      * @param Applicant $applicant
      * @return Response
@@ -178,7 +205,7 @@ class ApplicantController extends AbstractController
     }
 
     /**
-     * @Route ("/{id}/offer", name="applicant_offer", methods={"GET"})
+     * @Route ("/{id}/offer", name="offer", methods={"GET"})
      * @param ApplicantRepository $applicantRepository
      * @param Applicant $applicant
      * @return Response
