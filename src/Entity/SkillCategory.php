@@ -38,6 +38,11 @@ class SkillCategory
      */
     private $skills;
 
+    public function __toString(): string
+    {
+        return $this->getName();
+    }
+
     public function __construct()
     {
         $this->skills = new ArrayCollection();

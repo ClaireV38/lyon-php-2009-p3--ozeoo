@@ -41,7 +41,9 @@ class OfferController extends AbstractController
         $offer = new Offer();
         /* @phpstan-ignore-next-line */
         $offer->setCompany($this->getUser()->getCompany());
-        $form = $this->createForm(OfferType::class, $offer);
+        $form = $this->createForm(OfferType::class, $offer, [
+            'validation_groups' => ['listSkill']
+            ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

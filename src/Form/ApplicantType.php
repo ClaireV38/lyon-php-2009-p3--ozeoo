@@ -76,6 +76,7 @@ class ApplicantType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Applicant::class,
+            'validation_groups' => ['listSkill']
         ]);
     }
 }

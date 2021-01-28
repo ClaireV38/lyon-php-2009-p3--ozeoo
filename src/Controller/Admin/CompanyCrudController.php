@@ -27,8 +27,7 @@ class CompanyCrudController extends AbstractCrudController
 
     public function configureCrud(Crud $crud): Crud
     {
-        return $crud->setEntityLabelInPlural('Entreprises inscrites')
-            ->setEntityLabelInSingular('Entreprise inscrite');
+        return $crud->setEntityLabelInPlural('Entreprises inscrites');
     }
 
     public static function getEntityFqcn(): string

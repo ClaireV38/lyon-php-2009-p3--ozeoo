@@ -61,14 +61,14 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Ozeo Administration');
+            ->setTitle('Ozeoo Administration');
     }
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Gestion Entreprises', 'fas fa-list', Company::class);
-        yield MenuItem::linkToCrud('Gestion Skills', 'fas fa-list', Skill::class);
-        yield MenuItem::linkToCrud('Gestion Catégories', 'fas fa-list', SkillCategory::class);
+        yield MenuItem::linktoDashboard('Accueil', 'fa fa-home');
+        yield MenuItem::linkToCrud('Gestion Entreprises', 'fas fa-building', Company::class);
+        yield MenuItem::linkToCrud('Gestion Compétences', 'fas fa-check-square', Skill::class);
+        yield MenuItem::linkToCrud('Gestion Catégories', 'fas fa-list-alt', SkillCategory::class);
     }
 }
