@@ -12,10 +12,10 @@
         {{ form_start(searchForm) }}
         <label id="sortFormShape">Trier {{ form_widget(searchForm.sort) }}</label>
         <div id="index-container-second">
-            <label id="sortFormShape">Chercher {{ form_widget(searchForm.searchTitle) }}</label>
+            <label id="sortFormShape" >Annonce {{ form_widget(searchForm.searchTitle, { 'attr': { 'placeholder': 'chercher'} })}}</label>
         </div>
         <div id="index-container-second">
-            <label id="sortFormShape">entreprise {{ form_widget(searchForm.searchCompany) }}</label>
+            <label id="sortFormShape">Entreprise {{ form_widget(searchForm.searchCompany, { 'attr': { 'placeholder': 'chercher'} }) }}</label>
         </div>
         <button id="index-container-button" class="btn-center btn btn-vertOze">Appliquer</button>
         {{ form_end(searchForm) }}

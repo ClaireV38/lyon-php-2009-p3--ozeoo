@@ -203,6 +203,28 @@ input[name="search_company_offer[search]"] {
     margin-right: 18px;
 }
 
+/*index candidat*/
+input[name="search_applicant_offer[searchTitle]"] {
+    margin-left: 10px;
+}
+
+input[name="search_applicant_offer[searchCompany]"] {
+    margin-left: 10px;
+}
+
+#search_applicant_offer_sort {
+    margin-left: 10px;
+}
+
+form[name="search_applicant_offer"] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    width: 80%;
+}
+
 /* Navbar */
 .logoright {
     display: none;
@@ -602,6 +624,15 @@ input[name="search_company_offer[search]"] {
 
     .btn_candidateHome_createProfileDesktop {
         margin-bottom: 20px;
+    }
+
+    form[name="search_applicant_offer"] {
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+        justify-content: space-between;
+        margin: auto;
+        width: 60%;
     }
 
     /*login*/
