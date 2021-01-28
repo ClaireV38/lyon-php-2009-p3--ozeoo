@@ -25,6 +25,12 @@ class CompanyCrudController extends AbstractCrudController
         $this->adminUrlGenerator = $adminUrlGenerator;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud->setEntityLabelInPlural('Entreprises inscrites')
+            ->setEntityLabelInSingular('Entreprise inscrite');
+    }
+
     public static function getEntityFqcn(): string
     {
         return Company::class;

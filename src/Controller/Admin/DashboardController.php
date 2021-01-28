@@ -4,6 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\Applicant;
 use App\Entity\Company;
+use App\Entity\Skill;
+use App\Entity\SkillCategory;
 use App\Entity\User;
 use App\Repository\CompanyRepository;
 use App\Repository\UserRepository;
@@ -66,5 +68,9 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Gestion Entreprises', 'fas fa-list', Company::class);
+        yield MenuItem::linkToCrud('Gestion Skills', 'fas fa-list', Skill::class);
+        yield MenuItem::linkToCrud('Gestion Catégories', 'fas fa-list', SkillCategory::class);
+
+
     }
 }
