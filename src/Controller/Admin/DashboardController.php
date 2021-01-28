@@ -70,7 +70,5 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Gestion Entreprises', 'fas fa-list', Company::class);
         yield MenuItem::linkToCrud('Gestion Skills', 'fas fa-list', Skill::class);
         yield MenuItem::linkToCrud('Gestion Catégories', 'fas fa-list', SkillCategory::class);
-
-
     }
 }
