@@ -25,14 +25,15 @@ class CompanyCrudController extends AbstractCrudController
         $this->adminUrlGenerator = $adminUrlGenerator;
     }
 
-    public function configureCrud(Crud $crud): Crud
-    {
-        return $crud->setEntityLabelInPlural('Entreprises inscrites');
-    }
-
     public static function getEntityFqcn(): string
     {
         return Company::class;
+    }
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud->setEntityLabelInPlural('Liste des entreprises');
+
     }
 
     public function configureFields(string $pageName): iterable
@@ -54,7 +55,8 @@ class CompanyCrudController extends AbstractCrudController
         return $actions
             // ...
             ->add(Crud::PAGE_EDIT, $activeCompany)
-            ->add(Crud::PAGE_EDIT, $desactivateCompany);
+            ->add(Crud::PAGE_EDIT, $desactivateCompany)
+            ->disable(Action::NEW, Action::DELETE);
     }
 
     public function activateCompany(AdminContext $context): RedirectResponse
