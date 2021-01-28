@@ -33,7 +33,7 @@ class SkillCategory
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Skill::class, mappedBy="skillCategory")
+     * @ORM\OneToMany(targetEntity=Skill::class, mappedBy="skillCategory", cascade={"remove"})
      * @var Collection<Skill>
      */
     private $skills;
