@@ -26,7 +26,6 @@ Remplacer les valeurs comme suit :
 
 ### Mise en route
 1. Lancer `symfony server:start` pour démarrer le serveur local
-2. Lancer `yarn run dev --watch` pour charger les assets
 
 ### Credentials
 Pour tester les users, vous trouverez les emails et mots de passe du compte admin par défaut, d'un compte entreprise et d'un compte candidat dans les fixtures.                                    
