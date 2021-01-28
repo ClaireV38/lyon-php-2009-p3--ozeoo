@@ -83,8 +83,6 @@ class ApplicantController extends AbstractController
      */
     public function new(Request $request, Applicant $applicant): Response
     {
-        /* @phpstan-ignore-next-line */
-        $user = $this->getUser();
         if ($this->getUser() != $applicant->getUser()) {
             throw new AccessDeniedException();
         }
@@ -103,7 +101,6 @@ class ApplicantController extends AbstractController
         return $this->render('applicant/edit.html.twig', [
             'applicant' => $applicant,
             'form' => $form->createView(),
-            'user' => $user,
         ]);
     }
 
@@ -199,8 +196,7 @@ class ApplicantController extends AbstractController
         Company $company,
         SkillRepository $skillRepository
     ): Response {
-        /* @phpstan-ignore-next-line */
-        $user = $this->getUser();
+
 
         $matchHardSkills = $skillRepository->findMatchHardSkills($offer, $applicant);
         $matchSoftSkills = $skillRepository->findMatchSoftSkills($offer, $applicant);
@@ -223,7 +219,6 @@ class ApplicantController extends AbstractController
             'applicant' => $applicant,
             'offer' => $offer,
             'company' => $company,
-            'user' => $user,
             'matchHardSkills' => $matchHardSkills,
             'matchSoftSkills' => $matchSoftSkills,
         ]);
@@ -244,8 +239,6 @@ class ApplicantController extends AbstractController
         EntityManagerInterface $entityManager,
         MailerInterface $mailer
     ): Response {
-        /* @phpstan-ignore-next-line */
-        $user = $this->getUser();
 
         /* @phpstan-ignore-next-line */
         $applicant = $this->getUser()->getApplicant();
@@ -272,8 +265,6 @@ class ApplicantController extends AbstractController
             $mailer->send($email);
         }
 
-        return $this->redirectToRoute('applicant_index', [
-            'user' => $user,
-        ]);
+        return $this->redirectToRoute('applicant_index');
     }
 }

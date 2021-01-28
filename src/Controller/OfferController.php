@@ -21,18 +21,6 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class OfferController extends AbstractController
 {
     /**
-     * @Route("/", name="offer_index", methods={"GET"})
-     * @param OfferRepository $offerRepository
-     * @return Response
-     */
-    public function index(OfferRepository $offerRepository): Response
-    {
-        return $this->render('offer/index.html.twig', [
-            'offers' => $offerRepository->findAll(),
-        ]);
-    }
-
-    /**
      * @Route("/nouvelle_offre", name="offer_new", methods={"GET","POST"})
      * @param Request $request
      * @return Response
