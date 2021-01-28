@@ -8,6 +8,13 @@
     <h1>Modifier son profil</h1>
     <div class="container" id="createCompanyForm">
         {{ include('company/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
-
     </div>
+    {% block javascripts %}
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                bsCustomFileInput.init()
+            })
+        </script>
+        {% endblock %}
 {% endblock %}

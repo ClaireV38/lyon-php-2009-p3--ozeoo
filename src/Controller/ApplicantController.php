@@ -17,7 +17,9 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -33,7 +35,6 @@ class ApplicantController extends AbstractController
      * @param ApplicantRepository $applicantRepository
      * @return Response
      */
-
     public function index(
         Request $request,
         ApplicantRepository $applicantRepository,
@@ -250,7 +251,7 @@ class ApplicantController extends AbstractController
         $applicant = $this->getUser()->getApplicant();
         $applicant->addOffer($offer);
         $entityManager->flush();
-        $this->addFlash('success', 'Félicitation tu viens de postuler à l\'offre');
+        $this->addFlash('success', 'Félicitations, tu viens de postuler à l\'offre !');
 
         /* @phpstan-ignore-next-line */
         $mailTo = $offer->getCompany()->getUser()->getEmail();
@@ -260,10 +261,10 @@ class ApplicantController extends AbstractController
             $mailTo = $offer->getCompany()->getContactEmail();
         }
         if ($mailTo !== null) {
-            $email = (new Email())
-                ->from($this->getParameter('mailer_from'))
+            $email = (new TemplatedEmail())
+                ->from(new Address($this->getParameter('mailer_from'), 'Ozéoo'))
                 ->to($mailTo)
-                    ->subject('Un candidat a postulé à une de vos offres')
+                    ->subject('Un candidat a postulé à l\'une de vos offres')
                     ->html($this->renderView('applicant/applicationOfferEmail.html.twig', [
                         'applicant' => $applicant,
                         'offer' => $offer
