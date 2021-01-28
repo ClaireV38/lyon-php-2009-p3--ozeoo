@@ -33,7 +33,6 @@ class CompanyCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud->setEntityLabelInPlural('Liste des entreprises');
-
     }
 
     public function configureFields(string $pageName): iterable
@@ -56,7 +55,7 @@ class CompanyCrudController extends AbstractCrudController
             // ...
             ->add(Crud::PAGE_EDIT, $activeCompany)
             ->add(Crud::PAGE_EDIT, $desactivateCompany)
-            ->disable(Action::NEW, Action::DELETE);
+            ->disable(Action::NEW);
     }
 
     public function activateCompany(AdminContext $context): RedirectResponse
