@@ -18,7 +18,9 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -39,7 +41,6 @@ class ApplicantController extends AbstractController
         ApplicantRepository $applicantRepository,
         OfferRepository $offerRepository
     ): Response {
-
         /* @phpstan-ignore-next-line */
         $applicant = $this->getUser()->getApplicant();
 
@@ -177,6 +178,38 @@ class ApplicantController extends AbstractController
     }
 
     /**
+     * @Route ("/{id}/offer", name="applicant_offer", methods={"GET"})
+     * @param ApplicantRepository $applicantRepository
+     * @param Applicant $applicant
+     * @return Response
+     */
+    public function showMatchOffers(ApplicantRepository $applicantRepository, Applicant $applicant): Response
+    {
+        if ($this->getUser() != $applicant->getUser()) {
+            throw new AccessDeniedException();
+        }
+
+        $offers = $applicant->getOffers();
+        $offerId = [];
+        foreach ($offers as $offer) {
+            $offerId[] = $offer->getId();
+        }
+        /* @phpstan-ignore-next-line */
+        $matchOffers = $applicantRepository->findMatchingOffersForApplicant($this->getUser()->getApplicant());
+        $offersInArray = [];
+        foreach ($matchOffers as $matchOffer) {
+            if (in_array($matchOffer['offer_id'], $offerId)) {
+                $offersInArray[] = $matchOffer;
+            }
+        }
+        return $this->render('applicant/offer.html.twig', [
+            'applicant' => $applicant,
+            'matchOffers' => $matchOffers,
+            'offers' => $offersInArray
+        ]);
+    }
+
+    /**
      * @Route ("/{applicantId}/company/{companyId}/offer/{offerId}", methods={"GET", "POST"}, name="offer_detail")
      * @ParamConverter("applicant", class="App\Entity\Applicant", options={"mapping": {"applicantId": "id"}})
      * @ParamConverter("offer", class="App\Entity\Offer", options={"mapping": {"offerId": "id"}})
@@ -247,7 +280,7 @@ class ApplicantController extends AbstractController
         $applicant = $this->getUser()->getApplicant();
         $applicant->addOffer($offer);
         $entityManager->flush();
-        $this->addFlash('success', 'Félicitation tu viens de postuler à l\'offre');
+        $this->addFlash('success', 'Félicitations, tu viens de postuler à l\'offre !');
 
         /* @phpstan-ignore-next-line */
         $mailTo = $offer->getCompany()->getUser()->getEmail();
@@ -257,10 +290,10 @@ class ApplicantController extends AbstractController
             $mailTo = $offer->getCompany()->getContactEmail();
         }
         if ($mailTo !== null) {
-            $email = (new Email())
-                ->from($this->getParameter('mailer_from'))
+            $email = (new TemplatedEmail())
+                ->from(new Address($this->getParameter('mailer_from'), 'Ozéoo'))
                 ->to($mailTo)
-                    ->subject('Un candidat a postulé à une de vos offres')
+                    ->subject('Un candidat a postulé à l\'une de vos offres')
                     ->html($this->renderView('applicant/applicationOfferEmail.html.twig', [
                         'applicant' => $applicant,
                         'offer' => $offer
