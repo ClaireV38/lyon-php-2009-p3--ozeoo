@@ -125,27 +125,6 @@ class ApplicantController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="applicant_delete", methods={"DELETE"})
-     * @param Request $request
-     * @param Applicant $applicant
-     * @return Response
-     */
-    public function delete(Request $request, Applicant $applicant): Response
-    {
-        if ($this->getUser() != $applicant->getUser()) {
-            throw new AccessDeniedException();
-        }
-
-        if ($this->isCsrfTokenValid('delete' . $applicant->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($applicant);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('applicant_index');
-    }
-
-    /**
      * @Route ("/{id}/offre", name="applicant_offer", methods={"GET"})
      * @param ApplicantRepository $applicantRepository
      * @param Applicant $applicant
