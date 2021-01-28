@@ -40,6 +40,13 @@ class HomeController extends AbstractController
      */
     public function showTuto(): Response
     {
-        return $this->render('home/tutoriel.html.twig');
+        /* @phpstan-ignore-next-line */
+        $company = $this->getUser()->getCompany();
+        /* @phpstan-ignore-next-line */
+        $applicant = $this->getUser()->getApplicant();
+        return $this->render('home/tutoriel.html.twig', [
+            'company' => $company,
+            'applicant' => $applicant,
+        ]);
     }
 }
