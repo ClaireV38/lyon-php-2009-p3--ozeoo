@@ -8,6 +8,7 @@ use App\Entity\Offer;
 use App\Form\ApplicantType;
 use App\Form\SearchApplicantOfferType;
 use App\Repository\ApplicantRepository;
+use App\Services\SearchOffers;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use App\Entity\User;
 use App\Repository\OfferRepository;
@@ -39,7 +40,8 @@ class ApplicantController extends AbstractController
     public function index(
         Request $request,
         ApplicantRepository $applicantRepository,
-        OfferRepository $offerRepository
+        OfferRepository $offerRepository,
+        SearchOffers $searchOffers
     ): Response {
         /* @phpstan-ignore-next-line */
         $applicant = $this->getUser()->getApplicant();
@@ -52,7 +54,6 @@ class ApplicantController extends AbstractController
 
         $applicantOffers = $applicant->getOffers();
 
-        $matchOffersArray = [];
         $searchForm = $this->createForm(SearchApplicantOfferType::class);
         $searchForm->handleRequest($request);
 
@@ -66,43 +67,8 @@ class ApplicantController extends AbstractController
                 $searchCompany = "";
             }
             $field = $searchForm->getData()['sort'];
-            switch ($field) {
-                case 'startDate':
-                    $matchOffersArray = $applicantRepository->findMatchingOffersForApplicantOrderBystartDate(
-                        $applicant,
-                        $searchTitle,
-                        $searchCompany,
-                    );
-                    break;
-                case 'creationDate':
-                    $matchOffersArray = $applicantRepository->findMatchingOffersForApplicantOrderByCreationDate(
-                        $applicant,
-                        $searchTitle,
-                        $searchCompany,
-                    );
-                    break;
-                case 'endDate':
-                    $matchOffersArray = $applicantRepository->findMatchingOffersForApplicantOrderByEndDate(
-                        $applicant,
-                        $searchTitle,
-                        $searchCompany,
-                    );
-                    break;
-                case 'title':
-                    $matchOffersArray = $applicantRepository->findMatchingOffersForApplicantOrderByTitle(
-                        $applicant,
-                        $searchTitle,
-                        $searchCompany,
-                    );
-                    break;
-                case 'company':
-                    $matchOffersArray = $applicantRepository->findMatchingOffersForApplicantOrderByCompany(
-                        $applicant,
-                        $searchTitle,
-                        $searchCompany,
-                    );
-                    break;
-            }
+
+            $matchOffersArray = $searchOffers->getSearchedOffers($applicant, $searchTitle, $searchCompany, $field);
         } else {
             /* @phpstan-ignore-next-line */
             $matchOffersArray = $applicantRepository->findMatchingOffersForApplicant($this->getUser()->getApplicant());
