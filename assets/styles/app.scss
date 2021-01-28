@@ -243,6 +243,7 @@ h1 {
 
 .candidate_ozeoPresentationCard {
     width: 18rem;
+
 }
 
 .candidate_ozeoTutoCard {
@@ -343,6 +344,7 @@ h1 {
 #listTuto {
     margin-bottom: 10px;
     font-size: 1.15em;
+    display: none;
 }
 
 /*error messages */
@@ -381,8 +383,20 @@ h1 {
         text-align: center;
     }
 
+    #buttonDetails {
+        padding-top: 10px;
+    }
+
     .applicant_home_welcome_mainTitle {
         color: $orangeOze;
+    }
+
+    #titleListOffer {
+        margin-left: 280px;
+    }
+
+    #skillsList {
+        width: 50%;
     }
 
     #listApplicantInfo {
@@ -899,7 +913,35 @@ h1 {
         margin-right: 40px;
     }
 
-    #mainTuto {
+    /*Reset password*/
+    #reset-password-container {
+        margin: auto;
+        width: 30%;
+    }
+
+    #reset-password-button {
+        margin-top: 15px;
+    }
+
+    #safetyImg {
+        width: 700px;
+        height: 400px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 30px;
+    }
+
+    #requestImg {
+        width: 700px;
+        height: 450px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 30px;
+    }
+
+    #buttonDetails {
         display: flex;
         flex-flow: row;
         justify-content: center;
