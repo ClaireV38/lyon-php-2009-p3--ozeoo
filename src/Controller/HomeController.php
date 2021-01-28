@@ -26,7 +26,7 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/Mention_Legal", name="legalTerms")
+     * @Route("/mention_legal", name="legalTerms")
      * @return Response
      */
     public function legalTerms(): Response

@@ -11,7 +11,7 @@ use LogicException;
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/Connexion", name="app_login")
+     * @Route("/connexion", name="app_login")
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -28,7 +28,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/Deconnexion", name="app_logout")
+     * @Route("/deconnexion", name="app_logout")
      */
     public function logout(): LogicException
     {

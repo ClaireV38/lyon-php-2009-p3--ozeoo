@@ -44,7 +44,7 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/Modifier_Profil", name="company_edit", methods={"GET","POST"})
+     * @Route("/{id}/modifier_profil", name="company_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Company $company
      * @return Response

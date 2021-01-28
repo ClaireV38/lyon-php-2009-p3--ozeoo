@@ -33,7 +33,7 @@ class OfferController extends AbstractController
     }
 
     /**
-     * @Route("/Nouvelle_Offre", name="offer_new", methods={"GET","POST"})
+     * @Route("/nouvelle_offre", name="offer_new", methods={"GET","POST"})
      * @param Request $request
      * @return Response
      */
@@ -85,7 +85,7 @@ class OfferController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/Modifier_Annonce", name="offer_edit", methods={"GET","POST"})
+     * @Route("/{id}/modifier_annonce", name="offer_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Offer $offer
      * @return Response

@@ -230,7 +230,7 @@ class ApplicantController extends AbstractController
     }
 
     /**
-     * @Route ("/Postule/{id}", name="applicant_offer_apply", methods={"GET"})
+     * @Route ("/postule/{id}", name="applicant_offer_apply", methods={"GET"})
      * @param Company $company
      * @param Offer $offer
      * @param EntityManagerInterface $entityManager
