@@ -40,7 +40,7 @@ class SkillCategory
 
     public function __toString(): string
     {
-        return $this->getName();
+        return $this->getName()?: '';
     }
 
     public function __construct()
