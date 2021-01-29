@@ -43,4 +43,3 @@ Pour tester l'inscription candidat et entreprise, installer le composant Mailer 
       MAILER_DSN= lien donné par Mailtrap
       MAILER_FROM_ADDRESS=hello@ozeoo.com
       ###< symfony/mailer ###
-
