@@ -6,6 +6,8 @@ use App\Entity\Applicant;
 use App\Entity\Company;
 use App\Entity\Offer;
 use App\Form\OfferType;
+use App\Form\SearchApplicantMatchingType;
+use App\Form\SearchCompanyOfferType;
 use App\Repository\OfferRepository;
 use App\Repository\SkillRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -141,7 +143,7 @@ class OfferController extends AbstractController
      * @param OfferRepository $offerRepository
      * @return Response
      */
-    public function showApplicants(Offer $offer, OfferRepository $offerRepository): Response
+    public function showApplicants(Request $request, Offer $offer, OfferRepository $offerRepository): Response
     {
         /* @phpstan-ignore-next-line */
         $company = $this->getUser()->getCompany();
@@ -155,13 +157,22 @@ class OfferController extends AbstractController
         foreach ($applicants as $applicant) {
             $applicantsID[] = $applicant->getId();
         }
-        $matchApplicants = $offerRepository->findMatchingApplicantsForOffer($offer);
+
+        $form = $this->createForm(SearchApplicantMatchingType::class);
+        $form->handleRequest($request);
+
+        $search = "";
+        if ($form->isSubmitted() && $form->isValid()) {
+            $search = $form->getData()['search'];
+        }
+        $matchApplicants = $offerRepository->findMatchingApplicantsForOffer($offer, $search);
         $applicantsInArray = [];
         foreach ($matchApplicants as $matchApplicant) {
             if (in_array($matchApplicant['applicant_id'], $applicantsID)) {
                 $applicantsInArray[] = $matchApplicant;
             }
         }
+
 
         return $this->render('offer/applicants.html.twig', [
             'offer' => $offer,

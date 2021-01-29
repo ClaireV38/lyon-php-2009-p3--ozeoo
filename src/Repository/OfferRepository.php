@@ -30,7 +30,7 @@ class OfferRepository extends ServiceEntityRepository
      * @param Offer $offer
      * @return array
      */
-    public function findMatchingApplicantsForOffer(Offer $offer): array
+    public function findMatchingApplicantsForOffer(Offer $offer, string $search): array
     {
         $rsm = new ResultSetMapping();
         $rsm->addScalarResult('match_hs', 'match_hs');
@@ -55,10 +55,12 @@ class OfferRepository extends ServiceEntityRepository
             JOIN applicant a on ahs.applicant_id = a.id and ass.applicant_id = a.id
         WHERE o.id = :offer
         GROUP BY a.id
-        HAVING `match_hs` >= 5 and `match_ss` >= 5
+        HAVING `match_hs` >= 5 and `match_ss` >= 5 and a.name like :search
         ORDER BY total DESC
         ', $rsm);
-        $sql->setParameters((array('offer' => $offer->getId())));
+        $sql->setParameters((array(
+            'offer' => $offer->getId(),
+            'searchT' => '%' . $search . '%')));
         return $sql->getArrayResult();
     }
 
