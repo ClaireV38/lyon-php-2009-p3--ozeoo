@@ -264,4 +264,18 @@ class Applicant
 
         return $this;
     }
+
+    public function getEmail(): string
+    {
+        /* @phpstan-ignore-next-line */
+        return $this->getUser()->getEmail();
+    }
+
+    public function setEmail(string $email): self
+    {
+        /* @phpstan-ignore-next-line */
+        $this->getUser()->setEmail($email);
+
+        return $this;
+    }
 }

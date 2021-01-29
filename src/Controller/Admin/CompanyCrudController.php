@@ -42,6 +42,7 @@ class CompanyCrudController extends AbstractCrudController
             TextField::new('siretNb', 'Numéro Siret'),
             TextField::new('apeNb', 'Numéro APE'),
             BooleanField::new('isVerified', 'Vérifié')->setFormTypeOption('disabled', 'disabled'),
+
         ];
     }
 

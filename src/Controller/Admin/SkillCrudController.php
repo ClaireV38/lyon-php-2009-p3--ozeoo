@@ -31,8 +31,8 @@ class SkillCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('name'),
-            AssociationField::new('skillCategory', 'Catégories compétences')
+            TextField::new('name', 'Intitulé de la compétence'),
+            AssociationField::new('skillCategory', 'Catégorie de la compétence')
         ];
     }
 }
