@@ -1,9 +1,9 @@
 @import 'variables.scss';
-@import "~bootstrap/scss/bootstrap";
+@import '~bootstrap/scss/bootstrap';
 
 /*Body*/
-
-html, body {
+html,
+body {
     height: 100vh;
     margin: 0;
     padding: 0;
@@ -235,7 +235,6 @@ h1 {
 
 .candidate_ozeoPresentationCard {
     width: 18rem;
-
 }
 
 .candidate_ozeoTutoCard {
@@ -290,9 +289,8 @@ h1 {
 
 /* Detail Candidate - Candidate Side */
 #list-HardSkill {
-    line-height: normal;
-    margin: auto auto 10px auto;
     font-size: 13px;
+    width: auto;
 }
 
 #list-SoftSkill {
@@ -304,6 +302,7 @@ h1 {
     display: flex;
     justify-content: space-around;
     margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 /*MatchOffer*/
@@ -312,9 +311,7 @@ h1 {
 }
 
 .applicant_home_welcome_mainTitle {
-
     display: none;
-  
 }
 
 /*error messages */
@@ -344,20 +341,12 @@ h1 {
         text-align: center;
     }
 
-    #buttonDetails {
-        padding-top: 10px;
-    }
-
     .applicant_home_welcome_mainTitle {
         color: $orangeOze;
     }
 
     #titleListOffer {
         margin-left: 280px;
-    }
-
-    #skillsList {
-        width: 50%;
     }
 
     #listApplicantInfo {
@@ -449,7 +438,6 @@ h1 {
     }
 
     /*Offer Match Applicant*/
-
     #announce-card-matchOffer {
         width: 90%;
         margin-top: 15px;
@@ -754,9 +742,9 @@ h1 {
     }
 
     #buttonPostuleOffer {
-        padding: 30px;
-        font-size: larger;
-        width: 200px;
+        padding: 25px;
+        font-size: x-large;
+        width: 400px;
     }
 
     /*offer list matches*/
@@ -773,22 +761,32 @@ h1 {
         padding: 10px;
     }
 
-    #list-SoftSkill {
-        width: 90%;
-        font-size: 13px;
-        line-height: initial;
+    .fas.fa-check-circle {
+        color: $vertOze;
+    }
+
+    .fas.fa-times-circle {
+        color: $orangeOze;
+    }
+
+    .skillMatchApplicant {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        font-size: larger;
+    }
+
+    .skillOfferNotMatch {
+        padding-bottom: 20px;
+        font-size: larger;
+    }
+
+    .extraSkillApplicant {
+        font-size: larger;
     }
 
     #list-HardSkill {
-        width: 90%;
         margin-bottom: 10px;
-        font-size: 13px;
-        line-height: initial;
-    }
-
-    #buttonDetails {
-        display: flex;
-        justify-content: space-around;
+        width: 75%;
     }
 
     #messagePostule {
@@ -802,25 +800,9 @@ h1 {
         margin-top: 15px;
     }
 
-    /* Detail Candidate - Candidate Side */
-    #skillsList {
+    #buttonDetails {
         display: flex;
-        flex-direction: row;
-        padding: 10px;
-    }
-
-    #list-HardSkill {
-        line-height: normal;
-        padding-left: 10px;
-        padding-right: 10px;
-        font-size: 13px;
-    }
-
-    #list-SoftSkill {
-        line-height: normal;
-        padding-left: 10px;
-        padding-right: 10px;
-        font-size: 13px;
+        justify-content: space-around;
     }
 
     /*Reset password*/
@@ -860,6 +842,17 @@ h1 {
     #legalTerms {
         margin: auto;
         width: 50%;
+    }
+
+    #legalTermsTitle {
+        margin-left: 40px;
+    }
+
+    #legalImg {
+        margin-top: 30px;
+        margin-bottom: 30px;
+        width: 910px;
+        height: 370px;
     }
 
     #applicantImg {
