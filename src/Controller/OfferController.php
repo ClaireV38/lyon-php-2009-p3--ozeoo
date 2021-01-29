@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Applicant;
+use App\Entity\Company;
 use App\Entity\Offer;
 use App\Form\OfferType;
 use App\Repository\OfferRepository;
@@ -38,6 +39,9 @@ class OfferController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        /* @phpstan-ignore-next-line */
+        $company = $this->getUser()->getCompany();
+
         $offer = new Offer();
         /* @phpstan-ignore-next-line */
         $offer->setCompany($this->getUser()->getCompany());
@@ -55,6 +59,7 @@ class OfferController extends AbstractController
         return $this->render('offer/new.html.twig', [
             'offer' => $offer,
             'form' => $form->createView(),
+            'company' => $company
         ]);
     }
 
@@ -66,12 +71,16 @@ class OfferController extends AbstractController
     public function show(Offer $offer): Response
     {
         /* @phpstan-ignore-next-line */
+        $company = $this->getUser()->getCompany();
+
+        /* @phpstan-ignore-next-line */
         if ($this->getUser() != $offer->getCompany()->getUser()) {
             throw new AccessDeniedException();
         }
 
         return $this->render('offer/show.html.twig', [
             'offer' => $offer,
+            'company' => $company
         ]);
     }
 
@@ -83,6 +92,9 @@ class OfferController extends AbstractController
      */
     public function edit(Request $request, Offer $offer): Response
     {
+        /* @phpstan-ignore-next-line */
+        $company = $this->getUser()->getCompany();
+
         /* @phpstan-ignore-next-line */
         if ($this->getUser() != $offer->getCompany()->getUser()) {
             throw new AccessDeniedException();
@@ -100,6 +112,7 @@ class OfferController extends AbstractController
         return $this->render('offer/edit.html.twig', [
             'offer' => $offer,
             'form' => $form->createView(),
+            'company' => $company
         ]);
     }
 
@@ -131,6 +144,9 @@ class OfferController extends AbstractController
     public function showApplicants(Offer $offer, OfferRepository $offerRepository): Response
     {
         /* @phpstan-ignore-next-line */
+        $company = $this->getUser()->getCompany();
+
+        /* @phpstan-ignore-next-line */
         if ($this->getUser() != $offer->getCompany()->getUser()) {
             throw new AccessDeniedException();
         }
@@ -149,7 +165,8 @@ class OfferController extends AbstractController
 
         return $this->render('offer/applicants.html.twig', [
             'offer' => $offer,
-            'applicants' => $applicantsInArray
+            'applicants' => $applicantsInArray,
+            'company' => $company
         ]);
     }
 
@@ -165,6 +182,9 @@ class OfferController extends AbstractController
     public function applicantShow(Offer $offer, Applicant $applicant, SkillRepository $skillRepository): Response
     {
         /* @phpstan-ignore-next-line */
+        $company = $this->getUser()->getCompany();
+
+        /* @phpstan-ignore-next-line */
         if ($this->getUser() != $offer->getCompany()->getUser() || !($offer->getApplicants()->contains($applicant))) {
             throw new AccessDeniedException();
         }
@@ -175,6 +195,8 @@ class OfferController extends AbstractController
             'applicant' => $applicant,
             'matchHardSkills' => $matchHardSkills,
             'matchSoftSkills' => $matchSoftSkills,
+            'offer' => $offer,
+            'company' => $company
         ]);
     }
 }
