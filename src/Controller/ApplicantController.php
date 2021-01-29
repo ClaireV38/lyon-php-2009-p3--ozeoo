@@ -176,8 +176,6 @@ class ApplicantController extends AbstractController
         Company $company,
         SkillRepository $skillRepository
     ): Response {
-
-
         $matchHardSkills = $skillRepository->findMatchHardSkills($offer, $applicant);
         $matchSoftSkills = $skillRepository->findMatchSoftSkills($offer, $applicant);
 

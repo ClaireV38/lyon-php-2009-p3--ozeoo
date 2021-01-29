@@ -25,12 +25,14 @@
                             <label for="id_label_multiple">
                                 {{ form_row(form.hardSkills, {'label': ' '}) }}
                             </label>
+                        <p id="minErrorHard"></p>
                     </div>
                     <div class="softSkills">
                         <h5>Compétences Comportementales <small>(10 max)</small></h5>
                             <label for="id_label_multiple">
                                 {{ form_row(form.softSkills, {'label': ' '}) }}
                             </label>
+                        <p id="minErrorSoft"></p>
                     </div>
             </div>
         </div>
@@ -45,14 +47,40 @@
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.full.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/i18n/fr.js"></script>
     <script type="text/javascript">
-    $(document).ready(function() {
-    $('#applicant_softSkills').select2({
-            maximumSelectionLength: 10
-    })
-    $('#applicant_hardSkills').select2({
-        maximumSelectionLength: 10
-    });
-});</script>
+        $(document).ready(function() {
+            $('#offer_softSkills').select2({
+                maximumSelectionLength: 10,
+                placeholder: '',
+                allowClear: true,
+                language: "fr"
+            })
+            $('#offer_hardSkills').select2({
+                maximumSelectionLength: 10,
+                placeholder: '',
+                allowClear: true,
+                language: "fr",
+            });
+            $('form').on('submit', function(){
+                var minimum = 5;
+                const errorminHard = document.querySelector('#minErrorHard');
+                errorminHard.innerHTML = "";
+                const errorminSoft = document.querySelector('#minErrorSoft');
+                errorminSoft.innerHTML = "";
+
+                if($("#offer_hardSkills").select2('data').length<minimum){
+                    errorminHard.innerHTML = "vous devez choisir 5 compétences minimum!";
+                    return false;
+                }else if($("#offer_softSkills").select2('data').length<minimum ) {
+                    errorminSoft.innerHTML = "vous devez choisir 5 compétences minimum!";
+                    return false;
+                }else {
+                    return true;
+                }
+            })
+
+        });
+    </script>
 {% endblock %}
