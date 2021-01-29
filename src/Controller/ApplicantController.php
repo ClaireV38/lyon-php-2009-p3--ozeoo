@@ -41,7 +41,6 @@ class ApplicantController extends AbstractController
         ApplicantRepository $applicantRepository,
         OfferRepository $offerRepository
     ): Response {
-
         /* @phpstan-ignore-next-line */
         $applicant = $this->getUser()->getApplicant();
 
