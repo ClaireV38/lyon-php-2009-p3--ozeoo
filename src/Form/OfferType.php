@@ -27,7 +27,12 @@ class OfferType extends AbstractType
             ->add('contractType')
             ->add('salary', null, ['required' => false])
             ->add('duration', null, ['required' => false])
-            ->add('startDate', DateType::class, ['format' => 'ddMMMyyyy'])
+            ->add('startDate', DateType::class, [
+                'format' => 'ddMMMyyyy',
+                'years' => (function () {
+                    return [2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030];
+                })()
+            ])
             ->add('endDate', DateType::class, [
                 'format' => 'ddMMMyyyy',
                 'placeholder' => [
@@ -37,6 +42,9 @@ class OfferType extends AbstractType
                 ],
                 'required' => false,
                 'choice_translation_domain' => true,
+                'years' => (function () {
+                    return [2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030];
+                })()
             ])
             ->add('description')
             ->add('isAnonymous')
