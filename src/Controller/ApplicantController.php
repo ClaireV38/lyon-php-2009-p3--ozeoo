@@ -85,7 +85,6 @@ class ApplicantController extends AbstractController
             'matchOffers' => $matchOffers,
             'applicantOffers' => $applicantOffers,
             'searchForm' => $searchForm->createView(),
-=
         ]);
     }
 
