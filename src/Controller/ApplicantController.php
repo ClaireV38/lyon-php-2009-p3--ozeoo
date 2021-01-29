@@ -46,6 +46,7 @@ class ApplicantController extends AbstractController
         /* @phpstan-ignore-next-line */
         $applicant = $this->getUser()->getApplicant();
 
+
         if (null == ($applicant->getFirstname())) {
              return $this->redirectToRoute('applicant_edit', [
                 'id' => $applicant->getId()
@@ -84,6 +85,7 @@ class ApplicantController extends AbstractController
             'matchOffers' => $matchOffers,
             'applicantOffers' => $applicantOffers,
             'searchForm' => $searchForm->createView(),
+=
         ]);
     }
 
