@@ -138,7 +138,7 @@ class OfferController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/applicants", name="offer_applicants", methods={"GET"})
+     * @Route("/{id}/applicants", name="offer_applicants", methods={"GET","POST"})
      * @param Offer $offer
      * @param OfferRepository $offerRepository
      * @return Response
@@ -164,8 +164,11 @@ class OfferController extends AbstractController
         $search = "";
         if ($form->isSubmitted() && $form->isValid()) {
             $search = $form->getData()['search'];
+            if (empty($search)) {
+                $search = "";
+            }
         }
-        $matchApplicants = $offerRepository->findMatchingApplicantsForOffer($offer, $search);
+        $matchApplicants = $offerRepository->findMatchingApplicantsForOfferWithSearch($offer, $search);
         $applicantsInArray = [];
         foreach ($matchApplicants as $matchApplicant) {
             if (in_array($matchApplicant['applicant_id'], $applicantsID)) {
@@ -177,7 +180,8 @@ class OfferController extends AbstractController
         return $this->render('offer/applicants.html.twig', [
             'offer' => $offer,
             'applicants' => $applicantsInArray,
-            'company' => $company
+            'company' => $company,
+            'form' => $form->createView()
         ]);
     }
 

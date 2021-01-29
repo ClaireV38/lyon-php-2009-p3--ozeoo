@@ -30,7 +30,7 @@ class OfferRepository extends ServiceEntityRepository
      * @param Offer $offer
      * @return array
      */
-    public function findMatchingApplicantsForOffer(Offer $offer, string $search): array
+    public function findMatchingApplicantsForOffer(Offer $offer): array
     {
         $rsm = new ResultSetMapping();
         $rsm->addScalarResult('match_hs', 'match_hs');
@@ -55,12 +55,48 @@ class OfferRepository extends ServiceEntityRepository
             JOIN applicant a on ahs.applicant_id = a.id and ass.applicant_id = a.id
         WHERE o.id = :offer
         GROUP BY a.id
-        HAVING `match_hs` >= 5 and `match_ss` >= 5 and a.name like :search
+        HAVING `match_hs` >= 5 and `match_ss` >= 5 
+        ORDER BY total DESC
+        ', $rsm);
+        $sql->setParameters((array('offer' => $offer->getId())));
+        return $sql->getArrayResult();
+    }
+
+    /**
+     * @param Offer $offer
+     * @return array
+     */
+    public function findMatchingApplicantsForOfferWithSearch(Offer $offer, string $search): array
+    {
+        $rsm = new ResultSetMapping();
+        $rsm->addScalarResult('match_hs', 'match_hs');
+        $rsm->addScalarResult('match_ss', 'match_ss');
+        $rsm->addScalarResult('applicant_id', 'applicant_id');
+        $rsm->addScalarResult('firstname', 'firstname');
+        $rsm->addScalarResult('personality', 'personality');
+        $rsm->addScalarResult('mobility', 'mobility');
+        $rsm->addScalarResult('city', 'city');
+
+        $sql = $this->getEntityManager()->createNativeQuery('
+        SELECT COUNT(distinct hs.id) as `match_hs`, COUNT(distinct ss.id) as `match_ss`,
+         a.id as `applicant_id`, a.firstname, a.personality, a.mobility, a.city,
+         SUM(distinct hs.id + ss.id) as total
+        FROM offer o
+            JOIN offer_hard_skills ohs on o.id = ohs.offer_id
+            JOIN applicant_hard_skills ahs on ohs.skill_id = ahs.skill_id
+            JOIN skill hs on ohs.skill_id = hs.id
+            JOIN offer_soft_skills oss on o.id = oss.offer_id
+            JOIN applicant_soft_skills ass on oss.skill_id = ass.skill_id
+            JOIN skill ss on oss.skill_id = ss.id
+            JOIN applicant a on ahs.applicant_id = a.id and ass.applicant_id = a.id
+        WHERE o.id = :offer
+        GROUP BY a.id
+        HAVING `match_hs` >= 5 and `match_ss` >= 5 and a.firstname like :search
         ORDER BY total DESC
         ', $rsm);
         $sql->setParameters((array(
             'offer' => $offer->getId(),
-            'searchT' => '%' . $search . '%')));
+            'search' => '%' . $search . '%')));
         return $sql->getArrayResult();
     }
 
