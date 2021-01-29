@@ -355,6 +355,21 @@ form[name="search_applicant_offer"] {
     display: none;
 }
 
+/*offer list applicant matching*/
+
+input[name="search_applicant_matching[search]"] {
+    margin-left: 10px;
+}
+
+form[name="search_applicant_matching"] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    width: 80%;
+}
+
 /*error messages */
 .errorMessage {
     flex-direction: column;
@@ -806,10 +821,19 @@ form[name="search_applicant_offer"] {
         width: 400px;
     }
 
-    /*offer list matches*/
+    /*offer list applicant matching*/
     #announce-card-matches {
         width: 90%;
         margin-top: 15px;
+    }
+
+    form[name="search_applicant_matching"] {
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+        justify-content: space-between;
+        margin: auto;
+        width: 50%;
     }
 
     /* Detail Candidate - Candidate Side */

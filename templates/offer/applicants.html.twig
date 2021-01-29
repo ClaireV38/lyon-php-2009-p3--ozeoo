@@ -34,11 +34,11 @@
             <div id="index-container-second">
                 <label id="sortFormShape">Chercher {{ form_widget(form.search) }}</label>
             </div>
-            <button id="index-container-button" class="btn-center btn btn-vertOze">Appliquer</button>
+            <button id="index-container-button" class="btn-center btn btn-vertOze mt-2 mt-md-0">Appliquer</button>
             {{ form_end(form) }}
         </div>
         {% for applicant in applicants %}
-            <div class="card container" id="announce-card-matches">
+            <div class="card container mt-2" id="announce-card-matches">
                 <div class="row-announce card-body flex-column flex-md-row align-items-center justify-content-between">
                     <div class="d-inline-block flex-column justify-content-center mr-md-2 w-100 mb-0 text-center">
                         <h5 class="card-title mb-0" id="title-announce-desktop">{{ applicant.firstname }}</h5>
@@ -57,6 +57,8 @@
                     </div>
                 </div>
             </div>
+        {% else %}
+            <p class="text-center mt-3"> Aucun candidat</p>
         {% endfor %}
     </div>
 {% endblock %}
