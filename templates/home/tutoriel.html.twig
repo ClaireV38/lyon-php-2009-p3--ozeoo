@@ -4,12 +4,6 @@
 
 {% block body %}
     <div id="home-list-overall">
-        {#  <div id="home-list-pictures">
-            <a href="{{ path("home") }}">
-                <img id="diversite1" src="{{ asset('build/images/logoNavBar_noBg.png') }}" alt="Image Ozé La Diversité avec logo">
-            </a>
-            <a href="{{ path("home") }}"><button type="button" class="btn btn-bleuOze btn-lg btn-block" id="home-list-buttons">Retour à l'accueil</button></a>
-        </div>#}
         {% if app.user.company %}
         {% include '/company/_navbar.html.twig' %}
         {% elseif app.user.applicant %}
