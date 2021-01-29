@@ -18,9 +18,13 @@
                 <div id="skillOfferType">
                     <h2 class="offerSkillsTitle">Compétences</h2>
                     <h5>Compétences techniques (5min, 10max)</h5>
-                    {{ form_row(form.hardSkills, {'label': " " }) }}
+                        <label for="id_label_multiple">
+                            {{ form_row(form.hardSkills, {'label': " " }) }}
+                        </label>
                     <h5>Compétences comportementales (5min, 10max)</h5>
-                    {{ form_row(form.softSkills, {'label': " " }) }}
+                        <label for="id_label_multiple">
+                            {{ form_row(form.softSkills, {'label': " " }) }}
+                        </label>
                 </div>
             </div>
              <button class="btn btn_validate flex">{{ button_label|default('Valider') }}</button>

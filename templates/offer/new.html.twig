@@ -19,10 +19,17 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $('#offer_softSkills').select2({
-                maximumSelectionLength: 10
+                maximumSelectionLength: 10,
+                minimumResultsForSearch: 5,
+                placeholder: 'This is my placeholder',
+                allowClear: true
             })
             $('#offer_hardSkills').select2({
-                maximumSelectionLength: 10
+                maximumSelectionLength: 10,
+                minimumResultsForSearch: 5,
+                placeholder: 'This is my placeholder',
+                allowClear: true
             });
-        });</script>
+        });
+    </script>
 {% endblock %}

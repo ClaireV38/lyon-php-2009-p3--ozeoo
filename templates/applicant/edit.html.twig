@@ -22,11 +22,15 @@
             <div class="skillSelection">
                     <div class="hardSkills">
                         <h5>Compétences Techniques <small>(10 max)</small></h5>
-                        {{ form_row(form.hardSkills, {'label': ' '}) }}
+                            <label for="id_label_multiple">
+                                {{ form_row(form.hardSkills, {'label': ' '}) }}
+                            </label>
                     </div>
                     <div class="softSkills">
                         <h5>Compétences Comportementales <small>(10 max)</small></h5>
-                        {{ form_row(form.softSkills, {'label': ' '}) }}
+                            <label for="id_label_multiple">
+                                {{ form_row(form.softSkills, {'label': ' '}) }}
+                            </label>
                     </div>
             </div>
         </div>

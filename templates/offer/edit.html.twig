@@ -16,13 +16,20 @@
 {% block javascripts %}
     {{ parent() }}
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.full.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/i18n/fr.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $('#offer_softSkills').select2({
-                maximumSelectionLength: 10
+                maximumSelectionLength: 10,
+                placeholder: 'This is my placeholder',
+                allowClear: true,
             })
             $('#offer_hardSkills').select2({
-                maximumSelectionLength: 10
+                maximumSelectionLength: 10,
+                placeholder: 'This is my placeholder',
+                allowClear: true,
             });
-        });</script>
+        });
+        </script>
 {% endblock %}

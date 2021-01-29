@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "af2bed60fbac4a80079b9520bb98db46",
+    "content-hash": "012121d1f335783da72c4074457896b8",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -7389,6 +7389,48 @@
                 "source": "https://github.com/SymfonyCasts/verify-email-bundle/tree/v1.1.1"
             },
             "time": "2020-12-18T14:57:31+00:00"
+        },
+        {
+            "name": "ttskch/select2-bootstrap4-theme",
+            "version": "1.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ttskch/select2-bootstrap4-theme.git",
+                "reference": "03fe405b21e4f8165a617b2b269346b1ffdc3619"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ttskch/select2-bootstrap4-theme/zipball/03fe405b21e4f8165a617b2b269346b1ffdc3619",
+                "reference": "03fe405b21e4f8165a617b2b269346b1ffdc3619",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Takashi Kanemoto",
+                    "email": "ttskch@gmail.com"
+                }
+            ],
+            "description": "Select2 v4 theme for Bootstrap4",
+            "keywords": [
+                "bootstrap",
+                "bootstrap4",
+                "css",
+                "scss",
+                "select2",
+                "theme"
+            ],
+            "funding": [
+                {
+                    "url": "https://www.paypal.com/paypalme/ttskch",
+                    "type": "custom"
+                }
+            ],
+            "time": "2021-01-28T07:02:26+00:00"
         },
         {
             "name": "twig/extra-bundle",
