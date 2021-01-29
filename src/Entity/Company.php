@@ -44,15 +44,17 @@ class Company implements \Serializable
      */
     private $siretNb;
 
-    /* @phpstan-ignore-next-line */
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @var string
      * @Assert\NotBlank(groups={"company"})
      * @Assert\Email(
+     *     groups={"company"},
      *     message = "L'email '{{ value }}' n'est pas un email au format valide."
      * )
-     * @Assert\Length(max="255", maxMessage="L'email ne doit pas exceder 255 caractères.")
+     * @Assert\Length(
+     *     groups={"company"},
+     *     max="255", maxMessage="L'email ne doit pas exceder 255 caractères.")
      */
     private $contactEmail;
 
