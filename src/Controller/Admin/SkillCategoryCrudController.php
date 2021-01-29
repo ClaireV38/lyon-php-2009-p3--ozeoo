@@ -37,27 +37,4 @@ class SkillCategoryCrudController extends AbstractCrudController
             BooleanField::new('isHard', 'Compétences Techniques'),
         ];
     }
-
-/*    public function configureActions(Actions $actions): Actions
-    {
-        $setHard = Action::new('setHard', 'Set Hard', 'fa fa-toggle-on')
-            ->linkToCrudAction('setHard');
-        return $actions
-            ->add(Crud::PAGE_EDIT, $setHard);
-    }
-
-    public function setHard(AdminContext $context): RedirectResponse
-    {
-        $setHard = $context->getEntity()->getInstance();
-        $skillCategory = $setHard->getName();
-        $skillCategory->setIsHard('1');
-        $this->emi->persist($skillCategory);
-        $this->emi->flush();
-
-        $url = $this->adminUrlGenerator
-            ->setController(SkillCategoryCrudController::class)
-            ->setAction('edit')
-            ->generateUrl();
-        return $this->redirect($url);
-    }*/
 }
