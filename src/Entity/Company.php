@@ -49,6 +49,9 @@ class Company implements \Serializable
      * @ORM\Column(type="string", length=255, nullable=true)
      * @var string
      * @Assert\NotBlank(groups={"company"})
+     * @Assert\Email(
+     *     message = "L'email '{{ value }}' n'est pas un email au format valide."
+     * )
      * @Assert\Length(max="255", maxMessage="L'email ne doit pas exceder 255 caractères.")
      */
     private $contactEmail;
@@ -56,6 +59,7 @@ class Company implements \Serializable
     /**
      * @ORM\Column(type="string")
      * @var string
+     * @Assert\NotBlank(message="Veuillez saisir votre code APE.")
      * @Assert\Regex("/^([0-9]{4}[a-zA-Z]{1})$/",
      *     message="Veuillez saisir un numéro d'APE composé de 4 chiffres et une lettre")
      */
