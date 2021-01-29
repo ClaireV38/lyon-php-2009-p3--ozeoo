@@ -1,15 +1,15 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-clairNavbar">
-    <a class="navbar-brand" href="/"><img src="{{ asset('build/images/logoNavBar_noBg.png') }}" width="192px" height="74px" alt="logoOze"/></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<nav class="navbar navbar-expand-md navbar-light bg-clairNavbar">
+    <img src="{{ asset('build/images/logoNavBar_noBg.png') }}" width="192px" height="74px" alt="logoOze"/>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             {% if app.user %}
             <div class="button2">
                 <li class="nav-item mt-3 mt-md-0">
-                    <a id="buttonNav" class="btn btn-orangeOze" class="nav-link " href="{{ path('company_show', {id: app.user.company.id}) }}">Profil</a>
+                    <a id="buttonNav" class="btn btn-orangeOze" class="nav-link " href="{{ path('company_index') }}">Mes Annonces</a>
                 </li>
             </div>
             <div class="button3">
@@ -19,10 +19,16 @@
             </div>
                 <li class="nav-item mt-3 mt-md-0 "></li>
         </ul>
+
+    <div class="dropdown">
+        <button class="btn btn-bleuOze dropdown-toggle" style="color: black" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ company.contactEmail }}
+        </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="{{ path('company_show' , {'id': app.user.company.id}) }}"><i class="fas fa-user"></i> Profil</a>
+            <a class="dropdown-item" href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt"></i> Se déconnecter</a>
+        </div>
     </div>
-    <div class="logoright">
-        <a id="buttonNavLogout" class="btn btn-bleuOze" href="{{ path('app_logout') }}">Se déconnecter</a>
-        <span class="icon-bar"> <img src="{{ asset('build/images/logoNoBg.png') }}" width="90%" height="90%" alt="logo2Oze"> </span>
     </div>
     {% endif %}
 </nav>

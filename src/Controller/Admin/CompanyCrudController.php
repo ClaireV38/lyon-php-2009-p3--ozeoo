@@ -13,16 +13,25 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Mime\Address;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 
 class CompanyCrudController extends AbstractCrudController
 {
     private EntityManagerInterface $emi;
     private AdminUrlGenerator $adminUrlGenerator;
+    private MailerInterface $mailer;
 
-    public function __construct(EntityManagerInterface $emi, AdminUrlGenerator $adminUrlGenerator)
-    {
+    public function __construct(
+        EntityManagerInterface $emi,
+        AdminUrlGenerator $adminUrlGenerator,
+        MailerInterface $mailer
+    ) {
         $this->emi = $emi;
         $this->adminUrlGenerator = $adminUrlGenerator;
+        $this->mailer = $mailer;
     }
 
     public static function getEntityFqcn(): string
@@ -66,6 +75,13 @@ class CompanyCrudController extends AbstractCrudController
         $this->emi->persist($user);
         $this->emi->flush();
         $this->addFlash('success', 'Entreprise Vérifié');
+
+        $email = (new Email())
+            ->from(new Address($this->getParameter('mailer_from')));
+        $email->to($user->getEmail());
+        $email->subject('Ozé La Diversité : Inscription confirmé');
+        $email->html($this->renderView('company/validateCompanyEmail.html.twig'));
+        $this->mailer->send($email);
 
             $url = $this->adminUrlGenerator
             ->setController(CompanyCrudController::class)
