@@ -14,6 +14,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
+
 class CompanyCrudController extends AbstractCrudController
 {
     private EntityManagerInterface $emi;
@@ -41,8 +42,7 @@ class CompanyCrudController extends AbstractCrudController
             TextField::new('name', 'Nom de l\'entreprise'),
             TextField::new('siretNb', 'Numéro Siret'),
             TextField::new('apeNb', 'Numéro APE'),
-            BooleanField::new('isVerified', 'Vérifié')->setFormTypeOption('disabled', 'disabled'),
-
+            BooleanField::new('isVerified', 'Vérifié')->setFormTypeOption('disabled', 'disabled')
         ];
     }
 
