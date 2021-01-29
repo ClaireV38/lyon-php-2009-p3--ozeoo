@@ -111,6 +111,7 @@ class Company implements \Serializable
     private $csr;
 
     /**
+     * @Assert\Valid
      * @ORM\OneToOne(targetEntity=User::class, inversedBy="company", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      * @var User
