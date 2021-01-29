@@ -14,7 +14,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-
 class CompanyCrudController extends AbstractCrudController
 {
     private EntityManagerInterface $emi;
