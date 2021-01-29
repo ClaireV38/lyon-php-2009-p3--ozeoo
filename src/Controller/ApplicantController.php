@@ -206,7 +206,6 @@ class ApplicantController extends AbstractController
 
     /**
      * @Route ("/postule/{id}", name="applicant_offer_apply", methods={"GET"})
-     * @param Company $company
      * @param Offer $offer
      * @param EntityManagerInterface $entityManager
      * @param MailerInterface $mailer
@@ -214,7 +213,6 @@ class ApplicantController extends AbstractController
      * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
      */
     public function apply(
-        Company $company,
         Offer $offer,
         EntityManagerInterface $entityManager,
         MailerInterface $mailer
