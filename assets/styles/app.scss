@@ -254,7 +254,6 @@ input[name="search_company_offer[search]"] {
 
 .candidate_ozeoPresentationCard {
     width: 18rem;
-
 }
 
 .candidate_ozeoTutoCard {
@@ -361,20 +360,12 @@ input[name="search_company_offer[search]"] {
         text-align: center;
     }
 
-    #buttonDetails {
-        padding-top: 10px;
-    }
-
     .applicant_home_welcome_mainTitle {
         color: $orangeOze;
     }
 
     #titleListOffer {
         margin-left: 280px;
-    }
-
-    #skillsList {
-        width: 50%;
     }
 
     #listApplicantInfo {
@@ -779,9 +770,9 @@ input[name="search_company_offer[search]"] {
     }
 
     #buttonPostuleOffer {
-        padding: 30px;
-        font-size: larger;
-        width: 200px;
+        padding: 25px;
+        font-size: x-large;
+        width: 400px;
     }
 
     /*offer list matches*/
@@ -837,25 +828,9 @@ input[name="search_company_offer[search]"] {
         margin-top: 15px;
     }
 
-    /* Detail Candidate - Candidate Side */
-    #skillsList {
+    #buttonDetails {
         display: flex;
-        flex-direction: row;
-        padding: 10px;
-    }
-
-    #list-HardSkill {
-        line-height: normal;
-        padding-left: 10px;
-        padding-right: 10px;
-        font-size: 13px;
-    }
-
-    #list-SoftSkill {
-        line-height: normal;
-        padding-left: 10px;
-        padding-right: 10px;
-        font-size: 13px;
+        justify-content: space-around;
     }
 
     /*Reset password*/
@@ -895,6 +870,17 @@ input[name="search_company_offer[search]"] {
     #legalTerms {
         margin: auto;
         width: 50%;
+    }
+
+    #legalTermsTitle {
+        margin-left: 40px;
+    }
+
+    #legalImg {
+        margin-top: 30px;
+        margin-bottom: 30px;
+        width: 910px;
+        height: 370px;
     }
 
     #applicantImg {

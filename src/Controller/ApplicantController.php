@@ -35,13 +35,11 @@ class ApplicantController extends AbstractController
      * @param ApplicantRepository $applicantRepository
      * @return Response
      */
-
     public function index(
         Request $request,
         ApplicantRepository $applicantRepository,
         OfferRepository $offerRepository
     ): Response {
-
         /* @phpstan-ignore-next-line */
         $applicant = $this->getUser()->getApplicant();
 

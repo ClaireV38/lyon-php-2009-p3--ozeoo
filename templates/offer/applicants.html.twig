@@ -23,10 +23,9 @@
                 <a href="{{ path("offer_show", {id: offer.id}) }}"
                    class="d-inline-block mt-2 btn btn-orangeOze d-inline-flex">Voir fiche</a>
             </div>
+
         </div>
     </div>
-
-
     <div class="container d-block">
         <h1 class="text-center">Liste des candidats qui ont postulé</h1>
         {% for applicant in applicants %}
@@ -51,6 +50,5 @@
             </div>
     {% endfor %}
 </div>
-
 
 {% endblock %}
