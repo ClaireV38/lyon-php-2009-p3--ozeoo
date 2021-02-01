@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand-md navbar-light bg-clairNavbar">
-    <img src="{{ asset('build/images/logoNavBar_noBg.png') }}" width="192px" height="74px" alt="logoOze"/>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <a class="navbar-brand" href="/"><img src="{{ asset('build/images/logoNavBar_noBg.png') }}" width="192px" height="74px" alt="logoOze"/></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
@@ -19,7 +19,6 @@
             </div>
                 <li class="nav-item mt-3 mt-md-0 "></li>
         </ul>
-
     <div class="dropdown">
         <button class="btn btn-bleuOze dropdown-toggle" style="color: black" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {{ app.user.email }}

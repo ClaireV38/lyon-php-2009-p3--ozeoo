@@ -4,32 +4,45 @@
 
 {% block body %}
     {% include '/company/_navbar.html.twig' %}
-        <h1 class="text-center">Bienvenue {{ company.name }} ! </h1>
-            {% if company.contactEmail is null %}
-                <div class="container d-flex flex-column" id="company-home-body">
-                    <a class="d-block btn btn-bleuOze btn-lg align-content-center"
-                       id="create-company-card" href="{{ path("company_edit", {id: app.user.company.id}) }}" role="button">
-                        Créer son profil entreprise
-                    </a>
-                </div>
-            {% endif %}
+
+    <h1 class="text-center">Bienvenue {{ company.name }} ! </h1>
+    {% if company.contactEmail is null %}
+        <div class="container d-flex flex-column" id="company-home-body">
+            <a class="d-block btn btn-bleuOze btn-lg align-content-center"
+               id="create-company-card" href="{{ path("company_edit", {id: app.user.company.id}) }}" role="button">
+                Créer son profil entreprise
+            </a>
+        </div>
+    {% endif %}
     <h4 id="titleListOffer">Liste de vos Annonces :</h4>
+    <div class="center flex-column flex-md-row align-items-center">
+        {{ form_start(form) }}
+        <label id="sortFormShape">Trier {{ form_widget(form.sort) }}</label>
+        <div id="index-container-second">
+            <label id="sortFormShape">Chercher {{ form_widget(form.search) }}</label>
+        </div>
+        <button id="index-container-button" class="btn-center btn btn-vertOze">Appliquer</button>
+        {{ form_end(form) }}
+    </div>
     {% for offer in offers %}
         <div class="card container" id="announce-card-homecompany">
             <div class="row-announce card-body flex-column flex-md-row align-items-center justify-content-between">
-                <div class="d-inline-block mb-2 mr-md-2 w-100 mb-0 text-center">
+                <div class="d-inline-block mb-2 mb-md-0 mr-md-2 w-100 mb-0 text-center">
                     <h5 class="card-title" id="title-announce-desktop">{{ offer.title }}</h5>
-                    <p class="mb-0"> début mission : {{ offer.startDate|date("d/m/Y") }}</p>
+                    <p class="mb-0"> Créé le : {{ offer.creationDate|date("d/m/Y") }}</p>
+                    <p class="mb-0"> Début mission : {{ offer.startDate|date("d/m/Y") }}</p>
+                    <p class="mb-0"> Expire le : {{ offer.endDate|date("d/m/Y") }}</p>
                 </div>
                 <div class="row-info-right w-100 flex-md-row">
                     <div class="row-info-nb d-md-inline-block flex-md-row align-items-center text-center">
-                        <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> nb matchs :
+                        <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> Nb matchs :
                             <strong>{{ nbMatches[offer.id] }}</strong></p>
-                        <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> nb candidats :
+                        <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> Nb candidats :
                             <strong>{{ offer.applicants |length }}</strong></p>
                     </div>
                     <div class="row-btn-offer d-md-inline-block flex justify-content-around">
-                        <a href="{{ path("offer_applicants", {id: offer.id}) }}" class="d-inline-block btn btn-offer btn-orangeOze d-inline-flex">Voir les candidats</a>
+                        <a href="{{ path("offer_applicants", {id: offer.id}) }}"
+                           class="d-inline-block btn btn-offer btn-orangeOze d-inline-flex">Voir les candidats</a>
                         <a href="{{ path("offer_edit", {id: offer.id}) }}"
                            class="d-inline-block btn btn-offer btn-bleuOze d-inline-flex">Editer</a>
                     </div>
