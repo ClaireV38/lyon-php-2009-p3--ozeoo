@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Applicant;
+use App\Entity\Company;
 use App\Entity\Offer;
 use App\Entity\Skill;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -60,6 +61,103 @@ class OfferRepository extends ServiceEntityRepository
         $sql->setParameters((array('offer' => $offer->getId())));
         return $sql->getArrayResult();
     }
+
+
+    /**
+     * @param string $search
+     * @param Company $company
+     * @return int|mixed|string
+     */
+    public function findLikeTitleOrderById(string $search, Company $company)
+    {
+        $queryBuilder = $this->createQueryBuilder('o')
+            ->join('o.company', 'c')
+            ->where('o.title LIKE :search')
+            ->andWhere('c = :company')
+            ->setParameter('company', $company)
+            ->setParameter('search', '%' . $search . '%')
+            ->orderBy('o.id', 'ASC')
+            ->getQuery();
+
+        return $queryBuilder->getResult();
+    }
+
+    /**
+     * @param string $search
+     * @param Company $company
+     * @return int|mixed|string
+     */
+    public function findLikeTitleOrderByEndDate(string $search, Company $company)
+    {
+        $queryBuilder = $this->createQueryBuilder('o')
+            ->join('o.company', 'c')
+            ->where('o.title LIKE :search')
+            ->andWhere('c = :company')
+            ->setParameter('company', $company)
+            ->setParameter('search', '%' . $search . '%')
+            ->orderBy('o.endDate', 'ASC')
+            ->getQuery();
+
+        return $queryBuilder->getResult();
+    }
+
+    /**
+     * @param string $search
+     * @param Company $company
+     * @return int|mixed|string
+     */
+    public function findLikeTitleOrderByStartDate(string $search, Company $company)
+    {
+        $queryBuilder = $this->createQueryBuilder('o')
+            ->join('o.company', 'c')
+            ->where('o.title LIKE :search')
+            ->andWhere('c = :company')
+            ->setParameter('company', $company)
+            ->setParameter('search', '%' . $search . '%')
+            ->orderBy('o.startDate', 'ASC')
+            ->getQuery();
+
+        return $queryBuilder->getResult();
+    }
+
+    /**
+     * @param string $search
+     * @param Company $company
+     * @return int|mixed|string
+     */
+    public function findLikeTitleOrderByCreationDate(string $search, Company $company)
+    {
+        $queryBuilder = $this->createQueryBuilder('o')
+            ->join('o.company', 'c')
+            ->where('o.title LIKE :search')
+            ->andWhere('c = :company')
+            ->setParameter('company', $company)
+            ->setParameter('search', '%' . $search . '%')
+            ->orderBy('o.creationDate', 'ASC')
+            ->getQuery();
+
+        return $queryBuilder->getResult();
+    }
+
+    /**
+     * @param string $search
+     * @param Company $company
+     * @return int|mixed|string
+     */
+    public function findLikeTitleOrderByTitle(string $search, Company $company)
+    {
+        $queryBuilder = $this->createQueryBuilder('o')
+            ->join('o.company', 'c')
+            ->where('o.title LIKE :search')
+            ->andWhere('c = :company')
+            ->setParameter('company', $company)
+            ->setParameter('search', '%' . $search . '%')
+            ->orderBy('o.title', 'ASC')
+            ->getQuery();
+
+        return $queryBuilder->getResult();
+    }
+
 
     public function countOffers(): array
     {

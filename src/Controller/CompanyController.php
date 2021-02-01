@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Company;
 use App\Form\CompanyType;
+use App\Form\SearchCompanyOfferType;
 use App\Repository\CompanyRepository;
 use App\Repository\OfferRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,24 +15,53 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * @Route("/company")
+ * @Route("/company", name="company_")
  */
 class CompanyController extends AbstractController
 {
     /**
-     * @Route("/index", name="company_index", methods={"GET"})
+     * @Route("/index", name="index", methods={"GET","POST"})
+     * @param Request $request
      * @param OfferRepository $offerRepository
      * @return Response
      */
-    public function index(OfferRepository $offerRepository): Response
+    public function index(Request $request, OfferRepository $offerRepository): Response
     {
         /* @phpstan-ignore-next-line */
         $company = $this->getUser()->getCompany();
 
-        $offers = $offerRepository->findBy(
-            ['company' => $company],
-            ['id' => 'DESC']
-        );
+        $form = $this->createForm(SearchCompanyOfferType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $search = $form->getData()['search'];
+            if (empty($search)) {
+                $search = "";
+            }
+            $field = $form->getData()['sort'];
+            switch ($field) {
+                case 'startDate':
+                    $offers = $offerRepository->findLikeTitleOrderByStartDate($search, $company);
+                    break;
+                case 'creationDate':
+                    $offers = $offerRepository->findLikeTitleOrderByCreationDate($search, $company);
+                    break;
+                case 'endDate':
+                    $offers = $offerRepository->findLikeTitleOrderByEndDate($search, $company);
+                    break;
+                case 'title':
+                    $offers = $offerRepository->findLikeTitleOrderByTitle($search, $company);
+                    break;
+                default:
+                    $offers = $offerRepository->findLikeTitleOrderById($search, $company);
+            }
+        } else {
+            $offers = $offerRepository->findBy(
+                ['company' => $company],
+                ['id' => 'DESC']
+            );
+        }
+
         $nbMatches = [];
         foreach ($offers as $offer) {
             $matchApplicants = $offerRepository->findMatchingApplicantsForOffer($offer);
@@ -39,12 +70,13 @@ class CompanyController extends AbstractController
         return $this->render('company/index.html.twig', [
             'company' => $company,
             'offers' => $offers,
-            'nbMatches' => $nbMatches
+            'nbMatches' => $nbMatches,
+            'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}/edit", name="company_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
      * @param Request $request
      * @param Company $company
      * @return Response
@@ -74,7 +106,7 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="company_show", methods={"GET"})
+     * @Route("/{id}", name="show", methods={"GET"})
      * @param Company $company
      * @return Response
      */
@@ -90,7 +122,7 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="company_delete", methods={"DELETE"})
+     * @Route("/{id}", name="delete", methods={"DELETE"})
      * @param Request $request
      * @param Company $company
      * @return Response
