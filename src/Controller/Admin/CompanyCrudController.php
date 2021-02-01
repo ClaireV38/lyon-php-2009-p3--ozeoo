@@ -106,5 +106,4 @@ class CompanyCrudController extends AbstractCrudController
             ->generateUrl();
         return $this->redirect($url);
     }
-
 }
