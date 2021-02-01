@@ -34,7 +34,7 @@ main {
 #home-list-pictures {
     display: flex;
     justify-content: space-around;
-
+    background-color: #FFFFFF;
 }
 
 h1 {
@@ -62,6 +62,11 @@ h1 {
 #diversite1 {
     height: auto;
     width: 100%;
+}
+
+#diversite2 {
+    height: auto;
+    width: 25%;
 }
 
 #diversite2 {
@@ -720,10 +725,6 @@ form[name="search_applicant_offer"] {
         font-size: 20px;
     }
 
-    /* Offer form */
-    .offerHardSkills {
-        width: 45%;
-    }
 
     /* New Applicant profile */
     .applicantForm{
@@ -920,12 +921,6 @@ form[name="search_applicant_offer"] {
         justify-content: space-around;
     }
 
-    /*Legal Terms*/
-    #legalTerms {
-        margin: auto;
-        width: 50%;
-    }
-
     #applicantImg {
         width: 560px;
         height: 360px;
@@ -940,6 +935,8 @@ form[name="search_applicant_offer"] {
         display: flex;
         justify-content: space-evenly;
         flex-direction: row;
+        background-color: #FFFFFF;
+        padding: 0;
     }
 
     #textTuto {
@@ -961,6 +958,12 @@ form[name="search_applicant_offer"] {
         padding: 10px;
         margin-left: 40px;
         margin-right: 40px;
+    }
+
+    #mainTuto {
+        display: flex;
+        flex-flow: row;
+        justify-content: center;
     }
 
     /*Reset password*/
