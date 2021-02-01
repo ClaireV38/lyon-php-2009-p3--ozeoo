@@ -335,6 +335,25 @@ h1 {
     justify-content: center;
 }
 
+/*Error Display*/
+
+#minErrorHard {
+    color: tomato;
+    //border: tomato solid 1px;
+    //border-radius: 5px;
+    //width: fit-content;
+    //padding: 5px;
+}
+
+#minErrorSoft {
+    color: tomato;
+    //border: tomato solid 1px;
+    //border-radius: 5px;
+    //width: fit-content;
+    //padding: 5px;
+}
+
+
 @media (min-width: 768px) {
     .buttonHomeCompany {
         text-align: center;
