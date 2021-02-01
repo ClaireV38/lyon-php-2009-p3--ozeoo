@@ -25,7 +25,7 @@ class Offer
 
     /**
      * @Assert\NotBlank(message="Il vous faut indiquer l'intitulé du poste")
-     * @Assert\Length(max="255", maxMessage="L'intitulé ne doit pas faire plus de 255 caractères")
+     * @Assert\Length(max="150", maxMessage="L'intitulé ne doit pas faire plus de 150 caractères")
      * @ORM\Column(type="string", length=255)
      * @var string
      */
@@ -33,6 +33,7 @@ class Offer
 
     /**
      * @Assert\NotBlank(message="Il vous faut indiquer un type de contrat")
+     * @Assert\Length(max="50", maxMessage="L'intitulé ne doit pas faire plus de 50 caractères")
      * @ORM\Column(type="string", length=50)
      * @var string
      */
@@ -40,12 +41,14 @@ class Offer
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
+     * @Assert\Length(max="50", maxMessage="L'intitulé ne doit pas faire plus de 50 caractères")
      * @var string
      */
     private $salary;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max="50", maxMessage="L'intitulé ne doit pas faire plus de 50 caractères")
      * @var string
      */
     private $duration ;
@@ -65,6 +68,7 @@ class Offer
     private $creationDate;
 
     /**
+     * @Assert\GreaterThanOrEqual("today")
      * @ORM\Column(type="date", nullable=true)
      * @var \DateTimeInterface|null
      */
@@ -85,7 +89,7 @@ class Offer
 
     /**
      * @Assert\NotBlank(message="Il vous faut indiquer une ville")
-     * @Assert\Length(max="50", maxMessage="L'intitulé ne doit pas faire plus de 100 caractères")
+     * @Assert\Length(max="50", maxMessage="L'intitulé ne doit pas faire plus de 50 caractères")
      * @ORM\Column(type="string", nullable=true)
      * @var string|null
      */
