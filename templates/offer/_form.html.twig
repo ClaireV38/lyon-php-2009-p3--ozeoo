@@ -15,11 +15,13 @@
                     {{ form_row(form.endDate, { 'label': 'Date limite de candidature' }) }}
                     </div>
                 {{ form_row(form.isAnonymous, { 'label': 'Cochez si vous souhaitez que l\'entreprise reste anonyme' }) }}
-            <h2 class="offerSkillsTitle">Compétences</h2>
-                <h5>Compétences techniques (5min, 10max)</h5>
+                <div id="skillOfferType">
+                    <h2 class="offerSkillsTitle">Compétences</h2>
+                    <h5>Compétences techniques (5min, 10max)</h5>
                     {{ form_row(form.hardSkills, {'label': " " }) }}
-                <h5>Compétences comportementales (5min, 10max)</h5>
+                    <h5>Compétences comportementales (5min, 10max)</h5>
                     {{ form_row(form.softSkills, {'label': " " }) }}
+                </div>
             </div>
              <button class="btn btn_validate flex">{{ button_label|default('Valider') }}</button>
      {{ form_end(form) }}
