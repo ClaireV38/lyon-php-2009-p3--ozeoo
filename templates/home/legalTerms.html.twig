@@ -669,7 +669,7 @@
             <div class="center">
                 <img id="legalImg" src="{{ asset('build/images/logoozé.png') }}" alt="Image Ozé La Diversité avec logo">
             </div>
-            <button id="registerBtn" class="btn-center btn btn-bleuOze">{{ button_label|default('Retour à l\'accueil') }}</button>
+            <a id="registerBtn" href="{{ path('home') }}" class="btn-center btn btn-bleuOze">Retour à l'accueil</a>
         </div>
     </div>
 {% endblock %}
