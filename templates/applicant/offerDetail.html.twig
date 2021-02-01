@@ -80,19 +80,26 @@
                     </div>
                     <div class="skillMatchApplicant">
                         <ul style="list-style: none ">
-                            {% for hardSkill in applicant.hardSkills %}
-                                {% if hardSkill in matchHardSkills %}
-                                    <li><i class="fas fa-check-circle"></i> {{ hardSkill.name }}</li>
-                                {% endif %}
-                            {% endfor %}
+                            {% for skillCat in skillCats %}
+                                <span id="skillCategoryName"><b>{{ skillCat.name }}</b></span>
+                                {% for hardSkill in applicant.hardSkills %}
+                                    {% if hardSkill in matchHardSkills %}
+                                        {% if hardSkill.skillCategory is same as skillCat %}
+                                            <li><i class="fas fa-check-circle"></i> {{ hardSkill.name }}</li>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
                         </ul>
                     </div>
                     <div class="skillOfferNotMatch">
                         <ul style="list-style: none ">
-                            {% for hardSkill in offer.hardSkills %}
-                                {% if  hardSkill not in matchHardSkills %}
-                                    <li><i class="fas fa-times-circle" ></i> {{ hardSkill.name }}</li>
-                                {% endif %}
+                                {% for hardSkill in offer.hardSkills %}
+                                    {% if  hardSkill not in matchHardSkills %}
+                                        {% if hardSkill.skillCategory is same as skillCat %}
+                                            <li><i class="fas fa-times-circle" ></i> {{ hardSkill.name }}</li>
+                                            {% endif %}
+                                        {% endif %}
+                                {% endfor %}
                             {% endfor %}
                         </ul>
                     </div>

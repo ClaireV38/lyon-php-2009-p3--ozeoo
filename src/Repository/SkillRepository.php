@@ -31,8 +31,10 @@ class SkillRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('s')
             ->innerJoin('s.hardOffers', 'ho', 'WITH', 'ho IN (:offer)')
             ->innerJoin('s.hardApplicants', 'ha', 'WITH', 'ha IN (:applicant)')
+            ->innerJoin('s.skillCategory', 'sc')
             ->setParameter('offer', $offer)
             ->setParameter('applicant', $applicant)
+            ->orderBy('sc.name', 'ASC')
             ->getQuery()
             ->getResult()
             ;
