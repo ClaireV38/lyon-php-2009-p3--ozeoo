@@ -16,12 +16,12 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * @Route("/company", name="company_")
+ * @Route("/entreprise")
  */
 class CompanyController extends AbstractController
 {
     /**
-     * @Route("/index", name="index", methods={"GET","POST"})
+     * @Route("/index", name="company_index", methods={"GET","POST"})
      * @param Request $request
      * @param OfferRepository $offerRepository
      * @return Response
@@ -70,7 +70,7 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
+     * @Route("/{id}/modifier_profil", name="company_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Company $company
      * @return Response
@@ -100,7 +100,7 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="show", methods={"GET"})
+     * @Route("/{id}", name="company_show", methods={"GET"})
      * @param Company $company
      * @return Response
      */
@@ -113,26 +113,5 @@ class CompanyController extends AbstractController
         return $this->render('company/show.html.twig', [
             'company' => $company,
         ]);
-    }
-
-    /**
-     * @Route("/{id}", name="delete", methods={"DELETE"})
-     * @param Request $request
-     * @param Company $company
-     * @return Response
-     */
-    public function delete(Request $request, Company $company): Response
-    {
-        if ($this->getUser() != $company->getUser()) {
-            throw new AccessDeniedException();
-        }
-
-        if ($this->isCsrfTokenValid('delete' . $company->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($company);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('company_index');
     }
 }
