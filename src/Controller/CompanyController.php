@@ -7,6 +7,7 @@ use App\Form\CompanyType;
 use App\Form\SearchCompanyOfferType;
 use App\Repository\CompanyRepository;
 use App\Repository\OfferRepository;
+use App\Services\SearchOffers;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +26,7 @@ class CompanyController extends AbstractController
      * @param OfferRepository $offerRepository
      * @return Response
      */
-    public function index(Request $request, OfferRepository $offerRepository): Response
+    public function index(Request $request, OfferRepository $offerRepository, SearchOffers $searchOffers): Response
     {
         /* @phpstan-ignore-next-line */
         $company = $this->getUser()->getCompany();
@@ -34,28 +35,17 @@ class CompanyController extends AbstractController
         $form->handleRequest($request);
 
         $noResult = false;
+        $offers = $offerRepository->findBy(
+            ['company' => $company],
+            ['id' => 'DESC']
+        );
         if ($form->isSubmitted() && $form->isValid()) {
             $search = $form->getData()['search'];
             if (empty($search)) {
                 $search = "";
             }
             $field = $form->getData()['sort'];
-            switch ($field) {
-                case 'startDate':
-                    $offers = $offerRepository->findLikeTitleOrderByStartDate($search, $company);
-                    break;
-                case 'creationDate':
-                    $offers = $offerRepository->findLikeTitleOrderByCreationDate($search, $company);
-                    break;
-                case 'endDate':
-                    $offers = $offerRepository->findLikeTitleOrderByEndDate($search, $company);
-                    break;
-                case 'title':
-                    $offers = $offerRepository->findLikeTitleOrderByTitle($search, $company);
-                    break;
-                default:
-                    $offers = $offerRepository->findLikeTitleOrderById($search, $company);
-            }
+            $offers = $searchOffers->getSearchedOffersForCompany($search, $company, $field);
             if (empty($offers)) {
                 $offers = $offerRepository->findBy(
                     ['company' => $company],
@@ -63,11 +53,6 @@ class CompanyController extends AbstractController
                 );
                 $noResult = true;
             }
-        } else {
-            $offers = $offerRepository->findBy(
-                ['company' => $company],
-                ['id' => 'DESC']
-            );
         }
 
         $nbMatches = [];

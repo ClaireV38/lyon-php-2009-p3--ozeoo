@@ -70,7 +70,12 @@ class ApplicantController extends AbstractController
             }
             $field = $searchForm->getData()['sort'];
 
-            $matchOffersArray = $searchOffers->getSearchedOffers($applicant, $searchTitle, $searchCompany, $field);
+            $matchOffersArray = $searchOffers->getSearchedOffersForApplicant(
+                $applicant,
+                $searchTitle,
+                $searchCompany,
+                $field
+            );
             if (empty($matchOffersArray)) {
                 $matchOffersArray = $applicantRepository->findMatchingOffersForApplicant(
                 /* @phpstan-ignore-next-line */
