@@ -161,14 +161,20 @@ class OfferController extends AbstractController
         $form = $this->createForm(SearchApplicantMatchingType::class);
         $form->handleRequest($request);
 
-        $search = "";
+        $noResult = false;
         if ($form->isSubmitted() && $form->isValid()) {
             $search = $form->getData()['search'];
             if (empty($search)) {
                 $search = "";
             }
+            $matchApplicants = $offerRepository->findMatchingApplicantsForOfferWithSearch($offer, $search);
+            if (empty($matchApplicants)) {
+                $matchApplicants = $offerRepository->findMatchingApplicantsForOffer($offer);
+                $noResult = true;
+            }
+        } else {
+            $matchApplicants = $offerRepository->findMatchingApplicantsForOffer($offer);
         }
-        $matchApplicants = $offerRepository->findMatchingApplicantsForOfferWithSearch($offer, $search);
         $applicantsInArray = [];
         foreach ($matchApplicants as $matchApplicant) {
             if (in_array($matchApplicant['applicant_id'], $applicantsID)) {
@@ -181,7 +187,8 @@ class OfferController extends AbstractController
             'offer' => $offer,
             'applicants' => $applicantsInArray,
             'company' => $company,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'noResult' => $noResult
         ]);
     }
 

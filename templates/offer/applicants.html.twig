@@ -29,6 +29,7 @@
 
     <div class="container d-block">
         <h1 class="text-center">Liste des candidats qui ont postulé</h1>
+        {% if applicants %}
         <div class="center flex-column flex-md-row align-items-center">
             {{ form_start(form) }}
             <div id="index-container-second">
@@ -37,6 +38,10 @@
             <button id="index-container-button" class="btn-center btn btn-vertOze mt-2 mt-md-0">Appliquer</button>
             {{ form_end(form) }}
         </div>
+        {% endif %}
+        {% if noResult %}
+            <h5 class="text-center">Aucune annonce ne correspond à votre recherche</h5>
+        {% endif %}
         {% for applicant in applicants %}
             <div class="card container mt-2" id="announce-card-matches">
                 <div class="row-announce card-body flex-column flex-md-row align-items-center justify-content-between">

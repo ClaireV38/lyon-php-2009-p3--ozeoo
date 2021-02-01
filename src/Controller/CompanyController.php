@@ -33,6 +33,7 @@ class CompanyController extends AbstractController
         $form = $this->createForm(SearchCompanyOfferType::class);
         $form->handleRequest($request);
 
+        $noResult = false;
         if ($form->isSubmitted() && $form->isValid()) {
             $search = $form->getData()['search'];
             if (empty($search)) {
@@ -55,6 +56,13 @@ class CompanyController extends AbstractController
                 default:
                     $offers = $offerRepository->findLikeTitleOrderById($search, $company);
             }
+            if (empty($offers)) {
+                $offers = $offerRepository->findBy(
+                    ['company' => $company],
+                    ['id' => 'DESC']
+                );
+                $noResult = true;
+            }
         } else {
             $offers = $offerRepository->findBy(
                 ['company' => $company],
@@ -72,6 +80,7 @@ class CompanyController extends AbstractController
             'offers' => $offers,
             'nbMatches' => $nbMatches,
             'form' => $form->createView(),
+            'noResult' => $noResult
         ]);
     }
 

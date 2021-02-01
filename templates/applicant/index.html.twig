@@ -8,6 +8,7 @@
         <h1 class="applicant_home_welcome_mainTitle">Bienvenue {{ applicant.firstname }} !</h1>
     </div>
     <h4 id="titleListOffer">Liste de vos Annonces :</h4>
+    {% if matchOffers %}
     <div class="center flex-column flex-md-row align-items-center">
         {{ form_start(searchForm) }}
         <label id="sortFormShape">Trier {{ form_widget(searchForm.sort) }}</label>
@@ -20,6 +21,10 @@
         <button id="index-container-button" class="btn-center btn btn-vertOze">Appliquer</button>
         {{ form_end(searchForm) }}
     </div>
+    {% endif %}
+    {% if noResult %}
+        <h5 class="text-center">Aucune annonce ne correspond à votre recherche</h5>
+    {% endif %}
     {% for matchOffer in matchOffers %}
         <div class="card container" id="announce-card-matchOffer">
             <div class="row-announce card-body flex-column flex-md-row align-items-center justify-content-between">
