@@ -46,14 +46,21 @@ class Company implements \Serializable
     /**
      * @ORM\Column(type="string", length=255)
      * @var string
-     * @Assert\NotBlank(groups={"company"}, message="Champ obligatoire")
-     * @Assert\Length(max="255", maxMessage="L'email ne doit pas exceder 255 caractères.")
+     * @Assert\NotBlank(groups={"company"})
+     * @Assert\Email(
+     *     groups={"company"},
+     *     message = "L'email '{{ value }}' n'est pas un email au format valide."
+     * )
+     * @Assert\Length(
+     *     groups={"company"},
+     *     max="255", maxMessage="L'email ne doit pas exceder 255 caractères.")
      */
     private $contactEmail;
 
     /**
      * @ORM\Column(type="string")
      * @var string
+     * @Assert\NotBlank(message="Veuillez saisir votre code APE.")
      * @Assert\Regex("/^([0-9]{4}[a-zA-Z]{1})$/",
      *     message="Veuillez saisir un numéro d'APE composé de 4 chiffres et une lettre")
      */
@@ -109,6 +116,7 @@ class Company implements \Serializable
     private $csr;
 
     /**
+     * @Assert\Valid
      * @ORM\OneToOne(targetEntity=User::class, inversedBy="company", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      * @var User

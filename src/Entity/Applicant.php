@@ -49,6 +49,7 @@ class Applicant
     private $city;
 
     /**
+     * @Assert\Valid
      * @ORM\OneToOne(targetEntity=User::class, inversedBy="applicant", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      * @var User
