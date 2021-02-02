@@ -26,11 +26,27 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/mention_legal", name="legalTerms")
+     * @Route("/mentions_legales", name="legalTerms")
      * @return Response
      */
     public function legalTerms(): Response
     {
         return $this->render('home/legalTerms.html.twig');
+    }
+
+    /**
+     * @Route("/tutoriel", name="tutoriel")
+     * @return Response
+     */
+    public function showTuto(): Response
+    {
+        /* @phpstan-ignore-next-line */
+        $company = $this->getUser()->getCompany();
+        /* @phpstan-ignore-next-line */
+        $applicant = $this->getUser()->getApplicant();
+        return $this->render('home/tutoriel.html.twig', [
+            'company' => $company,
+            'applicant' => $applicant,
+        ]);
     }
 }
