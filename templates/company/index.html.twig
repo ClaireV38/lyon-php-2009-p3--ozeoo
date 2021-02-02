@@ -4,7 +4,6 @@
 
 {% block body %}
     {% include '/company/_navbar.html.twig' %}
-
     <h1 class="text-center">Bienvenue {{ company.name }} ! </h1>
     {% if company.contactEmail is null %}
         <div class="container d-flex flex-column" id="company-home-body">
@@ -49,9 +48,9 @@
                 </div>
             </div>
         </div>
-        {% else %}
-                <div class="card-body">
-                    <h5 class="text-center"> Vous n'avez pas encore d'annonces</h5>
-                </div>
+    {% else %}
+        <div class="card-body">
+            <h5 class="text-center"> Vous n'avez pas encore d'annonces</h5>
+        </div>
     {% endfor %}
 {% endblock %}

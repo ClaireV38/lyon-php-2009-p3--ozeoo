@@ -5,6 +5,12 @@
 {% block body %}
     {% include '/applicant/_navbar.html.twig' %}
     <h1 class="text-center">Liste de vos annonces</h1>
+    <div id="index-container">
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button>Search</button>
+        {{ form_end(form) }}
+    </div>
     {% for matchOffer in matchOffers %}
         <div class="card container" id="announce-card-matchOffer">
             <div class="row-announce card-body flex-column flex-md-row align-items-center justify-content-between">
@@ -35,7 +41,6 @@
                 </div>
             </div>
         </div>
-
     {% else %}
         <h5 class="text-center"> vous n'avez pas encore d'annonces qui match vos compétences</h5>
     {% endfor %}
