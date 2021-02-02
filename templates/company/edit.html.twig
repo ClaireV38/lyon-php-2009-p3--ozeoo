@@ -1,15 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Company{% endblock %}
-
+{% block title %}Profil entreprise{% endblock %}
 {% block body %}
     {% include 'company/_navbar.html.twig' %}
-
-    <h1>Modifier son profil</h1>
+    {% if company.contactEmail is null %}
+        <h1>Créez votre profil</h1>
+    {% else %}
+        <h1>Modifiez votre profil</h1>
+    {% endif %}
     <div class="container" id="createCompanyForm">
         {{ include('company/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
     </div>
     {% block javascripts %}
+        {{ parent() }}
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {

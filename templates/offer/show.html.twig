@@ -4,6 +4,13 @@
 
 {% block body %}
     {% include '/company/_navbar.html.twig' %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('company_index') }}">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="{{ path("offer_applicants", {id: offer.id}) }}">{{ offer.title }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Détail</li>
+        </ol>
+    </nav>
 <div class="container offerDetail">
     <h1>{{ offer.title }}</h1>
     <div class="card startDateContractType ">

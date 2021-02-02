@@ -31,7 +31,6 @@ class Company implements \Serializable
      * @ORM\Column(type="string", length=255)
      * @var string
      * @Assert\NotBlank(message="Veuillez saisir votre nom.")
-     * g
      */
     private $name;
 
@@ -45,7 +44,7 @@ class Company implements \Serializable
     private $siretNb;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      * @var string
      * @Assert\NotBlank(groups={"company"})
      * @Assert\Email(

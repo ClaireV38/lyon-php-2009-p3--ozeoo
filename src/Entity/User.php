@@ -41,6 +41,7 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\NotBlank (message="Champ non rempli")
      */
     private $password;
 
