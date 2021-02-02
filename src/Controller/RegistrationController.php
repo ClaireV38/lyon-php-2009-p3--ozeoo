@@ -36,7 +36,7 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/register/company", name="app_register_company")
+     * @Route("/inscription/entreprise", name="app_register_company")
      * @param Request $request
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param GuardAuthenticatorHandler $guardHandler
@@ -89,7 +89,7 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/register/applicant", name="app_register_applicant")
+     * @Route("/inscription/candidat", name="app_register_applicant")
      * @param Request $request
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param GuardAuthenticatorHandler $guardHandler
@@ -145,7 +145,7 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/verify/email", name="app_verify_email")
+     * @Route("/email", name="app_verify_email")
      * @param Request $request
      * @param UserRepository $userRepository
      * @return Response
