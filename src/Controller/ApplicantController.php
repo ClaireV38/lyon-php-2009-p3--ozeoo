@@ -47,9 +47,6 @@ class ApplicantController extends AbstractController
         /* @phpstan-ignore-next-line */
         $applicant = $this->getUser()->getApplicant();
 
-        /* @phpstan-ignore-next-line */
-        $user = $this->getUser();
-
         $form = $this->createForm(ApplicantType::class, $applicant, [
             'validation_groups' => ['listSkill']
         ]);
