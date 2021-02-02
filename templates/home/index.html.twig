@@ -3,60 +3,58 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-        <div id="home-list-overall">
-            <div id="home-list-pictures">
-                    <a href="{{ path("home") }}">
-                    <img id="diversite1" src="{{ asset('build/images/logoNavBar_noBg.png') }}" alt="Image Ozé La Diversité avec logo">
-                    </a>
-                    <a href="{{ path("app_login") }}"><button type="button" class="btn btn-bleuOze btn-lg btn-block" id="home-list-buttons">Se Connecter</button></a>
+    <div class="container-fluid">
+        <div id="tutoImg">
+            <a href="{{ path("home") }}">
+                <img id="diversite1" src="{{ asset('build/images/logoNavBar_noBg.png') }}" alt="Image Ozé La Diversité avec logo">
+            </a>
+            <a href="{{ path("app_login") }}" id="linkTuto"><button type="button" class="btn btn-bleuOze btn-lg btn-block" id="home-list-buttons">Se Connecter</button></a>
+        </div>
+        <div id="welcomeTuto">
+            <h1 class="applicant_home_welcome_mainTitle">Bienvenue !</h1>
+        </div>
+
+        <div class="card" id="textTuto">
+            <p id="presentationTuto" class="card-text">  OzéO, est une plateforme digitale intuitive et inclusive, permettant de simplifier l’accès à l’emploi et de recruter différemment.
+                Notre but est de faire en sorte que des profils éloignés de l’emploi,
+                puissent rencontrer une opportunité grâce à un système de matching ciblant des compétences comportementales et des compétences techniques.
+                Faire savoir un savoir faire, recruter une personnalité, Ozéo permettra de rencontrer le candidat ou l’entreprise qui vous conviendra le mieux.</p>
+        </div>
+
+        <div id="tutoMobileVersion" class="card d-lg-none d-xl-none d-md-none">
+            <div id="titleTuto">
+                <h5 class="card-title candidate_welcome_title">Tutoriel sur l'utilisation du site</h5>
             </div>
-            <div class="container" id="home-list">
+            <ul id="listTuto" class="card-text">
+                <li>Créez votre Profil</li>
+                <li>Visualisez annonces et profils qui match les compétences
+                    et postulez !</li>
+                <li>Entrez en contact !</li>
+            </ul>
+        </div>
 
-                <div class="container applicant_index_tuto">
-                    <h1 class="applicant_home_welcome_mainTitle" >Bienvenue !</h1>
-                    <div class="card candidate_ozeoPresentationCard">
-                        <div class="card-body" id="presentationOze">
-                            <p class="card-text">  OzéO, est une plateforme digitale intuitive et inclusive, permettant de simplifier l’accès à l’emploi et de recruter différemment.
-                                Notre but est de faire en sorte que des profils éloignés de l’emploi,
-                                puissent rencontrer une opportunité grâce à un système de matching ciblant des compétences comportementales et des compétences techniques.
-                                Faire savoir un savoir faire, recruter une personnalité, Ozéo permettra de rencontrer le candidat ou l’entreprise qui vous conviendra le mieux.</p>
-                        </div>
-                    </div>
-                    <div class="card candidate_ozeoTutoCard" >
-                        <div class="card-body">
-                            <h5 class="card-title candidate_welcome_title">Tutoriel sur l'utilisation du site</h5>
-                            <ul class="card-text">
-                                <li>Créez votre Profil</li>
-                                <li>Visualisez annonces et profils qui match les compétences
-                                    et postulez !</li>
-                                <li>Entrez en contact !</li>
-                            </ul>
-                        </div>
-                    </div>
+        <div  class="d-sm-none d-none d-md-block d-lg-block d-xl-block">
+            <h1 class="applicant_home_welcome_mainTitle" >Le Concept</h1>
+            <div id="mainTuto" class="align-items-center">
+                <div id="circleTuto" class="card justify-content-center align-items-center">
+                    <p class="card-text">
+                        Créez votre Profil
+                    </p>
+                </div>
 
-                    <h1 class="applicant_home_welcome_mainTitle" >Le Concept</h1>
-                    <div class="container desktop_candidate_tuto">
-
-                        <div class="card desktop_candidate_tutoCard1 row align-self-center">
-                            <div class="card-body" id="buttonRedirectProfil">
-                                Créez votre Profil
-                            </div>
-                        </div>
-                        <img src="{{ asset('build/images/fleche.png') }}" alt="flèche">
-                        <div class="card desktop_candidate_tutoCard2">
-                            <div class="card-body">
-                                Visualisez annonces et profils qui match les compétences
-                                et postulez !
-                            </div>
-                        </div>
-                        <img src="{{ asset('build/images/fleche.png') }}" alt="flèche">
-                        <div class="card desktop_candidate_tutoCard3 row align-self-center">
-                            <div class="card-body" id="buttonRedirectProfil">
-                                Entrez en contact !
-                            </div>
-                        </div>
-                    </div>
+                <img id="arrowTuto" src="{{ asset('build/images/fleche.png') }}" alt="flèche">
+                <div id="circleTuto" class="card justify-content-center align-items-center">
+                    <p class="card-text" id="textTutoCircle">
+                        Visualisez annonces et profils qui match les compétences
+                        et postulez !</p>
+                </div>
+                <img id="arrowTuto" src="{{ asset('build/images/fleche.png') }}" alt="flèche">
+                <div id="circleTuto" class="card justify-content-center align-items-center">
+                    <p class="card-text">
+                        Entrez en contact !
+                    </p>
                 </div>
             </div>
         </div>
+    </div>
 {% endblock %}

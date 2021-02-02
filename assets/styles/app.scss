@@ -99,6 +99,14 @@ h1 {
     margin-top: 15px;
 }
 
+.offerDetail {
+    text-align: center;
+}
+
+.profilCompany {
+    text-align: center;
+}
+
 #people-box-card {
     display: flex;
     flex-direction: row;
@@ -333,6 +341,30 @@ input[name="search_company_offer[search]"] {
     display: none;
 }
 
+/* Tutoriel Index */
+#tutoMobileVersion {
+    margin-top: 20px;
+}
+
+#presentationTuto {
+    font-size: 1.25em;
+    text-align: center;
+}
+
+#linkTuto {
+    text-decoration: none;
+}
+
+#titleTuto {
+    padding: 5px;
+}
+
+#listTuto {
+    margin-bottom: 10px;
+    font-size: 1.15em;
+    display: none;
+}
+
 /*error messages */
 .errorMessage {
     flex-direction: column;
@@ -347,6 +379,15 @@ input[name="search_company_offer[search]"] {
     margin: 20px auto;
     width: 200px;
     justify-content: center;
+}
+
+/* Color Icon Skill Check */
+.fas.fa-check-circle {
+    color: $vertOze;
+}
+
+.fas.fa-times-circle {
+    color: $orangeOze;
 }
 
 @media (min-width: 768px) {
@@ -696,12 +737,27 @@ input[name="search_company_offer[search]"] {
         margin: 10px;
     }
 
+    .profilCompany {
+        margin-left: 100px;
+    }
+
+    #cardValues {
+        width: 80%;
+        align-self: center;
+    }
+
+    #cardDescription {
+        width: 80%;
+        align-self: center;
+    }
+
     .photoCompany {
         margin-bottom: 10px;
     }
 
     .photoVideoCompany {
         flex: 1;
+        margin-right: 50px;
     }
 
     .descriptionCompanyOfferDetail {
@@ -714,7 +770,7 @@ input[name="search_company_offer[search]"] {
         justify-content: space-around;
         margin-bottom: 10px;
         padding-top: 10px;
-        height: 100px;
+        height: 120px;
     }
 
     .offerDetail {
@@ -833,6 +889,49 @@ input[name="search_company_offer[search]"] {
         justify-content: space-around;
     }
 
+    /*Legal Terms*/
+    #legalTerms {
+        margin: auto;
+        width: 50%;
+    }
+
+    #applicantImg {
+        width: 560px;
+        height: 360px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 30px;
+    }
+
+    /* Tutoriel Index */
+    #tutoImg {
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: row;
+    }
+
+    #textTuto {
+        padding: 10px;
+        font-size: 15px;
+        width: 90%;
+        margin: auto;
+        height: auto;
+    }
+
+    #titleTuto {
+        margin-top: 20px;
+    }
+
+    #circleTuto {
+        border-radius: 100px;
+        width: 12rem;
+        height: 12rem;
+        padding: 10px;
+        margin-left: 40px;
+        margin-right: 40px;
+    }
+
     /*Reset password*/
     #reset-password-container {
         margin: auto;
@@ -863,6 +962,12 @@ input[name="search_company_offer[search]"] {
 
     #buttonDetails {
         display: flex;
+        flex-flow: row;
+        justify-content: center;
+    }
+
+    #arrowTuto {
+        width: 150px;
         justify-content: space-around;
     }
 
@@ -891,4 +996,13 @@ input[name="search_company_offer[search]"] {
         margin-right: auto;
         margin-bottom: 30px;
     }
+
+    #textTutoCircle {
+        text-align: center;
+    }
+
+    #presentationTuto {
+        font-size: 1.5em;
+    }
+
 }
