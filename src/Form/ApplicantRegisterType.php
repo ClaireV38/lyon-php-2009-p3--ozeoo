@@ -32,10 +32,17 @@ class ApplicantRegisterType extends AbstractType
                 'invalid_message' => 'Les deux mots de passe doivent correspondre.',
                 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
-                'first_options'  => ['label' => 'Mot de passe'],
+                'first_options'  => ['label' => 'Mot de passe',
+                    'constraints' => [
+                        new NotBlank(['message' => "Veuillez saisir un mot de passe."]),
+                        new Length(['min' => 6, 'minMessage' => "Le mot de passe doit contenir au moins 6 caractères."])
+                    ]
+                ],
                 'second_options' => ['label' => 'Confirmation du mot de passe'],
+                'mapped' => false,
             ])
             ->add('accepterLesTermes', CheckboxType::class, [
+                'label' => false,
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([

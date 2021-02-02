@@ -1,116 +1,47 @@
-# Project 3 - OzeLaDiversite
+# Project 3 - OzeLaDiversite : Test
 
-![Wild Code School](https://wildcodeschool.fr/wp-content/uploads/2019/01/logo_pink_176x60.png)
+Ce projet a pour base le Symfony website-skeleton.
 
-It's symfony website-skeleton project with some additional tools to validate code standards.
+### Concept
+Imaginé par le cabinet RH Ozé La Diversité, Ozeoo a été ensuite conçu par une équipe de jeunes développeurs issus de la Wild Code School.
+Ozeoo est une plateforme de mise en relation de profils atypiques et entreprises en vue d'un recrutement.
 
-* GrumPHP, as pre-commit hook, will run 2 tools when `git commit` is run :
-  
-    * PHP_CodeSniffer to check PSR12 
-    * PHPStan focuses on finding errors in your code (without actually running it)
-    * PHPmd will check if you follow PHP best practices
-     
-  If tests fail, the commit is canceled and a warning message is displayed to developper.
+Le site web contient des offres d'emploi basées sur des compétences. Si les compétences requises correspondent à celles du candidat, un "match" a lieu, et le candidat peut alors postuler à l'offre.
+Un match existe dès lors qu'au moins 5 soft skills (savoir-être) et 5 hard skills (savoir-faire) du candidat correspondent à celles exigées par l'entreprise.
 
-* Github Action as Continuous Integration will be run when a branch with active pull request is updated on github. It will run :
+### Installation
+1. Faire un `git clone https://github.com/WildCodeSchool/lyon-php-2009-p3--ozeladiversite`
+2. Copier la ligne suivante du fichier .env : `DATABASE_URL=mysql://db_user:db_password@127.0.0.1:3306/db_name`. A la racine, créer un nouveau fichier .env.local et y coller la ligne.
+Remplacer les valeurs comme suit :
+- `db_user` = nom d'utilisateur courant en base de données
+- `db_password` = mot de passe habituel
+- `db_name` = nom de la base de données (au choix)
+3. Lancer `composer install`
+4. Lancer `yarn install`
+5. Lancer `yarn encore dev`
+6. Lancer dans l'ordre suivant :
+   - `php bin/console doctrine:database:create`
+   - `php bin/console doctrine:migration:migrate`
+   - `php bin/console doctrine:fixtures:load`
 
-    * Tasks to check if vendor, .idea, env.local are not versionned,
-    * PHP_CodeSniffer, PHPStan and PHPmd with same configuration as GrumPHP.
+### Mise en route
+1. Lancer `symfony server:start` pour démarrer le serveur local
+2. Lancer `yarn run dev --watch` pour charger les assets
 
-## Getting Started
+### Credentials
+Pour tester les users, vous trouverez les emails et mots de passe du compte admin par défaut, d'un compte entreprise et d'un compte candidat dans les fixtures.                                    
+ 
+### Tests avancés
+Pour tester l'inscription candidat et entreprise, installer le composant Mailer en lançant : `composer require symfony/mailer`
+ 
+      Se rendre sur https://mailtrap.io/ 
+      Créer un compte ou s'y connecter
+      Cliquer sur l'icône "Settings"
+      Dans la liste déroulante sous "Intégration", sélectionner "Symfony"
+      Copier la ligne MAILER_DSN, l’intégrer dans env.local à cet endroit :
 
-### Prerequisites
-
-1. Check composer is installed
-2. Check yarn & node are installed
-
-### Install
-
-1. Clone this project
-2. Run `composer install`
-3. Run `yarn install`
-4. Run `yarn encore dev` to build assets
-
-### Working
-
-1. Run `symfony server:start` to launch your local php web server
-2. Run `yarn run dev --watch` to launch your local server for assets
-
-### Testing
-
-1. Run `.vendor/bin/phpcs` to launch PHP code sniffer
-2. Run `.vendor/bin/phpstan analyse src --level max` to launch PHPStan
-3. Run `.vendor/bin/phpmd src text phpmd.xml` to launch PHP Mess Detector
-3. Run `./node_modules/.bin/eslint assets/js` to launch ESLint JS linter
-3. Run `./node_modules/.bin/sass-lint -c sass-linter.yml -v` to launch Sass-lint SASS/CSS linter
-
-### Windows Users
-
-If you develop on Windows, you should edit you git configuration to change your end of line rules with this command :
-
-`git config --global core.autocrlf true`
-
-## Deployment
-
-![Img caprover](https://captain.phprover.wilders.dev/icon-512x512.png)
-
-To deploy on Cap Rover, follow [instructions in the manual](https://caprover.com/docs/get-started.html) and add, at least, two  *"Environmental Variables"* in *"App Configs"*  tab:
-
-* `APP_ENV` with `prod`/`dev` value
-* `DATABASE_URL` with the connection informations given by caprover when you create the related DB app.
-
-Caprover configuration files are : 
-
-* [captain-definition](https://github.com/WildCodeSchool/sf4-pjt3-starter-kit/blob/master/captain-definition) Caprover entry point
-* [Dockerfile](https://github.com/WildCodeSchool/sf4-pjt3-starter-kit/blob/master/Dockerfile) Web app configuration for Docker container
-* [docker-compose.yml](https://github.com/WildCodeSchool/sf4-pjt3-starter-kit/blob/master/docker-compose.yml) ...not use it's used 😅
-* [docker-entry.sh](https://github.com/WildCodeSchool/sf4-pjt3-starter-kit/blob/master/docker-entry.sh) shell instruction to execute when docker image is built
-* [nginx.conf](https://github.com/WildCodeSchool/sf4-pjt3-starter-kit/blob/master/nginx.conf) Nginx server configuration
-* [php.ini](https://github.com/WildCodeSchool/sf4-pjt3-starter-kit/blob/master/php.ini) Php configuration
-
-
-
-## Built With
-
-* [Symfony](https://github.com/symfony/symfony)
-* [GrumPHP](https://github.com/phpro/grumphp)
-* [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer)
-* [PHPStan](https://github.com/phpstan/phpstan)
-* [PHPMD](http://phpmd.org)
-* [ESLint](https://eslint.org/)
-* [Sass-Lint](https://github.com/sasstools/sass-lint)
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Authors
-
-Wild Code School trainers team
-
-## License
-
-MIT License
-
-Copyright (c) 2019 aurelien@wildcodeschool.fr
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-## Acknowledgments
+      ###> symfony/mailer ###
+      MAILER_DSN= lien donné par Mailtrap
+      MAILER_FROM_ADDRESS=hello@ozeoo.com
+      ###< symfony/mailer ###
 

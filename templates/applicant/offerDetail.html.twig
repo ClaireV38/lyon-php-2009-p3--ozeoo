@@ -1,0 +1,134 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail de l'offre{% endblock %}
+
+{% block body%}
+    {% include '/applicant/_navbar.html.twig' %}
+    {% if offer in applicant.offers %}
+    {% else %}
+        <div class="buttonPostule">
+            <a class="btn btn-vertOze" id="buttonPostuleOffer" href="{{ path('applicant_offer_apply' , {id: offer.id}) }}">Postuler</a>
+        </div>
+    {% endif %}
+        {% if offer.isAnonymous == false %}
+            <h1>{{ company.name }}</h1>
+            <div class="profilCompany">
+                <div class="photoVideoCompany">
+                    <div class="photoCompany">
+                        {% if company.picture is not empty %}
+                            <img src="{{asset('uploads/images/company/'~company.picture)}}" class="img-fluid rounded mx-auto d-block" alt="Responsive image">
+                        {% endif %}
+                    </div>
+                    <div class="videoCompany">
+                        {% if company.video is not empty %}
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe class="embed-responsive-item" src="{{ company.video }}"></iframe>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="descriptionCompanyOfferDetail" >
+                    <div class="card " style="margin-left: 10px">
+                        <div class="card-body descriptionCompanyOfferDetail">
+                            <h4 class="card-header text-center">Qui sommes-nous ?</h4>
+                            <p class="card-text" id="textOfferDetail">{{ company.description }}</p>
+                        </div>
+                    </div>
+                    <div class="card " style="margin-left: 10px">
+                        <div class="card-body descriptionCompanyOfferDetail">
+                            <h4 class="card-header text-center">Nos Valeurs</h4>
+                            <p class="card-text" id="textOfferDetail">{{ company.csr }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    <hr>
+        {% endif %}
+
+    <div class="offerDetail">
+        <h1 >{{ offer.title }}</h1>
+            <div class="card startDateContractType ">
+                <div class="startDateOfferDetail">
+                    <h3>Date de début : </h3>
+                        <h5>{{ offer.startDate |date("d/m/Y")}}</h5>
+                </div>
+                <div class="contractTypeOfferDetail">
+                    <h3>Type de Contrat : </h3>
+                        <h5>{{ offer.contractType }}</h5>
+                </div>
+                <div class="cityOfferDetail">
+                    <h3>Où ? : </h3>
+                    <h5>{{ offer.city }}</h5>
+                </div>
+                <div class="salaryOfferDetail">
+                    <h3>Salaire : </h3>
+                    <h5>{{ offer.salary }}</h5>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Description de l'offre :</h5>
+                    <p class="card-text">{{ offer.description }}</p>
+                </div>
+            </div>
+        <div class="col-md" id="skillsList">
+            <div class="card" id="list-HardSkill">
+                <div class="card-body" >
+                    <div class="card-header">
+                        <h5>Compétences Techniques</h5>
+                    </div>
+                    <div class="skillMatchApplicant">
+                        <ul style="list-style: none ">
+                            {% for hardSkill in applicant.hardSkills %}
+                                {% if hardSkill in matchHardSkills %}
+                                    <li><i class="fas fa-check-circle"></i> {{ hardSkill.name }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="skillOfferNotMatch">
+                        <ul style="list-style: none ">
+                            {% for hardSkill in offer.hardSkills %}
+                                {% if  hardSkill not in matchHardSkills %}
+                                    <li><i class="fas fa-times-circle" ></i> {{ hardSkill.name }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="card" id="list-HardSkill">
+                <div class="card-body" >
+                    <div class="card-header">
+                        <h5>Compétences Comportementales</h5>
+                    </div>
+                    <div class="skillMatchApplicant">
+                        <ul style="list-style: none ">
+                            {% for softSkill in applicant.softSkills %}
+                                {% if softSkill in matchSoftSkills %}
+                                    <li><i class="fas fa-check-circle"></i> {{ softSkill.name }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="skillOfferNotMatch">
+                        <ul style="list-style: none ">
+                            {% for softSkill in offer.softSkills %}
+                                {% if softSkill not in matchSoftSkills %}
+                                    <li><i class="fas fa-times-circle" ></i> {{ softSkill.name }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        {% if offer in applicant.offers %}
+            {% else %}
+            <div class="buttonPostule">
+                <a class="btn btn-vertOze" id="buttonPostuleOffer" href="{{ path('applicant_offer_apply' , {id: offer.id}) }}">Postuler</a>
+            </div>
+        {% endif %}
+{% endblock %}

@@ -49,6 +49,7 @@ class Applicant
     private $city;
 
     /**
+     * @Assert\Valid
      * @ORM\OneToOne(targetEntity=User::class, inversedBy="applicant", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      * @var User
@@ -76,7 +77,7 @@ class Applicant
     private $hardSkills;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Offer::class, mappedBy="applicant")
+     * @ORM\ManyToMany(targetEntity=Offer::class, mappedBy="applicants", cascade={"remove"})
      * @var Collection<Offer>
      */
     private $offers;
@@ -90,7 +91,7 @@ class Applicant
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Length(max="255", maxMessage="Le texte ne doit pas exceder 255 caractères.")
-     * @var string
+     * @var string|null
      */
     private $availability;
 
@@ -258,9 +259,23 @@ class Applicant
         return $this->availability;
     }
 
-    public function setAvailability(string $availability): self
+    public function setAvailability(?string $availability): self
     {
         $this->availability = $availability;
+
+        return $this;
+    }
+
+    public function getEmail(): string
+    {
+        /* @phpstan-ignore-next-line */
+        return $this->getUser()->getEmail();
+    }
+
+    public function setEmail(string $email): self
+    {
+        /* @phpstan-ignore-next-line */
+        $this->getUser()->setEmail($email);
 
         return $this;
     }

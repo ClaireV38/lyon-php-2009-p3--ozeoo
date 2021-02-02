@@ -2,30 +2,46 @@
 
 {% block title %}Offres Candidat{% endblock %}
 
-{% block body%}
+{% block body %}
     {% include '/applicant/_navbar.html.twig' %}
-        <h1 class="text-center">Liste de vos annonces</h1>
-        {% for matchOffer in matchOffers %}
-            <div class="card container" id="announce-card-matchOffer">
-                <div class="row-announce card-body flex-column flex-md-row align-items-center justify-content-between">
-                    <div class="d-inline-block mb-2 mr-md-2 w-100 mb-0 text-center">
-                        <h5 class="card-title" id="title-announce-desktop">{{ matchOffer.offer_title }}</h5>
-                        <p class="mb-0"> Publié le : {{ matchOffer.creation_date|date("d/m/Y") }}</p>
+    <h1 class="text-center">Liste de vos annonces</h1>
+    <div id="index-container">
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button>Search</button>
+        {{ form_end(form) }}
+    </div>
+    {% for matchOffer in matchOffers %}
+        <div class="card container" id="announce-card-matchOffer">
+            <div class="row-announce card-body flex-column flex-md-row align-items-center justify-content-between">
+                <div class="d-inline-block mb-2 mr-md-2 w-100 mb-0 text-center">
+                    <h5 class="card-title" id="title-announce-desktop">{{ matchOffer.title }}</h5>
+                    <p class="mb-0"> Publié le : {{ matchOffer.startDate|date("d/m/Y") }}</p>
+                    <p class="mb-0"> Entreprise : {{ matchOffer.company.name }}</p>
+                    {% if matchOffer in applicantOffers %}
+                        <div class="alert alert-bleuOze" id="messagePostule" role="alert">
+                            Vous avez déja postulé à cette offre
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="row-info-right w-100 flex-md-row">
+                    <div class="row-info-nb " id="textMatchOffer">
+                        <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> Type de contrat :
+                            <strong>{{ matchOffer.contractType }}</strong></p>
+                        <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> Début du contrat :
+                            <strong>{{ matchOffer.startDate|date("d/m/Y") }}</strong></p>
+                        <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> Lieu :
+                            <strong>{{ matchOffer.city }}</strong></p>
                     </div>
-                    <div class="row-info-right w-100 flex-md-row">
-                        <div class="row-info-nb " id="textMatchOffer">
-                            <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> Type de contrat :
-                                <strong>{{ matchOffer.contract_type }}</strong></p>
-                            <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> Début du contrat :
-                                <strong>{{ matchOffer.start_date|date("d/m/Y")}}</strong></p>
-                            <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> Lieu :
-                                <strong>{{ matchOffer.city}}</strong></p>
-                        </div>
-                        <div class="row-btn-offer d-md-inline-block flex justify-content-around">
-                            <a href="#" class="d-inline-block btn btn-offer btn-orangeOze d-inline-flex">Voir Annonce</a>
-                        </div>
+                    <div class="row-btn-offer d-md-inline-block flex justify-content-around">
+                        <a href="{{ path("offer_detail" ,
+                            {applicantId: app.user.applicant.id, companyId:matchOffer.company.id, offerId: matchOffer.id }) }}"
+                           class="d-inline-block btn btn-offer btn-orangeOze d-inline-flex">Voir Annonce</a>
                     </div>
                 </div>
             </div>
+        </div>
+    {% else %}
+        <h5 class="text-center"> vous n'avez pas encore d'annonces qui match vos compétences</h5>
     {% endfor %}
 {% endblock %}

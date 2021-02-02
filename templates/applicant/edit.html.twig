@@ -7,7 +7,11 @@
 
         <div class="applicantForm">
             <div class="infoForm">
-                <h2 class="titleApplicant">Créer ton profil</h2>
+                {% if app.user.firstname is defined %}
+                <h2 class="titleApplicant">Modifie ton profil</h2>
+                {% else %}
+                <h2 class="titleApplicant">Crée ton profil</h2>
+                {% endif %}
                 {{ form_start(form) }}
                 {{ form_row(form.firstname, {'label': 'Ton prénom'}) }}
                 {{ form_row(form.lastname, {'label': 'Ton nom'}) }}
@@ -28,7 +32,7 @@
                         <h5>Compétences Comportementales <small>(10 max)</small></h5>
                         {{ form_row(form.softSkills, {'label': ' '}) }}
                     </div>
-            </div>
+            </di
         </div>
     <div class="buttonApplicant">
         <input type='submit' class="btn btn-vertOze" value='Valider'>

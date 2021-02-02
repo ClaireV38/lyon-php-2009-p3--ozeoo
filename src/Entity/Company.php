@@ -31,7 +31,6 @@ class Company implements \Serializable
      * @ORM\Column(type="string", length=255)
      * @var string
      * @Assert\NotBlank(message="Veuillez saisir votre nom.")
-     * @Assert\Length(max="255", maxMessage="Le nom ne doit pas exceder 255 caractères.")
      */
     private $name;
 
@@ -45,16 +44,23 @@ class Company implements \Serializable
     private $siretNb;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      * @var string
      * @Assert\NotBlank(groups={"company"})
-     * @Assert\Length(max="255", maxMessage="L'email ne doit pas exceder 255 caractères.")
+     * @Assert\Email(
+     *     groups={"company"},
+     *     message = "L'email '{{ value }}' n'est pas un email au format valide."
+     * )
+     * @Assert\Length(
+     *     groups={"company"},
+     *     max="255", maxMessage="L'email ne doit pas exceder 255 caractères.")
      */
     private $contactEmail;
 
     /**
      * @ORM\Column(type="string")
      * @var string
+     * @Assert\NotBlank(message="Veuillez saisir votre code APE.")
      * @Assert\Regex("/^([0-9]{4}[a-zA-Z]{1})$/",
      *     message="Veuillez saisir un numéro d'APE composé de 4 chiffres et une lettre")
      */
@@ -110,6 +116,7 @@ class Company implements \Serializable
     private $csr;
 
     /**
+     * @Assert\Valid
      * @ORM\OneToOne(targetEntity=User::class, inversedBy="company", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      * @var User
@@ -123,7 +130,7 @@ class Company implements \Serializable
     private $city;
 
     /**
-     * @ORM\OneToMany(targetEntity=Offer::class, mappedBy="company")
+     * @ORM\OneToMany(targetEntity=Offer::class, mappedBy="company", cascade={"remove"})
      * @var Collection<Offer>
      */
     private $offers;
@@ -155,8 +162,9 @@ class Company implements \Serializable
         return $this->contactEmail;
     }
 
-    public function setContactEmail(string $contactEmail): self
+    public function setContactEmail(?string $contactEmail): self
     {
+        /* @phpstan-ignore-next-line */
         $this->contactEmail = $contactEmail;
 
         return $this;
@@ -339,5 +347,11 @@ class Company implements \Serializable
         list (
             $this->id,
             ) = unserialize($serialized, array('allowed_classes' => false));
+    }
+
+    public function getIsVerified(): ?bool
+    {
+        /* @phpstan-ignore-next-line */
+        return $this->getUser()->getIsVerified();
     }
 }
