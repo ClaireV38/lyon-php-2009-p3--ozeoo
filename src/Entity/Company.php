@@ -31,7 +31,6 @@ class Company implements \Serializable
      * @ORM\Column(type="string", length=255)
      * @var string
      * @Assert\NotBlank(message="Veuillez saisir votre nom.")
-     * g
      */
     private $name;
 
@@ -44,11 +43,10 @@ class Company implements \Serializable
      */
     private $siretNb;
 
-    /* @phpstan-ignore-next-line */
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      * @var string
-     * @Assert\NotBlank(groups={"company"})
+     * @Assert\NotBlank(groups={"company"}, message="Champ obligatoire")
      * @Assert\Length(max="255", maxMessage="L'email ne doit pas exceder 255 caractères.")
      */
     private $contactEmail;

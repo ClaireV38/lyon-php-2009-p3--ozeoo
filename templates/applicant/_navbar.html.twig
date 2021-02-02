@@ -10,10 +10,14 @@
             <li class="nav-item nav mt-3 mt-md-0">
                 <a id="buttonNav" class="btn btn-orangeOze" class="nav-link"href="{{ path('applicant_index') }}">Mes Annonces</a>
             </li>
+
+            <li class="nav-item nav mt-3 mt-md-0">
+                <a id="buttonNav" class="btn btn-bleuOze btn-appl-tuto" class="nav-link"href="{{ path('tutoriel') }}">Tutoriel</a>
+            </li>
         </ul>
         <div class="dropdown">
             <button class="btn btn-bleuOze dropdown-toggle" style="color: black" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{ user.email }}
+                {{ app.user.email }}
             </button>
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="{{ path("applicant_show", {'id': app.user.applicant.id}) }}"><i class="fas fa-user"></i> Profil</a>
