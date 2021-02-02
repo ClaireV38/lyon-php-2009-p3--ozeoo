@@ -59,6 +59,7 @@ class ApplicantController extends AbstractController
         $searchForm = $this->createForm(SearchApplicantOfferType::class);
         $searchForm->handleRequest($request);
 
+        $noResult = false;
         if ($searchForm->isSubmitted() && $searchForm->isValid()) {
             $searchTitle = $searchForm->getData()['searchTitle'];
             $searchCompany = $searchForm->getData()['searchCompany'];
@@ -70,7 +71,19 @@ class ApplicantController extends AbstractController
             }
             $field = $searchForm->getData()['sort'];
 
-            $matchOffersArray = $searchOffers->getSearchedOffers($applicant, $searchTitle, $searchCompany, $field);
+            $matchOffersArray = $searchOffers->getSearchedOffersForApplicant(
+                $applicant,
+                $searchTitle,
+                $searchCompany,
+                $field
+            );
+            if (empty($matchOffersArray)) {
+                $matchOffersArray = $applicantRepository->findMatchingOffersForApplicant(
+                /* @phpstan-ignore-next-line */
+                    $this->getUser()->getApplicant()
+                );
+                $noResult = true;
+            }
         } else {
             /* @phpstan-ignore-next-line */
             $matchOffersArray = $applicantRepository->findMatchingOffersForApplicant($this->getUser()->getApplicant());
@@ -86,6 +99,7 @@ class ApplicantController extends AbstractController
             'matchOffers' => $matchOffers,
             'applicantOffers' => $applicantOffers,
             'searchForm' => $searchForm->createView(),
+            'noResult' => $noResult
         ]);
     }
 
