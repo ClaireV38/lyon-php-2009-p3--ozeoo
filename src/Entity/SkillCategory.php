@@ -33,10 +33,15 @@ class SkillCategory
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Skill::class, mappedBy="skillCategory")
+     * @ORM\OneToMany(targetEntity=Skill::class, mappedBy="skillCategory", cascade={"remove"})
      * @var Collection<Skill>
      */
     private $skills;
+
+    public function __toString(): string
+    {
+        return $this->getName() ? : '';
+    }
 
     public function __construct()
     {

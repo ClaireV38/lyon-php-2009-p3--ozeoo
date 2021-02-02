@@ -47,6 +47,10 @@ class ApplicantController extends AbstractController
         /* @phpstan-ignore-next-line */
         $applicant = $this->getUser()->getApplicant();
 
+        $form = $this->createForm(ApplicantType::class, $applicant, [
+            'validation_groups' => ['listSkill']
+        ]);
+        $form->handleRequest($request);
 
         if (null == ($applicant->getFirstname())) {
              return $this->redirectToRoute('applicant_edit', [

@@ -4,8 +4,8 @@
     Un candidat a postulé à l'une de vos offre.
 {% endblock %}
     {% block mailContent%}
-        <p class="applicationMailParagraph"> {{ applicant.firstname }} a postulé à votre offre <b>{{ offer.title }}</b>:</p>
-        <p class="applicationMailParagraph"><b>sa mobilité</b> : {{ applicant.mobility }}</p>
-        <p class="applicationMailParagraph"><b>sa disponibilité</b> {{ applicant.availability }}</p>
-        <p class="applicationMailParagraph"> vous invitons à vous rendre sur le site OZEO pour plus de détails et pour contacter le candidat</p>
+        {{ applicant.firstname }} a postulé à votre offre <b>{{ offer.title }}</b>:
+        <b>sa mobilité</b> : {{ applicant.mobility }}
+        <b>sa disponibilité</b> {{ applicant.availability }}
+        vous invitons à vous rendre sur le site OZEO pour plus de détails et pour contacter le candidat
     {% endblock%}
