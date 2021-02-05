@@ -62,10 +62,8 @@ class Offer
     private $duration ;
 
     /**
-     * @Assert\GreaterThanOrEqual("today")
-     * @Assert\NotBlank(message="Il vous faut indiquer la date de début du contrat",
-     *     groups={"listSkill"}
-     *     )
+     * @Assert\GreaterThanOrEqual("today", groups={"listSkill"})
+     * @Assert\NotBlank(message="Il vous faut indiquer la date de début du contrat")
      * @ORM\Column(type="date")
      * @var \DateTimeInterface
      */
