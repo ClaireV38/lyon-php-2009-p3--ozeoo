@@ -121,7 +121,9 @@ class ApplicantController extends AbstractController
             throw new AccessDeniedException();
         }
 
-        $form = $this->createForm(ApplicantType::class, $applicant);
+        $form = $this->createForm(ApplicantType::class, $applicant, [
+            'validation_groups' => ['listSkill']
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
