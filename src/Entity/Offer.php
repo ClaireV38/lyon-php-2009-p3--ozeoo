@@ -24,7 +24,9 @@ class Offer
     private $id;
 
     /**
-     * @Assert\NotBlank(message="Il vous faut indiquer l'intitulé du poste")
+     * @Assert\NotBlank(message="Il vous faut indiquer l'intitulé du poste",
+     *     groups={"listSkill"}
+     *     )
      * @Assert\Length(max="150", maxMessage="L'intitulé ne doit pas faire plus de 150 caractères")
      * @ORM\Column(type="string", length=255)
      * @var string
@@ -32,7 +34,9 @@ class Offer
     private $title;
 
     /**
-     * @Assert\NotBlank(message="Il vous faut indiquer un type de contrat")
+     * @Assert\NotBlank(message="Il vous faut indiquer un type de contrat",
+     *     groups={"listSkill"}
+     *     )
      * @Assert\Length(max="50", maxMessage="L'intitulé ne doit pas faire plus de 50 caractères")
      * @ORM\Column(type="string", length=50)
      * @var string
@@ -41,21 +45,27 @@ class Offer
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
-     * @Assert\Length(max="50", maxMessage="L'intitulé ne doit pas faire plus de 50 caractères")
+     * @Assert\Length(max="50", maxMessage="L'intitulé ne doit pas faire plus de 50 caractères",
+     *     groups={"listSkill"}
+     *     )
      * @var string
      */
     private $salary;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Length(max="50", maxMessage="L'intitulé ne doit pas faire plus de 50 caractères")
+     * @Assert\Length(max="50", maxMessage="L'intitulé ne doit pas faire plus de 50 caractères",
+     *     groups={"listSkill"}
+     *     )
      * @var string
      */
     private $duration ;
 
     /**
      * @Assert\GreaterThanOrEqual("today")
-     * @Assert\NotBlank(message="Il vous faut indiquer la date de début du contrat")
+     * @Assert\NotBlank(message="Il vous faut indiquer la date de début du contrat",
+     *     groups={"listSkill"}
+     *     )
      * @ORM\Column(type="date")
      * @var \DateTimeInterface
      */
@@ -68,14 +78,18 @@ class Offer
     private $creationDate;
 
     /**
-     * @Assert\GreaterThanOrEqual("today")
+     * @Assert\GreaterThanOrEqual("today",
+     *     groups={"listSkill"}
+     *     )
      * @ORM\Column(type="date", nullable=true)
      * @var \DateTimeInterface|null
      */
     private $endDate;
 
     /**
-     * @Assert\NotBlank(message="Il vous faut indiquer une description du poste")
+     * @Assert\NotBlank(message="Il vous faut indiquer une description du poste",
+     *     groups={"listSkill"}
+     *     )
      * @ORM\Column(type="text")
      * @var string
      */
@@ -88,7 +102,9 @@ class Offer
     private $isAnonymous;
 
     /**
-     * @Assert\NotBlank(message="Il vous faut indiquer une ville")
+     * @Assert\NotBlank(message="Il vous faut indiquer une ville",
+     *     groups={"listSkill"}
+     *     )
      * @Assert\Length(max="50", maxMessage="L'intitulé ne doit pas faire plus de 50 caractères")
      * @ORM\Column(type="string", nullable=true)
      * @var string|null
@@ -148,7 +164,7 @@ class Offer
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    public function setTitle(?string $title): self
     {
         $this->title = $title;
 
@@ -160,7 +176,7 @@ class Offer
         return $this->contractType;
     }
 
-    public function setContractType(string $contractType): self
+    public function setContractType(?string $contractType): self
     {
         $this->contractType = $contractType;
 
@@ -232,7 +248,7 @@ class Offer
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 

@@ -92,7 +92,9 @@ class OfferController extends AbstractController
             throw new AccessDeniedException();
         }
 
-        $form = $this->createForm(OfferType::class, $offer);
+        $form = $this->createForm(OfferType::class, $offer, [
+            'validation_groups' => ['listSkill']
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
