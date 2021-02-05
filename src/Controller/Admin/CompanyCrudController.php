@@ -49,9 +49,9 @@ class CompanyCrudController extends AbstractCrudController
     {
         return [
             TextField::new('name', 'Nom de l\'entreprise'),
-            TextField::new('siretNb', 'Numéro Siret'),
+            TextField::new('siretNb', 'Numéro SIRET'),
             TextField::new('apeNb', 'Numéro APE'),
-            BooleanField::new('isVerified', 'Vérifié')->setFormTypeOption('disabled', 'disabled')
+            BooleanField::new('isVerified', 'Vérifiée')->setFormTypeOption('disabled', 'disabled')
         ];
     }
 
@@ -75,12 +75,12 @@ class CompanyCrudController extends AbstractCrudController
         $user->setIsVerified('1');
         $this->emi->persist($user);
         $this->emi->flush();
-        $this->addFlash('success', 'Entreprise Vérifié');
+        $this->addFlash('success', 'Entreprise Vérifiée');
 
         $email = (new Email())
             ->from(new Address($this->getParameter('mailer_from')));
         $email->to($user->getEmail());
-        $email->subject('Ozé La Diversité : Inscription confirmé');
+        $email->subject('Ozeoo : Inscription confirmée');
         $email->html($this->renderView('company/validateCompanyEmail.html.twig'));
         $this->mailer->send($email);
 
@@ -98,7 +98,7 @@ class CompanyCrudController extends AbstractCrudController
         $user->setIsVerified('0');
         $this->emi->persist($user);
         $this->emi->flush();
-        $this->addFlash('success', 'Entreprise non vérifié');
+        $this->addFlash('success', 'Entreprise non vérifiée');
 
             $url = $this->adminUrlGenerator
             ->setController(CompanyCrudController::class)

@@ -20,7 +20,7 @@ class SkillCategoryCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud->setEntityLabelInPlural('Catégories des compétences')
-            ->setEntityLabelInSingular('une catégories');
+            ->setEntityLabelInSingular('une catégorie');
     }
 
     public function configureFields(string $pageName): iterable
