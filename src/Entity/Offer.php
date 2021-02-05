@@ -29,7 +29,7 @@ class Offer
      *     )
      * @Assert\Length(max="150", maxMessage="L'intitulé ne doit pas faire plus de 150 caractères")
      * @ORM\Column(type="string", length=255)
-     * @var string
+     * @var string|null
      */
     private $title;
 
@@ -39,7 +39,7 @@ class Offer
      *     )
      * @Assert\Length(max="50", maxMessage="L'intitulé ne doit pas faire plus de 50 caractères")
      * @ORM\Column(type="string", length=50)
-     * @var string
+     * @var string|null
      */
     private $contractType;
 
@@ -91,7 +91,7 @@ class Offer
      *     groups={"listSkill"}
      *     )
      * @ORM\Column(type="text")
-     * @var string
+     * @var string|null
      */
     private $description;
 

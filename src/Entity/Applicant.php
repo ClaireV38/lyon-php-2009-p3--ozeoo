@@ -26,7 +26,7 @@ class Applicant
      * @Assert\NotBlank(message="Le champ est vide",
      *     groups={"listSkill"}
      *     )
-     * @var string
+     * @var string|null
      */
     private $firstname;
 
@@ -35,7 +35,7 @@ class Applicant
      * @Assert\NotBlank(message="Le champ est vide",
      *     groups={"listSkill"}
      *     )
-     * @var string
+     * @var string|null
      */
     private $lastname;
 
@@ -44,7 +44,7 @@ class Applicant
      * @Assert\NotBlank(message="Le champ est vide",
      *     groups={"listSkill"}
      *     )
-     * @var string
+     * @var string|null
      */
     private $personality;
 
@@ -90,7 +90,7 @@ class Applicant
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @var string
+     * @var string|null
      */
     private $mobility;
 
