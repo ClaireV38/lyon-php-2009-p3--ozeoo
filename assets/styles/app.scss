@@ -277,8 +277,8 @@ form[name="search_applicant_offer"] {
 
 .applicant_home_welcome_mainTitle {
     margin-top: 10px;
+    color: $orangeOze;
 }
-
 .applicant_index_tuto {
     display: flex;
     flex-direction: column;
@@ -399,6 +399,7 @@ form[name="search_applicant_matching"] {
 #presentationTuto {
     font-size: 1.25em;
     text-align: center;
+    padding: 20px;
 }
 
 #linkTuto {
@@ -412,7 +413,6 @@ form[name="search_applicant_matching"] {
 #listTuto {
     margin-bottom: 10px;
     font-size: 1.15em;
-    display: none;
 }
 
 /*error messages */
@@ -1037,6 +1037,14 @@ form[name="search_applicant_matching"] {
         justify-content: space-around;
     }
 
+    #textTutoCircle {
+        text-align: center;
+    }
+
+    #presentationTuto {
+        font-size: 1.5em;
+    }
+
     /*Legal Terms*/
     #legalTerms {
         margin: auto;
@@ -1061,13 +1069,5 @@ form[name="search_applicant_matching"] {
         margin-left: auto;
         margin-right: auto;
         margin-bottom: 30px;
-    }
-
-    #textTutoCircle {
-        text-align: center;
-    }
-
-    #presentationTuto {
-        font-size: 1.5em;
     }
 }
