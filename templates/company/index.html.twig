@@ -5,15 +5,16 @@
 {% block body %}
     {% include '/company/_navbar.html.twig' %}
     <h1 class="text-center">Bienvenue {{ company.name }} ! </h1>
+    <div class="container d-flex flex-column" id="company-home-body">
     {% if company.contactEmail is null %}
-        <div class="container d-flex flex-column" id="company-home-body">
-            <a class="d-block btn btn-bleuOze btn-lg align-content-center"
+
+            <a class="d-block btn btn-bleuOze btn-lg align-content-center mb-3"
                id="create-company-card" href="{{ path("company_edit", {id: app.user.company.id}) }}" role="button">
                 Créer son profil entreprise
             </a>
-        </div>
     {% endif %}
-    <h4 id="titleListOffer">Liste de vos Annonces :</h4>
+    <h4>Liste de vos Annonces :</h4>
+    </div>
     {% if offers %}
     <div class="center flex-column flex-md-row align-items-center">
         {{ form_start(form) }}
@@ -44,11 +45,11 @@
                         <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> Nb candidats :
                             <strong>{{ offer.applicants |length }}</strong></p>
                     </div>
-                    <div class="row-btn-offer d-md-inline-block flex justify-content-around">
+                    <div class="row-btn-offer d-md-inline-block d-flex flex-row justify-content-around">
                         <a href="{{ path("offer_applicants", {id: offer.id}) }}"
-                           class="d-inline-block btn btn-offer btn-orangeOze d-inline-flex">Voir les candidats</a>
+                           class="d-inline-block btn btn-offer btn-orangeOze d-inline-flex p-2 m-sm-1">Voir les candidats</a>
                         <a href="{{ path("offer_edit", {id: offer.id}) }}"
-                           class="d-inline-block btn btn-offer btn-bleuOze d-inline-flex">Editer</a>
+                           class="d-inline-block btn btn-offer btn-bleuOze d-inline-flex p-2 m-sm-1">Editer</a>
                     </div>
                 </div>
             </div>
