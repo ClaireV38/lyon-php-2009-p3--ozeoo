@@ -10,46 +10,56 @@
             <li class="breadcrumb-item active" aria-current="page">{{ offer.title }}</li>
         </ol>
     </nav>
-<div class="container d-block">
-
-    <h1 class="d-block text-center">Annonce</h1>
-
-    <div class="card container flex-column align-items-center text-center" id="announce-card-matches">
-        <div class="card-body">
-            <h5 class="card-title">{{ offer.title }}</h5>
-            <div>type de contrat : {{ offer.contractType }}</div>
-            <div>ville : {{ offer.city }}</div>
-            <div>date de création : {{ offer.creationDate|date("d/m/Y") }}</div>
-            <a href="{{ path("offer_show", {id: offer.id}) }}"
-               class="d-inline-block mt-2 btn btn-orangeOze d-inline-flex">Voir fiche</a>
+    <div class="container d-block">
+        <h1 class="d-block text-center">Annonce</h1>
+        <div class="card container flex-column align-items-center text-center" id="announce-card-matches">
+            <div class="card-body">
+                <h5 class="card-title">{{ offer.title }}</h5>
+                <div>type de contrat : {{ offer.contractType }}</div>
+                <div>ville : {{ offer.city }}</div>
+                <div>date de création : {{ offer.creationDate|date("d/m/Y") }}</div>
+                <a href="{{ path("offer_show", {id: offer.id}) }}"
+                   class="d-inline-block mt-2 btn btn-orangeOze d-inline-flex">Voir fiche</a>
+            </div>
         </div>
     </div>
-</div>
-
-
-<div class="container d-block">
-    <h1 class="text-center">Liste des candidats qui ont postulé</h1>
-    {% for applicant in applicants %}
-        <div class="card container" id="announce-card-matches">
-            <div class="row-announce card-body flex-column flex-md-row align-items-center justify-content-between">
-                <div class="d-inline-block flex-column justify-content-center mr-md-2 w-100 mb-0 text-center">
-                    <h5 class="card-title mb-0" id="title-announce-desktop">{{ applicant.firstname }}</h5>
-                </div>
-                <div class="row-info-right w-100 flex-md-grow-1 flex-md-row">
-                    <div class="row-info-nb d-md-inline-block flex-md-row align-items-center text-center">
-                        <p class="d-md-inline-block mr-md-1 mb-0" class="card-text"> nb hardskills :
-                            <strong>{{ applicant.match_hs }}</strong></p>
-                        <p class="d-md-inline-block mr-md-1 mb-0" class="card-text"> nb softskills :
-                            <strong>{{ applicant.match_ss }}</strong></p>
+    <div class="container d-block">
+        <h1 class="text-center">Liste des candidats qui ont postulé</h1>
+        {% if applicants %}
+        <div class="center flex-column flex-md-row align-items-center">
+            {{ form_start(form) }}
+            <div id="index-container-second">
+                <label id="sortFormShape">Chercher {{ form_widget(form.search) }}</label>
+            </div>
+            <button id="index-container-button" class="btn-center btn btn-vertOze mt-2 mt-md-0">Appliquer</button>
+            {{ form_end(form) }}
+        </div>
+        {% endif %}
+        {% if noResult %}
+            <h5 class="text-center">Aucune annonce ne correspond à votre recherche</h5>
+        {% endif %}
+        {% for applicant in applicants %}
+            <div class="card container mt-2" id="announce-card-matches">
+                <div class="row-announce card-body flex-column flex-md-row align-items-center justify-content-between">
+                    <div class="d-inline-block flex-column justify-content-center mr-md-2 w-100 mb-0 text-center">
+                        <h5 class="card-title mb-0" id="title-announce-desktop">{{ applicant.firstname }}</h5>
                     </div>
-                    <div class="row-btn-offer d-md-inline-block flex justify-content-around">
-                        <a href="{{ path("offer_applicant_show", { offerId: offer.id , applicantId: applicant.applicant_id}) }}"
-                           class="d-inline-block btn btn-offer btn-bleuOze d-inline-flex">Voir fiche</a>
+                    <div class="row-info-right w-100 flex-md-grow-1 flex-md-row">
+                        <div class="row-info-nb d-md-inline-block flex-md-row align-items-center text-center">
+                            <p class="d-md-inline-block mr-md-1 mb-0" class="card-text"> nb hardskills :
+                                <strong>{{ applicant.match_hs }}</strong></p>
+                            <p class="d-md-inline-block mr-md-1 mb-0" class="card-text"> nb softskills :
+                                <strong>{{ applicant.match_ss }}</strong></p>
+                        </div>
+                        <div class="row-btn-offer d-md-inline-block flex justify-content-around">
+                            <a href="{{ path("offer_applicant_show", { offerId: offer.id , applicantId: applicant.applicant_id}) }}"
+                               class="d-inline-block btn btn-offer btn-bleuOze d-inline-flex">Voir fiche</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    {% endfor %}
-</div>
-
+        {% else %}
+            <p class="text-center mt-3"> Aucun candidat</p>
+        {% endfor %}
+    </div>
 {% endblock %}

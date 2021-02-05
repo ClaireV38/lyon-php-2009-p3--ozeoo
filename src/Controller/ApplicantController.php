@@ -7,8 +7,10 @@ use App\Entity\Company;
 use App\Entity\Offer;
 use App\Entity\SkillCategory;
 use App\Form\ApplicantType;
+use App\Form\SearchApplicantOfferType;
 use App\Repository\ApplicantRepository;
 use App\Repository\SkillCategoryRepository;
+use App\Services\SearchOffers;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use App\Entity\User;
 use App\Repository\OfferRepository;
@@ -41,29 +43,58 @@ class ApplicantController extends AbstractController
     public function index(
         Request $request,
         ApplicantRepository $applicantRepository,
-        OfferRepository $offerRepository
+        OfferRepository $offerRepository,
+        SearchOffers $searchOffers
     ): Response {
         /* @phpstan-ignore-next-line */
         $applicant = $this->getUser()->getApplicant();
 
-        /* @phpstan-ignore-next-line */
-        $user = $this->getUser();
-
-        $form = $this->createForm(ApplicantType::class, $applicant);
+        $form = $this->createForm(ApplicantType::class, $applicant, [
+            'validation_groups' => ['listSkill']
+        ]);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($applicant);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('applicant_index');
+        if (null == ($applicant->getFirstname())) {
+             return $this->redirectToRoute('applicant_edit', [
+                'id' => $applicant->getId()
+             ]);
         }
 
         $applicantOffers = $applicant->getOffers();
 
-        /* @phpstan-ignore-next-line */
-        $matchOffersArray = $applicantRepository->findMatchingOffersForApplicant($this->getUser()->getApplicant());
+        $searchForm = $this->createForm(SearchApplicantOfferType::class);
+        $searchForm->handleRequest($request);
+
+        $noResult = false;
+        if ($searchForm->isSubmitted() && $searchForm->isValid()) {
+            $searchTitle = $searchForm->getData()['searchTitle'];
+            $searchCompany = $searchForm->getData()['searchCompany'];
+            if (empty($searchTitle)) {
+                $searchTitle = "";
+            }
+            if (empty($searchCompany)) {
+                $searchCompany = "";
+            }
+            $field = $searchForm->getData()['sort'];
+
+            $matchOffersArray = $searchOffers->getSearchedOffersForApplicant(
+                $applicant,
+                $searchTitle,
+                $searchCompany,
+                $field
+            );
+            if (empty($matchOffersArray)) {
+                $matchOffersArray = $applicantRepository->findMatchingOffersForApplicant(
+                /* @phpstan-ignore-next-line */
+                    $this->getUser()->getApplicant()
+                );
+                $noResult = true;
+            }
+        } else {
+            /* @phpstan-ignore-next-line */
+            $matchOffersArray = $applicantRepository->findMatchingOffersForApplicant($this->getUser()->getApplicant());
+        }
+
         $matchOffers = [];
         foreach ($matchOffersArray as $matchOffer) {
             $matchOffers[] = $offerRepository->findOneBy(['id' => $matchOffer['offer_id']]);
@@ -71,10 +102,10 @@ class ApplicantController extends AbstractController
 
         return $this->render('applicant/index.html.twig', [
             'applicant' => $applicant,
-            'form' => $form->createView(),
             'matchOffers' => $matchOffers,
             'applicantOffers' => $applicantOffers,
-            'user' => $user
+            'searchForm' => $searchForm->createView(),
+            'noResult' => $noResult
         ]);
     }
 
@@ -139,36 +170,33 @@ class ApplicantController extends AbstractController
      * @Route ("/{id}/offre", name="applicant_offer", methods={"GET"})
      * @param ApplicantRepository $applicantRepository
      * @param Applicant $applicant
+     * @param OfferRepository $offerRepository
      * @return Response
      */
-    public function showMatchOffers(ApplicantRepository $applicantRepository, Applicant $applicant): Response
-    {
-        if ($this->getUser() != $applicant->getUser()) {
-            throw new AccessDeniedException();
+    public function showMatchOffers(
+        ApplicantRepository $applicantRepository,
+        Applicant $applicant,
+        OfferRepository $offerRepository
+    ): Response {
+        $applicantOffers = $applicant->getOffers();
+
+        /* @phpstan-ignore-next-line */
+        $matchOffersArray = $applicantRepository->findMatchingOffersForApplicant($this->getUser()->getApplicant());
+        $matchOffers = [];
+        foreach ($matchOffersArray as $matchOffer) {
+            $matchOffers[] = $offerRepository->findOneBy(['id' => $matchOffer['offer_id']]);
         }
 
-        $offers = $applicant->getOffers();
-        $offerId = [];
-        foreach ($offers as $offer) {
-            $offerId[] = $offer->getId();
-        }
-        /* @phpstan-ignore-next-line */
-        $matchOffers = $applicantRepository->findMatchingOffersForApplicant($this->getUser()->getApplicant());
-        $offersInArray = [];
-        foreach ($matchOffers as $matchOffer) {
-            if (in_array($matchOffer['offer_id'], $offerId)) {
-                $offersInArray[] = $matchOffer;
-            }
-        }
         return $this->render('applicant/offer.html.twig', [
             'applicant' => $applicant,
             'matchOffers' => $matchOffers,
-            'offers' => $offersInArray
+            'applicantOffers' => $applicantOffers,
         ]);
     }
 
     /**
-     * @Route ("/{applicantId}/entreprise/{companyId}/offre/{offerId}", methods={"GET", "POST"}, name="offer_detail")
+     * @Route ("/{applicantId}/entreprise/{companyId}/offre/{offerId}",
+     *      methods={"GET", "POST"}, name="applicant_offer_detail")
      * @ParamConverter("applicant", class="App\Entity\Applicant", options={"mapping": {"applicantId": "id"}})
      * @ParamConverter("offer", class="App\Entity\Offer", options={"mapping": {"offerId": "id"}})
      * @ParamConverter("company", class="App\Entity\Company", options={"mapping": {"companyId": "id"}})

@@ -25,7 +25,8 @@ class Skill
      * @ORM\Column(type="string", length=255)
      * @Assert\Count(
      *      max = 10,
-     *      maxMessage = "Tu ne peux pas choisir plus de 10 compétences"
+     *      maxMessage = "Tu ne peux pas choisir plus de 10 compétences",
+     *      groups={"listSkill"}
      * )
      * @var string
      */
@@ -61,7 +62,6 @@ class Skill
      * @var Collection<Applicant>
      */
     private $hardOffers;
-
 
     public function __construct()
     {

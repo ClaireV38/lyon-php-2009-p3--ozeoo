@@ -49,6 +49,7 @@ class Applicant
     private $city;
 
     /**
+     * @Assert\Valid
      * @ORM\OneToOne(targetEntity=User::class, inversedBy="applicant", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      * @var User
@@ -261,6 +262,20 @@ class Applicant
     public function setAvailability(?string $availability): self
     {
         $this->availability = $availability;
+
+        return $this;
+    }
+
+    public function getEmail(): string
+    {
+        /* @phpstan-ignore-next-line */
+        return $this->getUser()->getEmail();
+    }
+
+    public function setEmail(string $email): self
+    {
+        /* @phpstan-ignore-next-line */
+        $this->getUser()->setEmail($email);
 
         return $this;
     }

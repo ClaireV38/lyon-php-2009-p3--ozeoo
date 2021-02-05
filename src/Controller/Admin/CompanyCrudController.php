@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\Address;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 
 class CompanyCrudController extends AbstractCrudController
 {
@@ -39,13 +38,20 @@ class CompanyCrudController extends AbstractCrudController
         return Company::class;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setEntityLabelInPlural('Liste des entreprises')
+            ->setDefaultSort(['user.isVerified' => 'ASC']);
+    }
+
     public function configureFields(string $pageName): iterable
     {
         return [
             TextField::new('name', 'Nom de l\'entreprise'),
             TextField::new('siretNb', 'Numéro Siret'),
             TextField::new('apeNb', 'Numéro APE'),
-            BooleanField::new('isVerified', 'Vérifié')->setFormTypeOption('disabled', 'disabled'),
+            BooleanField::new('isVerified', 'Vérifié')->setFormTypeOption('disabled', 'disabled')
         ];
     }
 
@@ -58,7 +64,8 @@ class CompanyCrudController extends AbstractCrudController
         return $actions
             // ...
             ->add(Crud::PAGE_EDIT, $activeCompany)
-            ->add(Crud::PAGE_EDIT, $desactivateCompany);
+            ->add(Crud::PAGE_EDIT, $desactivateCompany)
+            ->disable(Action::NEW);
     }
 
     public function activateCompany(AdminContext $context): RedirectResponse
@@ -98,13 +105,5 @@ class CompanyCrudController extends AbstractCrudController
             ->setAction('edit')
             ->generateUrl();
         return $this->redirect($url);
-    }
-
-    public function activateFilter(AdminContext $context): self
-    {
-        $company = $context->getEntity()->getInstance();
-        $user = $company->getUser();
-        $user->$company->getIsVerified();
-        return $this;
     }
 }
