@@ -11,18 +11,47 @@
 {% endblock %}
 {% block stylesheets %}
     {{ parent() }}
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.full.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/i18n/fr.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $('#offer_softSkills').select2({
-                maximumSelectionLength: 10
+                maximumSelectionLength: 10,
+                placeholder: '',
+                allowClear: true,
+                language: "fr",
             })
+
             $('#offer_hardSkills').select2({
-                maximumSelectionLength: 10
+                maximumSelectionLength: 10,
+                placeholder: '',
+                allowClear: true,
+                language: "fr",
             });
-        });</script>
+
+            $('form').on('submit', function(){
+                const minimum = 5;
+                const errorminHard = document.querySelector('#minErrorHard');
+                errorminHard.innerHTML = "";
+                const errorminSoft = document.querySelector('#minErrorSoft');
+                errorminSoft.innerHTML = "";
+
+                if($("#offer_hardSkills").select2('data').length<minimum){
+                    errorminHard.innerHTML = "Vous devez choisir 5 compétences minimum!";
+                    return false;
+                }else if($("#offer_softSkills").select2('data').length<minimum ) {
+                    errorminSoft.innerHTML = "Vous devez choisir 5 compétences minimum!";
+                    return false;
+                }else {
+                    return true;
+                }
+            })
+
+        });
+
+        </script>
 {% endblock %}

@@ -650,6 +650,9 @@
     "symfonycasts/verify-email-bundle": {
         "version": "v1.1.1"
     },
+    "ttskch/select2-bootstrap4-theme": {
+        "version": "1.5.2"
+    },
     "twig/extra-bundle": {
         "version": "v3.1.1"
     },

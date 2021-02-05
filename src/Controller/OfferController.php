@@ -203,12 +203,21 @@ class OfferController extends AbstractController
 
         $matchHardSkills = $skillRepository->findMatchHardSkills($offer, $applicant);
         $matchSoftSkills = $skillRepository->findMatchSoftSkills($offer, $applicant);
+
+        $skillCats = [];
+        foreach ($offer->getHardSkills() as $skill) {
+            if (!in_array($skill ->getSkillCategory(), $skillCats)) {
+                $skillCats[] = $skill->getSkillCategory();
+            }
+        }
+
         return $this->render('offer/applicant_show.html.twig', [
             'applicant' => $applicant,
             'matchHardSkills' => $matchHardSkills,
             'matchSoftSkills' => $matchSoftSkills,
             'offer' => $offer,
-            'company' => $company
+            'company' => $company,
+            'skillCats' => $skillCats,
         ]);
     }
 }

@@ -5,9 +5,11 @@ namespace App\Controller;
 use App\Entity\Applicant;
 use App\Entity\Company;
 use App\Entity\Offer;
+use App\Entity\SkillCategory;
 use App\Form\ApplicantType;
 use App\Form\SearchApplicantOfferType;
 use App\Repository\ApplicantRepository;
+use App\Repository\SkillCategoryRepository;
 use App\Services\SearchOffers;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use App\Entity\User;
@@ -143,6 +145,13 @@ class ApplicantController extends AbstractController
      */
     public function show(Applicant $applicant): Response
     {
+        $skillCats = [];
+        foreach ($applicant->getHardSkills() as $skill) {
+            if (!in_array($skill ->getSkillCategory(), $skillCats)) {
+                $skillCats[] = $skill->getSkillCategory();
+            }
+        }
+
         /* @phpstan-ignore-next-line */
         $user = $this->getUser();
 
@@ -153,6 +162,7 @@ class ApplicantController extends AbstractController
         return $this->render('applicant/show.html.twig', [
             'applicant' => $applicant,
             'user' => $user,
+            'skillCats' => $skillCats
         ]);
     }
 
@@ -204,8 +214,6 @@ class ApplicantController extends AbstractController
         Company $company,
         SkillRepository $skillRepository
     ): Response {
-
-
         $matchHardSkills = $skillRepository->findMatchHardSkills($offer, $applicant);
         $matchSoftSkills = $skillRepository->findMatchSoftSkills($offer, $applicant);
 
@@ -223,12 +231,20 @@ class ApplicantController extends AbstractController
             throw new AccessDeniedException();
         }
 
+        $skillCats = [];
+        foreach ($offer->getHardSkills() as $skill) {
+            if (!in_array($skill ->getSkillCategory(), $skillCats)) {
+                $skillCats[] = $skill->getSkillCategory();
+            }
+        }
+
         return $this->render('applicant/offerDetail.html.twig', [
             'applicant' => $applicant,
             'offer' => $offer,
             'company' => $company,
             'matchHardSkills' => $matchHardSkills,
             'matchSoftSkills' => $matchSoftSkills,
+            'skillCats' => $skillCats
         ]);
     }
 
