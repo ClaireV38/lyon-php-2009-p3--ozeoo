@@ -24,6 +24,7 @@ class CompanyController extends AbstractController
      * @Route("/index", name="company_index", methods={"GET","POST"})
      * @param Request $request
      * @param OfferRepository $offerRepository
+     * @param SearchOffers $searchOffers
      * @return Response
      */
     public function index(Request $request, OfferRepository $offerRepository, SearchOffers $searchOffers): Response

@@ -277,6 +277,7 @@ form[name="search_applicant_offer"] {
 
 .applicant_home_welcome_mainTitle {
     margin-top: 10px;
+    color: $orangeOze;
 }
 
 .applicant_index_tuto {
@@ -373,10 +374,6 @@ form[name="search_applicant_offer"] {
     margin-bottom: 10px;
 }
 
-.applicant_home_welcome_mainTitle {
-    display: none;
-}
-
 /*offer list applicant matching*/
 input[name="search_applicant_matching[search]"] {
     margin-left: 10px;
@@ -449,10 +446,6 @@ form[name="search_applicant_matching"] {
     .buttonEditCompany {
         padding-top: 50px;
         text-align: center;
-    }
-
-    .applicant_home_welcome_mainTitle {
-        color: $orangeOze;
     }
 
     #titleListOffer {
