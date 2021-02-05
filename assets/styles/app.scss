@@ -795,12 +795,10 @@ h1 {
 
     .skillMatchApplicant {
         padding-top: 20px;
-        padding-bottom: 20px;
         font-size: larger;
     }
 
     .skillOfferNotMatch {
-        padding-bottom: 20px;
         font-size: larger;
     }
 
@@ -890,5 +888,24 @@ h1 {
     .titleCategoryApplicant {
         padding-bottom: 10px;
         padding-top: 10px;
+    }
+
+    #skillCategoryName {
+        padding-bottom: 10px;
+        padding-top: 10px;
+    }
+
+    #skillCategoryNameOfferApplicant {
+        padding-bottom: 10px;
+    }
+
+    .legend {
+        display: flex;
+        justify-content: space-evenly;
+        padding-top: 10px;
+    }
+
+    .skillMatchApplicantOfferApplicant {
+        font-size: larger;
     }
 }
