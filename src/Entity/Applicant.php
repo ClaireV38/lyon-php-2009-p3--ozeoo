@@ -50,7 +50,7 @@ class Applicant
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
-     * @var string
+     * @var string|null
      */
     private $city;
 
@@ -255,7 +255,7 @@ class Applicant
         return $this->city;
     }
 
-    public function setCity(string $city): self
+    public function setCity(?string $city): self
     {
         $this->city = $city;
 

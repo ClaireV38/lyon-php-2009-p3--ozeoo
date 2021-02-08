@@ -454,6 +454,12 @@ form[name="search_applicant_matching"] {
     margin: 0;
 }
 
+// Required fields asterisk //
+label.required:before {
+    content: " *";
+    color: red;
+}
+
 @media (min-width: 768px) {
     .buttonHomeCompany {
         text-align: center;
@@ -1114,5 +1120,11 @@ form[name="search_applicant_matching"] {
 
     #presentationTuto {
         font-size: 1.5em;
+    }
+
+    // Required fields asterisk //
+    label.required:before {
+        content: "* ";
+        color: red;
     }
 }

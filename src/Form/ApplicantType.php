@@ -30,13 +30,21 @@ class ApplicantType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('firstname', TextType::class)
-            ->add('lastname')
+            ->add('firstname', TextType::class, [
+                'required' => true,
+            ])
+            ->add('lastname', TextType::class, [
+                'required' => true,
+            ])
             ->add('personality')
-            ->add('mobility', TextType::class)
-            ->add('city', TextType::class)
+            ->add('mobility', TextType::class, [
+                'required' => true,
+            ])
+            ->add('city', TextType::class, [
+                'required' => true,
+            ])
             ->add('availability', TextType::class, [
-                'required'   => false,
+                'required' => false,
             ])
             ->add('softSkills', EntityType::class, [
                 'multiple' => true,
@@ -76,7 +84,10 @@ class ApplicantType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Applicant::class,
-            'validation_groups' => ['listSkill']
+            'validation_groups' => ['listSkill'],
+                    'attr' => [
+        'novalidate' => 'novalidate', // comment me to reactivate the html5 validation!  🚥
+    ]
         ]);
     }
 }
