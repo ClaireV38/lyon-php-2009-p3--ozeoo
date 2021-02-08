@@ -3,7 +3,13 @@
 {% block title %}Création de compte entreprise{% endblock %}
 
 {% block body %}
-    {% include '/company/_navbar.html.twig' %}
+    <div id="home-list-pictures">
+        <div id="home-list-picture1">
+            <a href="{{ path("home") }}">
+                <img id="diversite1" src="{{ asset('build/images/logoNavBar_noBg.png') }}" alt="Image Ozé La Diversité avec logo">
+            </a>
+        </div>
+    </div>
     {% for flashError in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
