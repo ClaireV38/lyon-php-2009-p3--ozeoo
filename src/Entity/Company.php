@@ -92,7 +92,7 @@ class Company implements \Serializable
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @var string
+     * @var string|null
      */
     private $video;
 
@@ -227,7 +227,7 @@ class Company implements \Serializable
         return $this->video;
     }
 
-    public function setVideo(string $video): self
+    public function setVideo(?string $video): self
     {
         $this->video = $video;
 
