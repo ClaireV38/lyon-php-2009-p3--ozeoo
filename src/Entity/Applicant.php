@@ -23,22 +23,28 @@ class Applicant
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
-     * @Assert\NotBlank(message="Le champ est vide")
-     * @var string
+     * @Assert\NotBlank(message="Le champ est vide",
+     *     groups={"listSkill"}
+     *     )
+     * @var string|null
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
-     * @Assert\NotBlank(message="Le champ est vide")
-     * @var string
+     * @Assert\NotBlank(message="Le champ est vide",
+     *     groups={"listSkill"}
+     *     )
+     * @var string|null
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Assert\NotBlank(message="Le champ est vide")
-     * @var string
+     * @Assert\NotBlank(message="Le champ est vide",
+     *     groups={"listSkill"}
+     *     )
+     * @var string|null
      */
     private $personality;
 
@@ -84,13 +90,15 @@ class Applicant
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @var string
+     * @var string|null
      */
     private $mobility;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Length(max="255", maxMessage="Le texte ne doit pas exceder 255 caractères.")
+     * @Assert\Length(max="255", maxMessage="Le texte ne doit pas exceder 255 caractères.",
+     *     groups={"listSkill"}
+     *     )
      * @var string|null
      */
     private $availability;
@@ -112,7 +120,7 @@ class Applicant
         return $this->firstname;
     }
 
-    public function setFirstname(string $firstname): self
+    public function setFirstname(?string $firstname): self
     {
         $this->firstname = $firstname;
 
@@ -124,7 +132,7 @@ class Applicant
         return $this->lastname;
     }
 
-    public function setLastname(string $lastname): self
+    public function setLastname(?string $lastname): self
     {
         $this->lastname = $lastname;
 
@@ -136,7 +144,7 @@ class Applicant
         return $this->personality;
     }
 
-    public function setPersonality(string $personality): self
+    public function setPersonality(?string $personality): self
     {
         $this->personality = $personality;
 
@@ -187,7 +195,7 @@ class Applicant
         return $this->mobility;
     }
 
-    public function setMobility(string $mobility): self
+    public function setMobility(?string $mobility): self
     {
         $this->mobility = $mobility;
 

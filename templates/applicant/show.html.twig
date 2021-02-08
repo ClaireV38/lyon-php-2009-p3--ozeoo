@@ -28,8 +28,17 @@
                         </div>
                         <div class="skillMatchApplicant">
                             <ul style="list-style: none ">
-                                {% for hardSkill in applicant.hardSkills %}
-                                    <li class="list-group-item"> {{ hardSkill.name }}</li>
+                                {% for skillCat in skillCats %}
+                                    <div class="titleCategoryApplicant">
+                                        <strong>{{ skillCat.name }}</strong>
+                                    </div>
+                                        {% for hardSkill in applicant.hardSkills %}
+                                            {% if hardSkill.skillCategory is same as skillCat %}
+                                                <div class="skillGroup">
+                                                    <li class="list-group-item"> {{ hardSkill.name }}</li>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
                                 {% endfor %}
                             </ul>
                         </div>

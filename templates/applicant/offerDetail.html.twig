@@ -78,21 +78,36 @@
                     <div class="card-header">
                         <h5>Compétences Techniques</h5>
                     </div>
-                    <div class="skillMatchApplicant">
+                        <div class="legend">
+                            <p><i class="fas fa-check-circle"></i> Compétence Matchée</p>
+                            <p><i class="fas fa-times-circle"></i> Compétence Non-matchée</p>
+                        </div>
+                    <div class="skillMatchApplicantOfferApplicant">
                         <ul style="list-style: none ">
-                            {% for hardSkill in applicant.hardSkills %}
-                                {% if hardSkill in matchHardSkills %}
-                                    <li><i class="fas fa-check-circle"></i> {{ hardSkill.name }}</li>
-                                {% endif %}
-                            {% endfor %}
+                            {% for skillCat in skillCats %}
+                                <div id="skillCategoryName"><b>{{ skillCat.name }}</b></div>
+                                {% for hardSkill in applicant.hardSkills %}
+                                    {% if hardSkill in matchHardSkills %}
+                                        {% if hardSkill.skillCategory is same as skillCat %}
+                                            <div class="skillGroup">
+                                                <li><i class="fas fa-check-circle"></i> {{ hardSkill.name }}</li>
+                                            </div>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
                         </ul>
                     </div>
                     <div class="skillOfferNotMatch">
                         <ul style="list-style: none ">
-                            {% for hardSkill in offer.hardSkills %}
-                                {% if  hardSkill not in matchHardSkills %}
-                                    <li><i class="fas fa-times-circle" ></i> {{ hardSkill.name }}</li>
-                                {% endif %}
+                                {% for hardSkill in offer.hardSkills %}
+                                    {% if  hardSkill not in matchHardSkills %}
+                                        {% if hardSkill.skillCategory is same as skillCat %}
+                                            <div class="skillGroup">
+                                                <li><i class="fas fa-times-circle" ></i> {{ hardSkill.name }}</li>
+                                            </div>
+                                            {% endif %}
+                                        {% endif %}
+                                {% endfor %}
                             {% endfor %}
                         </ul>
                     </div>

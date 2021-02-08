@@ -4,10 +4,10 @@
 
 {% block body %}
     {% include '/applicant/_navbar.html.twig' %}
-    <div class="container applicant_index_tuto">
-        <h1 class="applicant_home_welcome_mainTitle">Bienvenue {{ applicant.firstname }} !</h1>
+    <div class="container">
+        <h1 class="text-center applicant_home_welcome_mainTitle">Bienvenue {{ applicant.firstname }} !</h1>
+        <h4>Liste de vos Annonces :</h4>
     </div>
-    <h4 id="titleListOffer">Liste de vos Annonces :</h4>
     {% if matchOffers %}
     <div class="center flex-column flex-md-row align-items-center">
         {{ form_start(searchForm) }}
@@ -18,7 +18,7 @@
         <div id="index-container-second">
             <label id="sortFormShape">Entreprise {{ form_widget(searchForm.searchCompany, { 'attr': { 'placeholder': 'chercher'} }) }}</label>
         </div>
-        <button id="index-container-button" class="btn-center btn btn-vertOze">Appliquer</button>
+        <button id="index-container-button" class="btn-center btn btn-vertOze mb-2">Appliquer</button>
         {{ form_end(searchForm) }}
     </div>
     {% endif %}
