@@ -4,7 +4,6 @@ namespace App\Form;
 
 use App\Entity\Applicant;
 use App\Entity\Skill;
-use App\Form\SkillType;
 use App\Entity\SkillCategory;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -60,14 +59,14 @@ class ApplicantType extends AbstractType
                 'class' => Skill::class,
                 'choice_label' => 'name',
 
-        ])
+            ])
             ->add('hardSkills', EntityType::class, [
                 'multiple' => true,
                 'query_builder' => function (EntityRepository $er) {
-                        return $er->createQueryBuilder('s')
-                            ->join('s.skillCategory', 'c')
-                            ->where('c.isHard = true')
-                            ->orderBy('s.name', 'ASC');
+                    return $er->createQueryBuilder('s')
+                        ->join('s.skillCategory', 'c')
+                        ->where('c.isHard = true')
+                        ->orderBy('s.name', 'ASC');
                 },
                 'group_by' => function ($skill) {
                     return $skill->getSkillCategory()->getName();
@@ -84,10 +83,7 @@ class ApplicantType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Applicant::class,
-            'validation_groups' => ['listSkill'],
-                    'attr' => [
-        'novalidate' => 'novalidate', // comment me to reactivate the html5 validation!  🚥
-    ]
+            'validation_groups' => ['listSkill']
         ]);
     }
 }
