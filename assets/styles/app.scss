@@ -399,7 +399,7 @@ form[name="search_applicant_matching"] {
 
 #presentationTuto {
     font-size: 1.25em;
-    text-align: center;
+    text-align: justify;
     padding: 20px;
 }
 
@@ -452,6 +452,12 @@ form[name="search_applicant_matching"] {
 
 #buttonNav2Applicant {
     margin: 0;
+}
+
+/* Legal Terms */
+
+#legalImg {
+    display: none;
 }
 
 @media (min-width: 768px) {
@@ -892,9 +898,9 @@ form[name="search_applicant_matching"] {
     }
 
     #buttonPostuleOffer {
-        padding: 25px;
+        padding: 20px;
         font-size: x-large;
-        width: 400px;
+        width: 200px;
     }
 
     /*offer list applicant matching*/
@@ -1058,6 +1064,7 @@ form[name="search_applicant_matching"] {
     #legalTerms {
         margin: auto;
         width: 50%;
+        text-align: justify;
     }
 
     #legalTermsTitle {
@@ -1066,9 +1073,10 @@ form[name="search_applicant_matching"] {
 
     #legalImg {
         margin-top: 30px;
-        margin-bottom: 30px;
+        margin-bottom: 50px;
         width: 910px;
         height: 370px;
+        display: block;
     }
 
     #applicantImg {

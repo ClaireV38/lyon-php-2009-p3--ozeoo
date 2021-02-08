@@ -21,7 +21,7 @@ class SearchApplicantOfferType extends AbstractType
                 'label' => false,
                 'choices' => [
                     'Début de mission' => 'startDate',
-                    'Créé le' => 'creationDate',
+                    'Créée le' => 'creationDate',
                     'Date d\'expiration' => 'endDate',
                     'Titre de l\'annonce' => 'title',
                     'Entreprise' => 'company',

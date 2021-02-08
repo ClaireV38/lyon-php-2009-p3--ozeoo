@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
@@ -26,7 +27,7 @@ class CompanyType extends AbstractType
                 'label' => 'Nom'
             ])
             ->add('siretNb', TextType::class, [
-                'label' => 'Numéro de siret'
+                'label' => 'Numéro de SIRET'
             ])
             ->add('contactEmail', EmailType::class, [
                 'label' => 'Email de contact'
@@ -35,7 +36,7 @@ class CompanyType extends AbstractType
                 'label' => 'Numéro APE'
             ])
             ->add('pictureFile', VichImageType::class, [
-                'label' => 'Photo de l\'entreprise (formats autorisés: png, jpeg, jpg)',
+                'label' => 'Photo de l\'entreprise (formats autorisés : PNG, JPEG, JPG)',
                 'required'      => false,
                 'allow_delete' => true,
                 'attr' => [
@@ -54,7 +55,8 @@ class CompanyType extends AbstractType
                     ]
                 ])
             ->add('video', TextType::class, [
-                'label' => 'Vidéo de présentation de l\'entreprise'
+                'label' => 'Vidéo de présentation de l\'entreprise',
+                'required' => false,
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description de l\'entreprise',
@@ -66,9 +68,6 @@ class CompanyType extends AbstractType
             ->add('csr', TextareaType::class, [
                 'required' => false,
                 'label' => 'Responsabilité Sociale de l\'Entreprise'
-            ])
-            ->add('video', TextType::class, [
-                'label' => 'Vidéo de présentation de l\'entreprise'
             ]);
     }
 
