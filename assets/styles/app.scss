@@ -454,6 +454,11 @@ form[name="search_applicant_matching"] {
     margin: 0;
 }
 
+// Rename button Browse //
+.custom-file-label::after {
+    content: 'Parcourir'!important;
+}
+
 @media (min-width: 768px) {
     .buttonHomeCompany {
         text-align: center;
@@ -1116,6 +1121,7 @@ form[name="search_applicant_matching"] {
         font-size: 1.5em;
     }
 
+    // Rename button Browse //
     .custom-file-label::after {
         content: 'Parcourir'!important;
     }
