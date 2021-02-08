@@ -235,7 +235,6 @@ form[name="search_applicant_offer"] {
     align-items: center;
     justify-content: space-between;
     margin: auto;
-    width: 80%;
 }
 
 /* Navbar */
@@ -312,11 +311,6 @@ form[name="search_applicant_offer"] {
 
 /* Offer form */
 
-.jobOffer {
-    width: 50%;
-    margin: auto;
-}
-
 .btn_validate {
     background-color: $vertOze;
     margin: auto;
@@ -327,6 +321,10 @@ form[name="search_applicant_offer"] {
 .offerSkillsTitle {
     margin-top: 50px;
     text-align: center;
+}
+
+.jobOffer {
+    margin: 0 3px;
 }
 
 /*login*/
@@ -575,7 +573,7 @@ form[name="search_applicant_matching"] {
         align-items: baseline;
         justify-content: space-between;
         margin: auto;
-        width: 50%;
+        width: 60%;
     }
 
     /* Desktop index company style */
@@ -711,7 +709,6 @@ form[name="search_applicant_matching"] {
         align-items: baseline;
         justify-content: space-between;
         margin: auto;
-        width: 60%;
     }
 
     /*login*/
@@ -740,6 +737,16 @@ form[name="search_applicant_matching"] {
     #loginPageButtons {
         padding-left: 15px;
         padding-right: 15px;
+    }
+
+    .jobOffer {
+        width: 50%;
+        margin: auto;
+    }
+
+    .offer-skill-selection {
+        width: 50%;
+        margin: auto;
     }
 
     /* Company Registration */
@@ -899,7 +906,6 @@ form[name="search_applicant_matching"] {
 
     /*offer list applicant matching*/
     #announce-card-matches {
-        width: 90%;
         margin-top: 15px;
     }
 
