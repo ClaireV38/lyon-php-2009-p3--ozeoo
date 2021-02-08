@@ -50,6 +50,8 @@ class Applicant
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
+     * @Assert\NotBlank(message="Le champ est vide",
+     *     groups={"listSkill"})
      * @var string|null
      */
     private $city;
@@ -90,6 +92,8 @@ class Applicant
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Assert\NotBlank(message="Le champ est vide",
+     *     groups={"listSkill"})
      * @var string|null
      */
     private $mobility;
