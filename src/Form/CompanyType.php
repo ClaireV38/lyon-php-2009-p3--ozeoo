@@ -55,6 +55,7 @@ class CompanyType extends AbstractType
                 ])
             ->add('video', TextType::class, [
                 'label' => 'Lien vidéo Youtube'
+                'required'      => false,
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description de l\'entreprise',
