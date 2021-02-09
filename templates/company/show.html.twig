@@ -26,6 +26,9 @@
                 <iframe class="embed-responsive-item" src="{{ company.video }}"></iframe>
             </div>
         {% endif %}
+        <div class="buttonEditCompany">
+            <a id="buttonNav" class="btn btn-orangeOze" href="{{ path('company_edit', {id: app.user.company.id}) }}">Modifier mon Profil</a>
+        </div>
     </div>
 
     <div class="container d-none d-md-block" id="companyDetailsDesktop">
@@ -57,7 +60,7 @@
                             </div>
                         </div>
                         <div class="buttonEditCompany">
-                            <a  id="buttonNav" class="btn btn-orangeOze" class="nav-link" href="{{ path('company_edit', {id: app.user.company.id}) }}">Modifier mon Profil</a>
+                            <a id="buttonNav" class="btn btn-orangeOze" href="{{ path('company_edit', {id: app.user.company.id}) }}">Modifier mon Profil</a>
                         </div>
                     </div>
                 {% endif %}
