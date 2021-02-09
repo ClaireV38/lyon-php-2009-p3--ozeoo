@@ -39,6 +39,9 @@ class CompanyType extends AbstractType
                 'label' => 'Photo de l\'entreprise (formats autorisés : PNG, JPEG, JPG)',
                 'required'      => false,
                 'allow_delete' => true,
+                'delete_label' => 'Ne pas afficher d\'image',
+                'image_uri' => false,
+                'download_uri' => false,
                 'attr' => [
                     'accept' => "image/jpeg, image/png",
                     'placeholder' => "Choisir votre photo"
@@ -55,8 +58,8 @@ class CompanyType extends AbstractType
                     ]
                 ])
             ->add('video', TextType::class, [
-                'label' => 'Vidéo de présentation de l\'entreprise',
-                'required' => false,
+                'label' => 'Lien vidéo Youtube',
+                'required' => false
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description de l\'entreprise',
@@ -68,8 +71,7 @@ class CompanyType extends AbstractType
             ->add('csr', TextareaType::class, [
                 'required' => false,
                 'label' => 'Responsabilité Sociale de l\'Entreprise'
-            ])
-            ;
+            ]);
     }
 
     /**

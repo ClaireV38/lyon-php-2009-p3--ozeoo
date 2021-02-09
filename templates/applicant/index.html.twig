@@ -37,20 +37,21 @@
                             Vous avez déja postulé à cette offre
                         </div>
                     {% endif %}
-                </div>
-                <div class="row-info-right w-100 flex-md-row">
-                    <div class="row-info-nb " id="textMatchOffer">
-                        <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> Type de contrat :
-                            <strong>{{ matchOffer.contractType }}</strong></p>
-                        <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> Début du contrat :
-                            <strong>{{ matchOffer.startDate|date("d/m/Y") }}</strong></p>
-                        <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> Lieu :
-                            <strong>{{ matchOffer.city }}</strong></p>
                     </div>
-                    <div class="row-btn-offer d-md-inline-block flex justify-content-around">
-                        <a href="{{ path("applicant_offer_detail" ,
-                            {applicantId: app.user.applicant.id, companyId:matchOffer.company.id, offerId: matchOffer.id }) }}"
-                           class="d-inline-block btn btn-offer btn-orangeOze d-inline-flex">Voir Annonce</a>
+                    <div class="row-info-right w-100 flex-md-row">
+                        <div class="row-info-nb " id="textMatchOffer">
+                            <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> Type de contrat :
+                                <strong>{{ matchOffer.contractType }}</strong></p>
+                            <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> Début du contrat :
+                                <strong>{{ matchOffer.startDate|date("d/m/Y") }}</strong></p>
+                            <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> Lieu :
+                                <strong>{{ matchOffer.city }}</strong></p>
+                        </div>
+                        <div class="row-btn-offer d-md-inline-block flex justify-content-around">
+                            <a href="{{ path("applicant_offer_detail" ,
+                                {applicantId: app.user.applicant.id, companyId:matchOffer.company.id, offerId: matchOffer.id }) }}"
+                               class="d-inline-block btn btn-offer btn-orangeOze d-inline-flex">Voir Annonce</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -59,4 +60,5 @@
         <br>
         <h5 class="text-center">Vous n'avez pas encore d'annonces matchant vos compétences.</h5>
     {% endfor %}
+    </div>
 {% endblock %}
