@@ -54,6 +54,7 @@ class CompanyType extends AbstractType
                     ]
                 ])
             ->add('video', TextType::class, [
+                'required'      => false,
                 'label' => 'Vidéo de présentation de l\'entreprise'
             ])
             ->add('description', TextareaType::class, [
@@ -67,9 +68,7 @@ class CompanyType extends AbstractType
                 'required' => false,
                 'label' => 'Responsabilité Sociale de l\'Entreprise'
             ])
-            ->add('video', TextType::class, [
-                'label' => 'Vidéo de présentation de l\'entreprise'
-            ]);
+            ;
     }
 
     /**
