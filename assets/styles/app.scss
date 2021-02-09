@@ -778,7 +778,6 @@ form[name="search_applicant_matching"] {
         font-size: 20px;
     }
 
-
     /* New Applicant profile */
     .applicantForm{
         display: flex;
@@ -1130,8 +1129,8 @@ form[name="search_applicant_matching"] {
     // Rename button Browse //
     .custom-file-label::after {
         content: 'Parcourir'!important;
-  }
-  
+    }
+
     label.required:after {
         content: " *";
         color: red;
