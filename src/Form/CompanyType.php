@@ -38,6 +38,9 @@ class CompanyType extends AbstractType
                 'label' => 'Photo de l\'entreprise (formats autorisés: png, jpeg, jpg)',
                 'required'      => false,
                 'allow_delete' => true,
+                'delete_label' => 'Ne pas afficher d\'image',
+                'image_uri' => false,
+                'download_uri' => false,
                 'attr' => [
                     'accept' => "image/jpeg, image/png",
                     'placeholder' => "Choisir votre photo"
