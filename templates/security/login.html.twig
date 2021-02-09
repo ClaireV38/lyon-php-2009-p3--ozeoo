@@ -4,28 +4,19 @@
 
 {% block body %}
 
-        <div id="home-list-pictures">
-            <div id="home-list-picture1">
-                <a href="{{ path("home") }}">
-                    <img id="diversite1" src="{{ asset('build/images/logoNavBar_noBg.png') }}" alt="Image Ozé La Diversité avec logo">
-                </a>
-            </div>
-        </div>
-        <div class="main-row" id="formLoginPhoto">
-            <div>
-            <form class="login-form" method="post">
-                {% if error %}
-                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                {% endif %}
-
-                {% if app.user %}
-                    <div class="mb-3">
-                        Vous êtes connecté(e) en tant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
-                    </div>
-                {% endif %}
-
-                <h1 class="h3 mb-3 font-weight-normal">Se connecter</h1>
-                <div id="loginMobile">
+<div id="home-list-pictures">
+    <div id="home-list-picture1">
+        <a href="{{ path("home") }}">
+            <img id="diversite1" src="{{ asset('build/images/logoNavBar_noBg.png') }}" alt="Image Ozé La Diversité avec logo">
+        </a>
+    </div>
+</div>
+    <div class="main-row" id="formLoginPhoto">
+        <form class="login-form" method="post">
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+            <h1 class="h3 mb-3 font-weight-normal">Se connecter</h1>
                 <div class="form-group">
                     <label for="inputEmail">Adresse email</label>
                     <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control"
@@ -38,20 +29,18 @@
                     <input type="hidden" name="_csrf_token"
                            value="{{ csrf_token('authenticate') }}">
                 </div>
-                <a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié</a>
-                <a href="{{ path('app_login') }}">
-                    <button id="loginPageButtons" class="btn btn-lg btn-vertOze btn-center btn-235px" type="submit">
-                        Se connecter
-                    </button>
-                </a>
-            </form>
+                    <a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié</a>
+                    <a href="{{ path('app_login') }}">
+                        <button id="loginPageButtons" class="btn btn-lg btn-vertOze btn-center btn-235px" type="submit">
+                            Se connecter
+                        </button>
+                    </a>
                 <div class="buttonInscription">
                     <a id="loginPageButtons" href="{{ path('app_register_applicant') }}" class="btn btn-lg btn-bleuOze btn-center btn-235px" style="color: black">Inscription candidat</a>
                     <a id="loginPageButtons" href="{{ path('app_register_company') }}" class="btn btn-lg btn-orangeOze btn-center btn-235px" >Inscription entreprise</a>
                 </div>
-        </div>
+        </form>
             <img id="diversityBig1" src="{{ asset('build/images/diversityBig1.jpg') }}" height="350" width="500"
                  class="ml-2" alt="Montage d'images de différentes personnes représentant la diversité">
-        </div>
     </div>
 {% endblock %}

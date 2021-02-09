@@ -44,7 +44,7 @@ class Company implements \Serializable
     private $siretNb;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,  nullable=true)
      * @var string
      * @Assert\NotBlank(groups={"company"})
      * @Assert\Email(
@@ -92,14 +92,14 @@ class Company implements \Serializable
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @var string
+     * @var string|null
      */
     private $video;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @var string
-     * @Assert\NotBlank(groups={"company"})
+     * @var string|null
+     * @Assert\NotBlank(message="Veuillez saisir une description", groups={"company"})
      */
     private $description;
 
@@ -227,7 +227,7 @@ class Company implements \Serializable
         return $this->video;
     }
 
-    public function setVideo(string $video): self
+    public function setVideo(?string $video): self
     {
         $this->video = $video;
 
@@ -239,7 +239,7 @@ class Company implements \Serializable
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 
