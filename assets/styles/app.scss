@@ -342,8 +342,7 @@ form[name="search_applicant_offer"] {
 /* Company Form */
 #companyCreateFormButton {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    margin: auto;
 }
 
 /*flex*/
@@ -468,15 +467,31 @@ form[name="search_applicant_matching"] {
     display: none;
 }
 
+.login-form {
+    padding: 5px;
+}
+
+#applicantImg {
+    display: none;
+}
+
+#company-register {
+    padding: 5px;
+}
+
+.navbar-nav.mr-auto {
+    padding: 0;
+}
+
+.buttonEditCompany {
+    padding-top: 50px;
+    text-align: center;
+}
+
 @media (min-width: 768px) {
     .buttonHomeCompany {
         text-align: center;
         margin-top: 100px;
-    }
-
-    .buttonEditCompany {
-        padding-top: 50px;
-        text-align: center;
     }
 
     #titleListOffer {
@@ -977,9 +992,9 @@ form[name="search_applicant_matching"] {
     }
 
     #applicantImg {
+        display: block;
         width: 560px;
         height: 360px;
-        display: block;
         margin-left: auto;
         margin-right: auto;
         margin-bottom: 30px;
@@ -1085,15 +1100,6 @@ form[name="search_applicant_matching"] {
         height: 370px;
     }
 
-    #applicantImg {
-        width: 560px;
-        height: 360px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 30px;
-    }
-
     .skillGroup {
         margin-left: 30px;
     }
@@ -1128,5 +1134,10 @@ form[name="search_applicant_matching"] {
 
     #presentationTuto {
         font-size: 1.5em;
+    }
+
+    label.required:after {
+        content: " *";
+        color: red;
     }
 }
