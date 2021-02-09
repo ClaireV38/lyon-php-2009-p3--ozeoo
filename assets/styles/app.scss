@@ -1115,4 +1115,9 @@ form[name="search_applicant_matching"] {
     #presentationTuto {
         font-size: 1.5em;
     }
+
+    label.required:after {
+        content: " *";
+        color: red;
+    }
 }

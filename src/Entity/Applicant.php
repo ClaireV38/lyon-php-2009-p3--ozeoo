@@ -50,7 +50,9 @@ class Applicant
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
-     * @var string
+     * @Assert\NotBlank(message="Le champ est vide",
+     *     groups={"listSkill"})
+     * @var string|null
      */
     private $city;
 
@@ -90,6 +92,8 @@ class Applicant
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Assert\NotBlank(message="Le champ est vide",
+     *     groups={"listSkill"})
      * @var string|null
      */
     private $mobility;
@@ -255,7 +259,7 @@ class Applicant
         return $this->city;
     }
 
-    public function setCity(string $city): self
+    public function setCity(?string $city): self
     {
         $this->city = $city;
 
