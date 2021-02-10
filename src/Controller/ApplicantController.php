@@ -38,6 +38,7 @@ class ApplicantController extends AbstractController
      * @param Request $request
      * @param ApplicantRepository $applicantRepository
      * @param OfferRepository $offerRepository
+     * @param SearchOffers $searchOffers
      * @return Response
      */
     public function index(
@@ -274,7 +275,7 @@ class ApplicantController extends AbstractController
         }
         if ($mailTo !== null) {
             $email = (new TemplatedEmail())
-                ->from(new Address($this->getParameter('mailer_from'), 'Ozéoo'))
+                ->from(new Address($this->getParameter('mailer_from'), 'Ozeoo'))
                 ->to($mailTo)
                     ->subject('Un candidat a postulé à l\'une de vos offres')
                     ->html($this->renderView('applicant/applicationOfferEmail.html.twig', [

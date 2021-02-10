@@ -92,6 +92,7 @@ class Company implements \Serializable
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Url(groups={"company"})
      * @var string|null
      */
     private $video;

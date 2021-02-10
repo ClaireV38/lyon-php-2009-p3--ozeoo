@@ -17,20 +17,22 @@
                 {{ form_row(form.lastname, {'label': 'Ton nom'}) }}
                 {{ form_row(form.city, {'label': 'Ta ville'}) }}
                 {{ form_row(form.mobility, {'label': 'Ta mobilité (Jusqu\'où tu veux aller travailler)'}) }}
-                {{ form_row(form.availability, {'label': 'A partir de quand es-tu disponible?'}) }}
-                {{ form_row(form.personality, {'label': 'Parle nous de toi, de tes hobbies, de tes passions..'}) }}
+                {{ form_row(form.availability, {'label': 'A partir de quand es-tu disponible ?'}) }}
+                {{ form_row(form.personality, {'label': 'Parle-nous de toi, de tes hobbies, de tes passions...'}) }}
             </div>
             <hr>
             <h2 class="titleApplicant">Compétences Acquises</h2>
 
             <div class="skillSelection">
                     <div class="hardSkills">
+                        <h5>Compétences Techniques <small>(5 min, 10 max)</small></h5>
                             <label for="id_label_multiple">
                                 {{ form_row(form.hardSkills, {'label': 'Compétences Techniques ( 5min, 10max)'}) }}
                             </label>
                         <p id="minErrorHard"></p>
                     </div>
                     <div class="softSkills">
+                        <h5>Compétences Comportementales <small>(5 min, 10 max)</small></h5>
                             <label for="id_label_multiple">
                                 {{ form_row(form.softSkills, {'label': 'Compétences Comportementales ( 5min, 10max)'}) }}
                             </label>
@@ -73,10 +75,10 @@
                 errorminSoft.innerHTML = "";
 
                 if($("#applicant_hardSkills").select2('data').length<minimum){
-                    errorminHard.innerHTML = "vous devez choisir 5 compétences minimum!";
+                    errorminHard.innerHTML = "Vous devez choisir 5 compétences minimum !";
                     return false;
                 }else if($("#applicant_softSkills").select2('data').length<minimum ) {
-                    errorminSoft.innerHTML = "vous devez choisir 5 compétences minimum!";
+                    errorminSoft.innerHTML = "Vous devez choisir 5 compétences minimum !";
                     return false;
                 }else {
                     return true;

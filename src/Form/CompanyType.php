@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
@@ -26,7 +27,7 @@ class CompanyType extends AbstractType
                 'label' => 'Nom'
             ])
             ->add('siretNb', TextType::class, [
-                'label' => 'Numéro de siret'
+                'label' => 'Numéro de SIRET'
             ])
             ->add('contactEmail', EmailType::class, [
                 'label' => 'Email de contact'
@@ -35,7 +36,7 @@ class CompanyType extends AbstractType
                 'label' => 'Numéro APE'
             ])
             ->add('pictureFile', VichImageType::class, [
-                'label' => 'Photo de l\'entreprise (formats autorisés: png, jpeg, jpg)',
+                'label' => 'Photo de l\'entreprise (formats autorisés : PNG, JPEG, JPG)',
                 'required'      => false,
                 'allow_delete' => true,
                 'delete_label' => 'Ne pas afficher d\'image',
