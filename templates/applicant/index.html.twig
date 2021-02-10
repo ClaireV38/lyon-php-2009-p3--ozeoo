@@ -7,21 +7,21 @@
     <div class="container">
         <h1 class="text-center applicant_home_welcome_mainTitle">Bienvenue {{ applicant.firstname }} !</h1>
         <h4>Liste de vos Annonces :</h4>
+        {% if matchOffers %}
+            <div class="center flex-column flex-md-row align-items-center">
+                {{ form_start(searchForm) }}
+                <label id="sortFormShape">Trier {{ form_widget(searchForm.sort) }}</label>
+                <div id="index-container-second">
+                    <label id="sortFormShape" >Annonce {{ form_widget(searchForm.searchTitle, { 'attr': { 'placeholder': 'chercher'} })}}</label>
+                </div>
+                <div id="index-container-second">
+                    <label id="sortFormShape">Entreprise {{ form_widget(searchForm.searchCompany, { 'attr': { 'placeholder': 'chercher'} }) }}</label>
+                </div>
+                <button id="index-container-button" class="btn-center btn btn-vertOze mb-2">Appliquer</button>
+                {{ form_end(searchForm) }}
+            </div>
+        {% endif %}
     </div>
-    {% if matchOffers %}
-    <div class="center flex-column flex-md-row align-items-center">
-        {{ form_start(searchForm) }}
-        <label id="sortFormShape">Trier {{ form_widget(searchForm.sort) }}</label>
-        <div id="index-container-second">
-            <label id="sortFormShape" >Annonce {{ form_widget(searchForm.searchTitle, { 'attr': { 'placeholder': 'chercher'} })}}</label>
-        </div>
-        <div id="index-container-second">
-            <label id="sortFormShape">Entreprise {{ form_widget(searchForm.searchCompany, { 'attr': { 'placeholder': 'chercher'} }) }}</label>
-        </div>
-        <button id="index-container-button" class="btn-center btn btn-vertOze mb-2">Appliquer</button>
-        {{ form_end(searchForm) }}
-    </div>
-    {% endif %}
     {% if noResult %}
         <h5 class="text-center">Aucune annonce ne correspond à votre recherche</h5>
     {% endif %}
@@ -37,7 +37,7 @@
                             Vous avez déja postulé à cette offre
                         </div>
                     {% endif %}
-                    </div>
+                </div>
                     <div class="row-info-right w-100 flex-md-row">
                         <div class="row-info-nb " id="textMatchOffer">
                             <p class="d-md-inline-block mr-md-2 mb-1" class="card-text"> Type de contrat :

@@ -23,15 +23,15 @@
 
                 <li class="nav-item mt-3 mt-md-0 "></li>
         </ul>
-    <div class="dropdown">
-        <button class="btn btn-bleuOze dropdown-toggle" style="color: black" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{ app.user.email }}
-        </button>
-        <div class="dropdown-menu">
-            <a class="dropdown-item" href="{{ path('company_show' , {'id': app.user.company.id}) }}"><i class="fas fa-user"></i> Profil</a>
-            <a class="dropdown-item" href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt"></i> Se déconnecter</a>
+        <div class="dropdown">
+            <button class="btn btn-bleuOze dropdown-toggle" style="color: black" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ app.user.email }}
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="{{ path('company_show' , {'id': app.user.company.id}) }}"><i class="fas fa-user"></i> Profil</a>
+                <a class="dropdown-item" href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt"></i> Se déconnecter</a>
+            </div>
         </div>
-    </div>
     </div>
     {% endif %}
 </nav>

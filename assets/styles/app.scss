@@ -372,7 +372,7 @@ form[name="search_applicant_offer"] {
 
 /*MatchOffer*/
 #announce-card-matchOffer {
-    margin-bottom: 10px;
+    margin: 10px;
 }
 
 /*offer list applicant matching*/
@@ -498,6 +498,10 @@ form[name="search_applicant_matching"] {
     text-align: center;
 }
 
+ul {
+    padding: 0;
+}
+
 @media (min-width: 768px) {
     .buttonHomeCompany {
         text-align: center;
@@ -509,7 +513,9 @@ form[name="search_applicant_matching"] {
     }
 
     #listApplicantInfo {
-        width: fit-content;
+        padding-bottom: 10px;
+        margin-right: auto;
+        margin-left: auto;
     }
 
     #formLoginPhoto {
@@ -599,7 +605,12 @@ form[name="search_applicant_matching"] {
     /*Offer Match Applicant*/
     #announce-card-matchOffer {
         width: 90%;
-        margin-top: 15px;
+        //margin-top: 15px;
+        margin: auto;
+    }
+
+    #navbarSupportedContent {
+        padding-right: 30px;
     }
 
     #textMatchOffer {
@@ -818,10 +829,26 @@ form[name="search_applicant_matching"] {
         margin: auto;
     }
 
+    select + .select2-container {
+        min-width: 100% !important;
+    }
+
     .skillSelection{
-        width: 50%;
+        max-width: 770px;
         margin: auto;
         padding: 10px 0 10px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .skillSelectionCompany{
+        max-width: 770px;
+        margin: auto;
+        padding: 10px 0 10px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
     .titleApplicant{
@@ -979,6 +1006,12 @@ form[name="search_applicant_matching"] {
         font-size: larger;
     }
 
+
+    #candidateInfo {
+        display: flex;
+        flex-direction: column;
+    }
+
     .skillOfferNotMatch {
         font-size: larger;
     }
@@ -1119,9 +1152,9 @@ form[name="search_applicant_matching"] {
         display: block;
     }
 
-    .skillGroup {
-        margin-left: 30px;
-    }
+    //.skillGroup {
+    //    margin-left: 30px;
+    //}
 
     .titleCategoryApplicant {
         padding-bottom: 10px;
