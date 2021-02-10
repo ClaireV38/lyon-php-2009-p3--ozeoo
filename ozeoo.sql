@@ -21,10 +21,10 @@
 
 LOCK TABLES `skill_category` WRITE;
 /*!40000 ALTER TABLE `skill_category` DISABLE KEYS */;
-INSERT INTO `skill_category` VALUES (1,1,'Achats'),(2,1,'Assurance'),(3,1,'Banque'),(4,1,'BTP'),(5,1,'Communication'),(6,1,'Contrôle de gestion'),(7,1,'Direction administrative et financière'),(8,1,'Direction d\'entreprise'),(9,1,'Direction de site logistique'),(10,1,'Déménagement'),(11,1,'Finance et administration'),(12,1,'Etudes et R&D (Ingénieurs, Ergonome...)'),(13,1,'Gestion'),(14,1,'Grande distribution'),(15,1,'Immobilier'),(16,1,'Informatique'),(17,1,'Magasinage et préparation de commande'),(18,1,'Marketing'),(19,1,'Ressources Humaines'),(20,1,'Services techniques'),(21,1,'Transport et logistique / Manutention / Magasinage'),(22,0,'Compétences comportementales');
+INSERT INTO `skill_category` VALUES (1,1,'Achats'),(2,1,'Assurance'),(3,1,'Banque'),(4,1,'BTP'),(5,1,'Communication'),(6,1,'Contrôle de gestion'),(7,1,'Direction administrative et financière'),(8,1,'Direction d\'entreprise'),(9,1,'Direction de site logistique'),(10,1,'Déménagement'),(11,1,'Gestion Finance et administration'),(12,1,'Etudes et R&D (Ingénieurs, Ergonome...)'),(13,1,'Grande distribution'),(14,1,'Immobilier'),(15,1,'Informatique'),(16,1,'Magasinage et préparation de commande'),(17,1,'Marketing'),(18,1,'Ressources Humaines'),(19,1,'Services techniques'),(20,1,'Transport et logistique / Manutention / Magasinage'),(21,0,'Compétences comportementales');
 /*!40000 ALTER TABLE `skill_category` ENABLE KEYS */;
-UNLOCK TABLES;
-
+UNLOCK TABLES;' ||
+ '
 --
 -- Dumping data for table `skill`
 --
@@ -41,7 +41,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'contact@ozeladiversite.com','[\"ROLE_ADMIN\"]','$argon2id$v=19$m=65536,t=4,p=1$4jloN8pl0Fgnh9zRB5Mg2Q$kdvVMIf5oEplestqJB3w2CpIsD5MJcB+45/peYZijSQ',1);
+INSERT INTO `user` VALUES (1,'contact@ozeladiversite.com','[\"ROLE_ADMIN\"]','$argon2id$v=19$m=65536,t=4,p=1$4sZrE1bkG973OEss4E/x0g$1P0jI0LflIj97T0FlBJlnIUOxz8Aqy8pFbm+64M/qPU',1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-02-10 19:33:19
+-- Dump completed on 2021-02-10 22:30:31
