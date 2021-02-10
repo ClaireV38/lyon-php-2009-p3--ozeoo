@@ -31,7 +31,7 @@
                 <div class="descriptionCompanyOfferDetail" >
                     <div class="card " style="margin-left: 10px">
                         <div class="card-body descriptionCompanyOfferDetail">
-                            <h4 class="card-header text-center">Qui sommes-nous ?</h4>
+                            <h4 class="card-header">Qui sommes-nous ?</h4>
                             <p class="card-text" id="textOfferDetail">{{ company.description }}</p>
                         </div>
                     </div>
@@ -50,25 +50,25 @@
         <h1 >{{ offer.title }}</h1>
             <div class="card startDateContractType ">
                 <div class="startDateOfferDetail">
-                    <h3>Date de début : </h3>
-                        <h5>{{ offer.startDate |date("d/m/Y")}}</h5>
+                    <h4 class="card-header text-center">Date de début : </h4>
+                        <p>{{ offer.startDate |date("d/m/Y")}}</p>
                 </div>
                 <div class="contractTypeOfferDetail">
-                    <h3>Type de Contrat : </h3>
-                        <h5>{{ offer.contractType }}</h5>
+                    <h4 class="card-header text-center">Type de Contrat : </h4>
+                        <p>{{ offer.contractType }}</p>
                 </div>
                 <div class="cityOfferDetail">
-                    <h3>Où ? : </h3>
-                    <h5>{{ offer.city }}</h5>
+                    <h4 class="card-header text-center">Où ? : </h4>
+                    <p>{{ offer.city }}</p>
                 </div>
                 <div class="salaryOfferDetail">
-                    <h3>Salaire : </h3>
-                    <h5>{{ offer.salary }}</h5>
+                    <h4 class="card-header text-center">Salaire : </h4>
+                    <p>{{ offer.salary }}</p>
                 </div>
             </div>
             <div class="card mb-3">
                 <div class="card-body">
-                    <h5 class="card-title">Description de l'offre :</h5>
+                    <h4 class="card-header text-center">Description de l'offre :</h4>
                     <p class="card-text">{{ offer.description }}</p>
                 </div>
             </div>

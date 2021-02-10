@@ -1,11 +1,11 @@
 {% extends '_mail_layout.html.twig' %}
 
 {% block mailTitle %}
-    Un candidat a postulé à l'une de vos offre.
+    Un candidat a postulé à l'une de vos offres.
 {% endblock %}
     {% block mailContent%}
-        {{ applicant.firstname }} a postulé à votre offre <b>{{ offer.title }}</b>:
-        <b>sa mobilité</b> : {{ applicant.mobility }}
-        <b>sa disponibilité</b> {{ applicant.availability }}
-        vous invitons à vous rendre sur le site OZEO pour plus de détails et pour contacter le candidat
+        <i>{{ applicant.firstname }}</i> a postulé à votre offre <b>{{ offer.title }}</b>.<br><br>
+        <b>Mobilité : </b>{{ applicant.mobility }}<br>
+        <b>Disponibilité : </b>{{ applicant.availability }}<br><br>
+        Nous vous invitons à vous rendre sur le site Ozeoo pour plus de détails et pour contacter le candidat.
     {% endblock%}

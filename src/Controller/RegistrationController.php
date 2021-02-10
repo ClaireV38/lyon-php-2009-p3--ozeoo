@@ -74,7 +74,7 @@ class RegistrationController extends AbstractController
             $email = (new TemplatedEmail());
             $email->from(new Address($this->getParameter('mailer_from'), 'Ozeoo'));
             $email->to($user->getEmail());
-            $email->subject('Ozéo : Demande d\'inscription en cours');
+            $email->subject('Ozeoo : Demande d\'inscription en cours');
             $email->html($this->renderView('company/newCompanyEmail.html.twig'));
             $mailer->send($email);
 
@@ -130,7 +130,7 @@ class RegistrationController extends AbstractController
                 (new TemplatedEmail())
                     ->from(new Address($this->getParameter('mailer_from'), 'Ozéoo'))
                     ->to($user->getEmail())
-                    ->subject('Ozéo : Merci de confirmer votre adresse email')
+                    ->subject('Ozeoo : Merci de confirmer votre adresse email')
                     ->htmlTemplate('applicant/newApplicantEmail.html.twig')
             );
 

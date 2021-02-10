@@ -1,41 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Applicant index{% endblock %}
+{% block title %}Espace candidat{% endblock %}
 
 {% block body %}
     {% include '/applicant/_navbar.html.twig' %}
     <div class="container">
         <h1 class="text-center applicant_home_welcome_mainTitle">Bienvenue {{ applicant.firstname }} !</h1>
-        <h4 class="mb-2">Liste de vos Annonces :</h4>
-        {% if matchOffers %}
-            <div class="center flex-column flex-md-row align-items-center justify-content-around mb-3">
-                {{ form_start(searchForm) }}
-                <label id="sortFormShape">Trier {{ form_widget(searchForm.sort) }}</label>
-                <div id="index-container-second">
-                    <label id="sortFormShape">Annonce {{ form_widget(searchForm.searchTitle, { 'attr': { 'placeholder': 'chercher'} }) }}</label>
-                </div>
-                <div id="index-container-second">
-                    <label id="sortFormShape">Entreprise {{ form_widget(searchForm.searchCompany, { 'attr': { 'placeholder': 'chercher'} }) }}</label>
-                </div>
-                <button id="index-container-button" class="btn-center btn btn-vertOze mb-2">Appliquer</button>
-                {{ form_end(searchForm) }}
-            </div>
-        {% endif %}
-        {% if noResult %}
-            <h5 class="text-center">Aucune annonce ne correspond à votre recherche</h5>
-        {% endif %}
-        {% for matchOffer in matchOffers %}
-            <div class="card w-100">
-                <div class="row-announce card-body flex-column flex-md-row align-items-center justify-content-between">
-                    <div class="d-inline-block mb-2 mr-md-2 w-100 mb-0 text-center">
-                        <h5 class="card-title" id="title-announce-desktop">{{ matchOffer.title }}</h5>
-                        <p class="mb-0"> Publié le : {{ matchOffer.startDate|date("d/m/Y") }}</p>
-                        <p class="mb-0"> Entreprise : {{ matchOffer.company.name }}</p>
-                        {% if matchOffer in applicantOffers %}
-                            <div class="alert alert-bleuOze" id="messagePostule" role="alert">
-                                Vous avez déja postulé à cette offre
-                            </div>
-                        {% endif %}
+        <h4>Liste de vos Annonces :</h4>
+    </div>
+    {% if matchOffers %}
+    <div class="center flex-column flex-md-row align-items-center">
+        {{ form_start(searchForm) }}
+        <label id="sortFormShape">Trier {{ form_widget(searchForm.sort) }}</label>
+        <div id="index-container-second">
+            <label id="sortFormShape" >Annonce {{ form_widget(searchForm.searchTitle, { 'attr': { 'placeholder': 'chercher'} })}}</label>
+        </div>
+        <div id="index-container-second">
+            <label id="sortFormShape">Entreprise {{ form_widget(searchForm.searchCompany, { 'attr': { 'placeholder': 'chercher'} }) }}</label>
+        </div>
+        <button id="index-container-button" class="btn-center btn btn-vertOze mb-2">Appliquer</button>
+        {{ form_end(searchForm) }}
+    </div>
+    {% endif %}
+    {% if noResult %}
+        <h5 class="text-center">Aucune annonce ne correspond à votre recherche</h5>
+    {% endif %}
+    {% for matchOffer in matchOffers %}
+        <div class="card container" id="announce-card-matchOffer">
+            <div class="row-announce card-body flex-column flex-md-row align-items-center justify-content-between">
+                <div class="d-inline-block mb-2 mr-md-2 w-100 mb-0 text-center">
+                    <h5 class="card-title" id="title-announce-desktop">{{ matchOffer.title }}</h5>
+                    <p class="mb-0"> Publiée le : {{ matchOffer.startDate|date("d/m/Y") }}</p>
+                    <p class="mb-0"> Entreprise : {{ matchOffer.company.name }}</p>
+                    {% if matchOffer in applicantOffers %}
+                        <div class="alert alert-bleuOze" id="messagePostule" role="alert">
+                            Vous avez déja postulé à cette offre
+                        </div>
+                    {% endif %}
                     </div>
                     <div class="row-info-right w-100 flex-md-row">
                         <div class="row-info-nb " id="textMatchOffer">
@@ -54,8 +55,10 @@
                     </div>
                 </div>
             </div>
-        {% else %}
-            <h5 class="text-center"> vous n'avez pas encore d'annonces qui matchent vos compétences</h5>
-        {% endfor %}
+        </div>
+    {% else %}
+        <br>
+        <h5 class="text-center">Vous n'avez pas encore d'annonces matchant vos compétences.</h5>
+    {% endfor %}
     </div>
 {% endblock %}
