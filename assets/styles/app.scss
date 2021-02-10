@@ -451,9 +451,24 @@ form[name="search_applicant_matching"] {
     margin: 0;
 }
 
+// lost password Path //
+#safetyImg {
+    display: none;
+}
+
+#reset-password-container {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#requestImg {
+    display: none;
+}
+
 // Rename button Browse //
 .custom-file-label::after {
     content: 'Parcourir'!important;
+
 }
 
 .login-form {
