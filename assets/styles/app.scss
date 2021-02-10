@@ -235,7 +235,6 @@ form[name="search_applicant_offer"] {
     align-items: center;
     justify-content: space-between;
     margin: auto;
-    width: 80%;
 }
 
 /* Navbar */
@@ -312,11 +311,6 @@ form[name="search_applicant_offer"] {
 
 /* Offer form */
 
-.jobOffer {
-    width: 50%;
-    margin: auto;
-}
-
 .btn_validate {
     background-color: $vertOze;
     margin: auto;
@@ -327,6 +321,10 @@ form[name="search_applicant_offer"] {
 .offerSkillsTitle {
     margin-top: 50px;
     text-align: center;
+}
+
+.jobOffer {
+    margin: 0 3px;
 }
 
 /*login*/
@@ -342,12 +340,11 @@ form[name="search_applicant_offer"] {
 /* Company Form */
 #companyCreateFormButton {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    margin: auto;
 }
 
 /*flex*/
-.flex{
+.flex {
     display: flex;
 }
 
@@ -399,7 +396,7 @@ form[name="search_applicant_matching"] {
 
 #presentationTuto {
     font-size: 1.25em;
-    text-align: center;
+    text-align: justify;
     padding: 20px;
 }
 
@@ -431,8 +428,8 @@ form[name="search_applicant_matching"] {
     width: 200px;
     justify-content: center;
 }
-/*Error Display*/
 
+/*Error Display*/
 #minErrorHard {
     color: tomato;
 }
@@ -454,15 +451,57 @@ form[name="search_applicant_matching"] {
     margin: 0;
 }
 
+/* Legal Terms */
+
+#legalImg {
+    display: none;
+}
+
+// lost password Path //
+#safetyImg {
+    display: none;
+}
+
+#reset-password-container {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#requestImg {
+    display: none;
+}
+
+// Rename button Browse //
+.custom-file-label::after {
+    content: 'Parcourir'!important;
+
+}
+
+.login-form {
+    padding: 5px;
+}
+
+#applicantImg {
+    display: none;
+}
+
+#company-register {
+    padding: 5px;
+}
+
+.navbar-nav.mr-auto {
+    padding: 0;
+}
+
+.buttonEditCompany {
+    padding-top: 50px;
+    text-align: center;
+}
+
 @media (min-width: 768px) {
     .buttonHomeCompany {
         text-align: center;
         margin-top: 100px;
-    }
-
-    .buttonEditCompany {
-        padding-top: 50px;
-        text-align: center;
     }
 
     #titleListOffer {
@@ -575,7 +614,7 @@ form[name="search_applicant_matching"] {
         align-items: baseline;
         justify-content: space-between;
         margin: auto;
-        width: 50%;
+        width: 60%;
     }
 
     /* Desktop index company style */
@@ -711,7 +750,6 @@ form[name="search_applicant_matching"] {
         align-items: baseline;
         justify-content: space-between;
         margin: auto;
-        width: 60%;
     }
 
     /*login*/
@@ -742,6 +780,16 @@ form[name="search_applicant_matching"] {
         padding-right: 15px;
     }
 
+    .jobOffer {
+        width: 50%;
+        margin: auto;
+    }
+
+    .offer-skill-selection {
+        width: 50%;
+        margin: auto;
+    }
+
     /* Company Registration */
     #company-register {
         margin: auto;
@@ -757,7 +805,6 @@ form[name="search_applicant_matching"] {
         width: 35%;
         font-size: 20px;
     }
-
 
     /* New Applicant profile */
     .applicantForm{
@@ -892,14 +939,13 @@ form[name="search_applicant_matching"] {
     }
 
     #buttonPostuleOffer {
-        padding: 25px;
+        padding: 20px;
         font-size: x-large;
-        width: 400px;
+        width: 200px;
     }
 
     /*offer list applicant matching*/
     #announce-card-matches {
-        width: 90%;
         margin-top: 15px;
     }
 
@@ -963,9 +1009,9 @@ form[name="search_applicant_matching"] {
     }
 
     #applicantImg {
+        display: block;
         width: 560px;
         height: 360px;
-        display: block;
         margin-left: auto;
         margin-right: auto;
         margin-bottom: 30px;
@@ -1058,6 +1104,7 @@ form[name="search_applicant_matching"] {
     #legalTerms {
         margin: auto;
         width: 50%;
+        text-align: justify;
     }
 
     #legalTermsTitle {
@@ -1066,18 +1113,10 @@ form[name="search_applicant_matching"] {
 
     #legalImg {
         margin-top: 30px;
-        margin-bottom: 30px;
+        margin-bottom: 50px;
         width: 910px;
         height: 370px;
-    }
-
-    #applicantImg {
-        width: 560px;
-        height: 360px;
         display: block;
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 30px;
     }
 
     .skillGroup {
@@ -1114,5 +1153,15 @@ form[name="search_applicant_matching"] {
 
     #presentationTuto {
         font-size: 1.5em;
+    }
+
+    // Rename button Browse //
+    .custom-file-label::after {
+        content: 'Parcourir'!important;
+    }
+
+    label.required:after {
+        content: " *";
+        color: red;
     }
 }
