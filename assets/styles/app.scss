@@ -1147,8 +1147,8 @@ ul {
     #legalImg {
         margin-top: 30px;
         margin-bottom: 50px;
-        width: 910px;
-        height: 370px;
+        width: 100%;
+        height: 100%;
         display: block;
     }
 
@@ -1196,5 +1196,9 @@ ul {
     label.required:after {
         content: " *";
         color: red;
+    }
+
+    .dropdown-menu {
+        left: -20px;
     }
 }
