@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.23, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
 --
 -- Host: localhost    Database: ozeladiversite
 -- ------------------------------------------------------
--- Server version	8.0.23-0ubuntu0.20.04.1
+-- Server version	8.0.21
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,14 +16,320 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping data for table `skill_category`
+-- Table structure for table `applicant`
 --
 
-LOCK TABLES `skill_category` WRITE;
-/*!40000 ALTER TABLE `skill_category` DISABLE KEYS */;
-INSERT INTO `skill_category` VALUES (1,1,'Marketing'),(2,1,'Communication'),(3,1,'Direction d\'entreprise'),(4,1,'Etudes et R&D'),(5,1,'Gestion, finance et administration'),(6,1,'Informatique'),(7,1,'Ressources Humaines'),(8,1,'Services techniques'),(9,1,'Transport et logistique / Manutention / Magasinage'),(10,1,'Déménagement'),(11,1,'Magasinage et préparation de commande'),(12,1,'Direction de site logistique'),(13,1,'Achats'),(14,1,'Contrôle de gestion'),(15,1,'Direction administrative et financière'),(16,1,'Assurance'),(17,1,'Banque'),(18,1,'Immobilier'),(19,1,'Grande distribution'),(20,1,'BTP'),(21,0,'Compétences comportementales');
-/*!40000 ALTER TABLE `skill_category` ENABLE KEYS */;
+DROP TABLE IF EXISTS `applicant`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `applicant` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `firstname` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lastname` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `personality` longtext COLLATE utf8mb4_unicode_ci,
+  `mobility` text COLLATE utf8mb4_unicode_ci,
+  `city` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `availability` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQ_CAAD1019A76ED395` (`user_id`),
+  CONSTRAINT `FK_CAAD1019A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `applicant`
+--
+
+LOCK TABLES `applicant` WRITE;
+/*!40000 ALTER TABLE `applicant` DISABLE KEYS */;
+INSERT INTO `applicant` VALUES (1,3,'Léa','Durand','Fraîchement diplômée de l’École Internationale de Tunon à Lille, j’ai hâte de pouvoir élaborer de nouvelles stratégies de communication auprès des médias, domaine dans lequel je me suis spécialisée. Je pense que ma passion pour l’écriture et mon goût pour la photographie pourront m’aider à mener à bien de nouveaux projets.','Nancy','Nancy','Dès le 01/03/2021'),(2,4,'Enzo','Ragazzi','Passionné de football et influenceur sur Instagram, j\'ai fait mes études en communication à Paris et suis aujourd\'hui prêt à travailler dans ce domaine. Je peux déménager.','Lyon','Lyon','A partir du 01/02/2021'),(3,8,'Gabriel','Ponteau',NULL,NULL,NULL,NULL),(4,9,'Simon','Maim','Diplômé en RH.','Paris','Paris 16e','Déjà disponible'),(5,10,'Emma','Valence','Très extravertie, je pratique le handball depuis mon enfance.','Sud','Nîmes','Déjà disponible'),(6,11,'Mickael','Solino','Ancien Directeur énergie chez Dalkia avec 15 ans d\'expérience.','Nationale','Paris',NULL);
+/*!40000 ALTER TABLE `applicant` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `applicant_hard_skills`
+--
+
+DROP TABLE IF EXISTS `applicant_hard_skills`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `applicant_hard_skills` (
+  `applicant_id` int NOT NULL,
+  `skill_id` int NOT NULL,
+  PRIMARY KEY (`applicant_id`,`skill_id`),
+  KEY `IDX_949A6BAF97139001` (`applicant_id`),
+  KEY `IDX_949A6BAF5585C142` (`skill_id`),
+  CONSTRAINT `FK_949A6BAF5585C142` FOREIGN KEY (`skill_id`) REFERENCES `skill` (`id`),
+  CONSTRAINT `FK_949A6BAF97139001` FOREIGN KEY (`applicant_id`) REFERENCES `applicant` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `applicant_hard_skills`
+--
+
+LOCK TABLES `applicant_hard_skills` WRITE;
+/*!40000 ALTER TABLE `applicant_hard_skills` DISABLE KEYS */;
+INSERT INTO `applicant_hard_skills` VALUES (1,196),(1,205),(1,213),(1,230),(1,238),(1,244),(1,254),(1,256),(1,261),(1,262),(2,205),(2,213),(2,238),(2,244),(2,254),(2,256),(2,481),(2,490),(4,256),(4,293),(4,296),(4,304),(4,434),(4,437),(4,447),(4,451),(4,469),(4,652),(5,310),(5,327),(5,484),(5,490),(5,635),(5,637),(6,289),(6,478),(6,487),(6,492),(6,495),(6,807);
+/*!40000 ALTER TABLE `applicant_hard_skills` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `applicant_soft_skills`
+--
+
+DROP TABLE IF EXISTS `applicant_soft_skills`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `applicant_soft_skills` (
+  `applicant_id` int NOT NULL,
+  `skill_id` int NOT NULL,
+  PRIMARY KEY (`applicant_id`,`skill_id`),
+  KEY `IDX_8A133AC597139001` (`applicant_id`),
+  KEY `IDX_8A133AC55585C142` (`skill_id`),
+  CONSTRAINT `FK_8A133AC55585C142` FOREIGN KEY (`skill_id`) REFERENCES `skill` (`id`),
+  CONSTRAINT `FK_8A133AC597139001` FOREIGN KEY (`applicant_id`) REFERENCES `applicant` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `applicant_soft_skills`
+--
+
+LOCK TABLES `applicant_soft_skills` WRITE;
+/*!40000 ALTER TABLE `applicant_soft_skills` DISABLE KEYS */;
+INSERT INTO `applicant_soft_skills` VALUES (1,15),(1,21),(1,24),(1,39),(1,60),(1,62),(1,71),(1,87),(1,121),(1,122),(2,21),(2,33),(2,60),(2,62),(2,71),(2,87),(2,123),(4,28),(4,38),(4,60),(4,63),(4,80),(4,101),(4,103),(4,121),(5,42),(5,60),(5,66),(5,103),(5,121),(6,2),(6,40),(6,57),(6,60),(6,105),(6,109),(6,122);
+/*!40000 ALTER TABLE `applicant_soft_skills` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `company`
+--
+
+DROP TABLE IF EXISTS `company`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `company` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `siret_nb` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contact_email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ape_nb` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `picture` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `video` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` longtext COLLATE utf8mb4_unicode_ci,
+  `corporate_culture` longtext COLLATE utf8mb4_unicode_ci,
+  `csr` longtext COLLATE utf8mb4_unicode_ci,
+  `city` longtext COLLATE utf8mb4_unicode_ci,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQ_4FBF094FA76ED395` (`user_id`),
+  CONSTRAINT `FK_4FBF094FA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `company`
+--
+
+LOCK TABLES `company` WRITE;
+/*!40000 ALTER TABLE `company` DISABLE KEYS */;
+INSERT INTO `company` VALUES (1,2,'EDF','12345678910123','contact@edf.com','1111A','602413877d8db945258799.png','https://www.youtube.com/embed/CSvqbMz4BX4','Le groupe Electricité de France (EDF) est la principale entreprise de production, de transport et de fourniture d’électricité en France. Depuis 2004, le groupe français est une société anonyme à capitaux publics.\r\n\r\nLa société intervient sur l’ensemble des métiers de l’électricité. Sa production d’électricité est caractérisée par la prépondérance de l’énergie nucléaire. EDF est le premier producteur électronucléaire mondial (selon les dernières données de l\'année 2012).','L’engagement éthique et conformité du Groupe\r\n\r\nLe groupe EDF promeut la culture d’intégrité : une conduite éthique et conforme aux lois doit donc être la règle absolue pour tous les salariés du Groupe, partout dans le monde, à tous les niveaux de l’entreprise, sans exception.','Electricien responsable, champion de la croissance bas carbone, EDF a retenu six Objectifs de responsabilité d’entreprise, en résonance aux 17 Objectifs de développement durable de l’ONU. Il s’agit d’engagements majeurs et prioritaires, dont le Groupe présentera chaque année les résultats.\r\n\r\nChangement climatique\r\nAller au-delà des exigences de la trajectoire 2°C fixée par la COP21 en baissant drastiquement nos émissions de CO₂.\r\n\r\nDéveloppement humain\r\nIntégrer les meilleures pratiques des groupes industriels, en matière de développement humain : santé/sécurité, diversité hommes/femmes, promotion sociale.\r\n\r\nPrécarité énergétique\r\nProposer à 100 % des populations fragiles de l’information et des solutions d’accompagnement en matière de consommation d’énergie et d’accès aux droits.\r\n\r\nEfficacité énergétique\r\nInnover par des solutions numériques d’efficacité énergétique pour que chaque client puisse consommer mieux.\r\n\r\nDialogue et concertation\r\nOrganiser de façon systématique, et partout dans le monde, une démarche de dialogue et de concertation, transparente et contradictoire, autour de chaque nouveau projet.\r\n\r\nBiodiversité\r\nLancer une approche positive de la biodiversité, ne pas se limiter à terme à la connaissance ou à la réduction des activités, pour avoir un effet positif sur la biodiversité.',NULL,'2021-02-10 18:10:31'),(2,5,'Saint-Gobain','12345678910124','contact@saint-gobain.com','1112A','6024ea32643a9311568476.jpg','http://www.youtube.com/embed/LpZ6dfTOmpk','Saint-Gobain est présent dans 70 pays avec 171 000 collaborateurs. Saint-Gobain conçoit, produit et distribue des matériaux et des solutions pensés pour le bien-être de chacun et l’avenir de tous. Ces matériaux se trouvent partout dans notre habitat et notre vie quotidienne : bâtiments, transports, infrastructures, ainsi que dans de nombreuses applications industrielles. Ils apportent confort, performance et sécurité tout en répondant aux défis de la construction durable, de la gestion efficace des ressources et du changement climatique.','Chez Saint-Gobain nous sommes engagés pour que nos activités, nos collaborateurs et nos partenaires participent ensemble à la construction d’un monde plus durable et plus inclusif.',NULL,NULL,'2021-02-11 09:26:26'),(3,6,'Thalès','12345678910125',NULL,'1113A',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(4,7,'Orange','12345678910126','contact@orange.com','1114A','6024f106d01c0372261797.png','http://www.youtube.com/embed/L8Llwfh4Yr8','Orange est l’opérateur de téléphonie mobile numéro 1 en France selon le rapport officiel de l’Arcep. L’opérateur historique, fondé en 1988, a été racheté en 2000 à Vodafone. Il propose des offres de téléphonie mobile et des offres d’accès à Internet avec la Livebox. Il faut savoir qu’Orange propose aussi d’autres offres spécifiques via l’opérateur Sosh avec des forfaits sans engagement à bas prix.',NULL,NULL,NULL,'2021-02-11 09:55:34');
+/*!40000 ALTER TABLE `company` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `doctrine_migration_versions`
+--
+
+DROP TABLE IF EXISTS `doctrine_migration_versions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `doctrine_migration_versions` (
+  `version` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
+  `executed_at` datetime DEFAULT NULL,
+  `execution_time` int DEFAULT NULL,
+  PRIMARY KEY (`version`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `doctrine_migration_versions`
+--
+
+LOCK TABLES `doctrine_migration_versions` WRITE;
+/*!40000 ALTER TABLE `doctrine_migration_versions` DISABLE KEYS */;
+INSERT INTO `doctrine_migration_versions` VALUES ('DoctrineMigrations\\Version20201213105003','2021-02-10 16:46:10',2967),('DoctrineMigrations\\Version20201213113758','2021-02-10 16:46:13',16),('DoctrineMigrations\\Version20201216155223','2021-02-10 16:46:13',111),('DoctrineMigrations\\Version20201217074800','2021-02-10 16:46:13',25),('DoctrineMigrations\\Version20201217090059','2021-02-10 16:46:13',16),('DoctrineMigrations\\Version20201229131809','2021-02-10 16:46:14',15),('DoctrineMigrations\\Version20201229132020','2021-02-10 16:46:14',14),('DoctrineMigrations\\Version20210105112914','2021-02-10 16:46:14',1146),('DoctrineMigrations\\Version20210105181431','2021-02-10 16:46:15',385),('DoctrineMigrations\\Version20210106091533','2021-02-10 16:46:15',1243),('DoctrineMigrations\\Version20210106092409','2021-02-10 16:46:16',168),('DoctrineMigrations\\Version20210106152847','2021-02-10 16:46:17',1317),('DoctrineMigrations\\Version20210107110052','2021-02-10 16:46:18',276),('DoctrineMigrations\\Version20210107134217','2021-02-10 16:46:18',129),('DoctrineMigrations\\Version20210109161053','2021-02-10 16:46:19',157),('DoctrineMigrations\\Version20210112095448','2021-02-10 16:46:19',42),('DoctrineMigrations\\Version20210118172758','2021-02-10 16:46:19',47),('DoctrineMigrations\\Version20210121085331','2021-02-10 16:46:19',46),('DoctrineMigrations\\Version20210122135030','2021-02-10 16:46:19',969);
+/*!40000 ALTER TABLE `doctrine_migration_versions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `offer`
+--
+
+DROP TABLE IF EXISTS `offer`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `offer` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `company_id` int NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contract_type` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `salary` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `duration` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `start_date` date NOT NULL,
+  `creation_date` date NOT NULL,
+  `end_date` date DEFAULT NULL,
+  `description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_anonymous` tinyint(1) NOT NULL,
+  `city` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_29D6873E979B1AD6` (`company_id`),
+  CONSTRAINT `FK_29D6873E979B1AD6` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `offer`
+--
+
+LOCK TABLES `offer` WRITE;
+/*!40000 ALTER TABLE `offer` DISABLE KEYS */;
+INSERT INTO `offer` VALUES (1,1,'Assistant(e) Ressources Humaines (H/F)','CDD','1800 € / mois','6 mois','2021-04-01','2021-02-10','2021-03-15','Au sein de l\'équipe Ressources Humaines et accompagné par votre tuteur, votre mission consistera à:\r\n\r\nparticiper au suivi et au pilotage du processus de recrutement des alternants et des stagiaires\r\neffectuer du reporting\r\norganiser des jurys d\'entretiens\r\nconstituer des dossiers administratifs de contractualisation\r\norganiser des événements RH\r\nêtre un appui administratif pour le service',0,'Nancy'),(2,1,'Chargé(e) d\'affaires travaux (H/F)','CDI',NULL,NULL,'2021-03-01','2021-02-10',NULL,'Rattaché au Chef de la section « Travaux-Logistique-Déchets », vous maitrisez simultanément toutes les composantes des interventions sur site nucléaire : technique, sûreté, assurance de la qualité, sécurité, radioprotection, environnement coordination des interfaces avec les autres activités, coût et délais.\r\n\r\nVous serez en charge de :\r\n\r\nApporter un appui aux services de la DP2D siège pour les activités réalisées sur site,\r\nPréparer les interventions des prestataires, surveiller et contrôler la réalisation de ces opérations,\r\nAssurer la gestion administrative et la clôture des affaires,\r\nEffectuer quelques missions transverses pour le compte de la Structure et le fonctionnement de la section Travaux.\r\n \r\n\r\nLe poste de Chargé d’affaires est soumis à astreinte.',0,'Charleville-Mézières'),(3,1,'Chargé(e) de communication (H/F)','CDI',NULL,NULL,'2021-05-01','2021-02-10','2021-04-20','Vous participerez à la mise en œuvre des actions de communication en lien avec la stratégie de l\'entreprise afin de développer la fierté d\'appartenance de tous les collaborateurs d\'Enedis en Normandie.\r\n\r\nVos missions seront :\r\n\r\n \r\n\r\n- Réalisation de supports de communication interne écrits : affiches, intranet, interviews, photos, ...\r\n\r\n- Contribuer à la vie du réseau social d\'entreprise : rédaction de contenus, animation, ....\r\n\r\n- Appui transverses des acteurs internes : réalisation des supports, mise en forme, conseil,...\r\n\r\n\r\n- organisation et réalisation de manifestations internes\r\n\r\n- Mener en autonomie un ou des projets de communication.',0,'Nancy'),(4,1,'Directeur de projets développement - Référent photovoltaïque (H/F)','CDI',NULL,NULL,'2021-03-01','2021-02-11','2021-02-25','Au sein de la Direction Sud d\'EDF Renouvelables France, vous serez rattaché(e) hiérarchiquement au responsable régional Auvergne Rhône Alpes (AURA) et vous prendrez en charge, en tant que référent régional photovoltaïque, le pilotage de la prospection et du développement de projets photovoltaïques.\r\n\r\n\r\n\r\nVotre rôle s\'articulera notamment autour des missions suivantes :\r\n\r\n- Impulser, définir et animer la stratégie territoriale, en coordination avec le Responsable de Région, relative à la prospection photovoltaïque,\r\n\r\n- Alimenter un portefeuille de prospection de qualité, qualifier les sites qui seront mis en développement, selon l\'ensemble des critères techniques, environnementaux, financiers, etc.,\r\n\r\n- Accompagner et piloter les chefs de projets dans le cadencement des différentes phases de prospection et de développement, y compris les appels d\'offre, jusqu\'au transfert aux équipes de construction,\r\n\r\n- Assurer la coordination interne entre les différents services en lien avec le Développement en vue de créer une véritable équipe projet,\r\n\r\n- Valider la production de l\'équipe projet (dossiers de demandes d\'autorisation, études d\'impact, etc...) et veiller au respect de l\'ensemble des enjeux (environnementaux, techniques, financiers, administratifs, etc.) liés à un projet en développement et jusqu\'à la mise en service,\r\n\r\n- En appui des chefs de projets, assurer les relations et la concertation avec les différents acteurs des projets : institutions (administrations et services de l\'Etat), collectivités territoriales, élus, riverains, propriétaires fonciers, associations, etc. dans le but de créer une réelle dynamique locale.',0,'Lyon et périphérie'),(5,1,'Gestionnaire comptable (H/F)','CDD',NULL,'2 ans','2021-04-01','2021-02-11','2021-03-31','L\'Unité Comptable Nationale (UCN) assure la production comptable des deux filiales ENEDIS et GRDF.\r\nLe quotidien du technicien comptable du domaine immobilisations consiste principalement à :\r\n- Comptabiliser et/ou s\'assurer de l\'enregistrement des événements économiques, selon la doctrine en vigueur et le respect des délais de clôture,\r\n- Contrôler et justifier les comptes de comptabilité afin de garantir la qualité des enregistrements effectués,\r\n- Assurer un appui et un conseil auprès des clients internes pour toute question ou difficulté rencontrées.\r\nNos activités :\r\n- s\'exercent au moyen du progiciel SAP,\r\n- nécessitent des échanges et contacts avec de nombreux interlocuteurs,\r\n- s\'appuient sur l\'analyse et le contrôle des dossiers techniques d\'investissements initiés par le métier technique\r\n\r\nUne aisance sur les outils informatiques ainsi qu\'une bonne expression écrite et orale sont souhaitées (travail en équipe d\'environ 15 personnes).',0,'Villefranche-sur-Saône'),(6,1,'Commercial Secteur Froid Industriel (H/F)','CDI',NULL,NULL,'2021-04-01','2021-02-11','2021-03-08','Rattaché au Directeur commercial régional, vous :\r\n\r\nProspectez et identifiez des nouveaux projets sur votre secteur d\'activité\r\nAssurez la qualification du besoin clients\r\nPrenez en charge la négociation commerciale et contractuelle\r\nPilotez l\'équipe projet technique (chiffreur, bureau d\'étude, marketing, assistant...) pour réaliser la proposition technique\r\nAssurez le closing de l\'affaire commerciale\r\nTransmettez le dossier à l\'équipe réalisation pour exécution.\r\n\r\nEn complément, vous assurez l\'ennoblissement de votre portefeuille clients existant et garantissez leur satisfaction et leur fidélisation.\r\n\r\nItinérant, vous assurez un reporting régulier de votre travail à votre responsable et êtes force de proposition sur la stratégie commerciale.\r\n\r\nAvantages liés au poste : véhicule de fonction + rémunération variable attractive + prime de vacances + Compte Epargne Temps (CET) + intéressement et participation + mutuelle et prévoyance + comité d\'entreprise (chèques vacances...).',0,'Reims'),(7,1,'Business Developer (H/F)','CDI',NULL,NULL,'2021-03-15','2021-02-11',NULL,'La mission au sein de l\'équipe sales consiste à continuer à faire progresser le volume d\'affaires de l\'agence en intégrant des nouveaux clients et à répondre aux besoins récurrents de notre portefeuille existant.\r\n\r\n\r\n\r\nVous serez en charge de :\r\n\r\nGérer des leads entrants\r\n\r\nRéaliser propositions commerciales en adéquation avec le besoin du client\r\n\r\nNégocier et gérer le closing des offres en cours\r\n\r\nIntéragir avec les différentes équipes de l\'agence dans le cadre des compétitions\r\n\r\nMaîtriser le CRM\r\n\r\nFaire vivre le portefeuille client de l\'agence en lien avec l\'équipe marketing\r\n\r\n\r\n\r\nProfil recherché :\r\n\r\nVous avez envie de rejoindre une agence en pleine croissance\r\n\r\nVous avez au moins 3 ans d\'expérience en vente B2B\r\n\r\nVous avez l\'esprit d\'équipe et souhaitez rejoindre une ambiance de travail agréable et dynamique\r\n\r\nVous êtes organisé et rigoureux\r\n\r\nVous avez une forte aisance orale (en physique et au téléphone)\r\n\r\nVous êtes convaincus par les nouveaux formats de communication digitale',0,'Paris');
+/*!40000 ALTER TABLE `offer` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `offer_applicant`
+--
+
+DROP TABLE IF EXISTS `offer_applicant`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `offer_applicant` (
+  `offer_id` int NOT NULL,
+  `applicant_id` int NOT NULL,
+  PRIMARY KEY (`offer_id`,`applicant_id`),
+  KEY `IDX_69686DDD53C674EE` (`offer_id`),
+  KEY `IDX_69686DDD97139001` (`applicant_id`),
+  CONSTRAINT `FK_69686DDD53C674EE` FOREIGN KEY (`offer_id`) REFERENCES `offer` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `FK_69686DDD97139001` FOREIGN KEY (`applicant_id`) REFERENCES `applicant` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `offer_applicant`
+--
+
+LOCK TABLES `offer_applicant` WRITE;
+/*!40000 ALTER TABLE `offer_applicant` DISABLE KEYS */;
+INSERT INTO `offer_applicant` VALUES (1,4),(3,2),(4,6),(7,5);
+/*!40000 ALTER TABLE `offer_applicant` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `offer_hard_skills`
+--
+
+DROP TABLE IF EXISTS `offer_hard_skills`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `offer_hard_skills` (
+  `offer_id` int NOT NULL,
+  `skill_id` int NOT NULL,
+  PRIMARY KEY (`offer_id`,`skill_id`),
+  KEY `IDX_50D7E4E53C674EE` (`offer_id`),
+  KEY `IDX_50D7E4E5585C142` (`skill_id`),
+  CONSTRAINT `FK_50D7E4E53C674EE` FOREIGN KEY (`offer_id`) REFERENCES `offer` (`id`),
+  CONSTRAINT `FK_50D7E4E5585C142` FOREIGN KEY (`skill_id`) REFERENCES `skill` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `offer_hard_skills`
+--
+
+LOCK TABLES `offer_hard_skills` WRITE;
+/*!40000 ALTER TABLE `offer_hard_skills` DISABLE KEYS */;
+INSERT INTO `offer_hard_skills` VALUES (1,256),(1,293),(1,296),(1,300),(1,304),(1,447),(1,652),(2,576),(2,589),(2,591),(2,593),(2,603),(2,807),(3,196),(3,205),(3,213),(3,230),(3,238),(3,244),(3,254),(3,256),(3,261),(3,262),(4,289),(4,478),(4,482),(4,483),(4,487),(4,492),(4,495),(4,807),(5,321),(5,326),(5,331),(5,338),(5,347),(6,477),(6,491),(6,492),(6,494),(6,495),(7,310),(7,327),(7,484),(7,635),(7,637);
+/*!40000 ALTER TABLE `offer_hard_skills` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `offer_soft_skills`
+--
+
+DROP TABLE IF EXISTS `offer_soft_skills`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `offer_soft_skills` (
+  `offer_id` int NOT NULL,
+  `skill_id` int NOT NULL,
+  PRIMARY KEY (`offer_id`,`skill_id`),
+  KEY `IDX_1B842F2453C674EE` (`offer_id`),
+  KEY `IDX_1B842F245585C142` (`skill_id`),
+  CONSTRAINT `FK_1B842F2453C674EE` FOREIGN KEY (`offer_id`) REFERENCES `offer` (`id`),
+  CONSTRAINT `FK_1B842F245585C142` FOREIGN KEY (`skill_id`) REFERENCES `skill` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `offer_soft_skills`
+--
+
+LOCK TABLES `offer_soft_skills` WRITE;
+/*!40000 ALTER TABLE `offer_soft_skills` DISABLE KEYS */;
+INSERT INTO `offer_soft_skills` VALUES (1,60),(1,63),(1,80),(1,101),(1,103),(1,121),(2,26),(2,42),(2,66),(2,89),(2,113),(3,15),(3,21),(3,24),(3,60),(3,62),(3,71),(3,87),(3,121),(3,122),(3,123),(4,2),(4,40),(4,41),(4,57),(4,60),(4,105),(4,109),(4,122),(5,8),(5,16),(5,31),(5,39),(5,91),(6,45),(6,74),(6,89),(6,95),(6,125),(7,42),(7,60),(7,66),(7,103),(7,121);
+/*!40000 ALTER TABLE `offer_soft_skills` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `reset_password_request`
+--
+
+DROP TABLE IF EXISTS `reset_password_request`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `reset_password_request` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `selector` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `hashed_token` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `requested_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
+  `expires_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
+  PRIMARY KEY (`id`),
+  KEY `IDX_7CE748AA76ED395` (`user_id`),
+  CONSTRAINT `FK_7CE748AA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `reset_password_request`
+--
+
+LOCK TABLES `reset_password_request` WRITE;
+/*!40000 ALTER TABLE `reset_password_request` DISABLE KEYS */;
+/*!40000 ALTER TABLE `reset_password_request` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `skill`
+--
+
+DROP TABLE IF EXISTS `skill`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `skill` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `skill_category_id` int NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_5E3DE477AC58042E` (`skill_category_id`),
+  CONSTRAINT `FK_5E3DE477AC58042E` FOREIGN KEY (`skill_category_id`) REFERENCES `skill_category` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=821 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `skill`
@@ -36,12 +342,55 @@ INSERT INTO `skill` VALUES (1,21,'Sens de la coordination et communication en in
 UNLOCK TABLES;
 
 --
+-- Table structure for table `skill_category`
+--
+
+DROP TABLE IF EXISTS `skill_category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `skill_category` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `is_hard` tinyint(1) NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `skill_category`
+--
+
+LOCK TABLES `skill_category` WRITE;
+/*!40000 ALTER TABLE `skill_category` DISABLE KEYS */;
+INSERT INTO `skill_category` VALUES (1,1,'Marketing'),(2,1,'Communication'),(3,1,'Direction d\'entreprise'),(4,1,'Etudes et R&D'),(5,1,'Gestion, finance et administration'),(6,1,'Informatique'),(7,1,'Ressources Humaines'),(8,1,'Services techniques'),(9,1,'Transport et logistique / Manutention / Magasinage'),(10,1,'Déménagement'),(11,1,'Magasinage et préparation de commande'),(12,1,'Direction de site logistique'),(13,1,'Achats'),(14,1,'Contrôle de gestion'),(15,1,'Direction administrative et financière'),(16,1,'Assurance'),(17,1,'Banque'),(18,1,'Immobilier'),(19,1,'Grande distribution'),(20,1,'BTP'),(21,0,'Compétences comportementales');
+/*!40000 ALTER TABLE `skill_category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `user` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `email` varchar(180) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `roles` json NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_verified` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQ_8D93D649E7927C74` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `user`
 --
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'contact@ozeladiversite.com','[\"ROLE_ADMIN\"]','$argon2id$v=19$m=65536,t=4,p=1$DF7tH4xFmnsv9+1FN0EpUA$yTqWtJPrDGGxxHtc5rq/Y5kRr2FArNVKSvQs3yiMYJc',1);
+INSERT INTO `user` VALUES (1,'contact@ozeladiversite.com','[\"ROLE_ADMIN\"]','$argon2id$v=19$m=65536,t=4,p=1$DF7tH4xFmnsv9+1FN0EpUA$yTqWtJPrDGGxxHtc5rq/Y5kRr2FArNVKSvQs3yiMYJc',1),(2,'contact@edf.com','[\"ROLE_COMPANY\"]','$argon2id$v=19$m=65536,t=4,p=1$cW5FTHBLOW54ZnVuUWR6TQ$h5NAXQf6aSwfr7JXhQmlKGPW0zQwuo3s5ve7j9hrZpE',1),(3,'contact@lea.com','[\"ROLE_APPLICANT\"]','$argon2id$v=19$m=65536,t=4,p=1$VERSUGV3NEtlZC8vRWR2UA$Ht3tTvvX9KXDc3+oHUVhCkSUdurxxe4oAOk5qTWT0tU',1),(4,'contact@enzo.com','[\"ROLE_APPLICANT\"]','$argon2id$v=19$m=65536,t=4,p=1$MFc4Umx6emNiVnN5YWpSSw$mPIDV1Nh39/l/zK595ZI8zzroE8J3Ks/K4XAz7/ISFo',1),(5,'contact@saint-gobain.com','[\"ROLE_COMPANY\"]','$argon2id$v=19$m=65536,t=4,p=1$VWR5dEF4VDVBMG5CR0REdQ$LXgfzTy2OJydnt4OOHicO3l9XrXzrfOYh+dlQm5Puzc',1),(6,'contact@thales.com','[\"ROLE_COMPANY\"]','$argon2id$v=19$m=65536,t=4,p=1$Y2VEazhZUVU3MHB4TVRYZQ$ODfQTGd19jXwK6njxLbgjIKlgex4p7Q8LUEVi0UiMtE',1),(7,'contact@orange.com','[\"ROLE_COMPANY\"]','$argon2id$v=19$m=65536,t=4,p=1$aEVTRENVa093d3g2NDM1NQ$XDYWYctfPuhfoPhZdqqsZWaniPC6/2KGS5PhKg9OEbk',1),(8,'contact@gabriel.com','[\"ROLE_APPLICANT\"]','$argon2id$v=19$m=65536,t=4,p=1$U1NXV2d2S2ZTeEZGOXd6eg$Y5raVUpZZs6SHbVAmGjguCUE8Is+GuoNmutRSZmsbTY',1),(9,'contact@simon.com','[\"ROLE_APPLICANT\"]','$argon2id$v=19$m=65536,t=4,p=1$RmNDMFRtbGE0Qnp0SHM5Uw$LOhedPGnxy9alFj2BIy6RGhZwNkzuoM+BD6zTPAvg8o',1),(10,'contact@emma.com','[\"ROLE_APPLICANT\"]','$argon2id$v=19$m=65536,t=4,p=1$RldRL0tURWNIVnB2RzZscg$j8NcyC0Vz25uj8sT9im1BQoUk2FdEVv0kCOMmcgHH/4',1),(11,'contact@mickael.com','[\"ROLE_APPLICANT\"]','$argon2id$v=19$m=65536,t=4,p=1$RjZ3NTguSDRwYy9XVGJUZA$bWfsNfk5B2M7JcoSK5mPd1eaJBLcWgG5y+drvAZxvIc',1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +403,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-02-09 19:23:13
+-- Dump completed on 2021-02-11 11:46:51
