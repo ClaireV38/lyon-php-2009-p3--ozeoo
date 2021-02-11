@@ -35,7 +35,9 @@
         <div class="row" style="justify-content: space-around">
             <div class="col-md-5" id="companyDetailsMedia">
                 {% if company.picture is not empty %}
-                    <img src="{{asset('uploads/images/company/'~company.picture)}}" class="img-fluid rounded mx-auto d-block" alt="{{ company.name }}">
+                    <div class="imgCompany">
+                        <img src="{{asset('uploads/images/company/'~company.picture)}}" style="max-width: 440px ; max-height: 240px" alt="{{ company.name }}">
+                    </div>
                 {% endif %}
                 {% if company.video is not empty %}
                 <div class="embed-responsive embed-responsive-16by9">

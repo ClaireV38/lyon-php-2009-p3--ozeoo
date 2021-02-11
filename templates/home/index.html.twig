@@ -3,13 +3,13 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
+    <div id="tutoImg">
+        <a href="{{ path("home") }}">
+            <img id="diversite1" src="{{ asset('build/images/logoNavBar_noBg.png') }}" alt="Image Ozé La Diversité avec logo">
+        </a>
+        <a href="{{ path("app_login") }}" id="linkTuto"><button type="button" class="btn btn-bleuOze btn-lg btn-block" id="home-list-buttons">Se Connecter</button></a>
+    </div>
     <div class="container-fluid">
-        <div id="tutoImg">
-            <a href="{{ path("home") }}">
-                <img id="diversite1" src="{{ asset('build/images/logoNavBar_noBg.png') }}" alt="Image Ozé La Diversité avec logo">
-            </a>
-            <a href="{{ path("app_login") }}" id="linkTuto"><button type="button" class="btn btn-bleuOze btn-lg btn-block" id="home-list-buttons">Se Connecter</button></a>
-        </div>
         <div id="welcomeTuto">
             <h1 class="applicant_home_welcome_mainTitle">Bienvenue !</h1>
         </div>
