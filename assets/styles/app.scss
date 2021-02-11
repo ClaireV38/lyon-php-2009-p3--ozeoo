@@ -352,6 +352,16 @@ form[name="search_applicant_offer"] {
     flex-direction: row;
 }
 
+#offer_startDate {
+    display: flex;
+    flex-flow: inherit;
+}
+
+#offer_endDate {
+    display: flex;
+    flex-flow: inherit;
+}
+
 /* Detail Candidate - Candidate Side */
 #list-HardSkill {
     font-size: 13px;
@@ -501,6 +511,11 @@ form[name="search_applicant_matching"] {
 
 ul {
     padding: 0;
+}
+
+label.required:after {
+    content: " *";
+    color: red;
 }
 
 @media (min-width: 768px) {
