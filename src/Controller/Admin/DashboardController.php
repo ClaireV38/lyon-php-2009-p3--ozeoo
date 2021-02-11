@@ -62,7 +62,7 @@ class DashboardController extends AbstractDashboardController
     {
         return Dashboard::new()
             ->setTitle('Ozeoo Administration')
-            ->setFaviconPath('assets/images/favicon.png');
+            ->setFaviconPath('build/images/logoNoBg.png');
     }
 
     public function configureMenuItems(): iterable

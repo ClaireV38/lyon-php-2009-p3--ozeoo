@@ -88,15 +88,17 @@ class CompanyController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $videoLink = $form->getData()->getVideo();
-            $ytarray = explode("/", $videoLink);
-            $ytendstring = end($ytarray);
-            $ytendarray = explode("?v=", $ytendstring);
-            $ytendstring = end($ytendarray);
-            $ytendarray = explode("&", $ytendstring);
-            $ytcode = $ytendarray[0];
-            $srcLink = "http://www.youtube.com/embed/" . $ytcode;
+            if ($videoLink != null) {
+                $ytarray = explode("/", $videoLink);
+                $ytendstring = end($ytarray);
+                $ytendarray = explode("?v=", $ytendstring);
+                $ytendstring = end($ytendarray);
+                $ytendarray = explode("&", $ytendstring);
+                $ytcode = $ytendarray[0];
+                $srcLink = "http://www.youtube.com/embed/" . $ytcode;
+                $company->setVideo($srcLink);
+            }
             $entityManager = $this->getDoctrine()->getManager();
-            $company->setVideo($srcLink);
             $entityManager->persist($company);
             $entityManager->flush();
             return $this->redirectToRoute('company_index');

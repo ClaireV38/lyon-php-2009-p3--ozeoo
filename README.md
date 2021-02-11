@@ -18,30 +18,37 @@ Remplacer les valeurs comme suit :
 - `db_name` = nom de la base de données (au choix)
 3. Lancer `composer install`
 4. Lancer `yarn install`
-5. Lancer `yarn encore dev`
+5. Lancer `yarn encore prod`
 6. Lancer dans l'ordre suivant :
    - `php bin/console doctrine:database:create`
    - `php bin/console doctrine:migration:migrate`
-   - `php bin/console doctrine:fixtures:load`
 
+7. Importer la base de donnée :
+   - `mysql -u db_user -p db_name < ozeoo.sql`
+   
+   
 ### Mise en route
+   Doc Symfony: https://symfony.com/doc/current/frontend.html
 1. Lancer `symfony server:start` pour démarrer le serveur local
-2. Lancer `yarn run dev --watch` pour charger les assets
+2. Lancer `yarn encore dev --watch` pour charger les assets
 
-### Credentials
-Pour tester les users, vous trouverez les emails et mots de passe du compte admin par défaut, d'un compte entreprise et d'un compte candidat dans les fixtures.                                    
- 
-### Tests avancés
-Pour tester l'inscription candidat et entreprise, installer le composant Mailer en lançant : `composer require symfony/mailer`
- 
-      Se rendre sur https://mailtrap.io/ 
-      Créer un compte ou s'y connecter
-      Cliquer sur l'icône "Settings"
-      Dans la liste déroulante sous "Intégration", sélectionner "Symfony"
-      Copier la ligne MAILER_DSN, l’intégrer dans env.local à cet endroit :
+
+
+### Mail
+Pour configurer votre adresse Mail de contact, il faut ajouter dans le fichier .env.local les lignes suivantes:
 
       ###> symfony/mailer ###
-      MAILER_DSN= lien donné par Mailtrap
-      MAILER_FROM_ADDRESS=hello@ozeoo.com
+      MAILER_DSN=smtp://user:pass@smtp.example.com:port
+      MAILER_FROM_ADDRESS=email@example.com
       ###< symfony/mailer ###
 
+### Pour l'administrateur : modalités pour vérifier les entreprises
+1. Se connecter avec l'email de contact Ozé La Diversité
+2. Vous êtes redirigé vers l'interface Administrateur
+3. Dans le menu à gauche, cliquer sur le lien "Gestion Entreprises"
+4. La liste de toutes les entreprises s'affiche. Les entreprises "non vérifiées" apparaissent automatiquement en haut de liste. Les entreprises "vérifiées" apparaissent comme telles.
+5. Pour accorder le statut "Vérifiée" à une entreprise, cliquer sur le bouton "Editer" à droite
+6. Les données de l'entreprise s'affichent dans une fenêtre blanche
+7. Au dessus de la fenêtre, cliquer sur le lien bleu "Vérifier"
+8. Sauvegarder les modifications
+9. Se déconnecter en haut à droite
