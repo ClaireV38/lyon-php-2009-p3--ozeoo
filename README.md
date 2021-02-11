@@ -18,7 +18,7 @@ Remplacer les valeurs comme suit :
 - `db_name` = nom de la base de données (au choix)
 3. Lancer `composer install`
 4. Lancer `yarn install`
-5. Lancer `yarn encore dev`
+5. Lancer `yarn encore prod`
 6. Lancer dans l'ordre suivant :
    - `php bin/console doctrine:database:create`
    - `php bin/console doctrine:migration:migrate`
@@ -28,8 +28,11 @@ Remplacer les valeurs comme suit :
    
    
 ### Mise en route
+   Doc Symfony: https://symfony.com/doc/current/frontend.html
 1. Lancer `symfony server:start` pour démarrer le serveur local
-2. Lancer `yarn run dev --watch` pour charger les assets
+2. Lancer `yarn encore dev --watch` pour charger les assets
+
+
 
 ### Mail
 Pour configurer votre adresse Mail de contact, il faut ajouter dans le fichier .env.local les lignes suivantes:
@@ -46,6 +49,6 @@ Pour configurer votre adresse Mail de contact, il faut ajouter dans le fichier .
 4. La liste de toutes les entreprises s'affiche. Les entreprises "non vérifiées" apparaissent automatiquement en haut de liste. Les entreprises "vérifiées" apparaissent comme telles.
 5. Pour accorder le statut "Vérifiée" à une entreprise, cliquer sur le bouton "Editer" à droite
 6. Les données de l'entreprise s'affichent dans une fenêtre blanche
-7. Au dessus de la fenêtre, cliquer su le lien bleu "Vérifier"
+7. Au dessus de la fenêtre, cliquer sur le lien bleu "Vérifier"
 8. Sauvegarder les modifications
 9. Se déconnecter en haut à droite
