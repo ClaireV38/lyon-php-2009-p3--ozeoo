@@ -35,6 +35,7 @@ Remplacer les valeurs comme suit :
 Pour configurer votre adresse Mail de contact, il faut ajouter dans le fichier .env.local les lignes suivantes:
 
       ###> symfony/mailer ###
+      MAILER_DSN=smtp://user:pass@smtp.example.com:port
       MAILER_FROM_ADDRESS=email@example.com
       ###< symfony/mailer ###
 

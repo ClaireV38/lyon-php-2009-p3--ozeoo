@@ -27,12 +27,18 @@ class Applicant
      *     groups={"listSkill"}
      *     )
      * @var string|null
+     * @Assert\Length (max="100", maxMessage="Le texte ne doit pas exceder 100 caractères.",
+     *     groups={"listSkill"}
+     *     )
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      * @Assert\NotBlank(message="Le champ est vide",
+     *     groups={"listSkill"}
+     *     )
+     * @Assert\Length (max="100", maxMessage="Le texte ne doit pas exceder 100 caractères.",
      *     groups={"listSkill"}
      *     )
      * @var string|null
@@ -52,6 +58,9 @@ class Applicant
      * @ORM\Column(type="string", length=100, nullable=true)
      * @Assert\NotBlank(message="Le champ est vide",
      *     groups={"listSkill"})
+     * @Assert\Length (max="255", maxMessage="Le texte ne doit pas exceder 255 caractères.",
+     *     groups={"listSkill"}
+     *     )
      * @var string|null
      */
     private $city;
@@ -94,6 +103,9 @@ class Applicant
      * @ORM\Column(type="text", nullable=true)
      * @Assert\NotBlank(message="Le champ est vide",
      *     groups={"listSkill"})
+     * @Assert\Length (max="255", maxMessage="Le texte ne doit pas exceder 255 caractères.",
+     *     groups={"listSkill"}
+     *     )
      * @var string|null
      */
     private $mobility;
