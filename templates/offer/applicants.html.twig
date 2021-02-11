@@ -46,14 +46,14 @@
                     </div>
                     <div class="row-info-right w-100 flex-md-grow-1 flex-md-row">
                         <div class="row-info-nb d-md-inline-block flex-md-row align-items-center text-center">
-                            <p class="d-md-inline-block mr-md-1 mb-0" class="card-text"> Nb hardskills :
+                            <p class="d-md-inline-block mr-md-1 mb-0" class="card-text"> Compétences Techniques :
                                 <strong>{{ applicant.match_hs }}</strong></p>
-                            <p class="d-md-inline-block mr-md-1 mb-0" class="card-text"> Nb softskills :
+                            <p class="d-md-inline-block mr-md-1 mb-0" class="card-text"> Compétences Comportementales :
                                 <strong>{{ applicant.match_ss }}</strong></p>
                         </div>
                         <div class="row-btn-offer d-md-inline-block flex justify-content-around">
                             <a href="{{ path("offer_applicant_show", { offerId: offer.id , applicantId: applicant.applicant_id}) }}"
-                               class="d-inline-block btn btn-offer btn-bleuOze d-inline-flex">Voir fiche</a>
+                               class="d-inline-block btn btn-offer btn-bleuOze d-inline-flex" style="min-width: max-content">Voir fiche</a>
                         </div>
                     </div>
                 </div>
