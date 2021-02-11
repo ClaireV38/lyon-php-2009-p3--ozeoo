@@ -60,6 +60,17 @@
                 maximumSelectionLength: 10,
                 placeholder: '',
                 language: "fr",
+                sorter: function(data) {
+                    return data.sort(function (a, b) {
+                        if (a.text > b.text) {
+                            return 1;
+                        }
+                        if (a.text < b.text) {
+                            return -1;
+                        }
+                        return 0;
+                    });
+                }
             });
             $('form').on('submit', function(){
                 const minimum = 5;
