@@ -54,14 +54,23 @@
             $('#offer_softSkills').select2({
                 maximumSelectionLength: 10,
                 placeholder: '',
-                allowClear: true,
                 language: "fr"
             })
             $('#offer_hardSkills').select2({
                 maximumSelectionLength: 10,
                 placeholder: '',
-                allowClear: true,
                 language: "fr",
+                sorter: function(data) {
+                    return data.sort(function (a, b) {
+                        if (a.text > b.text) {
+                            return 1;
+                        }
+                        if (a.text < b.text) {
+                            return -1;
+                        }
+                        return 0;
+                    });
+                }
             });
             $('form').on('submit', function(){
                 const minimum = 5;
