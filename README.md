@@ -1,4 +1,4 @@
-# Project 3 - OzeLaDiversite : Test
+# Project 3 - plateforme Ozeoo
 
 Ce projet a pour base le Symfony website-skeleton.
 
