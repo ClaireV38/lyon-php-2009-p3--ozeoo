@@ -28,69 +28,82 @@ class UserFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $faker  =  Faker\Factory::create('fr_FR');
-        for ($i = 1; $i <= self::NB_OBJECT; $i++) {
+
+        $applicant1 = new User();
+        $applicant1->setEmail('applicant1@monsite.com');
+        $applicant1->setRoles(['ROLE_APPLICANT']);
+        $applicant1->setPassword($this->passwordEncoder->encodePassword(
+            $applicant1,
+            'password'
+        ));
+        $applicant1->setIsVerified(true);
+        $this->addReference('appl_user_' . 1, $applicant1);
+        $manager->persist($applicant1);
+
+        $applicant2 = new User();
+        $applicant2->setEmail('applicant@monsite.com');
+        $applicant2->setRoles(['ROLE_APPLICANT']);
+        $applicant2->setPassword($this->passwordEncoder->encodePassword(
+            $applicant2,
+            'password'
+        ));
+        $applicantAccount = new Applicant();
+        $applicant2->setApplicant($applicantAccount);
+        $applicant2->setIsVerified(true);
+        $manager->persist($applicant2);
+
+        for ($i = 2; $i <= self::NB_OBJECT; $i++) {
             $applicant = new User();
             $applicant->setEmail('appl' . $faker->email());
             $applicant->setRoles(['ROLE_APPLICANT']);
             $applicant->setPassword($this->passwordEncoder->encodePassword(
                 $applicant,
-                'applicantpassword'
+                'password'
             ));
             $applicant->setIsVerified(true);
             $this->addReference('appl_user_' . $i, $applicant);
             $manager->persist($applicant);
         }
-            // Création d’un utilisateur de type “company”
-        for ($i = 2; $i <= self::NB_OBJECT; $i++) {
-            $company = new User();
-            $company->setEmail('comp' . $faker->email());
-            $company->setRoles(['ROLE_COMPANY']);
-            $company->setPassword($this->passwordEncoder->encodePassword(
-                $company,
-                'companypassword'
-            ));
-            $company->setIsVerified(true);
-            $this->addReference('comp_user_' . $i, $company);
-            $manager->persist($company);
-        }
-
-        $applicant = new User();
-        $applicant->setEmail('applicant@monsite.com');
-        $applicant->setRoles(['ROLE_APPLICANT']);
-        $applicant->setPassword($this->passwordEncoder->encodePassword(
-            $applicant,
-            'applicantpassword'
-        ));
-        $applicantAccount = new Applicant();
-        $applicant->setApplicant($applicantAccount);
-        $applicant->setIsVerified(true);
-        $manager->persist($applicant);
 
         $company1 = new User();
         $company1->setEmail('company1@monsite.com');
         $company1->setRoles(['ROLE_COMPANY']);
         $company1->setPassword($this->passwordEncoder->encodePassword(
-            $company,
-            'companypassword'
+            $company1,
+            'password'
         ));
         $this->addReference('comp_user_' . 1, $company1);
         $company1->setIsVerified(true);
         $manager->persist($company1);
 
 
+        // Création d’un utilisateur de type “company”
+        for ($j = 2; $j <= self::NB_OBJECT; $j++) {
+            $company = new User();
+            $company->setEmail('comp' . $faker->email());
+            $company->setRoles(['ROLE_COMPANY']);
+            $company->setPassword($this->passwordEncoder->encodePassword(
+                $company,
+                'password'
+            ));
+            $company->setIsVerified(true);
+            $this->addReference('comp_user_' . $j, $company);
+            $manager->persist($company);
+        }
+
         $company = new User();
         $company->setEmail('company@monsite.com');
         $company->setRoles(['ROLE_COMPANY']);
         $company->setPassword($this->passwordEncoder->encodePassword(
             $company,
-            'companypassword'
+            'password'
         ));
         $companyAccount = new Company();
         $companyAccount->setName('entreprise.sas');
-        $companyAccount->setApeNb('123456789123456');
-        $companyAccount->setSiretNb('1234A');
+        $companyAccount->setApeNb('1234A');
+        $companyAccount->setSiretNb('123456789123456');
         $company->setCompany($companyAccount);
-        $company->setIsVerified(true);
+        $company->setIsVerified(false);
         $manager->persist($company);
 
         // Création d’un utilisateur de type “administrateur”
@@ -99,7 +112,7 @@ class UserFixtures extends Fixture
         $admin->setRoles(['ROLE_ADMIN']);
         $admin->setPassword($this->passwordEncoder->encodePassword(
             $admin,
-            'adminpassword'
+            'password'
         ));
         $admin->setIsVerified(true);
         $manager->persist($admin);

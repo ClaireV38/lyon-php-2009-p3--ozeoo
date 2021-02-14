@@ -30,7 +30,7 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
         $offer1 = new Offer();
         $offer1->setCity($faker->text(20));
         $offer1->setCompany($this->getReference('company_' . 1));
-        $offer1->addApplicant($this->getReference('applicant_' . 1));
+        $offer1->addApplicant($this->getReference('applicant_' . 2));
         $offer1->setTitle($faker->sentence(6, true));
         $offer1->setContractType($faker->sentence(2, true));
         $offer1->setSalary($faker->bothify('????? ??? #### € ???'));
@@ -43,8 +43,11 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
             $faker->dateTimeBetween($offer1->getStartDate(), '2023-00-00 00:00:00')
         );
         $offer1->setDescription($faker->text(255));
-        $offer1->setIsAnonymous(rand(0, 1));
-        for ($j = 1; $j <= 10; $j++) {
+        $offer1->setIsAnonymous(0);
+        for ($j = 5; $j <= 10; $j++) {
+            $offer1->addHardSkill($this->getReference('hardskill_' . $j));
+        }
+        for ($j = 100; $j <= 105; $j++) {
             $offer1->addHardSkill($this->getReference('hardskill_' . $j));
         }
         for ($j = 1; $j <= 10; $j++) {
@@ -56,9 +59,6 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
             $offer = new Offer();
             $offer->setCity($faker->text(20));
             $offer->setCompany($this->getReference('company_' . rand(1, CompanyFixtures::NB_OBJECT)));
-            for ($j = 1; $j <= rand(0, 5); $j++) {
-                $offer->addApplicant($this->getReference('applicant_' . rand(1, ApplicantFixtures::NB_OBJECT)));
-            }
             $offer->setTitle($faker->sentence(6, true));
             $offer->setContractType($faker->sentence(2, true));
             $offer->setSalary($faker->bothify('????? ??? #### € ???'));
