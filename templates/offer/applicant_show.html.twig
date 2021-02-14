@@ -38,7 +38,7 @@
                         <div class="skillMatchApplicantOfferApplicant">
                             <ul style="list-style: none ">
                                 {% for skillCat in skillCats %}
-                                <div id="skillCategoryNameOfferApplicant"><b>{{ skillCat.name }}</b></div>
+                                <div id="skillCategoryNameOfferApplicant" class="mt-2"><b>{{ skillCat.name }}</b></div>
                                     {% for hardSkill in applicant.hardSkills %}
                                         {% if hardSkill in matchHardSkills %}
                                             {% if hardSkill.skillCategory is same as skillCat %}
