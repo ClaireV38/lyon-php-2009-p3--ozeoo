@@ -9,6 +9,11 @@ Ozeoo est une plateforme de mise en relation de profils atypiques et entreprises
 Le site web contient des offres d'emploi basées sur des compétences. Si les compétences requises correspondent à celles du candidat, un "match" a lieu, et le candidat peut alors postuler à l'offre.
 Un match existe dès lors qu'au moins 5 soft skills (savoir-être) et 5 hard skills (savoir-faire) du candidat correspondent à celles exigées par l'entreprise.
 
+
+### Video de démonstration
+
+https://www.loom.com/share/69300a4c00834af19307a09060d62078
+
 ### Installation
 1. Faire un `git clone https://github.com/WildCodeSchool/lyon-php-2009-p3--ozeladiversite`
 2. Copier la ligne suivante du fichier .env : `DATABASE_URL=mysql://db_user:db_password@127.0.0.1:3306/db_name`. A la racine, créer un nouveau fichier .env.local et y coller la ligne.

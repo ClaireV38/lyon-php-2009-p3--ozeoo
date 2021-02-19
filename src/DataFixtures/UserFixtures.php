@@ -101,7 +101,7 @@ class UserFixtures extends Fixture
         $companyAccount = new Company();
         $companyAccount->setName('entreprise.sas');
         $companyAccount->setApeNb('1234A');
-        $companyAccount->setSiretNb('123456789123456');
+        $companyAccount->setSiretNb('12345678912345');
         $company->setCompany($companyAccount);
         $company->setIsVerified(false);
         $manager->persist($company);
